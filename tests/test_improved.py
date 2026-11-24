@@ -7,8 +7,7 @@ import math
 import numpy as np
 import pytest
 
-from nanofusion.improved import ImprovedProperties, build_crystal, run_improved
-from nanofusion.improved import native
+from nanofusion.improved import ImprovedProperties, build_crystal, native, run_improved
 from nanofusion.improved import physics as P
 
 
@@ -192,7 +191,11 @@ def test_reproduces_texas_petawatt_cluster_record():
 
 
 def test_hollow_shell_implosion_focuses_and_obeys_space_charge():
-    from nanofusion.improved.implosion import ImplosionProperties, build_shell, run_implosion
+    from nanofusion.improved.implosion import (
+        ImplosionProperties,
+        build_shell,
+        run_implosion,
+    )
 
     props = ImplosionProperties(cavity_nm=3, electron_ratio=8, fuel="DT", reaction_radius_nm=0.05)
     shell = build_shell(props)
@@ -518,9 +521,9 @@ def test_one_simulator_for_every_route(capsys):
     bare = S.evaluate("cold_catcher", settings=S.Settings(blanket="none"))
     assert lithium.heat_J / bare.heat_J == pytest.approx(22.37 / 17.59, rel=1e-3)
     assert S.evaluate("muon_catalysis", settings=S.Settings(blanket="uranium", k_eff=0.95)).electric_gain > 10
-    # Spin-polarised fuel raises fusion but counts as unproven.
+    # Spin-polarised fuel raises fusion but is flagged as untested theory, and the default search leaves it out.
     spin = S.evaluate("fibre_pinch", {"spin": True})
-    assert spin.fusion_J > S.evaluate("fibre_pinch").fusion_J and math.isinf(spin.stretch)
+    assert spin.fusion_J > S.evaluate("fibre_pinch").fusion_J and spin.untested and not S.evaluate("fibre_pinch").untested
     # A pinch too cool for its alphas to make up its X-rays must have them resupplied, which sinks it.
     cool = S.evaluate("fibre_pinch", {"current_ma": 100.0, "t_kev": 3.63, "alfven_times": 99.4, "squeeze": 140.0})
     assert cool.electric_gain < 0.2
@@ -533,3 +536,154 @@ def test_one_simulator_for_every_route(capsys):
     assert "electric gain" in capsys.readouterr().out
     assert main(["sim", "run", "tamped_ball", "nonsense=1"]) == 2
     assert main(["sim", "list"]) == 0
+
+
+def test_simulator_new_routes_and_combinations():
+    from nanofusion.improved import simulator as S
+
+    # Ordinary inertial fusion, the reference: NIF-like inputs give ~0.15 mg of fuel, a ~600 Gbar isobaric hot spot,
+    # and a target gain of ~2 (NIF's record: 4.1).
+    nif = S.evaluate("compressed_icf", {"rho_g_cc": 950.0, "rho_r": 0.6, "adiabat": 3.0})
+    assert 1.0 < nif.target_gain < 6.0
+    reqs = {r.name: r.needed for r in nif.all_requirements}
+    assert 400 < reqs["hot-spot pressure (Gbar)"] < 800
+    assert 15e3 < nif.fuel_J < 50e3  # tens of kJ in the fuel, ~1-2% of NIF's laser energy
+    # A crystal spark is worse than an ordinary hot spot. Pulsed-power X-rays put less of the wall-plug energy
+    # into the fuel than a 10%-efficient laser: 0.15 x 0.35% against 0.10 x 1%.
+    spark = S.evaluate("compressed_icf", {"ignitor": "crystal spark"})
+    assert spark.electric_gain < nif.electric_gain
+    xrays = S.evaluate("compressed_icf", {"rho_g_cc": 950.0, "rho_r": 0.6, "adiabat": 3.0,
+                                          "driver": "pulsed-power X-rays"})
+    assert xrays.electric_gain == pytest.approx(nif.electric_gain * 0.15 * 0.0035 / (0.10 * 0.01))
+    # The other new routes run, with the expected scale.
+    factory = S.evaluate("muon_factory")
+    assert 20 < factory.drivers["laser"] / (1e3 * S.MEV) < 50  # ~34 GeV of light per muon (section 10)
+    assert S.evaluate("hollow_shell").untested
+    assert S.evaluate("lattice_confinement").electric_gain < 1e-12
+    plain = S.evaluate("pB_catcher", {"avalanche": False})
+    assert S.evaluate("pB_catcher").fusion_J == pytest.approx(plain.fusion_J / (1 - S.PB_AVALANCHE_K))
+    assert S.evaluate("magnetised_liner").electric_gain < 0.01
+    # Searches can hold an idea fixed, and start from known designs.
+    found = S.search(["compressed_icf"], samples=40, refine=20, seed=1, fixed={"ignitor": "crystal spark"},
+                     start=[{"rho_g_cc": 950.0, "rho_r": 0.6, "adiabat": 3.0}])["compressed_icf"]
+    assert all(o is None or o.params["ignitor"] == "crystal spark" for o in found.values())
+
+
+def test_simulator_untested_theory():
+    from nanofusion.improved import simulator as S
+
+    # Untested ideas are flagged, add no technology stretch, and the default search leaves them out.
+    channelled = S.evaluate("opaque_pB", {"alpha_channelling": 0.9, "direct_conversion": True})
+    assert len(channelled.untested) == 2 and not S.evaluate("opaque_pB").untested
+    assert channelled.electric_gain > S.evaluate("opaque_pB").electric_gain
+    plain = S.search(["opaque_pB"], samples=20, refine=10, seed=1)["opaque_pB"]
+    assert all(o is None or not o.untested for o in plain.values())
+    # Direct conversion: all of a proton-boron design's fusion is turned into electricity at 60% instead of 40%.
+    d = S.evaluate("son_fisch_pB", {"direct_conversion": True})
+    assert d.electricity_out_J == pytest.approx(d.fusion_J * S.DIRECT_EFFICIENCY)
+    # Freeing stuck muons with fields doubles the fusions per muon, but the cooling it needs eats the gain.
+    base = S.evaluate("muon_catalysis")
+    tek = S.evaluate("muon_catalysis", {"rf_stripping": "Kulsrud/TEK"})
+    assert tek.dt_fusions > 1.8 * base.dt_fusions and tek.electric_gain < 1.3 * base.electric_gain
+    # Antimatter sparks: a NIF-like target needs ~1e15 antiprotons, over 100 times the most ever stored.
+    spark = S.evaluate("antimatter_spark")
+    need = {r.name: r.needed for r in spark.all_requirements}["antiprotons per shot"]
+    assert 1e14 < need < 1e16 and spark.electric_gain < 1e-4 and spark.untested
+    # Light-assisted tunnelling: the light costs far more than the extra fusion.
+    assisted = S.evaluate("laser_assisted")
+    assert assisted.electric_gain < 1e-3 and assisted.untested
+    hot = S.evaluate("laser_assisted", {"rho_g_cc": 1000.0, "t_kev": 5.0, "radius_mm": 0.078})
+    cold_model = S.evaluate("laser_assisted", {"rho_g_cc": 1000.0, "t_kev": 5.0, "radius_mm": 0.078,
+                                               "model": "Thomson et al. 2024 (pessimistic)"})
+    assert hot.fusion_J > cold_model.fusion_J
+
+
+def test_icf_experiment_design_and_calibration():
+    import importlib.util
+    from pathlib import Path
+
+    from nanofusion.improved import simulator as S
+
+    # The sizing helpers invert the target model: density for a pressure, shell for a mass.
+    rho = S.icf_shell_density(608.0, 2.45)
+    rho_r = S.icf_shell_for_mass(608.0, 2.45, 0.22e-6)
+    t = S.icf_target(rho, rho_r, 2.45)
+    assert t["pressure_Pa"] / 1e14 == pytest.approx(608.0, rel=1e-6)
+    assert t["mass_kg"] == pytest.approx(0.22e-6, rel=1e-6)
+    # The best design keeps within its limits, and more fuel energy buys more fusion.
+    d = S.icf_design(40e3, 700.0, 2.25)
+    assert d["fuel_J"] <= 40e3 * (1 + 1e-9) and d["pressure_gbar"] <= 700.0 and d["adiabat"] >= 2.25
+    assert S.icf_design(60e3, 700.0, 2.25)["fusion_J"] > d["fusion_J"]
+
+    spec = importlib.util.spec_from_file_location("icf_experiment",
+                                                  Path(__file__).parents[1] / "tools" / "icf_experiment.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    cal = mod.calibrate()
+    # NIF's first ignition (N221204): ~1.2 g/cm2 before burn (NIF's simulations: 1.35-1.41 without alpha heating),
+    # a ceiling of ~11 MJ, so the shot reached ~30% of it; ~2% of the laser energy ends up in the fuel.
+    n22 = cal["N221204"]
+    assert 1.0 < n22["total_rho_r"] < 1.5 and 9e6 < n22["ceiling_J"] < 13e6
+    assert 0.2 < n22["quality"] < 0.4 and 0.01 < n22["coupling"] < 0.03
+    assert cal["N210808"]["quality"] < n22["quality"]
+    rows = {r["step"][0]: r for r in mod.campaign(n22["coupling"], {"record": 0.79, "typical": 0.48})}
+    # Repeating the record reproduces it; with today's fuel a lower adiabat does nothing, more pressure helps.
+    assert rows["A"]["yield_record_J"] == pytest.approx(8.6e6, rel=0.01)
+    assert rows["B"]["ceiling_J"] == pytest.approx(rows["A"]["ceiling_J"], rel=0.02)
+    assert rows["C"]["ceiling_J"] > 1.1 * rows["A"]["ceiling_J"]
+    # Re-sized fuel: the adiabat matters, and the upgrade's yields bracket published projections (20-30+ MJ).
+    assert rows["E"]["ceiling_J"] > 1.05 * rows["D"]["ceiling_J"]
+    assert 15e6 < rows["G"]["yield_record_J"] < rows["I"]["yield_record_J"] < 40e6
+    assert all(r["electric_plant_laser"] < 1 for r in rows.values())
+    assert mod.ice_um(0.22) == pytest.approx(65, abs=3)  # NIF's 0.22 mg is a 64.5-65 um ice layer
+
+
+def test_burn1d_implosion_and_burn():
+    import numpy as np
+
+    from nanofusion.improved import burn1d as B
+    from nanofusion.improved import energy as EN
+
+    # Bosch-Hale D-T reactivity agrees with the project's own cross-section integral
+    for t in (5.0, 10.0, 20.0):
+        assert B.bosch_hale_dt(np.array([t]))[0] == pytest.approx(EN.reactivity("D", "T", t), rel=0.02)
+    # the equation of state inverts, for D-T and for fully ionised carbon, hot and degenerate
+    n_i = np.array([1e30, 1e31, 1e31])
+    n_e = n_i * np.array([1.0, 1.0, 6.0])
+    t = np.array([1.0, 0.05, 2.0]) * B.KEV
+    assert B.temperature(B.pressure_of(t, n_i, n_e), n_i, n_e) == pytest.approx(t, rel=1e-6)
+    # radiation transport conserves energy: emitted = absorbed + escaped
+    rng = np.random.default_rng(0)
+    t_kev = rng.uniform(0.05, 10.0, 30)
+    n_e = rng.uniform(1e29, 1e32, 30)
+    dr = rng.uniform(1e-7, 1e-5, 30)
+    vol = rng.uniform(1e-15, 1e-12, 30)
+    emitted, absorbed, escaped = B.radiation(t_kev, n_e, n_e, dr, vol)
+    assert emitted.sum() == pytest.approx(absorbed.sum() + escaped, rel=1e-9)
+    # N221204's clean implosion ignites; without alpha heating it doesn't (LLNL's 1-D: ~15 MJ for this design)
+    clean = B.run(B.Capsule())
+    cold = B.run(B.Capsule(alpha_heating=False))
+    assert 10e6 < clean["yield_J"] < 40e6 and cold["yield_J"] < 0.2e6
+    assert abs(clean["energy_error"]) < 0.01 and 0.15 < clean["burn_up"] < 0.4
+
+
+def test_zpinch_dynamics_and_route():
+    from nanofusion.improved import simulator as S
+    from nanofusion.improved import zpinch as Z
+
+    # Pease-Braginskii current near Haines' 0.433 sqrt(lnL) MA; Bennett's relation
+    assert 1.0 < Z.pease_braginskii_ma(10) < 1.8
+    assert Z.bennett_kev(1e6, 1e19) == pytest.approx(Z.MU0 * 1e12 / (16 * math.pi * 1e19) / Z.KEV)
+    # a cold D-T fibre on Z can't take the current; preheated and fully stabilised it burns but doesn't ignite
+    cold = Z.run(Z.Pinch(rise_stabilised=True))
+    assert cold["peak_current_MA"] < 6 and cold["yield_J"] < 1.0
+    sheared = Z.run(Z.Pinch(start_kev=0.1, shear=0.1))
+    assert 0.3e6 < sheared["yield_J"] < 5e6 and sheared["burn_up"] < 0.05 and sheared["min_radius_um"] < 20
+    # the 1980s NRL fibre: thermonuclear D-D neutrons far below the ~1e10 measured (mostly beam-target)
+    nrl = Z.run(Z.Pinch(fuel="DD", radius_um=50, current_ma=0.64, rise_ns=130, rise_stabilised=True))
+    assert nrl["neutrons"] < 1e8
+    # the simulator route: untested stability is flagged and kept out of the default search
+    plain = S.evaluate("dynamic_pinch")
+    flow = S.evaluate("dynamic_pinch", {"stability": "sheared flow"})
+    assert not plain.untested and flow.untested and flow.fusion_J > plain.fusion_J
+    assert "stability" in S.THEORY_OFF

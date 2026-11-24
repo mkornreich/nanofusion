@@ -36,6 +36,8 @@ than 1.
 |---|---|---|
 | Electricity → laser light | 10% | fusion-laser designs; NIF's own is ~0.5% (`--laser-efficiency`) |
 | Electricity → pulsed current | 15% | about what Sandia's Z delivers to its load |
+| Pulsed power → fuel of an X-ray-driven capsule | 0.35% | on Z ~0.2% of the stored energy reached a capsule |
+| Pulsed power → fuel of a magnetised liner (MagLIF-like) | 0.5% | 13.5 kJ of hot-spot heat from ~20 MJ stored |
 | Electricity → accelerator beam | 40% | a design figure; the best today is 18% |
 | Light → crystal ions or fuel heat | 15% | best case (sections 7 and 12) |
 | Light → energy of squeezed fuel | 1% | NIF-class implosions |
@@ -53,9 +55,13 @@ achieved:
 | Laser peak power | 10 PW (ELI-NP) |
 | Laser intensity | 1.1×10²³ W/cm² |
 | Magnetic field on the target | 800 T (laser-driven coil, claimed) |
+| Compressed magnetic field | 7.1 kT (NIF magnetised implosion, 2023) |
 | Cold squeezed density | 1,000 g/cm³ (NIF design) |
 | Radial squeeze of the fuel | 35 (NIF-class implosions) |
 | Hot-spot areal density and pressure | 0.44 g/cm², 600 Gbar (NIF's best shots) |
+| Areal density of the cold fuel | 0.6 g/cm² (NIF's best shots) |
+| Fuel adiabat (lower is harder) | 1.5 (NIF's 2012 low-foot designs) |
+| Electron screening potential | 1.5 keV (⁶Li(d,α) in palladium) |
 | Pinch current, energy into the pinch | 26 MA, ~3 MJ (Sandia's Z) |
 | Stable Alfvén times of a dense hot pinch | 1 (fibre pinches broke up at peak current) |
 | Muons per second | 10⁸ (PSI, J-PARC) |
@@ -64,15 +70,43 @@ achieved:
 | Crystals' distance from a compressed core | ≥ 0.1 mm |
 | Uranium blanket k_eff | 0.98 |
 
+## Untested theory
+
+Some ideas have never been shown to work at all, whatever the technology.
+They are kept apart from stretch:
+* a design that relies on one is flagged with the idea's name;
+* the main search leaves such designs out;
+* `search --theory` (or `search(..., theory=True)`) lets them in, so the
+  leaderboard shows what would happen if the theory worked.
+
+| Untested idea | Where | Source |
+|---|---|---|
+| Spin-polarised D-T that survives in the fuel (cross section ×1.5) | `spin` on the D-T routes | Kulsrud et al. 1982; never tested in a plasma |
+| Alpha channelling: waves hand the alphas' energy to the ions | `alpha_channelling` on `opaque_pB`, `son_fisch_pB` | Fisch & Rax 1992; claims "more than half" |
+| Direct conversion of fusion products at 60% | `direct_conversion` on the same | designs claim 60–70%; ~48–65% shown on low-energy ions and beams |
+| Stuck muons freed by field re-acceleration (sticking 0.1%) | `rf_stripping` on the muon routes | Kulsrud; TEK concept. Needs fuel below 25 K: ~30 MeV of cooling per fusion, charged here |
+| Antiprotons light a hot spot by fission | `antimatter_spark` | ICAN-II, AIMStar (Penn State) |
+| Light-assisted tunnelling | `laser_assisted` | Queisser & Schützhold 2019; Wang 2020 (optimistic), Thomson et al. 2024 (pessimistic) |
+| A microbubble implosion | `hollow_shell` | simulated only |
+| A dense pinch stable while its current rises | `stability` on `dynamic_pinch` | NRL 1987; 2-D MHD blamed a cold core under an unstable corona |
+| Sheared-flow stabilisation at fibre density | `stability` on `dynamic_pinch` | shown for ~10³ Alfvén times only below 0.6 MA and 5×10²⁴ per m³ (FuZE) |
+
 A design's **stretch** is its largest ratio of demand to best. 1 means today's
-best would do; 10 means some demand is ten times beyond it. Spin-polarised
-fuel, never shown to survive in a plasma, counts as infinite stretch.
+best would do; 10 means some demand is ten times beyond it.
 
 ## The routes
 
 | Route | Section | What it varies |
 |---|---|---|
-| `cold_catcher` | 1 | ion energy, tritide or LiD catcher |
+| `compressed_icf` | 7, 11 | **the reference**: ordinary inertial fusion. Shell density, areal density, adiabat; hot-spot or crystal-spark ignitor; laser or pulsed-power X-ray drive; spin |
+| `magnetised_liner` | 12, 19 | MagLIF-like column: radius, length, temperature, density, compressed field, spin |
+| `muon_factory` | 9, 10 | exploding crystals make the muons: explosion energy, fuel density, sticking |
+| `hollow_shell` | 8 | ion energy, size of the focus |
+| `lattice_confinement` | 9 | NASA's measurement, or a perfect photon source |
+| `pB_catcher` | 4, 5 | proton energy, boron or decaborane, avalanche, screening, crystals or accelerator |
+| `antimatter_spark` | 22 | compressed D-T lit by antiprotons: shell density, areal density, adiabat, CERN-like or theoretical antiproton factory |
+| `laser_assisted` | 22 | cool D-T bathed in 5×10²¹ W/cm² light: density, temperature, size, optimistic or pessimistic tunnelling boost |
+| `cold_catcher` | 1, 5 | ion energy, tritide or LiD catcher, crystals or accelerator, screening |
 | `crystal_ball` | 3 | fuel, crystal size, fill, ball radius |
 | `fast_ignition` | 7 | crystals' distance from the spark, shaped crystals |
 | `muon_catalysis` | 9 | fuel density, sticking |
@@ -84,33 +118,104 @@ fuel, never shown to survive in a plasma, counts as infinite stretch.
 | `muon_squeezed` | 17 | density, core size, muons in the core |
 | `opaque_pB` | 18 | density, ion temperature, ball radius |
 | `fibre_pinch` | 19 | current, temperature, Alfvén times stable, squeeze, spin |
+| `dynamic_pinch` | 24 | the same fibre followed in time on a generator circuit: current, fibre radius, laser preheat, Alfvén times stable, stability idea |
 | `channelling` | 20 | ion energy, aligned beam or exploding crystal, measured or generous values |
 
 Each run also notes which demand limits it.
 
+**The reference route.** `compressed_icf` is ordinary inertial fusion, so that
+every other idea can be measured against it:
+* an isobaric hot spot (10 keV, ρR 0.3 g/cm²) inside a dense shell;
+* the shell's density and adiabat set the pressure;
+* the fuel burns the share ρR/(ρR + 7 g/cm²).
+
+With NIF-like inputs it gives 0.15 mg of fuel, a 39 µm hot spot at 590 Gbar
+and a target gain of 1.7, against NIF's record 4.1. So it is, if anything,
+conservative.
+
+Calibrated on NIF's own shots, the same model designs a practical shot campaign
+for NIF: [icf_experiment.md](icf_experiment.md). It uses `icf_design`,
+`icf_shell_for_mass` and `icf_shell_density`, which size the target for a given
+fuel energy, pressure and adiabat.
+
+**Two time-dependent models** check the static ones. They are too slow to search
+over thousands of designs, except the pinch, which the search samples at a
+quarter of the usual rate (`Route.effort`).
+* `burn1d.py`: a 1-D implosion and burn of a NIF capsule, matching LLNL's 1-D
+  yields.
+  * It shows that the static `compressed_icf` misses the adiabat's effect on
+    pressure.
+  * Its ceiling is about half the clean yield of NIF's best design.
+* `zpinch.py`: a pinch on a generator circuit, used by the `dynamic_pinch`
+  route.
+  * A cold fibre can't take the current.
+  * A preheated one collapses radiatively.
+  * On Z even a fully stable pinch reaches ~1% of breakeven; the static
+    `fibre_pinch` assumed a hot Bennett pinch from the start.
+
+**Combinations.** Options can be switched on and off: the ignitor and driver
+of `compressed_icf`, spin polarisation on every D-T route, screening and an
+accelerator instead of crystals on the catchers, the avalanche, ions heated
+first in the tamped ball. `search(..., fixed={...})` holds an idea at one
+setting and re-optimises everything else around it;
+`tools/simulator_search.py` prints that comparison for every idea.
+
 ## What the search finds
 
 See [results/simulator/summary.md](results/simulator/summary.md) for the full
-tables.
-* **With today's technology nothing comes close.** The best is muon
+tables, including what each idea adds.
+
+| Best electricity out / in | Today | ≤ 10× today | ≤ 100× today | Unlimited |
+|---|---|---|---|---|
+| Ordinary inertial fusion | – | **1.5** | **3.1** | **7.1** |
+| Dense D-T Z-pinch (static) | 0.01 | 0.89 | **2.8** | **5.7** |
+| Dense D-T Z-pinch, followed in time | 2×10⁻⁷ | 0.002 | **3.7** | **5.5** |
+| Muon catalysis | 0.12 | 0.16 | 0.16 | 0.16 |
+| Best route using exploding crystals | 0.005 | 0.005 | 0.012 | 1.3 |
+
+* **With today's technology nothing reaches breakeven.** The best is muon
   catalysis, at about a tenth of the electricity it costs.
-* **One route crosses net electricity on paper: the dense D-T Z-pinch.**
-  * Within ten times today's best on every demand it reaches ~0.9.
-  * Allowed a hundred times, it reaches ~3. That means holding a 100 MA pinch
-    stable for about 100 Alfvén times, which no dense, hot pinch has done.
-* **The crystal routes stay below a percent of breakeven** within a hundred
-  times today's technology. Picosecond laser energy holds them back.
+* **Ordinary inertial fusion leads beyond that.** Within ten times today on
+  every demand it reaches 1.5, with a 19 MJ laser and a shell about ten times
+  NIF's areal density.
+* **The dense Z-pinch is next**, if it stays stable for many Alfvén times.
+  Followed in time (`dynamic_pinch`), it needs more stability than the static
+  route asked for:
+  * within ten times today it reaches only 0.002, against the static 0.89;
+  * given ~46 Alfvén times and 71 MA, a 1.5 mm fibre collapses radiatively to
+    ICF-like density, ignites and burns 40% of its fuel: 3.7 within a
+    hundred times today.
+* **Combining the crystals with other ideas doesn't rescue them.**
+  * As a fusion spark they are worse than a hot spot.
+  * As a muon factory they reach 0.006 of breakeven.
+  * Their best route stays at about 1%.
+* **Lasers beat pulsed-power X-rays** for driving a capsule.
+* **Screening and the avalanche change nothing visible.** Heating the ions
+  first helps two to three times.
 * **A uranium blanket makes several routes "net energy"**, but nearly all of
   the heat is then fission.
+* **Untested theory moves the numbers, and changes one leader.**
+  * **Sheared-flow stabilisation at fibre density** (shown only at ≤ 0.6 MA)
+    makes the time-dependent pinch the best route within ten times today:
+    4.2, against inertial fusion's 1.5. That design is 68 MA on a 1.5 mm
+    fibre, limited by the 26 MJ it puts into the pinch.
+  * Spin-polarised fuel lifts inertial fusion and the pinch by 15–35%.
+  * Proton–boron with alpha channelling and direct conversion reaches 2% of
+    breakeven.
+  * Antimatter sparks reach 0.39, needing 22 times the most antiprotons ever
+    stored, even from a factory 10,000 times better than CERN's.
+  * Light-assisted tunnelling reaches 0.85 only with no limits on technology.
+  * Freeing stuck muons with fields: 0.14 against 0.12.
 
 ## Limits
 
 * The simulator is only as good as the models it wires together. Each has the
   limits listed in its section of energy.md.
-* The search found three flaws in the pinch model, now fixed:
-  * fuel burning past 100%;
-  * pressures far beyond any experiment;
-  * a pinch too cool for its alphas to make up its X-ray losses.
+* The search found four flaws in the models, now fixed:
+  * a pinch's fuel burning past 100%;
+  * pinch pressures far beyond any experiment;
+  * a pinch too cool for its alphas to make up its X-ray losses;
+  * a capsule's hot spot far above the pressure of the shell around it.
 
   Other models may still have flaws the search hasn't exposed.
 * Stretch compares each demand separately. Meeting several at once is harder

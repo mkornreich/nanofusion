@@ -21,8 +21,11 @@ energy by a factor of at least 1,000. This page tries to close that gap:
   proton–boron's X-rays inside an opaque ball, holding the fuel with a
   current instead of a laser (a fibre Z-pinch), and steering ions through a
   tritide crystal's channels;
-* every route in one simulator, searched for the best electricity out per
-  electricity in (section 21, [simulator.md](simulator.md)).
+* every route in one simulator, with ordinary inertial fusion as a
+  yardstick and the ideas combined, searched for the best electricity out per
+  electricity in (section 21, [simulator.md](simulator.md));
+* untested theory in the same simulator, searched as if it worked
+  (section 22).
 
 Full numbers are in [results/energy/summary.md](results/energy/summary.md).
 Code: `nanofusion/improved/energy.py`. To reproduce:
@@ -82,7 +85,8 @@ The published literature reaches the same conclusion for every related idea.
 | Muon catalysis in squeezed fuel (stuck muons knocked free) | sticking below 0.1% above ~60 g/cm³; but ≤ ~140 fusions per muon in a 140 ps squeeze | Never: a squeeze is far too short, and a long one needs 10¹¹ times today's muon beams |
 | Proton–boron ball made opaque to its own X-rays | the balls that repay their heat need ρR 17–25 g/cm² (40–60 × NIF's hot spot) and trap 10–65%; trapping half at 1,000 g/cm³ takes 1.8 kg holding ~8 megatons, returning 0.3% | Only at white-dwarf-like densities; trapped X-rays and pairs soak up the energy |
 | Fibre of D-T fuel pinched by its own current (Z-pinch, no laser) | at Z's 26 MA, a sixfold squeeze held one Alfvén time (37 ps) repays the plasma's heat; the field costs 7.5 times that heat | Not with today's pinches; the field energy demands a large burn multiplication |
-| Every route in one simulator, searched (section 21) | today's technology: 0.12 electricity out / in (muon catalysis); within 10× of it on every demand: 0.86, within 100×: 2.8 (dense D-T Z-pinch) | Only the Z-pinch crosses 1 on paper, if it stays stable ~100 Alfvén times at 100 MA |
+| Every route in one simulator, with the ideas combined (section 21) | today's technology: 0.12 electricity out / in (muon catalysis); within 10× of it on every demand: 1.5 (ordinary inertial fusion), 0.89 (dense Z-pinch); crystal routes ≤ 0.012 within 100× | Only ordinary inertial fusion and the Z-pinch cross 1, and only well beyond today; no combination with exploding crystals gets near |
+| Untested theory in the simulator: alpha channelling, direct conversion, freeing stuck muons, antimatter sparks, light-assisted tunnelling, spin-polarised fuel (section 22) | proton–boron 0.023 at best; antimatter sparks 0.39 with 22 × the most antiprotons ever stored; light-assisted tunnelling 0.85 with no limits; muons 0.14 | Moves the numbers, not the verdict |
 | Ions channelled through a tritide crystal | 0.008–0.023 for a perfectly aligned beam (2–6 × random); +9% at most for an exploding crystal | Never: the cold-catcher limit, slightly dented |
 
 ### Where this sits among real results (fusion energy / laser energy)
@@ -1352,13 +1356,13 @@ deuterons. Stopping halves only above ~1 MeV per nucleon.
   cyclotron frequency to beat the plasma frequency: about 68,000 T in solid
   D-T, 85 times the strongest laser-made field claimed.
 
-## 21. Every route in one simulator
+## 21. Every route in one simulator, and the ideas combined
 
-**Idea.** Put every experiment above into one energy account, then let a
-search try thousands of parameter combinations, with the boosters
-(spin-polarised fuel, blankets), for the best electricity out per
-electricity in. Code: `nanofusion/improved/simulator.py`
-(`python -m nanofusion sim`), guide: [simulator.md](simulator.md), numbers:
+**Idea.** Put every experiment above into one energy account, add ordinary
+inertial fusion as a yardstick, combine the ideas, and let a search try
+thousands of designs for the best electricity out per electricity in. Code:
+`nanofusion/improved/simulator.py` (`python -m nanofusion sim`), guide:
+[simulator.md](simulator.md), numbers:
 [results/simulator/summary.md](results/simulator/summary.md).
 
 **The account.**
@@ -1370,31 +1374,218 @@ electricity in. Code: `nanofusion/improved/simulator.py`
 **Stretch.** Each design's demands (laser energy and power, field, density,
 pressure, current, pinch stability, muon supply, ...) are compared with the
 best ever achieved. The largest ratio is its stretch. Designs are ranked
-within stretch budgets.
+within stretch budgets. Ideas never shown to work are flagged and left out
+(section 22).
+
+**The yardstick.** The `compressed_icf` route is ordinary inertial fusion: an
+isobaric hot spot (10 keV, ρR 0.3 g/cm²) in a dense shell, burning the share
+ρR/(ρR + 7 g/cm²). NIF-like inputs give a target gain of 1.7, against NIF's
+record 4.1, so it is if anything conservative.
+
+**New routes and combinations** beyond sections 1–20:
+* a MagLIF-like magnetised liner (section 12's fuel, squeezed by pulsed power);
+* exploding crystals as the muon factory for muon catalysis;
+* inertial fusion lit by a crystal spark instead of a hot spot, or driven by
+  pulsed-power X-rays instead of a laser;
+* the hollow shell, NASA's lattice confinement, and a proton–boron catcher
+  with screening and the avalanche.
 
 | Best electricity out / in | Today's technology | ≤ 10× today | ≤ 100× today | Unlimited |
 |---|---|---|---|---|
-| Winning route | muon catalysis | dense D-T Z-pinch | dense D-T Z-pinch | dense D-T Z-pinch |
-| Electricity out / in | 0.12 | 0.86 | **2.8** | **5.9** |
-| Best crystal route | 0.005 (channelling) | 0.006 | 0.01 | 1.7 (spin-polarised tamped ball) |
+| Ordinary inertial fusion (yardstick) | – | **1.5** | **3.1** | **7.1** |
+| Dense D-T Z-pinch | 0.01 | 0.89 | **2.8** | **5.7** |
+| Dense D-T Z-pinch followed in time (section 24) | 2×10⁻⁷ | 0.002 | **3.7** | **5.5** |
+| Muon catalysis | 0.12 | 0.16 | 0.16 | 0.16 |
+| Best route using exploding crystals | 0.005 | 0.005 | 0.012 | 1.3 (tamped ball) |
 
-* **Nothing comes close with today's technology.** A muon returns about a
-  tenth of the electricity it cost.
-* **Only the dense Z-pinch crosses 1 on paper.**
-  * Within ten times today's best on every demand it reaches 0.86.
-  * Allowed a hundred times, it reaches 2.8: a 100 MA pinch held stable for
-    about 100 Alfvén times.
-  * No dense, hot pinch has stayed stable past its peak current. The 1980
-    Los Alamos dense Z-pinch reactor study also found net power, assuming
-    stability.
-* **The crystal routes never get near.** Within a hundred times today's
-  technology they stay at about a percent of breakeven, held back by
-  picosecond laser energy.
-* **The search caught three flaws in the pinch model**, now fixed: fuel
-  burning past 100%, a pressure 200 times any experiment's, and a pinch too
-  cool for its alphas to make up its X-ray losses.
+Untested theory is left out of this table; section 22 adds it.
+
+* **Nothing reaches breakeven with today's technology.** The best is muon
+  catalysis, which returns about a tenth of the electricity it costs.
+* **Ordinary inertial fusion leads beyond that.** Within ten times today's
+  best on every demand it reaches 1.5. That needs a 19 MJ laser, a cold shell
+  of 6 g/cm² (about ten times NIF's) and a low adiabat, as power-plant studies
+  of inertial fusion also find.
+* **The dense Z-pinch is second**, if it stays stable for many Alfvén times,
+  which no dense, hot pinch has done.
+* **Exploding crystals never help.**
+  * As the spark for inertial fusion they do worse than an ordinary hot spot
+    at every budget (0.64 against 7.1 even with no limits).
+  * As a muon factory they make muons, but at 0.006 of breakeven.
+  * Their best route, the tamped ball, stays at about 1% of breakeven within
+    a hundred times today's technology.
+* **Lasers beat pulsed-power X-rays** for driving a capsule (1.5 against 0.61
+  within ten times today). On Z only ~0.2% of the stored energy reached a
+  capsule.
+* **Small ideas stay small.**
+  * Electron screening and the proton–boron avalanche change nothing visible.
+  * Heating the ions first helps the tamped ball two to five times.
+  * Deuterium-only fuel costs a factor of 30–100.
+* **The search exposed four flaws in the models**, now fixed:
+  * a pinch "burning" more than all its fuel;
+  * a pinch at 130,000 Gbar;
+  * a pinch too cool for its alphas to make up its X-ray losses;
+  * a capsule whose hot spot was 600 times the pressure of the shell around
+    it.
 * **A uranium blanket** (k_eff 0.95) makes several routes "net energy",
   muon catalysis included, but over 99% of the heat is then fission.
+
+## 22. Untested theory, as if it worked
+
+**Idea.** Some proposals have never been shown to work at all. The simulator
+keeps them apart from technology: a design that relies on one is flagged,
+left out of section 21's search, and searched separately as if the theory
+held (`python -m nanofusion sim search --theory`). Numbers:
+[results/simulator/summary.md](results/simulator/summary.md).
+
+| Untested idea | What it promises | Model and source |
+|---|---|---|
+| Alpha channelling | waves hand the alphas' energy to the fuel ions instead of the electrons, the key hope for proton–boron | that share (up to 90%) of the alphas' electron heating goes to ions ([Fisch & Rax 1992](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.69.612); "more than half" claimed in later work) |
+| Direct conversion | charged fusion products become electricity directly | 60%, as designs claim (60–70%); ~48–65% has been shown only on low-energy ions and beams |
+| Freeing stuck muons with fields | stuck (μα)⁺ ions re-accelerated until stripped; sticking 0.1% | Kulsrud; the TEK concept. Both papers find the fuel must stay below 25 K, which costs ~30 MeV of cooling per 17.6 MeV fusion; charged here |
+| Antimatter sparks | antiprotons annihilate on uranium in compressed D-T; fission fragments light the hot spot | ~0.17 GeV deposited per antiproton; CERN's ~2 mJ of beam per antiproton, or a factory 10,000 times better (ICAN-II, AIMStar) |
+| Light-assisted tunnelling | intense light raises the D-T tunnelling probability in cool fuel | 5×10²¹ W/cm² held over the fuel; boost up to 10⁹ at 1 keV ([Queisser & Schützhold 2019](https://arxiv.org/abs/1902.04905); Wang 2020), or +70% (Thomson et al. 2024) |
+| Spin-polarised fuel | D-T cross section ×1.5 | never tested in a plasma |
+
+| Best electricity out / in, theory allowed | Today's technology | ≤ 10× today | ≤ 100× today | Unlimited |
+|---|---|---|---|---|
+| Ordinary inertial fusion (with spin-polarised fuel) | – | **1.8** | **3.5** | **8.2** |
+| Dense D-T Z-pinch (with spin-polarised fuel) | 0.018 | **1.2** | **3.4** | **7.1** |
+| Dense D-T Z-pinch followed in time (sheared-flow stabilised) | 0.001 | **4.2** | **5.9** | **6.0** |
+| Antimatter spark (theoretical factory) | – | 0.16 | 0.39 | 0.39 |
+| Light-assisted tunnelling | – | 0.032 | 0.091 | 0.85 |
+| Muon catalysis (stuck muons freed) | 0.14 | 0.2 | 0.2 | 0.2 |
+| Proton–boron (channelling, direct conversion) | – | 0.009 | 0.015 | 0.023 |
+
+* **Theory moves the numbers, and changes one leader.**
+  * Spin-polarised fuel lifts inertial fusion and the pinch by 15–35%.
+  * Sheared-flow stabilisation, proven only below 0.6 MA, would make the
+    time-dependent pinch (section 24) the best route within ten times today:
+    4.2, at 68 MA on a 1.5 mm fibre.
+  * Every other untested idea stays far below breakeven.
+* **Proton–boron gets about 50% better and stays at 2% of breakeven.**
+  Channelling feeds the ions, but the X-rays still win. Direct conversion
+  helps more than channelling here.
+* **Antimatter sparks need more antiprotons than have ever existed at once.**
+  A NIF-like target needs ~10¹⁵ antiprotons, and the best design 1.3×10¹⁴,
+  22 times the most ever stored. Even from a factory 10,000 times better than
+  CERN's, making them costs more than the fusion they spark. Livermore's
+  independent estimate also needed at least ~3×10¹⁵ antiprotons.
+* **Light-assisted tunnelling costs more light than it returns.** Holding
+  5×10²¹ W/cm² over the fuel for its whole burn costs gigajoules. The optimistic
+  boost does help: 0.091 against 0.037 with the pessimistic one for the same
+  ball. Both are far below breakeven.
+* **Freeing stuck muons doubles the fusions per muon**, but the cooling it
+  needs leaves 0.14 against 0.12. A 2026 analysis of X-ray stripping finds at
+  most +40% ([arXiv:2606.07077](https://arxiv.org/abs/2606.07077)).
+
+## 23. A practical experiment: what limits NIF's yield
+
+**Idea.** Ordinary inertial fusion leads every search above, so design a real
+experiment with it: a campaign of shots on NIF, one change at a time. Then
+check whether it is novel, and simulate what the simple model leaves out.
+Proposal: [icf_experiment.md](icf_experiment.md). Code: `tools/icf_experiment.py`
+(static model) and `tools/icf_dynamics.py` (1-D model). Numbers:
+[summary.md](results/icf_experiment/summary.md) and
+[dynamics.md](results/icf_experiment/dynamics.md).
+
+**Two models.**
+* **Static:** the simulator's `compressed_icf`, an isobaric hot spot in a
+  cold shell, calibrated on NIF's fuel and measured pressures.
+* **1-D:** `nanofusion/improved/burn1d.py` follows the shell from peak
+  velocity through stagnation, alpha heating, burn and disassembly. It uses
+  NIF's published velocities, leftover ablator and gas fill. It matches
+  LLNL's own 1-D yields: 5.1 MJ for N210808 against their 4.2–6.2 MJ.
+
+**Is it novel? Mostly not.**
+* Measured ÷ clean yield is NIF's standard yield-over-clean.
+* NIF has scanned every knob.
+* Landen et al. (2024) proposed spending extra laser energy on fuel instead of
+  ablator.
+* **The static model's central claim is falsified.** It said a lower adiabat
+  alone does nothing (×1.01). Hohenberger et al. (2025) did exactly that and
+  got up to 80% more yield. The 1-D model gets the direction right: at fixed
+  drive, a lower adiabat raises pressure and areal density.
+
+**What the static model leaves out**, simulated on N221204's design:
+
+| Physics | Effect |
+|---|---|
+| Alpha heating | ×530 |
+| Burn propagation | 27% burnt, against 21% from the static formula |
+| Velocity at fixed kinetic energy | pressure ∝ v^2.4; below ~380 km/s, no ignition |
+| Mixed-in ablator | 100 ng: −2% on a clean capsule; 1000 ng: −74% |
+| Asymmetry (unstagnated kinetic energy) | 3%: −12%; 10%: −98% |
+
+* **The static ceiling misled.** The clean 1-D yield of N221204's design is
+  20 MJ, not 10.9. The record reached 43% of it, not 79%.
+
+**The campaign, re-predicted.** Each step's clean 1-D yield is taken at the
+record's 43%, with the record's degradation held fixed as an upper bound:
+
+| Step | Predicted yield |
+|---|---|
+| Repeat the record | 8.6 MJ |
+| Lower adiabat (2.45 → 2.25) | 9.5–18.5 MJ |
+| 2.2 MJ spent on more ablator (NIF's choice) | 9.6–20 MJ |
+| 2.2 MJ spent on more fuel (Landen's proposal) | 10.4–21.9 MJ |
+| 2.6 MJ upgrade, scaled capsule | 12.8–27.5 MJ |
+
+* **The open test is fuel against ablator at 2.2 MJ.** It hasn't been shot,
+  as far as the search found. The 1-D model gives fuel an 8% edge.
+* **No net electricity.** The plant designs of section 21 need about ten times
+  NIF's laser energy and areal density.
+
+## 24. A practical dense Z-pinch experiment
+
+**Idea.** The dense D-T Z-pinch came second in section 21's search. Follow
+it in time, design a first experiment, and check whether it is novel and
+possible. Proposal: [zpinch_experiment.md](zpinch_experiment.md). Code:
+`nanofusion/improved/zpinch.py`, `tools/zpinch_experiment.py`. Numbers:
+[results/zpinch_experiment/summary.md](results/zpinch_experiment/summary.md).
+
+**The model.**
+* A generator circuit drives a fibre that heats ohmically and by compression.
+* It radiates with its own opacity, and loses heat to the electrodes.
+* It burns, with alphas held by its self-field.
+* The m = 0 mode grows in Alfvén times.
+* It reproduces the Pease–Braginskii current (1.3–1.6 MA, against Haines'
+  1.15–1.37) and FuZE's Bennett temperature.
+
+**Three barriers the static `fibre_pinch` route missed**, on Z (26 MA, a
+240 µm D-T fibre):
+1. **A cold fibre can't take the current.** Its resistance stalls the current
+   at ~4 MA, which is why the 1980s fibres grew a current-carrying corona.
+   Laser preheat to ~100 eV fixes this.
+2. **The radiative collapse caps its own current** at ~8.5 MA. Most of the
+   energy leaves as X-rays.
+3. **Stability decides everything:**
+   * broken in an Alfvén time: nothing;
+   * stable only while the current rises: under 1 J;
+   * fully flow-stabilised: 1.3 MJ from a 7.8 MJ bank, with no ignition.
+
+**Novel? Possible?**
+* No one has fielded D-T in a dense equilibrium pinch.
+* Fibre pinches stopped around 2000.
+* Flow-stabilised pinches have reached only 0.6 MA, in deuterium.
+* Tritium on Z has been a trace once (2016).
+* So **D-T is novel but not possible today**. Preheated deuterium fibres on Z
+  with a 1% tritium trace are. The model's three scenarios predict anything
+  from no thermonuclear neutrons to ~10⁹ to ~10¹⁵. Neutron isotropy, the
+  D-T/D-D ratio and the collapse's back-voltage tell them apart.
+
+**Energy.**
+* On Z, even fully flow-stabilised, the best is 1% of breakeven.
+* On a 60 MA machine (studied, not built), a ~1 mm fibre ignites and
+  returns 1.9× its electricity, but only if it stays stable through its whole
+  burn.
+* As the simulator route `dynamic_pinch` (section 21's table) it reaches:
+  * 0.002 within ten times today, against the static route's 0.89, because
+    ten Alfvén times aren't enough;
+  * 3.7 within a hundred, needing 46 Alfvén times and 71 MA;
+  * with sheared-flow stabilisation, 4.2 within ten times today, the best of
+    any route at that budget, if that stabilisation works at fibre
+    density.
 
 ## Why everything hits the same wall
 
@@ -1499,10 +1690,28 @@ net energy:
   * Son & Fisch's proton–boron keeps itself hot only at white-dwarf density.
   * Stuck muons are freed above ~60 g/cm³, but a squeeze lasts ~0.1 ns, far
     too short for the 1,000 fusions per muon that electricity needs.
+* **Untested theory** (section 22) mostly moves the numbers, not the
+  verdict: proton–boron stays at 2% of breakeven, antimatter sparks need more
+  antiprotons than have ever existed at once, and light-assisted tunnelling
+  costs more light than it returns. The exception is a dense pinch kept
+  stable by sheared flow, which would lead within ten times today's
+  technology (section 24).
 * **Every route in one simulator** (section 21): with today's technology
-  the best is a tenth of breakeven. Only a dense D-T Z-pinch crosses net
-  electricity on paper, if held stable ~100 Alfvén times at 100 MA, which no
-  dense hot pinch has done.
+  the best is a tenth of breakeven. Within ten times today's technology only
+  ordinary inertial fusion crosses net electricity (1.5), with the dense
+  Z-pinch next. Combining exploding crystals with any other idea stays below
+  ~1% of breakeven.
+* **A practical experiment** (section 23): a one-change-at-a-time shot
+  campaign on NIF. It is mostly not novel, and its static model's claim that
+  the adiabat doesn't matter was already falsified on NIF. A 1-D
+  implosion-and-burn model matches LLNL's 1-D yields, puts the 2025 record at
+  43% of a clean implosion, and predicts 13–28 MJ after the 2.6 MJ upgrade.
+  The open test is spending extra laser energy on fuel rather than ablator.
+* **A dense Z-pinch experiment** (section 24): followed in time, a D-T fibre
+  on Z can't take the current cold, collapses radiatively when preheated, and
+  reaches 1% of breakeven even if fully stabilised. D-T pinches are untried
+  and, for want of tritium on Z, not possible yet. Preheated deuterium fibres
+  with a tritium trace are.
 * **Three more walls attacked, none breached.**
   * An opaque proton–boron ball traps its X-rays, but the trapped radiation
     and pairs soak up its energy. The balls that do repay their heat need

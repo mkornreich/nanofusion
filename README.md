@@ -117,9 +117,35 @@ through a tritide crystal. None breaks through.
 `python3 -m nanofusion sim` puts every route into one simulator with a common
 energy account (list, run, search; see [docs/simulator.md](docs/simulator.md)),
 and `python3 tools/simulator_search.py` searches them all for the best
-electricity out per electricity in (section 21). With today's technology the
-best is a tenth of breakeven; only a dense D-T Z-pinch crosses 1 on paper, and
-only if it stays stable far longer than any has.
+electricity out per electricity in (section 21). It also runs ordinary
+inertial fusion as a yardstick and combines the ideas (crystal sparks, muon
+factories, pulsed-power drivers, magnetised liners, spin-polarised fuel,
+blankets). With today's technology the best is a tenth of breakeven. Within
+ten times today's technology only ordinary inertial fusion (1.5) crosses net
+electricity, with the dense Z-pinch next; no combination with exploding
+crystals gets above ~1% of breakeven. Untested theory (alpha channelling,
+direct conversion, freeing stuck muons with fields, antimatter sparks,
+light-assisted tunnelling, spin-polarised fuel) is kept apart and searched
+separately (`python3 -m nanofusion sim search --theory`, section 22). It mostly
+moves the numbers, not the verdict. The exception is a dense pinch kept stable
+by sheared flow, which would lead within ten times today's technology.
+`python3 tools/icf_experiment.py` and `python3 tools/icf_dynamics.py` design a
+practical experiment with ordinary inertial fusion: a one-change-at-a-time shot
+campaign on NIF (section 23; [docs/icf_experiment.md](docs/icf_experiment.md)).
+A 1-D implosion-and-burn model (`nanofusion/improved/burn1d.py`) simulates what
+the static model leaves out and matches LLNL's own 1-D yields. The campaign is
+mostly not novel: NIF has already falsified the static model's claim that the
+adiabat doesn't matter. The open test is spending extra laser energy on fuel
+rather than ablator.
+`python3 tools/zpinch_experiment.py` does the same for a dense D-T Z-pinch,
+with a time-dependent pinch model (`nanofusion/improved/zpinch.py`; section 24;
+[docs/zpinch_experiment.md](docs/zpinch_experiment.md)). Followed in time, a
+fibre on Z can't take the current cold and collapses radiatively when
+preheated. On Z it reaches 1% of breakeven even if fully stabilised; at
+~70 MA, with tens of Alfvén times of stability, a millimetre-thick fibre
+ignites (`dynamic_pinch` route: 3.7 within a hundred times today). D-T pinches
+have never been tried and need tritium Z doesn't yet handle; preheated
+deuterium fibres with a tritium trace are possible today.
 
 ### The page
 

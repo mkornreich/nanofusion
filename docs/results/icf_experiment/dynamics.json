@@ -1,0 +1,946 @@
+{
+ "runs": {
+  "N210808 clean": {
+   "yield_J": 5061153.598123864,
+   "burn_up": 0.06777502796603173,
+   "burn_pressure_gbar": 629.6046869317811,
+   "burn_T_keV": 12.628099893225459,
+   "peak_rhoR": 1.2475937905456558,
+   "burn_rhoR": 0.6950573509487499,
+   "burn_width_ps": 44.633597572063074,
+   "bang_time_ps": 810.301194880743,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.0016384177230798183,
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.65,
+    "ablator_mg": 0.149226
+   }
+  },
+  "N210808 no alphas": {
+   "yield_J": 33976.45661681899,
+   "burn_up": 0.0004549862502187618,
+   "burn_pressure_gbar": 267.32266679307327,
+   "burn_T_keV": 4.161449317930741,
+   "peak_rhoR": 1.5458986453471635,
+   "burn_rhoR": 1.210361737029805,
+   "burn_width_ps": 95.24110336591373,
+   "bang_time_ps": 702.2872543028666,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.0048219433217678975,
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.65,
+    "ablator_mg": 0.149226,
+    "alpha_heating": false
+   }
+  },
+  "N221204 clean": {
+   "yield_J": 19963348.891344443,
+   "burn_up": 0.2673336232885863,
+   "burn_pressure_gbar": 3176.7845037337556,
+   "burn_T_keV": 28.685548879953682,
+   "peak_rhoR": 1.4618064403463216,
+   "burn_rhoR": 1.1154193803299763,
+   "burn_width_ps": 16.35751072460836,
+   "bang_time_ps": 788.2549134088107,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0015262694439213396,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003
+   }
+  },
+  "N221204 no alphas": {
+   "yield_J": 37539.36483744257,
+   "burn_up": 0.0005026979427433042,
+   "burn_pressure_gbar": 302.5757619281792,
+   "burn_T_keV": 4.0339740651510985,
+   "peak_rhoR": 1.8899777535990556,
+   "burn_rhoR": 1.453299886467556,
+   "burn_width_ps": 116.1149392264176,
+   "bang_time_ps": 725.8554648494152,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0044112922105672,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "alpha_heating": false
+   }
+  },
+  "mix 30": {
+   "yield_J": 19869964.239833303,
+   "burn_up": 0.2660830887523272,
+   "burn_pressure_gbar": 3137.7435254263432,
+   "burn_T_keV": 28.534835691672694,
+   "peak_rhoR": 1.4628859324290382,
+   "burn_rhoR": 1.1111133862010465,
+   "burn_width_ps": 16.418310961374278,
+   "bang_time_ps": 788.8711102813859,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0015163358422507645,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "mix_ng": 30
+   }
+  },
+  "mix 100": {
+   "yield_J": 19635054.15062444,
+   "burn_up": 0.26293735575747496,
+   "burn_pressure_gbar": 3041.771455427083,
+   "burn_T_keV": 28.16142940133096,
+   "peak_rhoR": 1.4654608163733873,
+   "burn_rhoR": 1.1003187226494433,
+   "burn_width_ps": 16.846526721474657,
+   "bang_time_ps": 790.6754282006963,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.00149790549754831,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "mix_ng": 100
+   }
+  },
+  "mix 300": {
+   "yield_J": 18788963.460742313,
+   "burn_up": 0.2516071680726323,
+   "burn_pressure_gbar": 2724.183646081152,
+   "burn_T_keV": 26.890656915866415,
+   "peak_rhoR": 1.4732274793777402,
+   "burn_rhoR": 1.0625992954764718,
+   "burn_width_ps": 17.84335454848736,
+   "bang_time_ps": 796.6775256569143,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0014473097641566931,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "mix_ng": 300
+   }
+  },
+  "mix 1000": {
+   "yield_J": 5243287.51703711,
+   "burn_up": 0.07021402358404343,
+   "burn_pressure_gbar": 594.5263756483158,
+   "burn_T_keV": 12.022766147055105,
+   "peak_rhoR": 1.50525030625716,
+   "burn_rhoR": 0.774538994952694,
+   "burn_width_ps": 51.4758664809913,
+   "bang_time_ps": 852.3616880861678,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0013540670135534197,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "mix_ng": 1000
+   }
+  },
+  "rke 0.01": {
+   "yield_J": 19312295.963774282,
+   "burn_up": 0.25861522944458376,
+   "burn_pressure_gbar": 2913.138685680449,
+   "burn_T_keV": 27.725359374606658,
+   "peak_rhoR": 1.4586636602612046,
+   "burn_rhoR": 1.0844995782474771,
+   "burn_width_ps": 17.327844982828967,
+   "bang_time_ps": 795.5979705940581,
+   "kinetic_J": 35539.59310625375,
+   "energy_error": -0.001496231159164115,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "rke": 0.01
+   }
+  },
+  "rke 0.03": {
+   "yield_J": 17504839.365179025,
+   "burn_up": 0.2344111781068428,
+   "burn_pressure_gbar": 2306.6620027211643,
+   "burn_T_keV": 25.27610149186146,
+   "peak_rhoR": 1.4521450529375624,
+   "burn_rhoR": 1.0059214792753934,
+   "burn_width_ps": 19.999863751733535,
+   "bang_time_ps": 813.0697956556951,
+   "kinetic_J": 34821.62152834964,
+   "energy_error": -0.0014283603486663497,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "rke": 0.03
+   }
+  },
+  "rke 0.1": {
+   "yield_J": 365031.62039939343,
+   "burn_up": 0.004888219217497318,
+   "burn_pressure_gbar": 405.8309685508215,
+   "burn_T_keV": 6.772927803891534,
+   "peak_rhoR": 1.4264859772546843,
+   "burn_rhoR": 1.1988815328393825,
+   "burn_width_ps": 80.71306104907057,
+   "bang_time_ps": 836.9239986750581,
+   "kinetic_J": 32308.721005685227,
+   "energy_error": -0.002685041689343957,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.45,
+    "ablator_mg": 0.24242100000000003,
+    "rke": 0.1
+   }
+  },
+  "velocity 360": {
+   "yield_J": 143704.58525781438,
+   "burn_up": 0.0019243799058589644,
+   "burn_pressure_gbar": 338.59947046148886,
+   "burn_T_keV": 5.5982679342059125,
+   "peak_rhoR": 1.5329345235408476,
+   "burn_rhoR": 1.3810759215597237,
+   "burn_width_ps": 96.39747357816422,
+   "bang_time_ps": 858.5618410089058,
+   "kinetic_J": 35897.52434441677,
+   "energy_error": -0.0033607359677092653,
+   "inputs": {
+    "velocity_kms": 360,
+    "adiabat": 2.45,
+    "ablator_mg": 0.3338918700308643
+   }
+  },
+  "velocity 360 no alphas": {
+   "yield_J": 23136.04919568645,
+   "burn_up": 0.0003098199552454601,
+   "burn_pressure_gbar": 237.80153691587083,
+   "burn_T_keV": 3.6811370786089164,
+   "peak_rhoR": 1.88569781654395,
+   "burn_rhoR": 1.4279325375611749,
+   "burn_width_ps": 140.20545538819803,
+   "bang_time_ps": 791.3143885206646,
+   "kinetic_J": 35897.52434441677,
+   "energy_error": -0.004238747049677202,
+   "inputs": {
+    "velocity_kms": 360,
+    "adiabat": 2.45,
+    "ablator_mg": 0.3338918700308643,
+    "alpha_heating": false
+   }
+  },
+  "velocity 380": {
+   "yield_J": 14032507.81103442,
+   "burn_up": 0.187912417769531,
+   "burn_pressure_gbar": 1415.0913624574328,
+   "burn_T_keV": 20.725030154753693,
+   "peak_rhoR": 1.4918378393135545,
+   "burn_rhoR": 0.890696527710274,
+   "burn_width_ps": 27.714334267371484,
+   "bang_time_ps": 853.7989357336751,
+   "kinetic_J": 35898.13315045819,
+   "energy_error": -0.0012425027224163994,
+   "inputs": {
+    "velocity_kms": 380,
+    "adiabat": 2.45,
+    "ablator_mg": 0.2771217891689751
+   }
+  },
+  "velocity 380 no alphas": {
+   "yield_J": 31091.87816575401,
+   "burn_up": 0.0004163582217661946,
+   "burn_pressure_gbar": 275.90391572526016,
+   "burn_T_keV": 3.8869309160972674,
+   "peak_rhoR": 1.8935093249442532,
+   "burn_rhoR": 1.4473302585861987,
+   "burn_width_ps": 126.13452238326236,
+   "bang_time_ps": 753.2865700509661,
+   "kinetic_J": 35898.13315045819,
+   "energy_error": -0.004343303048135586,
+   "inputs": {
+    "velocity_kms": 380,
+    "adiabat": 2.45,
+    "ablator_mg": 0.2771217891689751,
+    "alpha_heating": false
+   }
+  },
+  "velocity 410": {
+   "yield_J": 21409041.313449234,
+   "burn_up": 0.2866932104733644,
+   "burn_pressure_gbar": 4203.837066233924,
+   "burn_T_keV": 32.16533473744645,
+   "peak_rhoR": 1.4263492792506396,
+   "burn_rhoR": 1.1896904849183396,
+   "burn_width_ps": 13.260505094345005,
+   "bang_time_ps": 742.4726332279672,
+   "kinetic_J": 35899.10806283534,
+   "energy_error": -0.001846480059963473,
+   "inputs": {
+    "velocity_kms": 410,
+    "adiabat": 2.45,
+    "ablator_mg": 0.20703382722189176
+   }
+  },
+  "velocity 410 no alphas": {
+   "yield_J": 45734.736195410616,
+   "burn_up": 0.00061244397439589,
+   "burn_pressure_gbar": 332.26115850995814,
+   "burn_T_keV": 4.203485507858437,
+   "peak_rhoR": 1.8772665210295365,
+   "burn_rhoR": 1.4526655731552525,
+   "burn_width_ps": 104.6810231270621,
+   "bang_time_ps": 700.0263647503607,
+   "kinetic_J": 35899.10806283534,
+   "energy_error": -0.004476916654774272,
+   "inputs": {
+    "velocity_kms": 410,
+    "adiabat": 2.45,
+    "ablator_mg": 0.20703382722189176,
+    "alpha_heating": false
+   }
+  },
+  "velocity 430": {
+   "yield_J": 21680859.0062648,
+   "burn_up": 0.2903331813564979,
+   "burn_pressure_gbar": 4902.024141740832,
+   "burn_T_keV": 34.46179789899214,
+   "peak_rhoR": 1.380571478340239,
+   "burn_rhoR": 1.2140096577650479,
+   "burn_width_ps": 11.660081375476127,
+   "bang_time_ps": 698.2201325825251,
+   "kinetic_J": 35899.79913996343,
+   "energy_error": -0.0021820945684851594,
+   "inputs": {
+    "velocity_kms": 430,
+    "adiabat": 2.45,
+    "ablator_mg": 0.16823356601406167
+   }
+  },
+  "velocity 430 no alphas": {
+   "yield_J": 57077.16993698593,
+   "burn_up": 0.0007643330149346108,
+   "burn_pressure_gbar": 367.16539276920133,
+   "burn_T_keV": 4.414463782310399,
+   "peak_rhoR": 1.8508039266875507,
+   "burn_rhoR": 1.4416497945207338,
+   "burn_width_ps": 92.47632238270309,
+   "bang_time_ps": 670.3095947525402,
+   "kinetic_J": 35899.79913996343,
+   "energy_error": -0.004588741274902069,
+   "inputs": {
+    "velocity_kms": 430,
+    "adiabat": 2.45,
+    "ablator_mg": 0.16823356601406167,
+    "alpha_heating": false
+   }
+  },
+  "adiabat 2.89 (N210808 target)": {
+   "yield_J": 580157.9649434856,
+   "burn_up": 0.007769023709009055,
+   "burn_pressure_gbar": 419.53844963520544,
+   "burn_T_keV": 7.518090697516631,
+   "peak_rhoR": 1.2009798315519904,
+   "burn_rhoR": 0.9588827742996887,
+   "burn_width_ps": 78.28319215893004,
+   "bang_time_ps": 775.9001081412214,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.002486233533211204,
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.89,
+    "ablator_mg": 0.149226
+   }
+  },
+  "adiabat 2.89 (N210808 target) no alphas": {
+   "yield_J": 32375.96780876746,
+   "burn_up": 0.00043355375037026407,
+   "burn_pressure_gbar": 252.5169106599854,
+   "burn_T_keV": 4.151909164176248,
+   "peak_rhoR": 1.4734721126315484,
+   "burn_rhoR": 1.154844284841151,
+   "burn_width_ps": 94.29761252964413,
+   "bang_time_ps": 697.0536769492369,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.004843244323660046,
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.89,
+    "ablator_mg": 0.149226,
+    "alpha_heating": false
+   }
+  },
+  "adiabat 2.68 (N210808 target)": {
+   "yield_J": 3538440.402912815,
+   "burn_up": 0.04738403856236482,
+   "burn_pressure_gbar": 543.487388738394,
+   "burn_T_keV": 11.06796140760119,
+   "peak_rhoR": 1.241479145700718,
+   "burn_rhoR": 0.7131603388334701,
+   "burn_width_ps": 54.24878464942448,
+   "bang_time_ps": 811.5033092796526,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.0016808019983043524,
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.68,
+    "ablator_mg": 0.149226
+   }
+  },
+  "adiabat 2.68 (N210808 target) no alphas": {
+   "yield_J": 33760.99170397335,
+   "burn_up": 0.0004521009118841921,
+   "burn_pressure_gbar": 265.33720533476094,
+   "burn_T_keV": 4.160137271060906,
+   "peak_rhoR": 1.5362996917838443,
+   "burn_rhoR": 1.202998244127111,
+   "burn_width_ps": 94.817640440352,
+   "bang_time_ps": 701.2585182658337,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.004829969149417517,
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.68,
+    "ablator_mg": 0.149226,
+    "alpha_heating": false
+   }
+  },
+  "adiabat 2.25 no alphas": {
+   "yield_J": 39345.61189671626,
+   "burn_up": 0.000526885796872295,
+   "burn_pressure_gbar": 320.17025511633386,
+   "burn_T_keV": 4.045662243483381,
+   "peak_rhoR": 1.9792362882128127,
+   "burn_rhoR": 1.5205527559863823,
+   "burn_width_ps": 116.00808068175215,
+   "bang_time_ps": 740.38756382101,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.004426726502930039,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.25,
+    "ablator_mg": 0.24242100000000003,
+    "alpha_heating": false
+   }
+  },
+  "adiabat 2.25": {
+   "yield_J": 22153062.298540257,
+   "burn_up": 0.2966565601513017,
+   "burn_pressure_gbar": 4264.287287802451,
+   "burn_T_keV": 32.02636092014206,
+   "peak_rhoR": 1.5124248439489263,
+   "burn_rhoR": 1.2326687086156212,
+   "burn_width_ps": 13.565899102325734,
+   "bang_time_ps": 782.1972902673399,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0016172196765236052,
+   "inputs": {
+    "velocity_kms": 394.0,
+    "adiabat": 2.25,
+    "ablator_mg": 0.24242100000000003
+   }
+  }
+ },
+ "fits": {
+  "N210808": {
+   "mix_ng": 219.7810363391936,
+   "yield_J": 1369601.8720195915,
+   "burn_up": 0.018340641788241078,
+   "burn_pressure_gbar": 472.71243216721615,
+   "burn_T_keV": 8.799259259317687,
+   "peak_rhoR": 1.2533749801428118,
+   "burn_rhoR": 0.8537419379149828,
+   "burn_width_ps": 70.69404843855364,
+   "bang_time_ps": 798.4304469602145,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.001956831459076952
+  },
+  "N221204": {
+   "mix_ng": 1034.572087327039,
+   "yield_J": 3149934.229860587,
+   "burn_up": 0.04218146641490985,
+   "burn_pressure_gbar": 515.5085505808959,
+   "burn_T_keV": 10.089655103913312,
+   "peak_rhoR": 1.5070304796577676,
+   "burn_rhoR": 0.8365146114755365,
+   "burn_width_ps": 68.15693068378842,
+   "bang_time_ps": 851.2967604595963,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0014866828690535097
+  },
+  "N250406": {
+   "mix_ng": 946.144746035512,
+   "yield_J": 8593000.820134671,
+   "burn_up": 0.11507077578373621,
+   "burn_pressure_gbar": 817.4293927574696,
+   "burn_T_keV": 15.218097840442729,
+   "peak_rhoR": 1.5025161920563213,
+   "burn_rhoR": 0.7763056986467486,
+   "burn_width_ps": 38.198298812250954,
+   "bang_time_ps": 843.6640158776289,
+   "kinetic_J": 35898.57889520582,
+   "energy_error": -0.0013036813543176658
+  }
+ },
+ "hohenberger": {
+  "2.89": {
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.89,
+    "ablator_mg": 0.149226,
+    "mix_ng": 219.7810363391936
+   },
+   "yield_J": 374478.8523388945,
+   "burn_up": 0.005014729191258759,
+   "burn_pressure_gbar": 401.938452012698,
+   "burn_T_keV": 6.984432820824875,
+   "peak_rhoR": 1.2064530183968472,
+   "burn_rhoR": 1.0198841814169195,
+   "burn_width_ps": 82.78303245665543,
+   "bang_time_ps": 765.0289467423073,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.00282820763972276
+  },
+  "2.68": {
+   "inputs": {
+    "velocity_kms": 401.0,
+    "adiabat": 2.68,
+    "ablator_mg": 0.149226,
+    "mix_ng": 219.7810363391936
+   },
+   "yield_J": 1030291.1707886743,
+   "burn_up": 0.013796857091877779,
+   "burn_pressure_gbar": 460.2320153415521,
+   "burn_T_keV": 8.354148933680236,
+   "peak_rhoR": 1.2472197566539838,
+   "burn_rhoR": 0.8996653314148398,
+   "burn_width_ps": 73.09762553312933,
+   "bang_time_ps": 791.5903091068852,
+   "kinetic_J": 29692.569649504498,
+   "energy_error": -0.002082032065588133
+  }
+ },
+ "campaign": {
+  "record": [
+   {
+    "step": "A. Repeat the record",
+    "practice": "today's target and pulse",
+    "inputs": {
+     "velocity_kms": 394.0,
+     "adiabat": 2.45,
+     "ablator_mg": 0.24242100000000003,
+     "mix_ng": 946.144746035512
+    },
+    "yield_J": 8593000.820134671,
+    "burn_up": 0.11507077578373621,
+    "burn_pressure_gbar": 817.4293927574696,
+    "burn_T_keV": 15.218097840442729,
+    "peak_rhoR": 1.5025161920563213,
+    "burn_rhoR": 0.7763056986467486,
+    "burn_width_ps": 38.198298812250954,
+    "bang_time_ps": 843.6640158776289,
+    "kinetic_J": 35898.57889520582,
+    "energy_error": -0.0013036813543176658
+   },
+   {
+    "step": "B. Lower adiabat",
+    "practice": "adiabat 2.45 \u2192 2.25",
+    "inputs": {
+     "velocity_kms": 394.0,
+     "adiabat": 2.25,
+     "ablator_mg": 0.24242100000000003,
+     "mix_ng": 946.144746035512
+    },
+    "yield_J": 18508709.59613555,
+    "burn_up": 0.24785422654595088,
+    "burn_pressure_gbar": 2610.073199085677,
+    "burn_T_keV": 26.169104500055912,
+    "peak_rhoR": 1.5550463213835233,
+    "burn_rhoR": 1.053821489867276,
+    "burn_width_ps": 18.521594323922358,
+    "bang_time_ps": 809.6368432547602,
+    "kinetic_J": 35898.57889520582,
+    "energy_error": -0.0013788706115460308
+   },
+   {
+    "step": "C. Faster",
+    "practice": "+4% velocity from a thinner ablator, same kinetic energy",
+    "inputs": {
+     "velocity_kms": 410.0,
+     "adiabat": 2.45,
+     "ablator_mg": 0.20703382722189176,
+     "mix_ng": 946.144746035512
+    },
+    "yield_J": 19448578.297639664,
+    "burn_up": 0.2604402163393554,
+    "burn_pressure_gbar": 3186.788361047557,
+    "burn_T_keV": 28.337502699796683,
+    "peak_rhoR": 1.4642918830659277,
+    "burn_rhoR": 1.091231972377106,
+    "burn_width_ps": 15.951669101061496,
+    "bang_time_ps": 760.6422484676801,
+    "kinetic_J": 35899.10806283534,
+    "energy_error": -0.0016135012403432568
+   },
+   {
+    "step": "D0. 2.2 MJ, thicker ablator",
+    "practice": "what NIF did: 5% more ablator left",
+    "inputs": {
+     "velocity_kms": 402.51662670869314,
+     "adiabat": 2.45,
+     "ablator_mg": 0.25547880562060893,
+     "mix_ng": 946.144746035512,
+     "fuel_mg": 0.22
+    },
+    "yield_J": 19984261.68329813,
+    "burn_up": 0.26761367111405326,
+    "burn_pressure_gbar": 3118.736708525932,
+    "burn_T_keV": 28.10674359806262,
+    "peak_rhoR": 1.5372942822276687,
+    "burn_rhoR": 1.1250768863517608,
+    "burn_width_ps": 16.37191439491931,
+    "bang_time_ps": 781.5686963206251,
+    "kinetic_J": 38525.11598112282,
+    "energy_error": -0.0013925684914890156
+   },
+   {
+    "step": "D. 2.2 MJ, thicker fuel",
+    "practice": "Landen et al.'s proposal: 7% more D-T",
+    "inputs": {
+     "velocity_kms": 401.23611065362235,
+     "adiabat": 2.45,
+     "ablator_mg": 0.24242100000000003,
+     "mix_ng": 946.144746035512,
+     "fuel_mg": 0.23609756097560983
+    },
+    "yield_J": 21857126.37787673,
+    "burn_up": 0.27273723378158615,
+    "burn_pressure_gbar": 3344.7096622128724,
+    "burn_T_keV": 29.161691408692647,
+    "peak_rhoR": 1.545013636346282,
+    "burn_rhoR": 1.1403299217891165,
+    "burn_width_ps": 15.672136707620187,
+    "bang_time_ps": 783.9867655680134,
+    "kinetic_J": 38525.07364366948,
+    "energy_error": -0.0015457435497399923
+   },
+   {
+    "step": "E. D + lower adiabat",
+    "practice": "",
+    "inputs": {
+     "velocity_kms": 401.23611065362235,
+     "adiabat": 2.25,
+     "ablator_mg": 0.24242100000000003,
+     "mix_ng": 946.144746035512,
+     "fuel_mg": 0.23609756097560983
+    },
+    "yield_J": 24556042.044446193,
+    "burn_up": 0.30641479872694877,
+    "burn_pressure_gbar": 4726.505273882439,
+    "burn_T_keV": 33.161596085299124,
+    "peak_rhoR": 1.5975968802633154,
+    "burn_rhoR": 1.2822364528991383,
+    "burn_width_ps": 12.344241328791568,
+    "bang_time_ps": 775.7956907155201,
+    "kinetic_J": 38525.07364366948,
+    "energy_error": -0.0016612643808238765
+   },
+   {
+    "step": "F. D + lower adiabat + faster",
+    "practice": "",
+    "inputs": {
+     "velocity_kms": 417.2855550797673,
+     "adiabat": 2.25,
+     "ablator_mg": 0.20631974761870406,
+     "mix_ng": 946.144746035512,
+     "fuel_mg": 0.23609756097560983
+    },
+    "yield_J": 25471378.076400407,
+    "burn_up": 0.31783652970017,
+    "burn_pressure_gbar": 5983.86419416074,
+    "burn_T_keV": 36.48602729908051,
+    "peak_rhoR": 1.5583362774895693,
+    "burn_rhoR": 1.3484280680606395,
+    "burn_width_ps": 10.071172724336602,
+    "bang_time_ps": 732.2294010333983,
+    "kinetic_J": 38525.614033815094,
+    "energy_error": -0.002006282200380272
+   },
+   {
+    "step": "G. 2.6 MJ, scaled capsule",
+    "practice": "every length \u00d7 1.08",
+    "inputs": {
+     "velocity_kms": 394.0,
+     "adiabat": 2.45,
+     "ablator_mg": 0.307460780487805,
+     "mix_ng": 1108.5890213378486,
+     "fuel_mg": 0.2790243902439025,
+     "vapour_ug": 2.2829268292682934,
+     "inner_radius_um": 324.7339912148021
+    },
+    "yield_J": 27465691.798903544,
+    "burn_up": 0.2899954896310315,
+    "burn_pressure_gbar": 3548.9528242544166,
+    "burn_T_keV": 30.82741538146457,
+    "peak_rhoR": 1.5857293410818945,
+    "burn_rhoR": 1.2107225974279727,
+    "burn_width_ps": 15.53648131723887,
+    "bang_time_ps": 854.0099539713314,
+    "kinetic_J": 45529.904940261054,
+    "energy_error": -0.0015065805886931272
+   },
+   {
+    "step": "H. G + lower adiabat + faster",
+    "practice": "",
+    "inputs": {
+     "velocity_kms": 409.76,
+     "adiabat": 2.25,
+     "ablator_mg": 0.26321411819887447,
+     "mix_ng": 1108.5890213378486,
+     "fuel_mg": 0.2790243902439025,
+     "vapour_ug": 2.2829268292682934,
+     "inner_radius_um": 324.7339912148021
+    },
+    "yield_J": 31036357.84846117,
+    "burn_up": 0.32769623487101496,
+    "burn_pressure_gbar": 5913.098898989535,
+    "burn_T_keV": 37.393912966777606,
+    "peak_rhoR": 1.5976884326518532,
+    "burn_rhoR": 1.3972376681396208,
+    "burn_width_ps": 10.405159438660364,
+    "bang_time_ps": 800.9201260300333,
+    "kinetic_J": 45530.5658152671,
+    "energy_error": -0.0019448034082713164
+   },
+   {
+    "step": "I. G + adiabat 2.0 + 8% faster",
+    "practice": "a stretch",
+    "inputs": {
+     "velocity_kms": 425.52000000000004,
+     "adiabat": 2.0,
+     "ablator_mg": 0.2237921141557095,
+     "mix_ng": 1108.5890213378486,
+     "fuel_mg": 0.2790243902439025,
+     "vapour_ug": 2.2829268292682934,
+     "inner_radius_um": 324.7339912148021
+    },
+    "yield_J": 32537139.1527363,
+    "burn_up": 0.3435421786888123,
+    "burn_pressure_gbar": 7943.610009221441,
+    "burn_T_keV": 41.61615251790051,
+    "peak_rhoR": 1.7664360267277222,
+    "burn_rhoR": 1.5117827508024015,
+    "burn_width_ps": 8.139065954567467,
+    "bang_time_ps": 762.545751302853,
+    "kinetic_J": 45531.25260694005,
+    "energy_error": -0.0022686719785981286
+   }
+  ],
+  "clean": [
+   {
+    "step": "A. Repeat the record",
+    "practice": "today's target and pulse",
+    "inputs": {
+     "velocity_kms": 394.0,
+     "adiabat": 2.45,
+     "ablator_mg": 0.24242100000000003
+    },
+    "yield_J": 19963348.891344443,
+    "burn_up": 0.2673336232885863,
+    "burn_pressure_gbar": 3176.7845037337556,
+    "burn_T_keV": 28.685548879953682,
+    "peak_rhoR": 1.4618064403463216,
+    "burn_rhoR": 1.1154193803299763,
+    "burn_width_ps": 16.35751072460836,
+    "bang_time_ps": 788.2549134088107,
+    "kinetic_J": 35898.57889520582,
+    "energy_error": -0.0015262694439213396
+   },
+   {
+    "step": "B. Lower adiabat",
+    "practice": "adiabat 2.45 \u2192 2.25",
+    "inputs": {
+     "velocity_kms": 394.0,
+     "adiabat": 2.25,
+     "ablator_mg": 0.24242100000000003
+    },
+    "yield_J": 22153062.298540257,
+    "burn_up": 0.2966565601513017,
+    "burn_pressure_gbar": 4264.287287802451,
+    "burn_T_keV": 32.02636092014206,
+    "peak_rhoR": 1.5124248439489263,
+    "burn_rhoR": 1.2326687086156212,
+    "burn_width_ps": 13.565899102325734,
+    "bang_time_ps": 782.1972902673399,
+    "kinetic_J": 35898.57889520582,
+    "energy_error": -0.0016172196765236052
+   },
+   {
+    "step": "C. Faster",
+    "practice": "+4% velocity from a thinner ablator, same kinetic energy",
+    "inputs": {
+     "velocity_kms": 410.0,
+     "adiabat": 2.45,
+     "ablator_mg": 0.20703382722189176
+    },
+    "yield_J": 21409041.313449234,
+    "burn_up": 0.2866932104733644,
+    "burn_pressure_gbar": 4203.837066233924,
+    "burn_T_keV": 32.16533473744645,
+    "peak_rhoR": 1.4263492792506396,
+    "burn_rhoR": 1.1896904849183396,
+    "burn_width_ps": 13.260505094345005,
+    "bang_time_ps": 742.4726332279672,
+    "kinetic_J": 35899.10806283534,
+    "energy_error": -0.001846480059963473
+   },
+   {
+    "step": "D0. 2.2 MJ, thicker ablator",
+    "practice": "what NIF did: 5% more ablator left",
+    "inputs": {
+     "velocity_kms": 402.51662670869314,
+     "adiabat": 2.45,
+     "ablator_mg": 0.25547880562060893,
+     "fuel_mg": 0.22
+    },
+    "yield_J": 22295130.452424638,
+    "burn_up": 0.29855902624246433,
+    "burn_pressure_gbar": 4304.620340920411,
+    "burn_T_keV": 32.311650103993216,
+    "peak_rhoR": 1.494594925330993,
+    "burn_rhoR": 1.243207746732354,
+    "burn_width_ps": 13.270372154187168,
+    "bang_time_ps": 760.3191918011432,
+    "kinetic_J": 38525.11598112282,
+    "energy_error": -0.0016156673150097521
+   },
+   {
+    "step": "D. 2.2 MJ, thicker fuel",
+    "practice": "Landen et al.'s proposal: 7% more D-T",
+    "inputs": {
+     "velocity_kms": 401.23611065362235,
+     "adiabat": 2.45,
+     "ablator_mg": 0.24242100000000003,
+     "fuel_mg": 0.23609756097560983
+    },
+    "yield_J": 24159022.850260578,
+    "burn_up": 0.30146072036786586,
+    "burn_pressure_gbar": 4574.631043332821,
+    "burn_T_keV": 33.408945649767574,
+    "peak_rhoR": 1.504939022135877,
+    "burn_rhoR": 1.2568502666621642,
+    "burn_width_ps": 12.687168470038666,
+    "bang_time_ps": 763.354644948615,
+    "kinetic_J": 38525.07364366948,
+    "energy_error": -0.001813196769798817
+   },
+   {
+    "step": "E. D + lower adiabat",
+    "practice": "",
+    "inputs": {
+     "velocity_kms": 401.23611065362235,
+     "adiabat": 2.25,
+     "ablator_mg": 0.24242100000000003,
+     "fuel_mg": 0.23609756097560983
+    },
+    "yield_J": 25695301.99423706,
+    "burn_up": 0.32063069343754586,
+    "burn_pressure_gbar": 5666.197343434645,
+    "burn_T_keV": 36.05894437650792,
+    "peak_rhoR": 1.5557829026400551,
+    "burn_rhoR": 1.3529586236870201,
+    "burn_width_ps": 10.773972044770476,
+    "bang_time_ps": 760.3481727930944,
+    "kinetic_J": 38525.07364366948,
+    "energy_error": -0.0018956313251513547
+   },
+   {
+    "step": "F. D + lower adiabat + faster",
+    "practice": "",
+    "inputs": {
+     "velocity_kms": 417.2855550797673,
+     "adiabat": 2.25,
+     "ablator_mg": 0.20631974761870406,
+     "fuel_mg": 0.23609756097560983
+    },
+    "yield_J": 25807214.445539806,
+    "burn_up": 0.32202715754112177,
+    "burn_pressure_gbar": 6422.238537177536,
+    "burn_T_keV": 38.074017703096004,
+    "peak_rhoR": 1.5273973802717324,
+    "burn_rhoR": 1.3735058712103785,
+    "burn_width_ps": 9.713578492617069,
+    "bang_time_ps": 722.166049798712,
+    "kinetic_J": 38525.614033815094,
+    "energy_error": -0.002180993148359301
+   },
+   {
+    "step": "G. 2.6 MJ, scaled capsule",
+    "practice": "every length \u00d7 1.08",
+    "inputs": {
+     "velocity_kms": 394.0,
+     "adiabat": 2.45,
+     "ablator_mg": 0.307460780487805,
+     "fuel_mg": 0.2790243902439025,
+     "vapour_ug": 2.2829268292682934,
+     "inner_radius_um": 324.7339912148021
+    },
+    "yield_J": 29616358.971855395,
+    "burn_up": 0.31270322932388195,
+    "burn_pressure_gbar": 4600.873303729537,
+    "burn_T_keV": 34.51287616628048,
+    "peak_rhoR": 1.5443380819924504,
+    "burn_rhoR": 1.3100177415822736,
+    "burn_width_ps": 13.033181370305341,
+    "bang_time_ps": 833.8631957824289,
+    "kinetic_J": 45529.904940261054,
+    "energy_error": -0.0017594123955230296
+   },
+   {
+    "step": "H. G + lower adiabat + faster",
+    "practice": "",
+    "inputs": {
+     "velocity_kms": 409.76,
+     "adiabat": 2.25,
+     "ablator_mg": 0.26321411819887447,
+     "fuel_mg": 0.2790243902439025,
+     "vapour_ug": 2.2829268292682934,
+     "inner_radius_um": 324.7339912148021
+    },
+    "yield_J": 31339827.413781207,
+    "burn_up": 0.3309004070370557,
+    "burn_pressure_gbar": 6282.5141979584905,
+    "burn_T_keV": 38.842064841129904,
+    "peak_rhoR": 1.6070594373778733,
+    "burn_rhoR": 1.4181967015174481,
+    "burn_width_ps": 10.073077209723873,
+    "bang_time_ps": 790.3294047006277,
+    "kinetic_J": 45530.5658152671,
+    "energy_error": -0.002110687268733528
+   },
+   {
+    "step": "I. G + adiabat 2.0 + 8% faster",
+    "practice": "a stretch",
+    "inputs": {
+     "velocity_kms": 425.52000000000004,
+     "adiabat": 2.0,
+     "ablator_mg": 0.2237921141557095,
+     "fuel_mg": 0.2790243902439025,
+     "vapour_ug": 2.2829268292682934,
+     "inner_radius_um": 324.7339912148021
+    },
+    "yield_J": 32434837.528945968,
+    "burn_up": 0.3424620307828961,
+    "burn_pressure_gbar": 7873.072043470111,
+    "burn_T_keV": 42.17772262967748,
+    "peak_rhoR": 1.7811151547049164,
+    "burn_rhoR": 1.502356375946084,
+    "burn_width_ps": 8.446367070646843,
+    "bang_time_ps": 755.8066574867555,
+    "kinetic_J": 45531.25260694005,
+    "energy_error": -0.002400750466824757
+   }
+  ]
+ }
+}

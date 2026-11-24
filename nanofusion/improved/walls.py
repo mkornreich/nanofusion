@@ -126,7 +126,8 @@ def alpha_share_classical(ions: dict, n_e: float, t_e_kev: float, e0_kev: float 
     return float(np.trapezoid(1 / (1 + u**1.5), u) / y)
 
 
-def opaque_ball(rho_g_cc: float, t_i_kev: float, radius_m: float, boron_fraction: float = 0.15) -> dict:
+def opaque_ball(rho_g_cc: float, t_i_kev: float, radius_m: float, boron_fraction: float = 0.15,
+                alpha_channelling: float = 0.0) -> dict:
     """Steady burn of a free (untamped) proton-boron ball, with its X-rays trapped if it is thick enough.
 
     The ions sit at t_i_kev. The electrons settle where what they receive
@@ -137,6 +138,8 @@ def opaque_ball(rho_g_cc: float, t_i_kev: float, radius_m: float, boron_fraction
     * "gain": fusion energy released while the ball holds together (R / 4 c_s) / the energy it holds
       (ions, electrons, and for an opaque ball its radiation and thermal pairs);
     * the electron temperature, optical depth, energy, mass and pressure.
+    alpha_channelling (untested theory, Fisch & Rax 1992): waves pass that share of what the alphas would give
+    the electrons to the ions instead.
     """
     ions, n_e0 = D.fuel_ions(D.pb_fuel(boron_fraction), rho_g_cc)
     fermi = D.fermi_gas(n_e0)["E_F_keV"]
@@ -153,6 +156,7 @@ def opaque_ball(rho_g_cc: float, t_i_kev: float, radius_m: float, boron_fraction
     def excess(t_e: float) -> float:
         s = state(t_e)
         f_i = alpha_share_classical(ions, s["n_e"], t_e)
+        f_i += alpha_channelling * (1 - f_i)  # untested: waves hand this share of the electrons' part to the ions
         return D._drain(ions, s["n_e"], t_i_kev, t_e) + (1 - f_i) * charged - s["loss"]
 
     lo, hi = 1e-2, 3 * t_i_kev

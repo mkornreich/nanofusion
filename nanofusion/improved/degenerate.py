@@ -348,7 +348,8 @@ def _drain(ions: dict, n_e: float, t_i_kev: float, t_e_kev: float) -> float:
                * 1.5 * (t_i_kev - t_e_kev) * KEV for s, n in ions.items())
 
 
-def hot_ion_balance(fuel: str, rho_g_cc: float, t_i_kev: float, boron_fraction: float = 0.15) -> dict:
+def hot_ion_balance(fuel: str, rho_g_cc: float, t_i_kev: float, boron_fraction: float = 0.15,
+                    alpha_channelling: float = 0.0) -> dict:
     """Steady power balance of hot ions in degenerate electrons (W/m^3).
 
     * fusion: Maxwellian reactivity at t_i_kev. Its charged products give a
@@ -361,6 +362,8 @@ def hot_ion_balance(fuel: str, rho_g_cc: float, t_i_kev: float, boron_fraction: 
       their temperature T_e.
     "self_heating" = f_i P_charged / drain at that T_e (equivalently, charged
     fusion power / radiation). Above 1 the ions keep themselves hot.
+    alpha_channelling (untested theory, Fisch & Rax 1992): waves pass that share of what the alphas would give
+    the electrons to the ions instead.
     "self_heating_cold" = f_i P_charged / drain with the electrons held at zero
     temperature instead: they drain the ions at the full degenerate rate, and
     whatever they receive is taken to vanish. "time_to_heat_s": how long
@@ -379,6 +382,7 @@ def hot_ion_balance(fuel: str, rho_g_cc: float, t_i_kev: float, boron_fraction: 
     p_fusion = rate * EN.q_value(*(("D", "T") if fuel == "DT" else ("p", "B11"))) * 1e3 * KEV
     p_charged = rate * CHARGED_KEV[fuel] * KEV
     f_i = alpha_share_to_ions(fuel, rho_g_cc, boron_fraction)
+    f_i += alpha_channelling * (1 - f_i)  # untested: waves hand this share of the electrons' part to the ions
     drain_cold = _drain(ions, n_e, t_i_kev, 0.0)
 
     def excess(t_e: float) -> float:  # heat into the electrons minus what they radiate; falls as t_e rises
