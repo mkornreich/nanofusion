@@ -336,3 +336,156 @@ def ignition_ball(rho_g_cc: float, t_ev: float, fuel: str = "DT", model: str = "
     return {"rho_g_cc": rho_g_cc, "T_eV": t_ev, "rate_per_nucleus_s": rate, "radius_m": radius,
             "mass_kg": nuclei * mean_mass * 1.66053906660e-27, "energy_J": energy,
             "rhoR_g_cm2": rho_g_cc * radius * 100, "coupling_Gamma": gamma}
+
+
+# --- a fission blanket around a fusion neutron source (fusion-fission hybrid) ------------------
+
+FISSION_MEV = 200.0  # energy per fission
+NEUTRONS_PER_FISSION = 2.5
+BREEDING_CAPTURE_MEV = 4.78  # 6Li(n,t)4He, the capture that replaces the burnt triton
+# A 14 MeV neutron in thick uranium splits uranium-238 directly and multiplies through (n,2n) and (n,3n).
+# Measured in a natural-uranium pile (McEnhill & Weale 1962): 1.18 fissions of U-238 and 0.28 of U-235 per
+# neutron, about 290 MeV. Calculated for pure U-238 (J. D. Lee): 233 MeV and 4.4 captures.
+FAST_FISSIONS = 1.2  # direct fissions per 14 MeV neutron
+NEUTRON_WORTH = 3.0  # chain-starting neutrons one 14 MeV neutron turns into (Bethe 1979: "two to four")
+
+
+def blanket_energy_per_fusion_mev(k_eff: float, uranium: bool = True, nu: float = NEUTRONS_PER_FISSION) -> float:
+    """Heat released per D-T fusion when its neutron enters a blanket.
+
+    uranium=False: lithium only, the fusion energy plus one tritium-breeding
+    capture (about 22 MeV). uranium=True: the neutron also causes
+    FAST_FISSIONS fissions directly and leaves NEUTRON_WORTH neutrons, each
+    starting chains that produce k/(1-k) further neutrons in a blanket of
+    multiplication k_eff, so k / (nu (1 - k)) fissions. k_eff = 0 is
+    depleted uranium with no chain: about 260 MeV per fusion, close to the
+    measured 290 MeV of a natural-uranium pile.
+    """
+    if not 0 <= k_eff < 1:
+        raise ValueError("k_eff must be in [0, 1)")
+    heat = DT_FUSION_MEV + BREEDING_CAPTURE_MEV
+    if uranium:
+        heat += FISSION_MEV * (FAST_FISSIONS + NEUTRON_WORTH * k_eff / (nu * (1 - k_eff)))
+    return heat
+
+
+def hybrid_plant_gain(target_gain: float, driver_efficiency: float, k_eff: float, uranium: bool = True,
+                      thermal_efficiency: float = 0.4) -> float:
+    """Electricity out / electricity in for a fusion source inside a blanket.
+
+    target_gain is fusion energy per unit of driver energy (laser light or
+    beam) and driver_efficiency is driver energy per unit of electricity.
+    """
+    heat = blanket_energy_per_fusion_mev(k_eff, uranium)
+    return thermal_efficiency * driver_efficiency * target_gain * heat / DT_FUSION_MEV
+
+
+def hybrid_k_needed(target_gain: float, driver_efficiency: float, plant_gain: float = 1.0,
+                    thermal_efficiency: float = 0.4) -> float | None:
+    """Uranium-blanket k_eff at which the plant's electricity out / in reaches `plant_gain`.
+
+    0.0 means uranium with no chain reaction is enough; None means a lithium
+    blanket with no uranium at all is enough.
+    """
+    per_fusion = plant_gain * DT_FUSION_MEV / (thermal_efficiency * driver_efficiency * target_gain)
+    if per_fusion <= blanket_energy_per_fusion_mev(0.0, uranium=False):
+        return None
+    x = (per_fusion - blanket_energy_per_fusion_mev(0.0)) * NEUTRONS_PER_FISSION / (FISSION_MEV * NEUTRON_WORTH)
+    return x / (1 + x) if x > 0 else 0.0  # x = k / (1 - k)
+
+
+def fission_share(k_eff: float) -> float:
+    """Share of a uranium blanket's heat that comes from fission."""
+    total = blanket_energy_per_fusion_mev(k_eff)
+    return (total - DT_FUSION_MEV - BREEDING_CAPTURE_MEV) / total
+
+
+# --- bare ions in a magnetic trap (no electrons to drag on them or to radiate) ------------------
+
+def brillouin_density(b_tesla: float, mass_u: float = 2.515) -> float:
+    """Highest density (m^-3) of a single-sign plasma that a field can hold: n = eps0 B^2 / (2 m)."""
+    return 8.8541878128e-12 * b_tesla**2 / (2 * mass_u * 1.66053906660e-27)
+
+
+def ion_trap(b_tesla: float, radius_m: float, length_m: float, t_kev: float = 60.0) -> dict:
+    """D-T fusion from a column of bare ions held at the Brillouin density limit.
+
+    With no electrons there is no electron drag and no bremsstrahlung, and
+    like-particle collisions do not carry ions across the field, so on paper
+    the energy balance is unlimited. The price is density: the ions' own
+    charge caps it at the Brillouin limit, and the voltage across the column
+    grows as n a^2.
+    """
+    n = brillouin_density(b_tesla)
+    volume = np.pi * radius_m**2 * length_m
+    power_density = 0.25 * n * n * EN.reactivity("D", "T", t_kev) * DT_FUSION_MEV * 1.602176634e-13
+    thermal = 1.5 * n * t_kev * 1.602176634e-16
+    field_energy = b_tesla**2 / (2 * 4e-7 * np.pi)
+    return {"b_tesla": b_tesla, "density_m3": n, "power_density_W_m3": power_density,
+            "power_W": power_density * volume,
+            "voltage_V": 1.602176634e-19 * n * radius_m**2 / (4 * 8.8541878128e-12),
+            "thermal_J": thermal * volume, "field_J": field_energy * volume,
+            "confinement_for_breakeven_s": thermal / power_density,
+            "field_payback_s": field_energy / power_density}
+
+
+# --- throwing whole crystals at a target (cluster-impact fusion) ------------------------------
+
+# A positively charged grain starts to shed ions above a surface field of about 10 V/nm (the field ion emission
+# limit used for charged dust, Dzhanoev et al., A&A 591, A147 (2016)); metals hold 19-57 V/nm, hydrogen ice far less.
+FIELD_EVAPORATION_V_M = 1.0e10
+
+
+def crystal_projectile(radius_nm: float, kev_per_deuteron: float, fuel: str = "D2",
+                       surface_field: float = FIELD_EVAPORATION_V_M) -> dict:
+    """A fuel crystal charged to the field-evaporation limit and accelerated as one projectile.
+
+    Returns its charge, the voltage needed for the given energy per deuteron
+    (every nucleus moves at the same speed, so heavier ones carry
+    proportionally more energy), and the speed.
+    """
+    r = radius_nm * 1e-9
+    parts, n_units = EN.FUELS[fuel]
+    units = n_units * 4 / 3 * np.pi * r**3
+    mass_u = sum(f * EN.SPECIES[s][0] for s, f in parts.items())
+    charge_e = 4 * np.pi * 8.8541878128e-12 * r * r * surface_field / 1.602176634e-19
+    kinetic_kev = units * mass_u / EN.SPECIES["D"][0] * kev_per_deuteron
+    speed = np.sqrt(2 * kev_per_deuteron * 1.602176634e-16 / (EN.SPECIES["D"][0] * 1.66053906660e-27))
+    return {"nuclei": units * sum(parts.values()), "charge_e": charge_e,
+            "charge_per_mass_e_u": charge_e / (units * mass_u),
+            "voltage_V": kinetic_kev * 1e3 / charge_e, "speed_m_s": float(speed),
+            "kinetic_J": kinetic_kev * 1.602176634e-16}
+
+
+def cluster_impact_yield(molecules: int, kev: float, molecule_mass_u: float = 20.03, deuterons_per_molecule: int = 2,
+                         target: str = "TiD2", d_density: float = 1.0e29) -> dict:
+    """D-D fusions per cluster for a (D2O)_n cluster of total energy `kev` stopping in a deuterated target.
+
+    Each deuteron carries its mass share of the energy and is treated as an
+    independent beam ion (thick-target yield), which is what the molecular
+    binding energy of a few eV against keV of motion implies.
+    """
+    e_d = kev * EN.SPECIES["D"][0] / (molecules * molecule_mass_u)
+    y = float(EN.thick_target([e_d], "D", target, {"D": d_density})["reactions"][0])
+    return {"keV_per_deuteron": e_d, "fusions_per_deuteron": y, "fusions_per_cluster": y * molecules * deuterons_per_molecule}
+
+
+# --- ions with a spread of energies stopping in a cold target (nanowire-array experiments) -------------
+
+DEUTERON_DENSITY = {"CD2": 8.0e28}  # deuterons per m^3
+
+
+def spectrum_yield(temperature_kev: float, e_max_kev: float, e_min_kev: float = 0.0, projectile: str = "D",
+                   material: str = "CD2", targets: dict | None = None) -> dict:
+    """Reactions per ion for an exponential spectrum, dN/dE ~ exp(-E / T) from e_min to e_max, stopping in a cold solid.
+
+    Laser-accelerated ions usually have such a spectrum. Default target:
+    deuterated polyethylene, as in the nanowire-array experiments.
+    """
+    targets = {"D": DEUTERON_DENSITY[material]} if targets is None else targets
+    e = np.linspace(max(e_min_kev, e_max_kev / 4000), e_max_kev, 4000)
+    w = np.exp(-(e - e[0]) / temperature_kev)
+    w /= w.sum()
+    res = EN.thick_target(e, projectile, material, targets)
+    return {"mean_keV": float(np.sum(w * e)), "reactions_per_ion": float(np.sum(w * res["reactions"])),
+            "fusion_MeV_per_ion": float(np.sum(w * res["fusion_MeV"]))}

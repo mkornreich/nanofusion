@@ -299,3 +299,121 @@ def test_dense_matter_rates_cover_all_regimes():
     hot = A.ignition_ball(1e3, 16e3)["energy_J"]
     cold = A.ignition_ball(1e3, 1.0)["energy_J"]
     assert hot < 1e4 and cold > 1e20 * hot
+
+
+def test_tamped_magnetised_ball():
+    from nanofusion.improved import confinement as C
+    from nanofusion.improved import energy as E
+
+    # With no tamper, field or self-heating it reduces to the fixed-temperature burn of energy.array_burn.
+    plasma = E.fuel_plasma("DT", 1.0, 20.0, 20.0)
+    heat = 1.5 * (plasma.n_e + sum(plasma.ions.values())) * 20.0 * E.KEV
+    old = plasma.fusion_power()[0] * 1e-3 / (4 * plasma.sound_speed()) / heat
+    bare = C.burn(C.Ball(radius_m=1e-3, t_i_kev=20.0, alpha_heating=False))
+    assert bare["gain"] == pytest.approx(old, rel=0.03)
+    # Pieces: alpha gyro-radius 0.27 m in 1 T, Braginskii's unmagnetised and strongly magnetised limits,
+    # Krokhin-Rozanov deposition joining smoothly, a gold wall receding at about a tenth of the sound speed.
+    assert C.ALPHA_LARMOR_TM == pytest.approx(0.27, rel=0.02)
+    assert C.kappa_perp_electron(0.0) == pytest.approx(3.16, rel=0.01)
+    assert C.kappa_perp_ion(0.0) == pytest.approx(3.906, rel=0.01)
+    assert C.kappa_perp_ion(30.0) == pytest.approx(2 / 30**2, rel=0.02)
+    assert C.sphere_deposition(0.5 - 1e-9) == pytest.approx(C.sphere_deposition(0.5 + 1e-9), rel=1e-6)
+    assert C.alpha_range_factor(0.0) == 1.0 and 0.6 < C.alpha_range_factor(0.3) < 0.7
+    assert C.magnetic_thickness(1e-3, 0.0) == 0.0 < C.magnetic_thickness(1e-3, 3e3)
+    pressure = 2 * C.SOLID_DT_IONS * 20.0 * C.KEV
+    assert 0.05 < C.piston_speed(pressure) / plasma.sound_speed() < 0.12
+    # Each trick helps, and tamper plus field bring a 0.3 mm ball to about breakeven.
+    kw = dict(radius_m=3e-4, t_i_kev=20.0)
+    none = C.burn(C.Ball(**kw))
+    tamped = C.burn(C.Ball(tamper="gold", **kw))
+    both = C.burn(C.Ball(tamper="gold", b_tesla=3e3, **kw))
+    assert none["gain"] < tamped["gain"] < both["gain"]
+    assert both["gain"] > 10 * none["gain"] and 0.8 < both["gain"] < 1.5
+    # Energy bookkeeping: heat left + losses + work = heat at the start + alpha heating.
+    spent = sum(both[k] for k in ("heat_left_J", "bremsstrahlung_J", "conduction_J", "work_on_wall_J", "carried_off_J"))
+    assert spent == pytest.approx(both["heat_at_start_J"] + both["alpha_heating_J"], rel=1e-6)
+    # A thin shell or an entrance hole holds less; ions heated first burn more for the same energy.
+    assert C.burn(C.Ball(tamper="gold", b_tesla=3e3, tamper_mm=0.05, **kw))["gain"] < 0.8 * both["gain"]
+    assert C.burn(C.Ball(tamper="gold", b_tesla=3e3, hole_fraction=0.05, **kw))["gain"] < 0.7 * both["gain"]
+    hot_ions = C.burn(C.Ball(radius_m=3e-4, t_i_kev=39.0, t_e_kev=1.0, tamper="gold", b_tesla=3e3))
+    assert hot_ions["energy_in_J"] == pytest.approx(both["energy_in_J"], rel=0.01)
+    assert hot_ions["gain"] > 1.3 * both["gain"]
+    # A column in a straight field also loses heat along the field to its ends; a ring field does not.
+    column = dict(radius_m=3e-4, t_i_kev=20.0, tamper="gold", b_tesla=3e3, aspect=4.0)
+    ring, straight = C.burn(C.Ball(**column)), C.burn(C.Ball(field="axial", **column))
+    assert straight["gain"] < 0.8 * ring["gain"] and straight["conduction_J"] > 2 * ring["conduction_J"]
+    assert C.Ball(**column).energy_in_J == pytest.approx(6 * both["energy_in_J"], rel=0.01)  # 2 a pi r^3 against 4/3 pi r^3
+    with pytest.raises(ValueError):
+        C.Ball(radius_m=3e-4, field="axial")
+    # A large enough ball runs away (ignites); the cheapest breakeven is tens of kilojoules, not megajoules.
+    big = C.burn(C.Ball(radius_m=4e-3, t_i_kev=7.0, tamper="gold", b_tesla=1e4))
+    assert big["ignited"] and big["gain"] > 50 and big["stopped"] == "grew to the limit"
+    assert both["stopped"] == "burn died out" and none["stopped"] == "flew apart"
+    # The result does not depend on the integrator's tolerance, and slow burns in thin fuel are followed to the end.
+    assert C.burn(C.Ball(radius_m=4e-3, t_i_kev=7.0, tamper="gold", b_tesla=1e4), rtol=1e-7)["gain"] == \
+        pytest.approx(big["gain"], rel=2e-3)
+    thin = C.burn(C.Ball(radius_m=3e-2, t_i_kev=20.0, fill=1e-4, tamper="gold", b_tesla=100.0))
+    assert thin["gain"] > 8 and thin["stopped"] == "burn died out"
+    # A gold shell of stated thickness around a column weighs what its geometry says: thicker shells hold longer.
+    shells = [C.burn(C.Ball(radius_m=1e-3, t_i_kev=10.0, tamper="gold", b_tesla=3e3, aspect=8.0, tamper_mm=t))["gain"]
+              for t in (0.1, 0.3, 1.0)]
+    assert shells[0] < shells[1] < shells[2]
+    best = C.smallest_ball(1.0, temperatures=(20.0,), tamper="gold", b_tesla=3e3)
+    assert 2e4 < best["energy_in_J"] < 1e5
+    assert C.smallest_ball(1.0, temperatures=(20.0,), r_hi=1e-3, tamper="none") is None
+
+
+def test_ball_command_line(capsys):
+    from nanofusion.__main__ import main
+
+    assert main(["ball", "--radius", "0.3", "--temperature", "20", "--field", "3000"]) == 0
+    assert "gain" in capsys.readouterr().out
+    assert main(["ball", "--axial-field"]) == 2  # an axial field needs a column
+    assert main(["ball", "--fill", "2"]) == 2
+
+
+def test_chain_reaction_blanket_trap_and_projectiles():
+    from nanofusion.improved import alternatives as A
+    from nanofusion.improved import energy as E
+
+    # Bosch-Hale's high-energy D-T fit joins the low-energy one and then falls.
+    assert float(P.sigma_dt_mb(550.1, high_energy=True)) == pytest.approx(float(P.sigma_dt_mb(549.9)), rel=0.02)
+    assert float(P.sigma_dt_mb(3000.0, high_energy=True)) < 0.4 * float(P.sigma_dt_mb(3000.0))
+    assert float(P.sigma_dt_mb(64.0, high_energy=True)) == float(P.sigma_dt_mb(64.0))
+    # No chain reaction in cold D-T. In hot D-T it nears 1 only in an infinite medium.
+    assert E.dt_chain(neutrons=3000)["k"] < 0.01
+    hot_plasma = E.fuel_plasma("DT", 1.0, 30.0, 30.0)
+    hot = E.dt_chain(hot_plasma=hot_plasma, nuclear_boost=5.0, neutrons=3000)
+    assert 0.5 < hot["k"] < 1.5 and hot["k_neutron"] > hot["k_alpha"]
+    thin = E.dt_chain(hot_plasma=hot_plasma, nuclear_boost=5.0, first_collision_probability=0.01, neutrons=3000)
+    assert thin["k_neutron"] < 0.01
+    assert not E.DT_HIGH_ENERGY
+    # Fission blanket: 22 MeV per fusion with lithium only. Depleted uranium with no chain gives about what a
+    # natural-uranium pile measured per 14 MeV neutron, 290 MeV (McEnhill & Weale 1962).
+    assert A.blanket_energy_per_fusion_mev(0.0, uranium=False) == pytest.approx(22.4, rel=0.01)
+    assert A.blanket_energy_per_fusion_mev(0.0) - A.DT_FUSION_MEV + 14.07 == pytest.approx(290, rel=0.2)
+    assert A.hybrid_k_needed(5e-4, 0.1) > 0.99  # exploding crystals: a critical reactor in all but name
+    assert A.hybrid_k_needed(0.53, 0.4) == 0.0  # muon catalysis: plain uranium is enough for net electricity
+    assert 0.6 < A.hybrid_k_needed(0.53, 0.4, plant_gain=4.0) < 0.8
+    assert A.hybrid_k_needed(100.0, 0.1) is None  # a good enough fusion source needs no uranium
+    k = A.hybrid_k_needed(0.15, 0.1)
+    assert A.hybrid_plant_gain(0.15, 0.1, k) == pytest.approx(1.0)
+    assert A.fission_share(k) > 0.9
+    # Bare ions: the Brillouin limit makes a 10 T trap a milliwatt machine, and power goes as B^4.
+    assert A.brillouin_density(10.0) == pytest.approx(1.06e17, rel=0.02)
+    trap = A.ion_trap(10.0, 0.05, 1.0)
+    assert trap["power_W"] < 1 and trap["voltage_V"] > 1e6
+    assert A.ion_trap(20.0, 0.05, 1.0)["power_W"] == pytest.approx(16 * trap["power_W"])
+    # Cluster impact: a 300 keV (D2O)100 cluster leaves 0.3 keV per deuteron, far too little to fuse. The yield
+    # agrees with Carraro et al.'s estimate of 4e-39 per cluster (Phys. Rev. A 42, 1379 (1990)).
+    cluster = A.cluster_impact_yield(100, 300.0)
+    assert cluster["keV_per_deuteron"] == pytest.approx(0.3, rel=0.02)
+    assert 4e-40 < cluster["fusions_per_cluster"] < 4e-38
+    shot = A.crystal_projectile(15.0, 100.0)
+    assert 4e7 < shot["voltage_V"] < 7e7 and shot["speed_m_s"] == pytest.approx(3.1e6, rel=0.02)
+    # Nanowire arrays (Curtis et al., Phys. Rev. Research 3, 043181 (2021)): the simulated deuteron spectrum,
+    # 3.8e12 above 0.2 MeV and 3e11 above 1 MeV, stopping in cold CD2 gives the measured 1.2e7 neutrons.
+    slope = 800.0 / math.log(3.8e12 / 3e11)
+    spectrum = A.spectrum_yield(slope, 13000.0, e_min_kev=200.0)
+    assert 0.5 * 3.8e12 * spectrum["reactions_per_ion"] == pytest.approx(1.2e7, rel=0.5)
+    assert 400 < spectrum["mean_keV"] < 600

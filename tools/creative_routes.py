@@ -148,7 +148,7 @@ def polarised() -> tuple[list[str], dict]:
         u, p = data["burn"][(1.0, label)], data["burn"][(1.5, label)]
         lines.append(f"| ball of exploding D-T crystals ({label} bound): breakeven ball radius and energy "
                      f"| {u[0] * 1e3:.2g} mm, {u[1]:.2g} J | {p[0] * 1e3:.2g} mm, {p[1]:.2g} J |")
-    lines += ["", "Polarisation is the biggest single lever found in this project. It cuts the breakeven energy of a "
+    lines += ["", "Polarisation is the biggest lever on the fuel itself in this project. It cuts the breakeven energy of a "
               "ball of exploding crystals 3–26-fold, because burn in the ball rises steeply with reaction rate. "
               "But the ball is still uncompressed inertial fusion. Its energy must arrive in tens of picoseconds, "
               "and light cannot reach crystals deeper than ~10 nm, so nothing changes in practice. For compressed "

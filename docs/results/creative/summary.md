@@ -52,7 +52,7 @@ Aligning the D and T spins raises the D-T cross section by 1.5 (theory, never ye
 | ball of exploding D-T crystals (generous bound): breakeven ball radius and energy | 1.6 mm, 1.1e+07 J | 0.53 mm, 4.2e+05 J |
 | ball of exploding D-T crystals (conservative bound): breakeven ball radius and energy | 4.2 mm, 7.8e+07 J | 2.8 mm, 2.3e+07 J |
 
-Polarisation is the biggest single lever found in this project. It cuts the breakeven energy of a ball of exploding crystals 3–26-fold, because burn in the ball rises steeply with reaction rate. But the ball is still uncompressed inertial fusion. Its energy must arrive in tens of picoseconds, and light cannot reach crystals deeper than ~10 nm, so nothing changes in practice. For compressed fusion, polarisation has been studied as a way to lower ignition thresholds (e.g. Temporal et al., Nucl. Fusion 52, 103011 (2012)); there it helps real schemes, not these crystals.
+Polarisation is the biggest lever on the fuel itself in this project. It cuts the breakeven energy of a ball of exploding crystals 3–26-fold, because burn in the ball rises steeply with reaction rate. But the ball is still uncompressed inertial fusion. Its energy must arrive in tens of picoseconds, and light cannot reach crystals deeper than ~10 nm, so nothing changes in practice. For compressed fusion, polarisation has been studied as a way to lower ignition thresholds (e.g. Temporal et al., Nucl. Fusion 52, 103011 (2012)); there it helps real schemes, not these crystals.
 
 ### Stripping stuck muons with X-rays
 

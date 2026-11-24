@@ -10,7 +10,10 @@ energy by a factor of at least 1,000. This page tries to close that gap:
   focusing of ions in a hollow shell, muon-catalysed fusion, NASA's lattice
   confinement fusion, three more speculative routes (cold pycnonuclear
   compression, crystals as a muon factory, spin-polarised fuel), and a map of
-  fusion in dense matter across every burning regime.
+  fusion in dense matter across every burning regime;
+* five more attempts (sections 12–16): holding the ball of crystals together
+  with a tamper and a magnetic field, a fission blanket, a chain reaction in
+  D-T, bare ions in a magnetic trap, and crystals fired as projectiles.
 
 Full numbers are in [results/energy/summary.md](results/energy/summary.md).
 Code: `nanofusion/improved/energy.py`. To reproduce:
@@ -21,11 +24,18 @@ python3 tools/energy_experiments.py
 
 ## Short answer
 
-**No version of this scheme gives net energy unless it turns into ordinary
-inertial-confinement fusion.** That means heating or compressing a few mm of
-deuterium-tritium fuel, with megajoules delivered in under a nanosecond. At
-that point the nanocrystals are at best an inefficient way of heating it. The
-published literature reaches the same conclusion for every related idea.
+**No version of this scheme gives net energy.** The best it can do is turn
+into a known kind of fusion target, with the nanocrystals as an inefficient
+way of heating it:
+* ordinary inertial-confinement fusion: a few mm of deuterium-tritium fuel,
+  with megajoules delivered in under a nanosecond (section 3);
+* magnetised target fusion: a sub-millimetre of fuel held by a heavy wall
+  and a kilotesla magnetic field, with tens to hundreds of kilojoules
+  delivered in picoseconds (section 12). This is the biggest lever found,
+  about a thousandfold. On paper it still returns only 0.15 of the laser
+  energy at breakeven, and 1.5 at best, for 180 MJ of picosecond light.
+
+The published literature reaches the same conclusion for every related idea.
 
 | Test | Best fusion energy out / energy in | Verdict |
 |---|---|---|
@@ -45,7 +55,13 @@ published literature reaches the same conclusion for every related idea.
 | Squeezing a cold D-T crystal until it fuses (pycnonuclear) | ideal gain ~30, but only at ~10⁷ g/cm³ | Needs 10⁴ × NIF's density, ~6×10⁸ Gbar and a 360-fold radial squeeze, all without heating |
 | Exploding µm crystals as a muon factory for muon catalysis | 0.08–0.55 of the laser light | No better than an accelerator, and needs 2–15 × today's record laser intensity |
 | Cold or warm dense fuel, all burning regimes (screened, pycnonuclear), four rate models | hot fuel ignites more cheaply at every density in every model; liquid metallic hydrogen burns 1% in > 10⁴⁶ years | Never: no regime where screening or zero-point motion beats heat |
-| Spin-polarised D-T (cross section × 1.5) | breakeven energy of a crystal ball 11 → 0.4 MJ (generous), 78 → 23 MJ (conservative); hot-plasma ion gain 3.1 → 4.7 | Biggest single lever found, but still uncompressed fusion delivered in picoseconds |
+| Spin-polarised D-T (cross section × 1.5) | breakeven energy of a crystal ball 11 → 0.4 MJ (generous), 78 → 23 MJ (conservative); hot-plasma ion gain 3.1 → 4.7 | Biggest lever on the fuel itself, but still uncompressed fusion delivered in picoseconds |
+| Ball of crystals held by a gold tamper and a 3 kT magnetic field (magnetised target fusion without compression) | fusion equals the fuel's energy at 50 kJ instead of 60 MJ (10 kJ if the crystals heat the ions first; 0.1–0.7 MJ with a coil's straight field); 0.15 of the laser energy at breakeven, 1.5 for 180 MJ of laser | Biggest lever found, about 1,200-fold, and still no net energy: it needs a picosecond laser 15–170 times more energetic than any, a field 4 times the strongest laser-made one claimed, and an entrance hole under 1% of the wall |
+| ... the same without tritium | deuterium alone: 620 MJ | Never |
+| Fission blanket around the fusion source | crystals need k_eff ≥ 0.998; a plasma at breakeven needs 0.92 and muon catalysis only plain uranium, with over 90% of the heat from fission | Never for crystals; otherwise a fission reactor with a costly neutron source |
+| Chain reaction in D-T through its own neutrons and alphas | 0.002 new fusions per fusion in cold D-T; about 1 only in a 30–100 keV plasma metres across | No chain reaction in anything that can be built |
+| Bare ions in a magnetic trap (no electrons at all) | 7 W per m³ at 10 T; the record collider luminosity would give 0.7 W | Never: the ions' own charge caps the density |
+| Whole crystals as projectiles (cluster-impact fusion) | 0.4% of the kinetic energy; 0.0016 from the wall plug | Never: the cold-catcher limit again, though 30 times better than the laser route |
 
 ### Where this sits among real results (fusion energy / laser energy)
 
@@ -54,6 +70,7 @@ published literature reaches the same conclusion for every related idea.
 | NASA lattice confinement fusion, 2020 (fusion / electron-beam energy) | ~4×10⁻¹⁴ (measured) | [NASA/TP-2020-5001616](https://ntrs.nasa.gov/citations/20205001616) |
 | This project: 30 nm LiD crystals, ions stopping in LiD | ~10⁻⁷ | [experiments.md](experiments.md) |
 | Texas Petawatt deuterium-cluster record (1.9×10⁷ n, 90–180 J) | ~2×10⁻⁷ (measured); reproduced by this model, section 6 | [PRL 111, 055002](https://arxiv.org/abs/1308.3798) |
+| Nanowire-array record (2.2×10⁶ neutrons per joule) | ~3×10⁻⁶ (measured); an 8 J shot reproduced by this model, section 6 | [Nat. Commun. 9, 1077](https://www.nature.com/articles/s41467-018-03445-z) |
 | This project: same crystals, tritide catcher | ~3×10⁻⁵ | [experiments.md](experiments.md) |
 | Best laser proton–boron shots (PALS, LFEX), ~10⁸ α per joule | ~10⁻⁴ | [PRE 101, 013204](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.101.013204) |
 | Muon-catalysed fusion record (Los Alamos, 150 fusions per muon; fusion / muon cost) | ~0.5; electricity out / in ~0.14 for an optimised plant | [Kelly et al. 2021](https://doi.org/10.1088/2515-7655/abfb4b) |
@@ -267,6 +284,31 @@ I used the experimenters' own burn model with this project's D–D reactivity:
   14 keV mean ion energy.
 * The measured fusion-to-laser energy ratio, about 2×10⁻⁷, is the same as
   this project's estimates for exploding crystals.
+
+### A second check: nanowire arrays
+
+Arrays of deuterated-plastic nanowires hold the record for D-D fusion per
+joule of laser light: 2.2×10⁶ neutrons per joule, about 500 times a flat
+target ([Curtis et al. 2018](https://www.nature.com/articles/s41467-018-03445-z)).
+Light gets several micrometres down between the wires
+([Bargsten et al. 2017](https://www.science.org/doi/10.1126/sciadv.1601558)),
+so a volume at a sixth of solid density is heated at once. This is the best
+nanostructured fusion target so far.
+
+A later 8 J shot gave 1.2×10⁷ neutrons
+([Curtis et al. 2021](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.3.043181)).
+The authors' own plasma simulation gives 3.8×10¹² deuterons above 0.2 MeV and
+3×10¹¹ above 1 MeV. Code: `tools/further_routes.py`.
+* **Those deuterons stopping in cold plastic give 1.2×10⁷ neutrons in this
+  model.** That matches the measurement. The yield is ordinary beam-target
+  fusion, as in section 1.
+* **The fast deuterons carry 4% of the light.** By their share of the
+  charge, all the ions together get about 15%. Nanostructures absorb 70–80%
+  of the light ([Park et al. 2021](https://doi.org/10.1063/5.0035174)), but
+  most of it stays in electrons.
+* **Fusion energy / laser energy is 2–3×10⁻⁶.** That is ten times better than
+  gas-jet clusters, and still a few millionths. With a tritide catcher the
+  same deuterons would return 1.2×10⁻⁴.
 
 ## 7. Crystals as the ignition spark for compressed fuel (fast ignition)
 
@@ -512,7 +554,7 @@ crystals.
 **Spin-polarised D-T.**
 * Aligning the spins raises the D-T cross section by 1.5. This is theory; the
   DIII-D programme aims to test whether polarisation survives in a plasma.
-* It is the biggest single lever found here. A ball of exploding crystals
+* It is the biggest lever on the fuel itself. A ball of exploding crystals
   breaks even at 0.4 MJ instead of 11 MJ (generous bound), or 23 MJ instead of
   78 MJ (conservative).
 * A fast deuteron in a 30 keV D-T plasma returns 4.7 times its energy instead
@@ -583,6 +625,370 @@ comparable with NIF's ~10 kJ hot spot.
   hydrogen isotopes the true uncertainty is larger than the spread between the
   four models. But the gaps here are tens of orders of magnitude.
 
+## 12. Holding the ball together: tamper, magnetic field, self-heating
+
+**Idea.** Section 3's ball needed 11–78 MJ because nothing holds it. It flies
+apart at its own sound speed, within tens of picoseconds for a
+sub-millimetre ball. Fusion research has three known ways to keep hot fuel
+together longer without compressing it. Used together they are magnetised
+target fusion, and Sandia's
+[MagLIF](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.125.155002)
+experiment is the working example.
+* **A heavy tamper.** Fuel inside a thick gold shell can expand only as fast
+  as it shoves the gold, about 13 times slower than its own sound speed.
+* **A magnetic field.** Hot fuel touching a cold wall loses its heat to it in
+  picoseconds. A field of a few kilotesla lying along the wall slows that
+  heat flow by orders of magnitude. It also holds in the fusion alphas once
+  the ball is several of their gyro-radii across (field × radius ≳ 0.5 T m:
+  [Basko et al. 2000](https://www.osti.gov/etdeweb/servlets/purl/21328998)).
+* **Self-heating.** Trapped alphas reheat the fuel, so a large enough ball
+  runs away (ignites).
+
+**Model.** A time-dependent version of section 3's ball:
+* separate ion and electron temperatures, and burn-up of the fuel;
+* alpha heating, with the nanosecond delay alphas need to slow down at solid
+  density;
+* X-ray losses and Braginskii heat conduction to the wall;
+* a gold wall that recedes at the speed of the shock that the fuel's
+  pressure drives into it.
+
+With all three tricks off it reproduces section 3 to within 1%. Code:
+`nanofusion/improved/confinement.py` and `tools/confined_ball.py`. For one
+ball: `python3 -m nanofusion ball --help`. Numbers:
+[results/confined/summary.md](results/confined/summary.md).
+
+**Result.** The cheapest solid-density D-T ball whose fusion output is 1, 10
+or 100 times the energy put into the fuel (its heat plus the field inside
+it):
+
+| Ball | Fusion = energy in | 10 × | 100 × |
+|---|---|---|---|
+| Bare, no self-heating (section 3's model) | 65 MJ | 130 GJ | never |
+| Bare, with self-heating | 60 MJ | 16 GJ | 2.7 TJ |
+| Thick gold tamper, no field | 23 MJ | 2.5 GJ | 8.2 GJ |
+| Gold tamper + 1 kT | 160 kJ | 8.4 MJ | 47 MJ |
+| Gold tamper + 3 kT | 52 kJ | 4.4 MJ | 44 MJ |
+| Gold tamper + 10 kT | 49 kJ | 5.3 MJ | 91 MJ |
+| Gold tamper + 3 kT, ions heated first | 10 kJ | 3 MJ | – |
+| Gold tamper + 3 kT, straight field | 680 kJ | – | – |
+| ... straight field, ions heated first | 110 kJ | – | – |
+
+* **Breakeven falls about 1,200-fold**, from 60 MJ to about 50 kJ, in a ball
+  0.6 mm across holding 22 µg of D-T. It doubles its volume in 1 ns instead
+  of flying apart in 60 ps.
+* **Both tricks are needed.** With a tamper alone the fuel's heat leaks into
+  the gold. A field alone cannot hold fuel whose pressure is a hundred times
+  its own. The best field is 3–10 kT; above that the field costs as much
+  energy as the heat.
+* **Heating the ions first cuts it to 10 kJ.** Exploding crystals do this:
+  the Texas Petawatt plasma of section 6 had 18 keV ions. Electrons take
+  about a nanosecond to catch up, and meanwhile the ions burn at twice the
+  temperature for the same energy.
+* **A straight field costs about 13 times more.** The numbers above assume
+  the field lies along the wall everywhere. Only a ring-shaped field around
+  an axis does that, and it takes about 4.5 MA through the fuel. Coils make
+  a straight field. Heat then runs along it to the two ends, so the fuel
+  must be a column 8 times longer than wide, as in MagLIF.
+* **High gain stays expensive.** A tenfold return needs 3–4 MJ and a
+  hundredfold one 44 MJ, in a centimetre-sized ball inside centimetres of
+  gold. At solid density an alpha needs about a nanosecond to hand over its
+  energy, which is as long as the wall holds, so small balls never ignite.
+* **Density hardly matters**: energy ∝ density^-0.25, against density^-2 for
+  the bare ball. Fuel a thousand times thinner, like a cluster jet, needs
+  290 kJ in a 1 cm ball for a microsecond, inside tens of centimetres of
+  gold. That is the central point of magnetised target fusion. But exploding crystals need the same intensity
+  everywhere, so the thinner the fuel, the more laser power: 12 PW at solid
+  density, 4,000 PW at a thousandth of it.
+* **Without tritium it stays out of reach.** Deuterium alone, counted
+  generously, needs 620 MJ even with the tamper and 3 kT (1.4 TJ bare).
+  Lithium deuteride radiates more than it fuses, and holding it longer does
+  not change that.
+
+**How fragile is it?** One change at a time, 3 kT ring field
+([full table](results/confined/summary.md)):
+
+| Change | Energy in at breakeven |
+|---|---|
+| none | 52 kJ |
+| entrance hole of 1% / 2% / 5% of the wall | 80 / 120 / 340 kJ |
+| gold shell 0.3 mm / 0.1 mm thick instead of 1 mm | 55 / 110 kJ |
+| wall recedes 1.5 × faster than the shock formula says | 140 kJ |
+| fuel as a foam at 20% of solid density, so that light can enter | 85 kJ |
+| Bohm heat loss instead of classical; gold mixed in at 1 per 1,000 ions | 52; 54 kJ |
+| spin-polarised fuel (section 10) | 18 kJ |
+
+**Check against MagLIF.** MagLIF reaches this kind of plasma by squeezing
+it with a 20 MA current: deuterium at 0.4–0.7 g/cm³ and 2.5–3 keV, in a
+column about 0.1 mm wide and 6 mm long, held about 2 ns, with
+field × radius ≈ 0.34 T m
+([Gomez et al. 2014](https://link.aps.org/accepted/10.1103/PhysRevLett.113.155003),
+[2020](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.125.155002);
+[Knapp et al. 2022](https://www.osti.gov/pages/servlets/purl/1871989)).
+* For the published conditions of the 2014 shot, this project's D-D
+  reactivity gives 5×10¹² neutrons (10¹² to 1.5×10¹³ over the temperature
+  error). Measured: 2×10¹².
+* For the best shot (2020): 2×10¹³ (10¹³ to 3×10¹³). Measured: 1.1×10¹³.
+* That best shot is equivalent to 2 kJ of D-T fusion from fuel holding
+  14 kJ of heat, a ratio of 0.15. The designs above are the same kind of
+  plasma at 20–40 keV instead of 3 keV.
+
+**Check against published estimates without a field.** Section 12 is close
+to a published proposal. [Ruhl & Korn](https://arxiv.org/abs/2302.06562)
+(Marvel Fusion) would heat uncompressed fuel inside a high-Z case with
+laser-driven nanostructures, with no magnetic field.
+* They find about 3.4 MJ for fusion to exceed the fuel's energy, in a
+  1 mm × 1 mm cylinder with D-T at 0.5 g/cm³ and 20 keV. This model gives
+  3.6 MJ returning 0.77 for that design.
+* Their critics ([Lackner et al.](https://arxiv.org/abs/2302.01628), with a
+  [follow-up](https://arxiv.org/abs/2312.13429)) find that perfectly tamped
+  D-T needs 250–700 MJ to ignite at 0.5–0.3 g/cm³. This model, with a real
+  gold wall, gives 0.5–1.2 GJ for a tenfold return.
+* The critics exempt schemes with an applied magnetic field. That is the
+  case worked out here.
+
+**What it would take.** If 15% of the light became heat in the fuel, as in
+the nanowire experiments of section 6, and the crystals heat the ions first.
+The power is the least that reaches the crystals' stripping intensity
+(4×10¹⁸ W/cm² for 40 nm D-T crystals) across the fuel:
+
+| Design | Laser energy | Least power, and pulse length | Fusion / laser energy |
+|---|---|---|---|
+| Solid D-T, ring field, breakeven | 66 kJ | 3.8 PW, 17 ps | 0.15 |
+| 20% foam with a 1% hole, ring field, breakeven | 340 kJ | 32 PW, 10 ps | 0.15 |
+| Solid D-T column, straight 3 kT field, breakeven | 750 kJ | 3.7 PW, 200 ps | 0.15 |
+| 20% foam with a 1% hole, ring field, tenfold return | 180 MJ | 1,900 PW, 97 ps | 1.5 |
+
+**Why it still isn't net energy**
+* **The gain is far too low.** The breakeven designs return 0.15 of the
+  laser energy, and the tenfold one 1.5 for 180 MJ of picosecond light. A
+  power plant needs 60–140.
+  Inside a fission blanket it could give net electricity on paper, but that
+  is section 13's story.
+* **The laser doesn't exist.** It must deliver 66–750 kJ in 10–200 ps.
+  * The most energetic picosecond-class shot so far is 4.4 kJ in 30 ps
+    ([NIF's ARC](https://www.osti.gov/servlets/purl/1343818)). Osaka's LFEX
+    gives 2 kJ in 1 ps ([Kawanaka 2016](https://inis.iaea.org/records/b3pe5-97221)).
+  * The highest peak power, 10 PW, comes with only 0.25 kJ
+    ([ELI-NP](https://doi.org/10.1017/hpl.2022.11)).
+  * The 50–70 kJ ignitor lasers designed for fast ignition
+    ([HiPER](https://www.osti.gov/etdeweb/biblio/21153113)) were never built.
+* **The field doesn't exist.** 3 kT over a cubic millimetre is about four
+  times the strongest laser-driven coil field claimed, 0.8 kT
+  ([Santos et al. 2015](https://arxiv.org/abs/1503.00247)), and a later
+  reanalysis puts such coils far lower (Peebles et al., Phys. Plasmas 29,
+  080501 (2022)). About 5 kT has been reached only by squeezing a seed field
+  inside an implosion ([Moody et al. 2022](https://www.osti.gov/servlets/purl/1901997)).
+* **The light must get in and the fuel must not get out.** The entrance hole
+  has to stay under about 1% of the wall: a 0.2 mm hole in a 1 mm cavity.
+  The fuel has to be a foam of 40 nm D-T crystals at a fifth of solid
+  density, which nobody makes. Nanowire arrays show such heating a few
+  micrometres deep
+  ([Bargsten et al. 2017](https://www.science.org/doi/10.1126/sciadv.1601558)),
+  not a millimetre.
+* **Left out of the model**, all of it harmful: gold blown into the fuel by
+  X-rays and alphas, the Nernst effect carrying field to the wall,
+  instabilities, and the quarter of the ions that start within one
+  gyro-radius of the wall in the smallest balls.
+* **It is magnetised target fusion.** As in section 3, the crystals are only
+  a way of heating.
+
+This is still the largest lever found in this project: three to four orders
+of magnitude in energy, where everything else moved the answer by factors of
+a few.
+
+## 13. A fission blanket around the fusion source
+
+**Idea.** Every D-T fusion gives a 14 MeV neutron. In a uranium blanket that
+neutron releases far more than the fusion itself, and more again if the
+blanket is kept just below critical. This is the fusion–fission hybrid
+([Bethe 1979](http://large.stanford.edu/publications/coal/references/docs/bethe.pdf);
+Livermore's [LIFE](https://web.mit.edu/fusion-fission/HybridsPubli/LIFE_TOFE/Moses.pdf)
+design). Accelerator-driven reactors such as Rubbia's
+[energy amplifier](https://www.osti.gov/etdeweb/servlets/purl/602571) do the
+same with spallation neutrons. Could a blanket turn even a poor fusion
+source into net electricity?
+
+**Model.** Code: `nanofusion/improved/alternatives.py` and
+`tools/further_routes.py`. Numbers:
+[results/further/summary.md](results/further/summary.md).
+* Lithium alone breeds the next triton: 22 MeV per fusion in all.
+* In uranium a 14 MeV neutron splits uranium-238 directly (about 1.2
+  fissions) and multiplies to about 3 neutrons. With no chain at all that is
+  262 MeV per fusion, 15 times the fusion energy. A natural-uranium pile
+  [measured](https://ncsp.llnl.gov/sites/ncsp/files/2021-11/la10860_ref_139.pdf)
+  290 MeV per neutron; this formula gives 259.
+* In a blanket of multiplication k_eff, each of those neutrons starts chains
+  worth k / (2.5 (1−k)) fissions: 4,800 MeV per fusion at k_eff = 0.95 and
+  12,000 MeV at 0.98. Designs stop at 0.95
+  ([MYRRHA](https://www.gen-4.org/sites/default/files/2024-09/GIF%20SCK%20CEN%20%20MYRRHA-Prof.%20Hamid_3-21-18.pdf))
+  to 0.98 (Rubbia) to stay safely below critical.
+* Net electricity needs (driver efficiency) × (fusion / driver energy) ×
+  (blanket multiplication) × (40% heat to electricity) ≥ 1. Lasers are taken
+  as 10% efficient and accelerators as 40%. Both are design figures: NIF's
+  laser manages 0.5% and the best proton accelerator 18%.
+
+| Fusion source | Fusion / driver energy | Electricity per neutron | k_eff for net electricity | k_eff for 4 × the electricity put in |
+|---|---|---|---|---|
+| 30 nm crystals on a tritide catcher ([experiments.md](experiments.md)) | 3×10⁻⁵ | 5.9 TeV | > 0.9999 | > 0.9999 |
+| The same if all the light became ion energy (section 1) | 0.004 | 44 GeV | 0.9978 | 0.9995 |
+| Hollow shell implosion (section 8) | 3×10⁻⁴ | 590 GeV | 0.9998 | > 0.9999 |
+| Ball of crystals at its breakeven, bare or tamped (sections 3 and 12) | 0.15 | 1.2 GeV | 0.92 | 0.98 |
+| Tamped, magnetised ball returning 10 × its fuel energy (section 12) | 1.5 | 117 MeV | 0.11 | 0.79 |
+| Muon catalysis at the record 150 fusions per muon (section 9) | 0.53 | 83 MeV | 0 (uranium, no chain) | 0.70 |
+| NIF's best shot, with NIF's own laser | 4.1 | 825 MeV | 0.88 | 0.97 |
+| NIF's best shot, with a 10% efficient laser | 4.1 | 43 MeV | 0 (uranium, no chain) | 0.41 |
+| For comparison: spallation neutrons from a 1 GeV proton beam | – | 125 MeV | – | – |
+
+* **The benchmark is spallation**: a 1 GeV proton makes about 20 neutrons in
+  lead ([Bauer 1998](https://www.osti.gov/etdeweb/servlets/purl/20020531)),
+  or 125 MeV of electricity per neutron. A fusion source belongs inside a
+  blanket only if its neutrons cost about that, or a few times more, since a
+  14 MeV neutron is worth about three ordinary ones.
+* **Exploding crystals are 350 to 47,000 times too expensive a neutron
+  source.** They would need k_eff of 0.998 or more. The margin to a runaway
+  chain is the delayed-neutron fraction, 0.2–0.7%. So that blanket is a
+  critical reactor in all but name, and the crystals add nothing to it.
+* **Any source that returns a tenth or more of its driver energy works on
+  paper.** Muon catalysis needs only plain uranium, which is the known
+  result for muon-catalysed hybrids (Petrov, Nature 285, 466 (1980); see
+  [Tajima & Eliezer](https://www.osti.gov/servlets/purl/6964059)). So would
+  section 12's ball, if it could be built.
+* **But it is not fusion energy.** At least 91% of the heat is fission, with
+  fission's fuel cycle and waste. It is a fission reactor with an expensive
+  neutron source.
+
+## 14. A chain reaction in D-T
+
+**Idea.** Section 4 found no avalanche in proton–boron fuel. D-T is a better
+case. Its neutron carries 14 MeV and knocks deuterons and tritons on to as
+much as 12.5 MeV, and they fuse a hundred times more easily than protons and
+boron. The 3.5 MeV alpha knocks ions on too. Does each fusion trigger
+another? The question is old (Peres & Shvarts, Nucl. Fusion 15, 687 (1975);
+reviewed in [Belloni 2021](https://arxiv.org/abs/2012.14533)).
+
+**Model.** k = fusions triggered per fusion (`energy.dt_chain`).
+* The neutron is followed through all its collisions in an infinite medium.
+  They are peaked forwards, as measured.
+* Alpha knock-ons use Rutherford scattering, × 5 above 0.5 MeV to allow for
+  nuclear scattering.
+* Each knock-on fuses with the thick-target probability (cold fuel) or the
+  hot-plasma slowing-down probability of section 2.
+* The D-T cross section above 550 keV follows the measured fall-off (Bosch &
+  Hale's high-energy fit). Elsewhere in this project it is held constant,
+  which overstates it; that version is shown for comparison.
+
+| Infinite medium | k (measured fall-off) | k (cross section held constant) | Chance that a 5 MeV deuteron fuses |
+|---|---|---|---|
+| cold solid D-T | 0.0017 | 0.0023 | 0.04% |
+| solid-density D-T plasma, 1 keV | 0.05 | 0.05 | 0.6% |
+| 3 keV | 0.17 | 0.17 | 2% |
+| 10 keV | 0.49 | 0.52 | 7% |
+| 30 keV | 0.93 | 1.0 | 15% |
+| 100 keV | 1.3 | 1.7 | 29% |
+
+* **Cold D-T: no chain reaction, by a factor of about 600.** Electrons stop
+  the knock-ons first, as in every cold route.
+* **Hot D-T: k reaches 1, but only in an infinite plasma at 30–100 keV.**
+  This is section 2 again: a fast ion in hot D-T returns 1–3 times its
+  energy. And the neutron hands over its energy only in fuel many mean free
+  paths thick. One mean free path is 5.3 g/cm², or 28 cm of solid D-T.
+* **In the balls of section 12, k is about 0.03–0.05**, nearly all from
+  alphas, and only if the field holds them in. The neutron adds 10⁻⁴ to
+  2×10⁻³. The chain feeds a fire that is already burning. It cannot light
+  one.
+* **Published work is less generous still.** Peres & Shvarts found cold D-T
+  critical only above 3.5×10⁴ g/cm³, and Afek et al. (J. Phys. D 11, 2171
+  (1978)) found 4,200 g/cm³ at 14–15 keV. A 2026 Monte Carlo study
+  ([arXiv:2604.06769](https://arxiv.org/abs/2604.06769)) finds D-T critical
+  only without neutron leakage and above about 200 ρ^-0.23 keV, which is
+  290 keV at solid density.
+
+## 15. No electrons at all: bare ions in a magnetic trap
+
+**Idea.** Electrons do the damage in every route so far: they stop fast ions
+and they radiate. A cloud of bare deuterons and tritons has neither problem,
+and collisions between like charges do not carry ions across a magnetic
+field. On paper its energy balance is unlimited. Penning-trap fusion was
+proposed on this basis
+([Barnes, Nebel & Turner 1993](https://doi.org/10.1063/1.860837)).
+
+**The catch.** The cloud's own charge limits its density to the Brillouin
+limit, n = ε₀B² / 2m
+([Dubin & O'Neil 1999](https://nnp.ucsd.edu/pdf_files/rmp71_87_99.pdf)).
+A column 5 cm in radius and 1 m long, with ions at 60 keV:
+
+| Field | Ion density | Fusion power per m³ | Power of the column | Voltage across it | Time the field must last to repay its own energy |
+|---|---|---|---|---|---|
+| 10 T (ordinary superconducting magnet) | 10¹¹ cm⁻³ | 7 W | 0.06 W | 1.2 MV | 65 days |
+| 45.5 T (strongest steady magnet) | 2×10¹² cm⁻³ | 3 kW | 24 W | 25 MV | 3 days |
+| 1 kT (laser-driven coil, lasts ~1 ns) | 10¹⁵ cm⁻³ | 0.7 GW | 5.5 MW | 12 GV | 9 minutes |
+| 100 kT (inside a laser plasma, lasts ~1 ps) | 10¹⁹ cm⁻³ | 7×10¹⁶ W | 5.5×10¹⁴ W | 10¹⁴ V | 0.06 s |
+
+* **A steady trap makes watts.** At 10 T the limit is a few billionths of
+  air's density. A tokamak reactor makes about 10⁶ W/m³.
+* **Laser-made fields are strong enough but far too brief**, by about
+  eleven orders of magnitude.
+* **It is section 8's limit again.** There the ions' repulsion capped how
+  many fit in the focus. Here it caps how many fit in the magnet.
+* **Colliding beams** are the same idea in a ring. One watt of D-T fusion
+  needs a luminosity of 7×10³⁴ cm⁻² s⁻¹. The record for any collider is
+  5.1×10³⁴ ([SuperKEKB, 2024](https://arxiv.org/abs/2507.13617)), which
+  would give 0.7 W.
+* **Published assessments agree.** Trap schemes that squeeze the ions into
+  a dense focus reach high gain only under optimistic assumptions
+  ([Chacón et al. 2000](https://doi.org/10.1063/1.1310199)), and holding
+  ions out of equilibrium costs more power than they return
+  ([Nevins 1995](https://doi.org/10.1063/1.871080); Rider, below).
+
+## 16. Crystals as projectiles (cluster-impact fusion)
+
+**Idea.** Don't explode the crystal: charge it and accelerate it whole with
+a voltage. Accelerators turn electricity into beam far more efficiently
+than lasers turn it into ion energy.
+
+**The original claim.** [Beuhler, Friedlander & Friedman
+(1989)](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.63.1292)
+fired singly charged heavy-water clusters of 25–1,300 molecules at
+200–325 keV into titanium deuteride. They reported about 10⁻¹² to 10⁻¹¹
+fusions per cluster of 100 molecules.
+* A cluster shares its energy among all its atoms. At 300 keV each deuteron
+  of a 100-molecule cluster has only 0.3 keV.
+* This model then gives 8×10⁻³⁹ fusions per cluster. An independent estimate
+  at the time gave 4×10⁻³⁹
+  ([Carraro et al. 1990](https://authors.library.caltech.edu/records/j00c8-pp470)).
+  The claim was 26 orders of magnitude higher.
+* The authors withdrew it in 1992
+  ([erratum](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.68.2108)):
+  light ions contaminating the beam had probably caused the fusion.
+
+**Doing it properly.** A grain holds positive charge up to a surface field
+of about 10 V/nm before it sheds ions
+([Dzhanoev et al. 2016](https://arxiv.org/abs/1603.08565)). A deuterium
+crystal charged that far could be accelerated to the 100–300 keV per deuteron
+where D-T fusion peaks. That is generous, since hydrogen ice is weakly bound.
+
+| Crystal diameter | Charge | Voltage for 100 keV per deuteron | Best fusion / kinetic energy | From the wall plug |
+|---|---|---|---|---|
+| 3 nm | 16 e | 5 MV | 0.004 | 0.0016 |
+| 10 nm | 170 e | 18 MV | 0.004 | 0.0016 |
+| 30 nm | 1,600 e | 54 MV | 0.004 | 0.0016 |
+
+* **It is the cold catcher again.** Whatever throws the deuteron, the
+  catcher's electrons stop it after it has returned at most 0.4% of its
+  energy.
+* **The driver is far better.** With a 40% efficient accelerator that is
+  0.0016 from the wall plug, against about 5×10⁻⁵ for laser-exploded
+  crystals. It is still 600 times short, and a plain deuteron beam does the
+  same.
+* **The speed is far beyond dust accelerators.** They throw micrometre
+  grains at up to 80 km/s with 2 MV
+  ([Mocker et al. 2011](https://doi.org/10.1063/1.3637461)). This needs
+  3,000 km/s.
+* **No collective help.** A 30 nm crystal heats its track to roughly 1 keV,
+  which would cut the electron drag. But that heat spreads over about half a
+  micrometre within the 0.3 ps the crystal takes to stop (a rough estimate,
+  not modelled).
+
 ## Why everything hits the same wall
 
 **Rider's argument.** Rider's general analysis of fusion out of thermal
@@ -600,6 +1006,15 @@ condition, burns in thermal equilibrium. That is what the National Ignition
 Facility achieves by compression: 8.6 MJ from 2.08 MJ of laser in 2025. Even
 there, a power plant needs about 15–35 times more target gain and a far more
 efficient laser.
+
+**What moved the wall, and what didn't (sections 12–16).** Only confinement
+did. A tamper and a magnetic field hold the fuel about 15 times longer, and
+that cuts the breakeven energy a thousandfold. It is a Lawson-type fix: the
+fuel is hot and held, so its ions thermalise instead of being lost. The
+other four routes change the driver (an accelerator instead of a laser),
+the product (neutrons into a blanket), or the plasma (no electrons). Each
+meets a limit already found: electrons stop fast ions, and like charges keep
+bare ions apart.
 
 **Later challenges to Rider.**
 * [Rostoker et al. 2003](https://ui.adsabs.harvard.edu/abs/2003JFuE...22...83R)
@@ -644,6 +1059,20 @@ net energy:
   hot fuel ignites more cheaply than warm or cold fuel at the same density.
   The last open corner, liquid metallic hydrogen, would take > 10⁴⁶ years to
   burn 1%.
+* **Holding the ball together** with a gold tamper and a kilotesla field is
+  the biggest lever found. On paper, breakeven on the fuel's energy falls
+  from 60 MJ to about 50 kJ, or 10 kJ if the crystals heat the ions first,
+  and 0.1–0.7 MJ with the straight field a real coil makes. It is still not
+  net energy: 0.15 of the laser energy comes back at breakeven and 1.5 at
+  best, from a laser, a field and a target that do not exist. And it is
+  magnetised target fusion, with the crystals only as the heater.
+* **Four more routes fail outright.**
+  * A fission blanket fed by crystal-made neutrons would have to be a
+    critical reactor in all but name.
+  * D-T supports no chain reaction through its own neutrons and alphas.
+  * Bare ions in a magnetic trap are capped by their own charge at watts per
+    cubic metre.
+  * Crystals fired as projectiles hit the same 0.4% cold-catcher limit.
 
 ## Caveats (generous or conservative?)
 
@@ -651,15 +1080,23 @@ net energy:
   * perfect laser-to-ion conversion in tests 1–2;
   * instant, uniform stripping of a whole ball in test 3;
   * ignoring electron energy beyond 1 keV;
-  * the generous fast-ion bound.
+  * the generous fast-ion bound;
+  * in section 12: a field lying along the wall everywhere, no gold mixed
+    into the fuel, perfect symmetry, and 15% of the light reaching the fuel.
 * **Conservative:**
   * no alpha-particle self-heating in test 3 (it matters only for balls with
     ρR ≳ 0.3 g/cm², which are larger than the breakeven sizes here);
-  * D+⁶Li counted for the (d,α) channel only, maybe a factor of 2 low.
+  * D+⁶Li counted for the (d,α) channel only, maybe a factor of 2 low;
+  * section 12 stops following a ball once its radius has grown fivefold,
+    because the wall model is not trusted further. Balls that ignite are
+    still burning then, and would return 20–50% more.
 * **Model limits:**
   * 0-D burn with fixed temperature and a fixed burn time;
   * cross sections held constant above their measured ranges;
   * non-relativistic bremsstrahlung, which underestimates losses at hundreds
-    of keV.
+    of keV;
+  * section 12 is also 0-D, and its answer goes as the cube of the speed at
+    which the gold wall recedes (taken from gold's shock data, good to
+    perhaps 20%).
 
 None of these change the conclusion by the orders of magnitude involved.

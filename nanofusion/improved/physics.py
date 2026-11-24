@@ -51,6 +51,7 @@ S_DLI_KEV_MB = {"Li6": 21.7e3 * 1e3, "Li7": 5.4e3 * 1e3}  # MeV b -> keV mb
 E_CAP_KEV = 4900.0  # Bosch-Hale validity limit; cross sections held constant above it
 Q_VALUE_MEV = {"DD": 3.65, "Li6": 22.37, "Li7": 15.03, "DT": 17.59, "pB": 8.68}  # D+D: average of its two branches
 E_CAP_DT_KEV = 550.0  # upper limit of the Bosch-Hale D-T fit used here
+E_CAP_DT_HIGH_KEV = 4700.0  # upper limit of Bosch & Hale's high-energy D-T fit (optional, see sigma_dt_mb)
 I_LID_EV = 36.5
 
 
@@ -77,14 +78,26 @@ def _sigma_dd(e, e_kev):
     return np.where(np.asarray(e_kev) < 1e-3, 0.0, out)
 
 
-def sigma_dt_mb(e_kev):
-    """D+T -> n + alpha (Bosch-Hale), millibarn; E = CM energy in keV."""
-    e = np.clip(np.asarray(e_kev, dtype=float), 1e-3, E_CAP_DT_KEV)
+def sigma_dt_mb(e_kev, high_energy: bool = False):
+    """D+T -> n + alpha (Bosch-Hale), millibarn; E = CM energy in keV.
+
+    By default the 0.5-550 keV fit is used and held constant above 550 keV,
+    which overstates the cross section there. ``high_energy=True`` switches
+    to Bosch & Hale's second fit from 550 to 4700 keV (it joins the first
+    within 1%), where the cross section falls from 0.26 b to below 0.1 b, and
+    holds it constant above 4700 keV.
+    """
+    raw = np.asarray(e_kev, dtype=float)
+    e = np.clip(raw, 1e-3, E_CAP_DT_KEV)
     num = 6.927e4 + e * (7.454e8 + e * (2.050e6 + e * (5.2000e4 + e * 0.0)))
     den = 1.0 + e * (6.380e1 + e * (-9.950e-1 + e * (6.981e-5 + e * 1.728e-4)))
     with np.errstate(over="ignore"):
         out = (num / den) / (e * np.exp(34.3827 / np.sqrt(e)))
-    return np.where(np.asarray(e_kev) < 1e-3, 0.0, out)
+    if high_energy:
+        eh = np.clip(raw, E_CAP_DT_KEV, E_CAP_DT_HIGH_KEV)
+        s_high = -1.4714e6 / (1.0 + eh * (-8.4127e-3 + eh * (4.7983e-6 + eh * (-1.0748e-9 + eh * 8.5184e-14))))
+        out = np.where(raw > E_CAP_DT_KEV, s_high / (eh * np.exp(34.3827 / np.sqrt(eh))), out)
+    return np.where(raw < 1e-3, 0.0, out)
 
 
 _PB_A = (2.0235e6, 4.0102e6, 1.3220e6, 4.9451e6, 4.3430e5)
@@ -160,8 +173,9 @@ MATERIALS = {
     "DT": ({1: 4.5e28}, 0.0),  # solid deuterium-tritium, 0.22 g/cm^3
     "ErD3": ({68: 2.67e28, 1: 8.0e28}, 0.0),  # erbium deuteride, 8e22 D/cm^3 (NASA lattice-confinement tests)
     "TiD2": ({22: 5.0e28, 1: 1.0e29}, 0.0),  # titanium deuteride, 1e23 D/cm^3
+    "CD2": ({6: 4.0e28, 1: 8.0e28}, 0.0),  # deuterated polyethylene, about 1.06 g/cm^3
 }
-_I_ATOM = {1: 19.2, 3: 40.0, 5: 76.0, 22: 233.0, 68: 720.0}  # eV (ICRU/PDG elemental values, approximate)
+_I_ATOM = {1: 19.2, 3: 40.0, 5: 76.0, 6: 78.0, 22: 233.0, 68: 720.0}  # eV (ICRU/PDG elemental values, approximate)
 
 
 def _material(name: str) -> tuple[dict, float]:

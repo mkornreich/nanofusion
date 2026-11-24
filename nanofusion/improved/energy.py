@@ -36,6 +36,9 @@ KEV = P.J_PER_KEV
 # Spin polarisation of D-T fuel: parallel spins raise the D-T cross section by 1.5 (theory, e.g. Kulsrud et al.,
 # PRL 49, 1248 (1982)). Experiments only; leave at 1.0 for unpolarised fuel.
 DT_SPIN_FACTOR = 1.0
+# Above 550 keV (centre of mass) the D-T cross section is held constant by default, which overstates it.
+# True switches to the measured fall-off (Bosch & Hale's 550-4700 keV fit). It matters only for MeV ions.
+DT_HIGH_ENERGY = False
 SPECIES = {  # mass (u), charge
     "p": (P.MASS_U["p"], 1),
     "He4": (P.MASS_U["He4"], 2),
@@ -56,7 +59,7 @@ def sigma_m2(a: str, b: str, e_cm_kev):
     if pair == {"D"}:
         return P.sigma_dd_mb(e) * P.MB_TO_M2
     if pair == {"D", "T"}:
-        return P.sigma_dt_mb(e) * P.MB_TO_M2 * DT_SPIN_FACTOR
+        return P.sigma_dt_mb(e, high_energy=DT_HIGH_ENERGY) * P.MB_TO_M2 * DT_SPIN_FACTOR
     for li in ("Li6", "Li7"):
         if pair == {"D", li}:
             mu = P.reduced_mass_u(P.MASS_U["D"], P.MASS_U[li])
@@ -356,3 +359,109 @@ def pb11_avalanche(material: str = "decaborane", alpha_kev: float = 2900.0, nucl
         secondary += n_p * ds * nuclear_boost * np.trapezoid(integrand, t)
     k = 3 * secondary
     return {"k": k, "per_alpha": secondary, "material": material, "nuclear_boost": nuclear_boost}
+
+
+# --- chain reaction in D-T carried by the fusion products ----------------------------
+
+N_ELASTIC_14MEV_B = {"D": 0.639, "T": 0.933}  # neutron elastic cross sections at 14.1 MeV (ENDF/B-VIII.0), barn
+# Elastic scattering at 14 MeV is peaked forwards: mean cosine of the scattering angle in the centre-of-mass
+# frame (ENDF/B-VIII.0). The struck nucleus then gets less energy on average: 4.2 MeV for D, not 6.3.
+N_MEAN_COSINE_14MEV = {"D": 0.330, "T": 0.464}
+E_NEUTRON_KEV = 14070.0
+E_ALPHA_KEV = 3520.0
+NUCLEAR_KNOCK_ON_KEV = 500.0
+
+
+def dt_chain(hot_plasma: "Plasma | None" = None, material: str = "DT", nuclear_boost: float = 1.0,
+             first_collision_probability: float | None = None, neutrons: int = 20000, seed: int = 3) -> dict:
+    """Secondary D-T fusions per D-T fusion, carried by its 14.1 MeV neutron and its 3.5 MeV alpha.
+
+    Both products knock deuterons and tritons on. A knock-on of energy T then
+    fuses with probability Y(T) before it stops: in cold D-T (thick-target
+    yield) or in a hot plasma (``beam_in_plasma``). A chain reaction needs
+    k >= 1.
+
+    * Neutron: each elastic collision gives the struck nucleus up to
+      T_max = 8/9 of the neutron's energy for D and 3/4 for T. Scattering is
+      peaked forwards (distribution exp(b cos theta), with the measured mean
+      cosine at 14 MeV, falling in proportion to the neutron's energy), so
+      the mean share is less than half of T_max. With
+      first_collision_probability=None the neutron is followed down to
+      20 keV in an infinite medium (the best case). A number counts only the
+      first collision, weighted by that probability, for a body thinner than
+      the 14 MeV mean free path (about 4.7 g/cm^2).
+    * Alpha: Rutherford knock-ons on D and T while it slows down, as in
+      ``pb11_avalanche``. ``nuclear_boost`` multiplies the cross section for
+      knock-ons above 0.5 MeV, where nuclear scattering outweighs Coulomb
+      scattering; softer collisions are the alpha's ordinary heating of ions.
+    """
+    if hot_plasma is None:
+        n_h = P._material(material)[0][1]
+        n_d = n_t = 0.5 * n_h
+    else:
+        n_d, n_t = hot_plasma.ions["D"], hot_plasma.ions["T"]
+    t_grid = np.geomspace(1.0, 0.9 * E_NEUTRON_KEV, 260)
+    if hot_plasma is None:
+        y_d = thick_target(t_grid, "D", material, {"T": n_t})["reactions"]
+        y_t = thick_target(t_grid, "T", material, {"D": n_d})["reactions"]
+    else:
+        y_d = np.array([beam_in_plasma(t, "D", hot_plasma)["channels"].get("D+T", 0.0) for t in t_grid])
+        y_t = np.array([beam_in_plasma(t, "T", hot_plasma)["channels"].get("T+D", 0.0) for t in t_grid])
+    yields = {"D": y_d, "T": y_t}
+    density = {"D": n_d, "T": n_t}
+
+    # alpha knock-ons
+    m_a = SPECIES["He4"][0] * P.AMU
+    e_a = np.geomspace(E_ALPHA_KEV, 20.0, 500)
+    v2 = 2 * e_a * KEV / m_a
+    if hot_plasma is None:
+        stop_a = P.stopping_kev_per_m(e_a, 2, SPECIES["He4"][0], material)
+    else:
+        tau = hot_plasma.slowing_time("He4")
+        e_c = hot_plasma.critical_energy("He4")
+        stop_a = (2 * e_a / tau) * (1 + (e_c / e_a) ** 1.5) / np.sqrt(v2)
+    k_e2 = P.K_COULOMB * P.E_CHARGE**2
+    k_alpha = 0.0
+    for i in range(len(e_a) - 1):
+        e_mid = 0.5 * (e_a[i] + e_a[i + 1])
+        ds = (e_a[i] - e_a[i + 1]) / (0.5 * (stop_a[i] + stop_a[i + 1]))
+        for s in ("D", "T"):
+            m_s = SPECIES[s][0] * P.AMU
+            t_max = 4 * m_a * m_s / (m_a + m_s) ** 2 * e_mid
+            t = t_grid[t_grid <= t_max]
+            if len(t) < 2:
+                continue
+            k_r = 2 * math.pi * (2 * k_e2) ** 2 / (m_s * 2 * e_mid * KEV / m_a)  # m^2 J
+            boost = np.where(t >= NUCLEAR_KNOCK_ON_KEV, nuclear_boost, 1.0)
+            integrand = boost * k_r / (t * KEV) ** 2 * np.interp(t, t_grid, yields[s]) * KEV
+            k_alpha += density[s] * ds * float(np.trapezoid(integrand, t))
+
+    # neutron knock-ons
+    gen = np.random.default_rng(seed)
+    w_d = density["D"] * N_ELASTIC_14MEV_B["D"]
+    p_d = w_d / (w_d + density["T"] * N_ELASTIC_14MEV_B["T"])
+    t_max_frac = {"D": 4 * 2.014 / (1 + 2.014) ** 2, "T": 4 * 3.016 / (1 + 3.016) ** 2}
+    e = np.full(neutrons, E_NEUTRON_KEV)
+    total = np.zeros(neutrons)
+    hits = np.zeros(neutrons)
+    first = None
+    alive = e > 20.0
+    while alive.any():
+        n_alive = int(alive.sum())
+        on_d = gen.uniform(size=n_alive) < p_d
+        frac = np.where(on_d, t_max_frac["D"], t_max_frac["T"])
+        mean_cos = np.where(on_d, N_MEAN_COSINE_14MEV["D"], N_MEAN_COSINE_14MEV["T"]) * e[alive] / E_NEUTRON_KEV
+        b = np.maximum(mean_cos * (3 - mean_cos**2) / (1 - mean_cos**2), 1e-6)  # inverse Langevin function
+        cos = np.log(np.exp(-b) + gen.uniform(size=n_alive) * (np.exp(b) - np.exp(-b))) / b
+        t = 0.5 * (1 - cos) * frac * e[alive]
+        y = np.where(on_d, np.interp(t, t_grid, y_d, left=0.0), np.interp(t, t_grid, y_t, left=0.0))
+        if first is None:
+            first = float(y.mean())
+        total[alive] += y
+        hits[alive] += 1
+        e[alive] -= t
+        alive = e > 20.0
+    k_neutron = float(total.mean()) if first_collision_probability is None else first_collision_probability * first
+    return {"k": k_alpha + k_neutron, "k_alpha": k_alpha, "k_neutron": k_neutron,
+            "first_knock_on_yield": first, "collisions_per_neutron": float(hits.mean()),
+            "yield_at_5MeV": {s: float(np.interp(5000.0, t_grid, yields[s])) for s in ("D", "T")}}

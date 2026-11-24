@@ -95,6 +95,15 @@ docs/energy.md). `python3 tools/creative_routes.py` tries three speculative
 routes: squeezing a cold crystal until it fuses, exploding crystals as a muon
 factory, and spin-polarised fuel (section 10). `python3 tools/dense_fusion.py` maps fusion in
 dense matter across all burning regimes (section 11).
+`python3 tools/confined_ball.py` asks whether a ball of exploded crystals can
+be held together, with a gold tamper, a kilotesla magnetic field and heating
+by its own alphas (section 12). That cuts the breakeven energy about a
+thousandfold on paper, the biggest lever found, and still gives no net
+energy. `python3 -m nanofusion ball --help` burns a single ball.
+`python3 tools/further_routes.py` tests four more routes: a fission blanket
+around the fusion source, a chain reaction in D-T, bare ions in a magnetic
+trap, and crystals fired as projectiles (sections 13–16). It also checks the
+model against nanowire-array experiments (section 6).
 
 ### The page
 
@@ -168,7 +177,8 @@ nanofusion/            Python package
   cli.py               `python3 -m nanofusion run`
   improved/            improved physics model: kernel.c (all-pairs forces), physics.py
                        (cross sections, stopping, laser pulse), simulation.py, cli.py,
-                       energy.py (reactivities, hot-plasma slowing, burn energy balance)
+                       energy.py (reactivities, hot-plasma slowing, burn energy balance),
+                       confinement.py (tamped, magnetised ball), alternatives.py (other routes)
   web/server.py        local web server and JSON API (standard library only)
   web/static/          the page: index.html, app.js, viewer.js (canvas plots), style.css
 docs/                  what-it-simulates.md (purpose, sources), improved-model.md (scan results)

@@ -1,0 +1,372 @@
+{
+ "hybrid": {
+  "rows": [
+   {
+    "source": "30 nm crystals on a tritide catcher, 6 fs laser (experiments.md)",
+    "gain": 3e-05,
+    "efficiency": 0.1,
+    "k_net": 0.9999836270358433,
+    "k_plant4": 0.9999959067636458,
+    "MeV_electric_per_neutron": 5863333.333333332,
+    "fission_share": 0.9999984739056282
+   },
+   {
+    "source": "the same if all the light became ion energy (section 1)",
+    "gain": 0.004,
+    "efficiency": 0.1,
+    "k_net": 0.9978164971464802,
+    "k_plant4": 0.9994542075966434,
+    "MeV_electric_per_neutron": 43975.0,
+    "fission_share": 0.9997965207504265
+   },
+   {
+    "source": "hollow shell implosion (section 8)",
+    "gain": 0.0003,
+    "efficiency": 0.1,
+    "k_net": 0.999836268109597,
+    "k_plant4": 0.9999590674959079,
+    "MeV_electric_per_neutron": 586333.3333333334,
+    "fission_share": 0.9999847390562819
+   },
+   {
+    "source": "ball of crystals at its breakeven, bare (section 3) or tamped and magnetised (section 12)",
+    "gain": 0.15,
+    "efficiency": 0.1,
+    "k_net": 0.9175058347435634,
+    "k_plant4": 0.9794947097775204,
+    "MeV_electric_per_neutron": 1172.6666666666665,
+    "fission_share": 0.9923695281409891
+   },
+   {
+    "source": "tamped, magnetised ball returning 10 \u00d7 its fuel energy (section 12)",
+    "gain": 1.5,
+    "efficiency": 0.1,
+    "k_net": 0.11372616600401271,
+    "k_plant4": 0.7913581713702842,
+    "MeV_electric_per_neutron": 117.26666666666667,
+    "fission_share": 0.9236952814098921
+   },
+   {
+    "source": "muon catalysis at the record 150 fusions per muon (section 9)",
+    "gain": 0.5277,
+    "efficiency": 0.4,
+    "k_net": 0.0,
+    "k_plant4": 0.704055670416665,
+    "MeV_electric_per_neutron": 83.33333333333333,
+    "fission_share": 0.9147387277508862
+   },
+   {
+    "source": "NIF's best shot, with NIF's own laser",
+    "gain": 4.1,
+    "efficiency": 0.0052,
+    "k_net": 0.8823671990093465,
+    "k_plant4": 0.9708316588386542,
+    "MeV_electric_per_neutron": 825.0469043151971,
+    "fission_share": 0.9891545559977261
+   },
+   {
+    "source": "NIF's best shot, with a 10% efficient laser",
+    "gain": 4.1,
+    "efficiency": 0.1,
+    "k_net": 0.0,
+    "k_plant4": 0.4098182492114416,
+    "MeV_electric_per_neutron": 42.90243902439025,
+    "fission_share": 0.9147387277508862
+   }
+  ],
+  "spallation_MeV_electric_per_neutron": 125.0
+ },
+ "chain": {
+  "media": {
+   "cold solid D-T": {
+    "constant": {
+     "k": 0.002348314555662907,
+     "k_alpha": 2.1732833421261905e-07,
+     "k_neutron": 0.0023480972273286944,
+     "first_knock_on_yield": 0.0005809650197191692,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.000799460324854121,
+      "T": 0.000674609521251023
+     }
+    },
+    "measured": {
+     "k": 0.001680102236256964,
+     "k_alpha": 2.154704745777312e-07,
+     "k_neutron": 0.0016798867657823863,
+     "first_knock_on_yield": 0.0003282832683548779,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.0004011845000047685,
+      "T": 0.00043164958584400106
+     }
+    }
+   },
+   "solid-density D-T plasma at 1 keV": {
+    "constant": {
+     "k": 0.04812695756027571,
+     "k_alpha": 8.45244272044555e-05,
+     "k_neutron": 0.04804243313307126,
+     "first_knock_on_yield": 0.0068155809652258184,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.006411918562690553,
+      "T": 0.008954549849903118
+     }
+    },
+    "measured": {
+     "k": 0.04687050410252897,
+     "k_alpha": 8.448694621189546e-05,
+     "k_neutron": 0.046786017156317077,
+     "first_knock_on_yield": 0.006424093334292086,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.005684131399338293,
+      "T": 0.008301820592422864
+     }
+    }
+   },
+   "solid-density D-T plasma at 3 keV": {
+    "constant": {
+     "k": 0.17220444605606455,
+     "k_alpha": 0.001076417236832823,
+     "k_neutron": 0.17112802881923173,
+     "first_knock_on_yield": 0.024899257894396353,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.023932581553281224,
+      "T": 0.03310222679286246
+     }
+    },
+    "measured": {
+     "k": 0.16690136755641224,
+     "k_alpha": 0.0010757536099501896,
+     "k_neutron": 0.16582561394646206,
+     "first_knock_on_yield": 0.023246352676511275,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.02085914453833414,
+      "T": 0.03034807340919082
+     }
+    }
+   },
+   "solid-density D-T plasma at 10 keV": {
+    "constant": {
+     "k": 0.5199142383908805,
+     "k_alpha": 0.01082091432432288,
+     "k_neutron": 0.5090933240665576,
+     "first_knock_on_yield": 0.08010448571495246,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.08315474110602815,
+      "T": 0.11077684492101703
+     }
+    },
+    "measured": {
+     "k": 0.49356525941184687,
+     "k_alpha": 0.010805125927168644,
+     "k_neutron": 0.4827601334846782,
+     "first_knock_on_yield": 0.07187371903351975,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.06783226333190033,
+      "T": 0.09711697122877193
+     }
+    }
+   },
+   "solid-density D-T plasma at 30 keV": {
+    "constant": {
+     "k": 1.0403003901423915,
+     "k_alpha": 0.04786865479534679,
+     "k_neutron": 0.9924317353470448,
+     "first_knock_on_yield": 0.17990959711775034,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.21693861408569665,
+      "T": 0.26530587127535793
+     }
+    },
+    "measured": {
+     "k": 0.9310178804292242,
+     "k_alpha": 0.04763686373216188,
+     "k_neutron": 0.8833810166970623,
+     "first_knock_on_yield": 0.1454173280193168,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.15243831123402588,
+      "T": 0.20914764655579932
+     }
+    }
+   },
+   "solid-density D-T plasma at 100 keV": {
+    "constant": {
+     "k": 1.668198295986138,
+     "k_alpha": 0.09006912708687606,
+     "k_neutron": 1.5781291688992618,
+     "first_knock_on_yield": 0.36694873372855935,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.5392255184199263,
+      "T": 0.5648130499808836
+     }
+    },
+    "measured": {
+     "k": 1.2623389048708178,
+     "k_alpha": 0.08823757079665843,
+     "k_neutron": 1.1741013340741593,
+     "first_knock_on_yield": 0.2332300121801425,
+     "collisions_per_neutron": 13.19625,
+     "yield_at_5MeV": {
+      "D": 0.288158046847249,
+      "T": 0.36680956405292553
+     }
+    }
+   },
+   "tamped, magnetised breakeven ball of section 12 (20 keV)": {
+    "k": 0.029857735192281847,
+    "k_alpha": 0.02974893573506523,
+    "k_neutron": 0.00010879945721661651,
+    "first_knock_on_yield": 0.11567129352006818,
+    "collisions_per_neutron": 13.19625,
+    "yield_at_5MeV": {
+     "D": 0.11577758548917344,
+     "T": 0.1620797721083375
+    }
+   },
+   "the 100-fold-return ball of section 12 (30 keV while burning)": {
+    "k": 0.04954009690313783,
+    "k_alpha": 0.04763686373216188,
+    "k_neutron": 0.0019032331709759472,
+    "first_knock_on_yield": 0.1454173280193168,
+    "collisions_per_neutron": 13.19625,
+    "yield_at_5MeV": {
+     "D": 0.15243831123402588,
+     "T": 0.20914764655579932
+    }
+   },
+   "a ball of solid D-T one mean free path in radius (30 keV)": {
+    "k": 0.1395581463830881,
+    "k_alpha": 0.04763686373216188,
+    "k_neutron": 0.09192128265092622,
+    "first_knock_on_yield": 0.1454173280193168,
+    "collisions_per_neutron": 13.19625,
+    "yield_at_5MeV": {
+     "D": 0.15243831123402588,
+     "T": 0.20914764655579932
+    }
+   }
+  },
+  "neutron_mfp_g_cm2": 5.31330248409542
+ },
+ "trap": {
+  "rows": [
+   {
+    "b_tesla": 10.0,
+    "density_m3": 1.0600629292760394e+17,
+    "power_density_W_m3": 7.060033051337973,
+    "power_W": 0.05544936992046127,
+    "voltage_V": 1198873.4114892306,
+    "thermal_J": 12.005339109916227,
+    "field_J": 312500.0,
+    "confinement_for_breakeven_s": 216.50992837496895,
+    "field_payback_s": 5635771.884302061
+   },
+   {
+    "b_tesla": 20.0,
+    "density_m3": 4.2402517171041574e+17,
+    "power_density_W_m3": 112.96052882140756,
+    "power_W": 0.8871899187273803,
+    "voltage_V": 4795493.645956922,
+    "thermal_J": 48.021356439664906,
+    "field_J": 1250000.0,
+    "confinement_for_breakeven_s": 54.12748209374224,
+    "field_payback_s": 1408942.9710755153
+   },
+   {
+    "b_tesla": 45.5,
+    "density_m3": 2.1945952793337206e+18,
+    "power_density_W_m3": 3025.884319713828,
+    "power_W": 23.76523987356378,
+    "voltage_V": 24819676.801355798,
+    "thermal_J": 248.54053292304076,
+    "field_J": 6469531.250000001,
+    "confinement_for_breakeven_s": 10.458153767659413,
+    "field_payback_s": 272226.6337061737
+   },
+   {
+    "b_tesla": 1000.0,
+    "density_m3": 1.0600629292760395e+21,
+    "power_density_W_m3": 706003305.1337975,
+    "power_W": 5544936.992046129,
+    "voltage_V": 11988734114.892307,
+    "thermal_J": 120053.3910991623,
+    "field_J": 3125000000.0,
+    "confinement_for_breakeven_s": 0.021650992837496892,
+    "field_payback_s": 563.5771884302059
+   },
+   {
+    "b_tesla": 100000.0,
+    "density_m3": 1.0600629292760395e+25,
+    "power_density_W_m3": 7.060033051337975e+16,
+    "power_W": 554493699204612.9,
+    "voltage_V": 119887341148923.08,
+    "thermal_J": 1200533910.991623,
+    "field_J": 31250000000000.004,
+    "confinement_for_breakeven_s": 2.1650992837496892e-06,
+    "field_payback_s": 0.05635771884302059
+   }
+  ],
+  "luminosity_for_1W": 7.096656139239071e+34
+ },
+ "projectiles": {
+  "beuhler": [
+   {
+    "molecules": 25,
+    "keV_per_deuteron": 1.2066510902366452,
+    "fusions_per_deuteron": 1.4063821774955366e-23,
+    "fusions_per_cluster": 7.031910887477683e-22
+   },
+   {
+    "molecules": 100,
+    "keV_per_deuteron": 0.3016627725591613,
+    "fusions_per_deuteron": 3.790348939226957e-41,
+    "fusions_per_cluster": 7.580697878453913e-39
+   },
+   {
+    "molecules": 1300,
+    "keV_per_deuteron": 0.023204828658397025,
+    "fusions_per_deuteron": 6.352440937727293e-91,
+    "fusions_per_cluster": 1.6516346438090961e-87
+   }
+  ],
+  "best_cold_gain": 0.004124304159021177,
+  "crystals": [
+   {
+    "radius_nm": 1.5,
+    "charge_e": 15.6253846899986,
+    "MV_100": 5.428538453918349,
+    "MV_300": 16.285615361755045
+   },
+   {
+    "radius_nm": 5.0,
+    "charge_e": 173.61538544442885,
+    "MV_100": 18.09512817972783,
+    "MV_300": 54.28538453918349
+   },
+   {
+    "radius_nm": 15.0,
+    "charge_e": 1562.53846899986,
+    "MV_100": 54.2853845391835,
+    "MV_300": 162.8561536175505
+   }
+  ]
+ },
+ "nanowires": {
+  "slope_keV": 315.0879215887913,
+  "neutrons_model": 11518309.2611861,
+  "ion_energy_J": 0.3126267790074776,
+  "fusion_over_laser": 1.75438341423e-06,
+  "record_fusion_over_laser": 2.573095674204e-06,
+  "tritide_fusion_over_laser": 0.00011567194616314794
+ }
+}

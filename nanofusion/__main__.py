@@ -4,6 +4,7 @@
     python -m nanofusion run [options]   run a simulation from the command line
     python -m nanofusion improved [...]  run the improved crystal model
     python -m nanofusion implosion [...] run a hollow-shell Coulomb implosion
+    python -m nanofusion ball [...]      burn a hot fuel ball held by a tamper and a magnetic field
 """
 
 from __future__ import annotations
@@ -25,6 +26,10 @@ def main(argv: list[str] | None = None) -> int:
         from .improved.implosion import main as implosion_main
 
         return implosion_main(argv[1:])
+    if argv and argv[0] == "ball":
+        from .improved.confinement import main as ball_main
+
+        return ball_main(argv[1:])
     from .web.server import main as web_main
 
     return web_main(argv)
