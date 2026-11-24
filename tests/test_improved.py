@@ -498,3 +498,38 @@ def test_xray_trapping_fibre_pinch_and_channelling():
     assert W.channelled_return(0.004, [(0.01, 2.0, 0.9, 0.5), (0.1, 2.0, 0.9, 0.5)]) < 0.0045
     # Magnetised electrons need their cyclotron frequency above the plasma frequency: ~7e4 T in solid D-T.
     assert W.magnetised_electron_field(4.5e28, 1.0) == pytest.approx(6.8e4, rel=0.02)
+
+
+def test_one_simulator_for_every_route(capsys):
+    from nanofusion.__main__ import main
+    from nanofusion.improved import simulator as S
+
+    # Every route runs with its defaults and gives a finite energy account.
+    for name in S.ROUTES:
+        o = S.evaluate(name)
+        assert math.isfinite(o.electric_gain) and o.electricity_in_J > 0 and o.stretch >= 1
+    # Muon catalysis at the record returns ~0.1 of its electricity (Kelly et al. estimate ~0.14), with today's means.
+    muon = S.evaluate("muon_catalysis")
+    assert 0.08 < muon.electric_gain < 0.16 and muon.stretch == 1
+    # Burn-up: fusion never exceeds what the fuel holds.
+    assert S.deplete(1e9, 1.0) < 1.0 and S.deplete(1e-6, 1.0) == pytest.approx(1e-6, rel=1e-5)
+    # Blankets: lithium adds 4.78 MeV per D-T fusion; a k_eff = 0.95 uranium blanket makes muons "net energy".
+    lithium = S.evaluate("cold_catcher")
+    bare = S.evaluate("cold_catcher", settings=S.Settings(blanket="none"))
+    assert lithium.heat_J / bare.heat_J == pytest.approx(22.37 / 17.59, rel=1e-3)
+    assert S.evaluate("muon_catalysis", settings=S.Settings(blanket="uranium", k_eff=0.95)).electric_gain > 10
+    # Spin-polarised fuel raises fusion but counts as unproven.
+    spin = S.evaluate("fibre_pinch", {"spin": True})
+    assert spin.fusion_J > S.evaluate("fibre_pinch").fusion_J and math.isinf(spin.stretch)
+    # A pinch too cool for its alphas to make up its X-rays must have them resupplied, which sinks it.
+    cool = S.evaluate("fibre_pinch", {"current_ma": 100.0, "t_kev": 3.63, "alfven_times": 99.4, "squeeze": 140.0})
+    assert cool.electric_gain < 0.2
+    # A quick search: the pinch passes 1 only when it may stay stable far longer than any dense hot pinch has.
+    found = S.search(["fibre_pinch"], samples=80, refine=40, seed=1)["fibre_pinch"]
+    assert found[10.0].electric_gain < 1 < found[100.0].electric_gain
+    assert found[100.0].limiting
+    # Command line.
+    assert main(["sim", "run", "tamped_ball", "radius_mm=0.3", "b_tesla=3000"]) == 0
+    assert "electric gain" in capsys.readouterr().out
+    assert main(["sim", "run", "tamped_ball", "nonsense=1"]) == 2
+    assert main(["sim", "list"]) == 0

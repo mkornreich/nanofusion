@@ -114,6 +114,12 @@ muon catalysis. None gives net energy: the squeeze costs more than it returns.
 (sections 18–20): trapping proton–boron's X-rays in an opaque ball, holding a
 D-T fibre with its own current (a Z-pinch, no laser), and channelling ions
 through a tritide crystal. None breaks through.
+`python3 -m nanofusion sim` puts every route into one simulator with a common
+energy account (list, run, search; see [docs/simulator.md](docs/simulator.md)),
+and `python3 tools/simulator_search.py` searches them all for the best
+electricity out per electricity in (section 21). With today's technology the
+best is a tenth of breakeven; only a dense D-T Z-pinch crosses 1 on paper, and
+only if it stays stable far longer than any has.
 
 ### The page
 

@@ -20,7 +20,9 @@ energy by a factor of at least 1,000. This page tries to close that gap:
 * three walls no earlier section touched (sections 18–20): trapping
   proton–boron's X-rays inside an opaque ball, holding the fuel with a
   current instead of a laser (a fibre Z-pinch), and steering ions through a
-  tritide crystal's channels.
+  tritide crystal's channels;
+* every route in one simulator, searched for the best electricity out per
+  electricity in (section 21, [simulator.md](simulator.md)).
 
 Full numbers are in [results/energy/summary.md](results/energy/summary.md).
 Code: `nanofusion/improved/energy.py`. To reproduce:
@@ -80,6 +82,7 @@ The published literature reaches the same conclusion for every related idea.
 | Muon catalysis in squeezed fuel (stuck muons knocked free) | sticking below 0.1% above ~60 g/cm³; but ≤ ~140 fusions per muon in a 140 ps squeeze | Never: a squeeze is far too short, and a long one needs 10¹¹ times today's muon beams |
 | Proton–boron ball made opaque to its own X-rays | the balls that repay their heat need ρR 17–25 g/cm² (40–60 × NIF's hot spot) and trap 10–65%; trapping half at 1,000 g/cm³ takes 1.8 kg holding ~8 megatons, returning 0.3% | Only at white-dwarf-like densities; trapped X-rays and pairs soak up the energy |
 | Fibre of D-T fuel pinched by its own current (Z-pinch, no laser) | at Z's 26 MA, a sixfold squeeze held one Alfvén time (37 ps) repays the plasma's heat; the field costs 7.5 times that heat | Not with today's pinches; the field energy demands a large burn multiplication |
+| Every route in one simulator, searched (section 21) | today's technology: 0.12 electricity out / in (muon catalysis); within 10× of it on every demand: 0.86, within 100×: 2.8 (dense D-T Z-pinch) | Only the Z-pinch crosses 1 on paper, if it stays stable ~100 Alfvén times at 100 MA |
 | Ions channelled through a tritide crystal | 0.008–0.023 for a perfectly aligned beam (2–6 × random); +9% at most for an exploding crystal | Never: the cold-catcher limit, slightly dented |
 
 ### Where this sits among real results (fusion energy / laser energy)
@@ -1349,6 +1352,50 @@ deuterons. Stopping halves only above ~1 MeV per nucleon.
   cyclotron frequency to beat the plasma frequency: about 68,000 T in solid
   D-T, 85 times the strongest laser-made field claimed.
 
+## 21. Every route in one simulator
+
+**Idea.** Put every experiment above into one energy account, then let a
+search try thousands of parameter combinations, with the boosters
+(spin-polarised fuel, blankets), for the best electricity out per
+electricity in. Code: `nanofusion/improved/simulator.py`
+(`python -m nanofusion sim`), guide: [simulator.md](simulator.md), numbers:
+[results/simulator/summary.md](results/simulator/summary.md).
+
+**The account.**
+* electricity → driver (laser, accelerator or pulsed current) → fuel →
+  fusion → heat (with a lithium blanket) → electricity;
+* realistic-to-generous efficiencies: 10% lasers, 15% pulsed power, 40%
+  accelerators, 40% heat to electricity.
+
+**Stretch.** Each design's demands (laser energy and power, field, density,
+pressure, current, pinch stability, muon supply, ...) are compared with the
+best ever achieved. The largest ratio is its stretch. Designs are ranked
+within stretch budgets.
+
+| Best electricity out / in | Today's technology | ≤ 10× today | ≤ 100× today | Unlimited |
+|---|---|---|---|---|
+| Winning route | muon catalysis | dense D-T Z-pinch | dense D-T Z-pinch | dense D-T Z-pinch |
+| Electricity out / in | 0.12 | 0.86 | **2.8** | **5.9** |
+| Best crystal route | 0.005 (channelling) | 0.006 | 0.01 | 1.7 (spin-polarised tamped ball) |
+
+* **Nothing comes close with today's technology.** A muon returns about a
+  tenth of the electricity it cost.
+* **Only the dense Z-pinch crosses 1 on paper.**
+  * Within ten times today's best on every demand it reaches 0.86.
+  * Allowed a hundred times, it reaches 2.8: a 100 MA pinch held stable for
+    about 100 Alfvén times.
+  * No dense, hot pinch has stayed stable past its peak current. The 1980
+    Los Alamos dense Z-pinch reactor study also found net power, assuming
+    stability.
+* **The crystal routes never get near.** Within a hundred times today's
+  technology they stay at about a percent of breakeven, held back by
+  picosecond laser energy.
+* **The search caught three flaws in the pinch model**, now fixed: fuel
+  burning past 100%, a pressure 200 times any experiment's, and a pinch too
+  cool for its alphas to make up its X-ray losses.
+* **A uranium blanket** (k_eff 0.95) makes several routes "net energy",
+  muon catalysis included, but over 99% of the heat is then fission.
+
 ## Why everything hits the same wall
 
 **Rider's argument.** Rider's general analysis of fusion out of thermal
@@ -1452,6 +1499,10 @@ net energy:
   * Son & Fisch's proton–boron keeps itself hot only at white-dwarf density.
   * Stuck muons are freed above ~60 g/cm³, but a squeeze lasts ~0.1 ns, far
     too short for the 1,000 fusions per muon that electricity needs.
+* **Every route in one simulator** (section 21): with today's technology
+  the best is a tenth of breakeven. Only a dense D-T Z-pinch crosses net
+  electricity on paper, if held stable ~100 Alfvén times at 100 MA, which no
+  dense hot pinch has done.
 * **Three more walls attacked, none breached.**
   * An opaque proton–boron ball traps its X-rays, but the trapped radiation
     and pairs soak up its energy. The balls that do repay their heat need

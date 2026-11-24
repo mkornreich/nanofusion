@@ -1,0 +1,2233 @@
+{
+ "fusion_only": {
+  "cold_catcher": {
+   "today's technology": {
+    "route": "cold_catcher",
+    "params": {
+     "ion_kev": 5000.0,
+     "catcher": "LiD"
+    },
+    "fusion_J": 0.005489612626852993,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "laser": 6.666666666666667
+    },
+    "electricity_in_J": 66.66666666666667,
+    "heat_J": 0.005489612626852993,
+    "target_gain": 0.0008234418940279488,
+    "electric_gain": 3.2937675761117955e-05,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of crystal ions; section 1",
+    "requirements": []
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "cold_catcher",
+    "params": {
+     "ion_kev": 5000.0,
+     "catcher": "LiD"
+    },
+    "fusion_J": 0.005489612626852993,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "laser": 6.666666666666667
+    },
+    "electricity_in_J": 66.66666666666667,
+    "heat_J": 0.005489612626852993,
+    "target_gain": 0.0008234418940279488,
+    "electric_gain": 3.2937675761117955e-05,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of crystal ions; section 1",
+    "requirements": []
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "cold_catcher",
+    "params": {
+     "ion_kev": 5000.0,
+     "catcher": "LiD"
+    },
+    "fusion_J": 0.005489612626852993,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "laser": 6.666666666666667
+    },
+    "electricity_in_J": 66.66666666666667,
+    "heat_J": 0.005489612626852993,
+    "target_gain": 0.0008234418940279488,
+    "electric_gain": 3.2937675761117955e-05,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of crystal ions; section 1",
+    "requirements": []
+   },
+   "unlimited": {
+    "route": "cold_catcher",
+    "params": {
+     "ion_kev": 5000.0,
+     "catcher": "LiD"
+    },
+    "fusion_J": 0.005489612626852993,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "laser": 6.666666666666667
+    },
+    "electricity_in_J": 66.66666666666667,
+    "heat_J": 0.005489612626852993,
+    "target_gain": 0.0008234418940279488,
+    "electric_gain": 3.2937675761117955e-05,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of crystal ions; section 1",
+    "requirements": []
+   }
+  },
+  "crystal_ball": {
+   "today's technology": {
+    "route": "crystal_ball",
+    "params": {
+     "fuel": "DT",
+     "crystal_nm": 28.740847239724566,
+     "fill": 1.0,
+     "ball_mm": 0.05344300014940714,
+     "bound": "conservative"
+    },
+    "fusion_J": 47.13545920546916,
+    "fuel_J": 565.0376062757368,
+    "drivers_J": {
+     "laser": 3766.917375171579
+    },
+    "electricity_in_J": 37669.17375171579,
+    "heat_J": 59.94429917148068,
+    "target_gain": 0.012513005864197431,
+    "electric_gain": 0.0006365342607893042,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "untamped ball of exploding crystals; section 3",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 3766.917375171579,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 3766.917375171579,
+      "best": 4400.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 499184889906858.7,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 8.076894602817176e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "crystal_ball",
+    "params": {
+     "fuel": "DT",
+     "crystal_nm": 25.977351561644248,
+     "fill": 1.0,
+     "ball_mm": 0.12860806701215818,
+     "bound": "generous"
+    },
+    "fusion_J": 1383.6611378995794,
+    "fuel_J": 6450.4408527239375,
+    "drivers_J": {
+     "laser": 43002.93901815959
+    },
+    "electricity_in_J": 430029.39018159587,
+    "heat_J": 1759.6645625249344,
+    "target_gain": 0.032175966794159745,
+    "electric_gain": 0.0016367853943953467,
+    "stretch": 9.773395231399906,
+    "limiting": "picosecond laser energy (J)",
+    "notes": "untamped ball of exploding crystals; section 3",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 43002.93901815959,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 43002.93901815959,
+      "best": 4400.0,
+      "stretch": 9.773395231399906
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 2143315208403124.5,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 6.598345113416286e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "crystal_ball",
+    "params": {
+     "fuel": "DT",
+     "crystal_nm": 22.478913550215747,
+     "fill": 1.0,
+     "ball_mm": 0.2894431859381844,
+     "bound": "generous"
+    },
+    "fusion_J": 18722.179997829422,
+    "fuel_J": 55335.87667208425,
+    "drivers_J": {
+     "laser": 368905.8444805617
+    },
+    "electricity_in_J": 3689058.4448056165,
+    "heat_J": 23809.84460212872,
+    "target_gain": 0.05075056488788138,
+    "electric_gain": 0.0025816717147058702,
+    "stretch": 83.84223738194584,
+    "limiting": "picosecond laser energy (J)",
+    "notes": "untamped ball of exploding crystals; section 3",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 368905.8444805617,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 368905.8444805617,
+      "best": 4400.0,
+      "stretch": 83.84223738194584
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 7087194376385801.0,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 4.940784560231067e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "crystal_ball",
+    "params": {
+     "fuel": "DT",
+     "crystal_nm": 18.044656949351552,
+     "fill": 1.0,
+     "ball_mm": 100.0,
+     "bound": "conservative"
+    },
+    "fusion_J": 36749442490674.27,
+    "fuel_J": 1486604037858.3806,
+    "drivers_J": {
+     "laser": 9910693585722.537
+    },
+    "electricity_in_J": 99106935857225.36,
+    "heat_J": 46735931126570.984,
+    "target_gain": 3.7080595997454666,
+    "electric_gain": 0.18862829618261764,
+    "stretch": 2252430360.3914857,
+    "limiting": "picosecond laser energy (J)",
+    "notes": "untamped ball of exploding crystals; section 3",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 9910693585722.537,
+      "best": 2080000.0,
+      "stretch": 4764756.531597374
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 9910693585722.537,
+      "best": 4400.0,
+      "stretch": 2252430360.3914857
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 4.448006761524654e+20,
+      "best": 1.02e+16,
+      "stretch": 43607.9094267123
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 3.183776281329636e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "tamped_ball": {
+   "today's technology": {
+    "route": "tamped_ball",
+    "params": {
+     "radius_mm": 0.0764152259221909,
+     "t_i_kev": 31.659828438954904,
+     "b_tesla": 415.0464435855676,
+     "fill": 0.9294156633252489,
+     "ions_first": true,
+     "fuel": "DT",
+     "spin": false
+    },
+    "fusion_J": 66.74501424552139,
+    "fuel_J": 613.7012878858535,
+    "drivers_J": {
+     "laser": 4091.3419192390234
+    },
+    "electricity_in_J": 40913.41919239023,
+    "heat_J": 84.882658821621,
+    "target_gain": 0.016313721894437937,
+    "electric_gain": 0.0008298759722082473,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "gold tamper, 1% entrance hole; burn died out; section 12",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 4091.3419192390234,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 4091.3419192390234,
+      "best": 4400.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 581176562657747.9,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 3.168096607440714e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 415.0464435855676,
+      "best": 800.0,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "tamped_ball",
+    "params": {
+     "radius_mm": 0.16574863806773651,
+     "t_i_kev": 32.7852484746914,
+     "b_tesla": 3159.817894615544,
+     "fill": 0.8544918499206924,
+     "ions_first": true,
+     "fuel": "DT",
+     "spin": false
+    },
+    "fusion_J": 4555.10202010513,
+    "fuel_J": 6030.8561387121545,
+    "drivers_J": {
+     "laser": 40205.707591414364
+    },
+    "electricity_in_J": 402057.07591414364,
+    "heat_J": 5792.929629889241,
+    "target_gain": 0.11329490992661545,
+    "electric_gain": 0.005763290813094685,
+    "stretch": 9.137660816230538,
+    "limiting": "picosecond laser energy (J)",
+    "notes": "gold tamper, 1% entrance hole; burn died out; section 12",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 40205.707591414364,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 40205.707591414364,
+      "best": 4400.0,
+      "stretch": 9.137660816230538
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 2831510318233659.5,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 3.28071374950885e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 3159.817894615544,
+      "best": 800.0,
+      "stretch": 3.94977236826943
+     }
+    ]
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "tamped_ball",
+    "params": {
+     "radius_mm": 0.4379235284933739,
+     "t_i_kev": 27.467347201850423,
+     "b_tesla": 4067.294275654593,
+     "fill": 0.5411896962472986,
+     "ions_first": true,
+     "fuel": "DT",
+     "spin": false
+    },
+    "fusion_J": 81928.07789012398,
+    "fuel_J": 60928.57771419555,
+    "drivers_J": {
+     "laser": 406190.518094637
+    },
+    "electricity_in_J": 4061905.18094637,
+    "heat_J": 104191.64880057269,
+    "target_gain": 0.20169864691680425,
+    "electric_gain": 0.01026037232866154,
+    "stretch": 92.31602683969024,
+    "limiting": "picosecond laser energy (J)",
+    "notes": "gold tamper, 1% entrance hole; burn died out; section 12",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 406190.518094637,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 406190.518094637,
+      "best": 4400.0,
+      "stretch": 92.31602683969024
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 1.6559720711561312e+16,
+      "best": 1.02e+16,
+      "stretch": 1.6235020305452266
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 2.7485685733694075e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 4067.294275654593,
+      "best": 800.0,
+      "stretch": 5.084117844568241
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "tamped_ball",
+    "params": {
+     "radius_mm": 10.0,
+     "t_i_kev": 5.0,
+     "b_tesla": 2919.731991356562,
+     "fill": 1.0,
+     "ions_first": false,
+     "fuel": "DT",
+     "spin": true
+    },
+    "fusion_J": 104622436919.73872,
+    "fuel_J": 467212829.0504043,
+    "drivers_J": {
+     "laser": 3114752193.669362
+    },
+    "electricity_in_J": 31147521936.69362,
+    "heat_J": 133053093456.19986,
+    "target_gain": 33.589329235366016,
+    "electric_gain": 1.708682876623395,
+    "stretch": Infinity,
+    "limiting": "spin-polarised D-T that survives in the fuel",
+    "notes": "gold tamper, 1% entrance hole; burn died out; section 12",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 3114752193.669362,
+      "best": 2080000.0,
+      "stretch": 1497.4770161871934
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 3114752193.669362,
+      "best": 4400.0,
+      "stretch": 707898.2258339459
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 3.1436901330622126e+18,
+      "best": 1.02e+16,
+      "stretch": 308.20491500609927
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 1.0006676484521386e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 2919.731991356562,
+      "best": 800.0,
+      "stretch": 3.6496649891957027
+     },
+     {
+      "name": "spin-polarised D-T that survives in the fuel",
+      "needed": 1.0,
+      "best": NaN,
+      "stretch": Infinity
+     }
+    ]
+   }
+  },
+  "fast_ignition": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null,
+   "\u2264 100\u00d7 today": null,
+   "unlimited": {
+    "route": "fast_ignition",
+    "params": {
+     "distance_um": 30.0,
+     "shaped": true
+    },
+    "fusion_J": 30000000.0,
+    "fuel_J": 10000.0,
+    "drivers_J": {
+     "laser": 3679029.385241026
+    },
+    "electricity_in_J": 36790293.85241026,
+    "heat_J": 38152359.29505401,
+    "target_gain": 8.154324648873278,
+    "electric_gain": 0.4148089650831046,
+    "stretch": 56029.89191570304,
+    "limiting": "laser peak power (W)",
+    "notes": "crystals as the ion spark for 400 g/cm3 D-T; yield fixed at the 30 MJ design; section 7",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 3679029.385241026,
+      "best": 2080000.0,
+      "stretch": 1.7687641275197241
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 3429029.385241026,
+      "best": 4400.0,
+      "stretch": 779.3248602820514
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 5.7150489754017104e+20,
+      "best": 1.02e+16,
+      "stretch": 56029.89191570304
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 9.180547568291878e+20,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "crystals' distance from the core (m)",
+      "needed": 2.9999999999999997e-05,
+      "best": 0.0001,
+      "stretch": 3.333333333333334
+     }
+    ]
+   }
+  },
+  "muon_catalysis": {
+   "today's technology": {
+    "route": "muon_catalysis",
+    "params": {
+     "phi": 1.4460320291379984,
+     "sticking": "PSI 1987 (0.45%)"
+    },
+    "fusion_J": 4.370315511490888e-10,
+    "fuel_J": 7.530230179799999e-10,
+    "drivers_J": {
+     "accelerator": 7.530230179799999e-10
+    },
+    "electricity_in_J": 1.8825575449499997e-09,
+    "heat_J": 5.55792825423827e-10,
+    "target_gain": 0.5803694451750429,
+    "electric_gain": 0.11809313917967672,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "155 fusions per muon; section 9",
+    "requirements": [
+     {
+      "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+      "needed": 1.4460320291379984,
+      "best": 1.45,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "muon_catalysis",
+    "params": {
+     "phi": 10.0,
+     "sticking": "PSI 1987 (0.45%)"
+    },
+    "fusion_J": 5.893694147775312e-10,
+    "fuel_J": 7.530230179799999e-10,
+    "drivers_J": {
+     "accelerator": 7.530230179799999e-10
+    },
+    "electricity_in_J": 1.8825575449499997e-09,
+    "heat_J": 7.495277890036028e-10,
+    "target_gain": 0.7826711809667214,
+    "electric_gain": 0.1592573445660085,
+    "stretch": 6.8965517241379315,
+    "limiting": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+    "notes": "209 fusions per muon; section 9",
+    "requirements": [
+     {
+      "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+      "needed": 10.0,
+      "best": 1.45,
+      "stretch": 6.8965517241379315
+     }
+    ]
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "muon_catalysis",
+    "params": {
+     "phi": 10.0,
+     "sticking": "PSI 1987 (0.45%)"
+    },
+    "fusion_J": 5.893694147775312e-10,
+    "fuel_J": 7.530230179799999e-10,
+    "drivers_J": {
+     "accelerator": 7.530230179799999e-10
+    },
+    "electricity_in_J": 1.8825575449499997e-09,
+    "heat_J": 7.495277890036028e-10,
+    "target_gain": 0.7826711809667214,
+    "electric_gain": 0.1592573445660085,
+    "stretch": 6.8965517241379315,
+    "limiting": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+    "notes": "209 fusions per muon; section 9",
+    "requirements": [
+     {
+      "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+      "needed": 10.0,
+      "best": 1.45,
+      "stretch": 6.8965517241379315
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "muon_catalysis",
+    "params": {
+     "phi": 10.0,
+     "sticking": "PSI 1987 (0.45%)"
+    },
+    "fusion_J": 5.893694147775312e-10,
+    "fuel_J": 7.530230179799999e-10,
+    "drivers_J": {
+     "accelerator": 7.530230179799999e-10
+    },
+    "electricity_in_J": 1.8825575449499997e-09,
+    "heat_J": 7.495277890036028e-10,
+    "target_gain": 0.7826711809667214,
+    "electric_gain": 0.1592573445660085,
+    "stretch": 6.8965517241379315,
+    "limiting": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+    "notes": "209 fusions per muon; section 9",
+    "requirements": [
+     {
+      "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+      "needed": 10.0,
+      "best": 1.45,
+      "stretch": 6.8965517241379315
+     }
+    ]
+   }
+  },
+  "muon_squeezed": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null,
+   "\u2264 100\u00d7 today": null,
+   "unlimited": {
+    "route": "muon_squeezed",
+    "params": {
+     "rho_g_cc": 87.20099094572925,
+     "core_um": 677.9043597612737,
+     "muons": 1e+18
+    },
+    "fusion_J": 5681250107.261155,
+    "fuel_J": 724079.2220042122,
+    "drivers_J": {
+     "laser": 72407922.20042121,
+     "accelerator": 753023017.9799999
+    },
+    "electricity_in_J": 2606636766.9542117,
+    "heat_J": 7225103177.909724,
+    "target_gain": 6.882768540296489,
+    "electric_gain": 1.1087242026977273,
+    "stretch": 4551661356395085.0,
+    "limiting": "muons per second",
+    "notes": "2016 fusions per muon in a 2016 ps squeeze; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 87.20099094572925,
+      "best": 1000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 7.039262118818742,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 72407922.20042121,
+      "best": 2080000.0,
+      "stretch": 34.811501057894816
+     },
+     {
+      "name": "muons per second",
+      "needed": 4.5516613563950845e+23,
+      "best": 100000000.0,
+      "stretch": 4551661356395085.0
+     }
+    ]
+   }
+  },
+  "pycnonuclear": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null,
+   "\u2264 100\u00d7 today": null,
+   "unlimited": {
+    "route": "pycnonuclear",
+    "params": {
+     "rho_g_cc": 1000.0
+    },
+    "fusion_J": 1.4133436108430494e+111,
+    "fuel_J": 1.3544073024008394e+107,
+    "drivers_J": {
+     "laser": 1.3544073024008393e+109
+    },
+    "electricity_in_J": 1.3544073024008392e+110,
+    "heat_J": 1.7974131082751003e+111,
+    "target_gain": 104.35144644729387,
+    "electric_gain": 5.3083385037543245,
+    "stretch": 6.511573569234804e+102,
+    "limiting": "laser energy per shot (J)",
+    "notes": "cold fuel squeezed until it fuses, burnt completely (generous); section 10",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 1000.0,
+      "best": 1000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 16.82390865739974,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 1.3544073024008393e+109,
+      "best": 2080000.0,
+      "stretch": 6.511573569234804e+102
+     }
+    ]
+   }
+  },
+  "projectiles": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null,
+   "\u2264 100\u00d7 today": {
+    "route": "projectiles",
+    "params": {
+     "radius_nm": 7.426991177386,
+     "kev_per_deuteron": 176.4098887292744
+    },
+    "fusion_J": 1.2928344364436353e-11,
+    "fuel_J": 2.9101267398390783e-09,
+    "drivers_J": {
+     "accelerator": 2.9101267398390783e-09
+    },
+    "electricity_in_J": 7.275316849597696e-09,
+    "heat_J": 1.6441561309405415e-11,
+    "target_gain": 0.004442536535419503,
+    "electric_gain": 0.0009039640004305566,
+    "stretch": 51.38973942320859,
+    "limiting": "projectile speed (m/s)",
+    "notes": "whole crystals fired into a tritide target; section 16",
+    "requirements": [
+     {
+      "name": "projectile speed (m/s)",
+      "needed": 4111179.1538566872,
+      "best": 80000.0,
+      "stretch": 51.38973942320859
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "projectiles",
+    "params": {
+     "radius_nm": 7.426991177386,
+     "kev_per_deuteron": 176.4098887292744
+    },
+    "fusion_J": 1.2928344364436353e-11,
+    "fuel_J": 2.9101267398390783e-09,
+    "drivers_J": {
+     "accelerator": 2.9101267398390783e-09
+    },
+    "electricity_in_J": 7.275316849597696e-09,
+    "heat_J": 1.6441561309405415e-11,
+    "target_gain": 0.004442536535419503,
+    "electric_gain": 0.0009039640004305566,
+    "stretch": 51.38973942320859,
+    "limiting": "projectile speed (m/s)",
+    "notes": "whole crystals fired into a tritide target; section 16",
+    "requirements": [
+     {
+      "name": "projectile speed (m/s)",
+      "needed": 4111179.1538566872,
+      "best": 80000.0,
+      "stretch": 51.38973942320859
+     }
+    ]
+   }
+  },
+  "pauli_beam": {
+   "today's technology": {
+    "route": "pauli_beam",
+    "params": {
+     "rho_g_cc": 980.7961899311673,
+     "fuel_um": 46.93466850393096,
+     "drag": 1.0170364106234016,
+     "spin": false
+    },
+    "fusion_J": 13721.49891024901,
+    "fuel_J": 27114.95566367071,
+    "drivers_J": {
+     "laser": 1446130.9687291044
+    },
+    "electricity_in_J": 14461309.687291043,
+    "heat_J": 17450.251883017077,
+    "target_gain": 0.00948842062507506,
+    "electric_gain": 0.0004826741771072863,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "deuteron returns 1 of its energy in flight; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 980.7961899311673,
+      "best": 1000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 15.771739204744152,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 1446130.9687291044,
+      "best": 2080000.0,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "pauli_beam",
+    "params": {
+     "rho_g_cc": 9619.048873282312,
+     "fuel_um": 26.475644264683563,
+     "drag": 1.0358762813891793,
+     "spin": false
+    },
+    "fusion_J": 320959.90017157566,
+    "fuel_J": 217951.92166488353,
+    "drivers_J": {
+     "laser": 11624102.488793788
+    },
+    "electricity_in_J": 116241024.88793787,
+    "heat_J": 408179.24768835405,
+    "target_gain": 0.02761158553797998,
+    "electric_gain": 0.001404596176201506,
+    "stretch": 9.619048873282312,
+    "limiting": "cold squeezed density (g/cm\u00b3)",
+    "notes": "deuteron returns 2.9 of its energy in flight; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 9619.048873282312,
+      "best": 1000.0,
+      "stretch": 9.619048873282312
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 33.759606371804836,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 11624102.488793788,
+      "best": 2080000.0,
+      "stretch": 5.588510811920091
+     }
+    ]
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "pauli_beam",
+    "params": {
+     "rho_g_cc": 99681.83266864989,
+     "fuel_um": 10.659303966580312,
+     "drag": 1.4942938484157922,
+     "spin": false
+    },
+    "fusion_J": 1509656.81632431,
+    "fuel_J": 689493.1172178751,
+    "drivers_J": {
+     "laser": 36772966.25162001
+    },
+    "electricity_in_J": 367729662.51620007,
+    "heat_J": 1919898.975621081,
+    "target_gain": 0.04105344143288422,
+    "electric_gain": 0.0020883808637944747,
+    "stretch": 99.68183266864989,
+    "limiting": "cold squeezed density (g/cm\u00b3)",
+    "notes": "deuteron returns 4.4 of its energy in flight; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 99681.83266864989,
+      "best": 1000.0,
+      "stretch": 99.68183266864989
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 73.60240438660085,
+      "best": 35.0,
+      "stretch": 2.1029258396171673
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 36772966.25162001,
+      "best": 2080000.0,
+      "stretch": 17.679310697894234
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "pauli_beam",
+    "params": {
+     "rho_g_cc": 250000.0,
+     "fuel_um": 33.935878999263274,
+     "drag": 1.0,
+     "spin": true
+    },
+    "fusion_J": 367833905.5986811,
+    "fuel_J": 101344006.51879641,
+    "drivers_J": {
+     "laser": 5405013681.002475
+    },
+    "electricity_in_J": 54050136810.02474,
+    "heat_J": 467791044.24346197,
+    "target_gain": 0.0680542043568812,
+    "electric_gain": 0.003461904608217016,
+    "stretch": Infinity,
+    "limiting": "spin-polarised D-T that survives in the fuel",
+    "notes": "deuteron returns 7.3 of its energy in flight; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 250000.0,
+      "best": 1000.0,
+      "stretch": 250.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 99.99999999999997,
+      "best": 35.0,
+      "stretch": 2.8571428571428563
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 5405013681.002475,
+      "best": 2080000.0,
+      "stretch": 2598.564269712728
+     },
+     {
+      "name": "spin-polarised D-T that survives in the fuel",
+      "needed": 1.0,
+      "best": NaN,
+      "stretch": Infinity
+     }
+    ]
+   }
+  },
+  "son_fisch_pB": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": {
+    "route": "son_fisch_pB",
+    "params": {
+     "rho_g_cc": 10000.0,
+     "t_i_kev": 248.62650297945163,
+     "fuel_um": 15.602464303520202
+    },
+    "fusion_J": 3040178.728973321,
+    "fuel_J": 2335286.9045447856,
+    "drivers_J": {
+     "laser": 20445093.82258468
+    },
+    "electricity_in_J": 204450938.2258468,
+    "heat_J": 3040178.728973321,
+    "target_gain": 0.14869967119519825,
+    "electric_gain": 0.005947986847807931,
+    "stretch": 10.0,
+    "limiting": "cold squeezed density (g/cm\u00b3)",
+    "notes": "ions self-heating ratio 1; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 10000.0,
+      "best": 1000.0,
+      "stretch": 10.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 21.544346900318832,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 20445093.82258468,
+      "best": 2080000.0,
+      "stretch": 9.82937203008879
+     }
+    ]
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "son_fisch_pB",
+    "params": {
+     "rho_g_cc": 23459.866232336524,
+     "t_i_kev": 172.6506598870842,
+     "fuel_um": 25.31513309622308
+    },
+    "fusion_J": 49584029.266570054,
+    "fuel_J": 16806296.260421284,
+    "drivers_J": {
+     "laser": 197915505.9360499
+    },
+    "electricity_in_J": 1979155059.360499,
+    "heat_J": 49584029.266570054,
+    "target_gain": 0.2505313013857113,
+    "electric_gain": 0.010021252055428453,
+    "stretch": 95.15168554617784,
+    "limiting": "laser energy per shot (J)",
+    "notes": "ions self-heating ratio 0.92; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 23459.866232336524,
+      "best": 1000.0,
+      "stretch": 23.459866232336523
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 28.626956438869563,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 197915505.9360499,
+      "best": 2080000.0,
+      "stretch": 95.15168554617784
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "son_fisch_pB",
+    "params": {
+     "rho_g_cc": 14838.938455405505,
+     "t_i_kev": 153.74645148228302,
+     "fuel_um": 100.0
+    },
+    "fusion_J": 2343192445.790884,
+    "fuel_J": 578069137.0806546,
+    "drivers_J": {
+     "laser": 6327814528.409365
+    },
+    "electricity_in_J": 63278145284.09364,
+    "heat_J": 2343192445.790884,
+    "target_gain": 0.3703004307839435,
+    "electric_gain": 0.014812017231357742,
+    "stretch": 3042.218523273733,
+    "limiting": "laser energy per shot (J)",
+    "notes": "ions self-heating ratio 0.77; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 14838.938455405505,
+      "best": 1000.0,
+      "stretch": 14.838938455405504
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 24.57353359950659,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 6327814528.409365,
+      "best": 2080000.0,
+      "stretch": 3042.218523273733
+     }
+    ]
+   }
+  },
+  "opaque_pB": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null,
+   "\u2264 100\u00d7 today": {
+    "route": "opaque_pB",
+    "params": {
+     "rho_g_cc": 501.3458041462352,
+     "t_i_kev": 180.51739028560056,
+     "radius_um": 83.06115491917309
+    },
+    "fusion_J": 5244126.12100233,
+    "fuel_J": 21644841.804422863,
+    "drivers_J": {
+     "laser": 149340967.60350147
+    },
+    "electricity_in_J": 1493409676.0350146,
+    "heat_J": 5244126.12100233,
+    "target_gain": 0.03511512082153789,
+    "electric_gain": 0.001404604832861516,
+    "stretch": 99.1661808495674,
+    "limiting": "hot-spot pressure (Gbar)",
+    "notes": "7% of the X-rays trapped; section 18",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 501.3458041462352,
+      "best": 1000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "hot-spot areal density (g/cm\u00b2)",
+      "needed": 4.1642361506267855,
+      "best": 0.44,
+      "stretch": 9.46417306960633
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 59499.708509740434,
+      "best": 600.0,
+      "stretch": 99.1661808495674
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 149340967.60350147,
+      "best": 2080000.0,
+      "stretch": 71.79854211706801
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "opaque_pB",
+    "params": {
+     "rho_g_cc": 8139.145192040956,
+     "t_i_kev": 150.0,
+     "radius_um": 52.740832333318856
+    },
+    "fusion_J": 105340816.44643036,
+    "fuel_J": 126714455.55834335,
+    "drivers_J": {
+     "laser": 978507899.7149385
+    },
+    "electricity_in_J": 9785078997.149385,
+    "heat_J": 105340816.44643036,
+    "target_gain": 0.10765453858585967,
+    "electric_gain": 0.004306181543434387,
+    "stretch": 1888.4934476505573,
+    "limiting": "hot-spot pressure (Gbar)",
+    "notes": "60% of the X-rays trapped; section 18",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 8139.145192040956,
+      "best": 1000.0,
+      "stretch": 8.139145192040957
+     },
+     {
+      "name": "hot-spot areal density (g/cm\u00b2)",
+      "needed": 42.92652919099703,
+      "best": 0.44,
+      "stretch": 97.56029361590234
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 1133096.0685903344,
+      "best": 600.0,
+      "stretch": 1888.4934476505573
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 978507899.7149385,
+      "best": 2080000.0,
+      "stretch": 470.4364902475666
+     }
+    ]
+   }
+  },
+  "fibre_pinch": {
+   "today's technology": {
+    "route": "fibre_pinch",
+    "params": {
+     "current_ma": 19.352004159053287,
+     "t_kev": 9.915948902481531,
+     "alfven_times": 1.0,
+     "squeeze": 18.007165603936603,
+     "spin": false
+    },
+    "fusion_J": 618404.8086213712,
+    "fuel_J": 280875.04872901185,
+    "drivers_J": {
+     "pulsed power": 2914417.935856206
+    },
+    "electricity_in_J": 19429452.90570804,
+    "heat_J": 786453.4149437222,
+    "target_gain": 0.21218810144321132,
+    "electric_gain": 0.016190953368793535,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "1 cm of D-T fibre; fusion / plasma heat 2.2; X-rays to resupply 0 x the heat; section 19",
+    "requirements": [
+     {
+      "name": "pinch current (A)",
+      "needed": 19352004.15905329,
+      "best": 26000000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "energy into the pinch (J)",
+      "needed": 2914417.935856206,
+      "best": 3000000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "stable Alfv\u00e9n times of a dense hot pinch",
+      "needed": 1.0,
+      "best": 1.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 18.007165603936603,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 463.63680090413607,
+      "best": 600.0,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "fibre_pinch",
+    "params": {
+     "current_ma": 62.318758060745424,
+     "t_kev": 9.732612798123874,
+     "alfven_times": 9.754581866350504,
+     "squeeze": 47.78582719575406,
+     "spin": false
+    },
+    "fusion_J": 331617806.3598145,
+    "fuel_J": 2912720.7046752926,
+    "drivers_J": {
+     "pulsed power": 29435247.950942896
+    },
+    "electricity_in_J": 196234986.3396193,
+    "heat_J": 421733389.89590967,
+    "target_gain": 11.26601029189536,
+    "electric_gain": 0.8596497449563364,
+    "stretch": 9.811749316980965,
+    "limiting": "energy into the pinch (J)",
+    "notes": "1 cm of D-T fibre; fusion / plasma heat 110; X-rays to resupply 0 x the heat; section 19",
+    "requirements": [
+     {
+      "name": "pinch current (A)",
+      "needed": 62318758.060745426,
+      "best": 26000000.0,
+      "stretch": 2.3968753100286704
+     },
+     {
+      "name": "energy into the pinch (J)",
+      "needed": 29435247.950942896,
+      "best": 3000000.0,
+      "stretch": 9.811749316980965
+     },
+     {
+      "name": "stable Alfv\u00e9n times of a dense hot pinch",
+      "needed": 9.754581866350504,
+      "best": 1.0,
+      "stretch": 9.754581866350504
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 47.78582719575406,
+      "best": 35.0,
+      "stretch": 1.365309348450116
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 3204.6497125363726,
+      "best": 600.0,
+      "stretch": 5.341082854227287
+     }
+    ]
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "fibre_pinch",
+    "params": {
+     "current_ma": 99.53671203335664,
+     "t_kev": 7.120450430854254,
+     "alfven_times": 99.77375444127897,
+     "squeeze": 26.42264861473472,
+     "spin": false
+    },
+    "fusion_J": 2315365654.351842,
+    "fuel_J": 7430667.781808523,
+    "drivers_J": {
+     "pulsed power": 63034756.12957116
+    },
+    "electricity_in_J": 420231707.5304744,
+    "heat_J": 2944555411.4753103,
+    "target_gain": 36.73157154114295,
+    "electric_gain": 2.8027922298193326,
+    "stretch": 99.77375444127897,
+    "limiting": "stable Alfv\u00e9n times of a dense hot pinch",
+    "notes": "1 cm of D-T fibre; fusion / plasma heat 310; X-rays to resupply 0 x the heat; section 19",
+    "requirements": [
+     {
+      "name": "pinch current (A)",
+      "needed": 99536712.03335664,
+      "best": 26000000.0,
+      "stretch": 3.8283350782060244
+     },
+     {
+      "name": "energy into the pinch (J)",
+      "needed": 63034756.12957116,
+      "best": 3000000.0,
+      "stretch": 21.01158537652372
+     },
+     {
+      "name": "stable Alfv\u00e9n times of a dense hot pinch",
+      "needed": 99.77375444127897,
+      "best": 1.0,
+      "stretch": 99.77375444127897
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 26.42264861473472,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 716.8248775073092,
+      "best": 600.0,
+      "stretch": 1.1947081291788486
+     }
+    ]
+   },
+   "unlimited": {
+    "route": "fibre_pinch",
+    "params": {
+     "current_ma": 100.0,
+     "t_kev": 6.1911416394746785,
+     "alfven_times": 2207.1033375623265,
+     "squeeze": 1.0,
+     "spin": false
+    },
+    "fusion_J": 2340967854.265378,
+    "fuel_J": 7499999.999999999,
+    "drivers_J": {
+     "pulsed power": 30134995.771545038
+    },
+    "electricity_in_J": 200899971.81030026,
+    "heat_J": 2977114889.1368113,
+    "target_gain": 77.68270060538174,
+    "electric_gain": 5.927556609013268,
+    "stretch": 2207.1033375623265,
+    "limiting": "stable Alfv\u00e9n times of a dense hot pinch",
+    "notes": "1 cm of D-T fibre; fusion / plasma heat 310; X-rays to resupply 0 x the heat; section 19",
+    "requirements": [
+     {
+      "name": "pinch current (A)",
+      "needed": 100000000.0,
+      "best": 26000000.0,
+      "stretch": 3.8461538461538463
+     },
+     {
+      "name": "energy into the pinch (J)",
+      "needed": 30134995.771545038,
+      "best": 3000000.0,
+      "stretch": 10.044998590515013
+     },
+     {
+      "name": "stable Alfv\u00e9n times of a dense hot pinch",
+      "needed": 2207.1033375623265,
+      "best": 1.0,
+      "stretch": 2207.1033375623265
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 1.0,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 0.8927372225295701,
+      "best": 600.0,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "channelling": {
+   "today's technology": {
+    "route": "channelling",
+    "params": {
+     "ion_kev": 176.23719651152197,
+     "source": "aligned beam",
+     "values": "generous"
+    },
+    "fusion_J": 0.02665531824355753,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "accelerator": 1.0
+    },
+    "electricity_in_J": 2.5,
+    "heat_J": 0.03389877595840716,
+    "target_gain": 0.02665531824355753,
+    "electric_gain": 0.0054238041533451456,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of deuterons into a titanium tritide crystal; section 20",
+    "requirements": []
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "channelling",
+    "params": {
+     "ion_kev": 175.77558923986828,
+     "source": "aligned beam",
+     "values": "generous"
+    },
+    "fusion_J": 0.026655380654884448,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "accelerator": 1.0
+    },
+    "electricity_in_J": 2.5,
+    "heat_J": 0.03389885532971945,
+    "target_gain": 0.026655380654884448,
+    "electric_gain": 0.005423816852755113,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of deuterons into a titanium tritide crystal; section 20",
+    "requirements": []
+   },
+   "\u2264 100\u00d7 today": {
+    "route": "channelling",
+    "params": {
+     "ion_kev": 175.77558923986828,
+     "source": "aligned beam",
+     "values": "generous"
+    },
+    "fusion_J": 0.026655380654884448,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "accelerator": 1.0
+    },
+    "electricity_in_J": 2.5,
+    "heat_J": 0.03389885532971945,
+    "target_gain": 0.026655380654884448,
+    "electric_gain": 0.005423816852755113,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of deuterons into a titanium tritide crystal; section 20",
+    "requirements": []
+   },
+   "unlimited": {
+    "route": "channelling",
+    "params": {
+     "ion_kev": 175.77558923986828,
+     "source": "aligned beam",
+     "values": "generous"
+    },
+    "fusion_J": 0.026655380654884448,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "accelerator": 1.0
+    },
+    "electricity_in_J": 2.5,
+    "heat_J": 0.03389885532971945,
+    "target_gain": 0.026655380654884448,
+    "electric_gain": 0.005423816852755113,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of deuterons into a titanium tritide crystal; section 20",
+    "requirements": []
+   }
+  }
+ },
+ "uranium": {
+  "cold_catcher": {
+   "today's technology": {
+    "route": "cold_catcher",
+    "params": {
+     "ion_kev": 185.58410762580365,
+     "catcher": "tritide"
+    },
+    "fusion_J": 0.004121164161648692,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "laser": 6.666666666666667
+    },
+    "electricity_in_J": 66.66666666666667,
+    "heat_J": 1.1298339066634329,
+    "target_gain": 0.0006181746242473038,
+    "electric_gain": 0.006779003439980597,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of crystal ions; section 1",
+    "requirements": [
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "cold_catcher",
+    "params": {
+     "ion_kev": 187.86878538105455,
+     "catcher": "tritide"
+    },
+    "fusion_J": 0.004121272670599033,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "laser": 6.666666666666667
+    },
+    "electricity_in_J": 66.66666666666667,
+    "heat_J": 1.1298636548332373,
+    "target_gain": 0.000618190900589855,
+    "electric_gain": 0.006779181928999424,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of crystal ions; section 1",
+    "requirements": [
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "crystal_ball": {
+   "today's technology": {
+    "route": "crystal_ball",
+    "params": {
+     "fuel": "DT",
+     "crystal_nm": 23.410075906472795,
+     "fill": 0.5556553537556282,
+     "ball_mm": 0.06892372612221816,
+     "bound": "generous"
+    },
+    "fusion_J": 27.25043083659086,
+    "fuel_J": 449.58399395878376,
+    "drivers_J": {
+     "laser": 2997.226626391892
+    },
+    "electricity_in_J": 29972.26626391892,
+    "heat_J": 7470.816381662906,
+    "target_gain": 0.009091882007399405,
+    "electric_gain": 0.09970305636389454,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "untamped ball of exploding crystals; section 3",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 2997.226626391892,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 2997.226626391892,
+      "best": 4400.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 251630984436181.47,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 5.358594903915969e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "crystal_ball",
+    "params": {
+     "fuel": "DT",
+     "crystal_nm": 26.00432027423163,
+     "fill": 0.3340358520691034,
+     "ball_mm": 0.165908340532408,
+     "bound": "generous"
+    },
+    "fusion_J": 439.6512932378657,
+    "fuel_J": 4635.219701642614,
+    "drivers_J": {
+     "laser": 30901.46467761743
+    },
+    "electricity_in_J": 309014.6467761743,
+    "heat_J": 120532.18913993657,
+    "target_gain": 0.014227522799471514,
+    "electric_gain": 0.1560213283058269,
+    "stretch": 7.023060154003962,
+    "limiting": "picosecond laser energy (J)",
+    "notes": "untamped ball of exploding crystals; section 3",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 30901.46467761743,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 30901.46467761743,
+      "best": 4400.0,
+      "stretch": 7.023060154003962
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 1195118234724163.2,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 6.612052534083723e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "tamped_ball": {
+   "today's technology": {
+    "route": "tamped_ball",
+    "params": {
+     "radius_mm": 0.07426279881670711,
+     "t_i_kev": 32.13457635276304,
+     "b_tesla": 79.71355294228933,
+     "fill": 1.0,
+     "ions_first": true,
+     "fuel": "DT",
+     "spin": false
+    },
+    "fusion_J": 64.10789226416753,
+    "fuel_J": 614.7537702561101,
+    "drivers_J": {
+     "laser": 4098.358468374067
+    },
+    "electricity_in_J": 40983.58468374067,
+    "heat_J": 17575.439250594274,
+    "target_gain": 0.015642334061032225,
+    "electric_gain": 0.1715363786376348,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "gold tamper, 1% entrance hole; burn died out; section 12",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 4098.358468374067,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 4098.358468374067,
+      "best": 4400.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 557127936936572.44,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 3.215603095292507e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 79.71355294228933,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "tamped_ball",
+    "params": {
+     "radius_mm": 0.16106792859217803,
+     "t_i_kev": 30.721064233939405,
+     "b_tesla": 3432.598483782491,
+     "fill": 1.0,
+     "ions_first": true,
+     "fuel": "DT",
+     "spin": false
+    },
+    "fusion_J": 4740.949360151094,
+    "fuel_J": 6086.5705948835075,
+    "drivers_J": {
+     "laser": 40577.13729922339
+    },
+    "electricity_in_J": 405771.37299223384,
+    "heat_J": 1299750.5381416604,
+    "target_gain": 0.1168379455945955,
+    "electric_gain": 1.2812639083502195,
+    "stretch": 9.222076658914407,
+    "limiting": "picosecond laser energy (J)",
+    "notes": "gold tamper, 1% entrance hole; burn died out; section 12",
+    "requirements": [
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 40577.13729922339,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "picosecond laser energy (J)",
+      "needed": 40577.13729922339,
+      "best": 4400.0,
+      "stretch": 9.222076658914407
+     },
+     {
+      "name": "laser peak power (W)",
+      "needed": 2505498432312424.5,
+      "best": 1.02e+16,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser intensity (W/cm\u00b2)",
+      "needed": 3.0741575104923233e+18,
+      "best": 1.1e+23,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 3432.598483782491,
+      "best": 800.0,
+      "stretch": 4.290748104728113
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "fast_ignition": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null
+  },
+  "muon_catalysis": {
+   "today's technology": {
+    "route": "muon_catalysis",
+    "params": {
+     "phi": 1.437292956802497,
+     "sticking": "PSI 1987 (0.45%)"
+    },
+    "fusion_J": 4.362300792657188e-10,
+    "fuel_J": 7.530230179799999e-10,
+    "drivers_J": {
+     "accelerator": 7.530230179799999e-10
+    },
+    "electricity_in_J": 1.8825575449499997e-09,
+    "heat_J": 1.1959424942288928e-07,
+    "target_gain": 0.5793051060190898,
+    "electric_gain": 25.411015932809782,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "155 fusions per muon; section 9",
+    "requirements": [
+     {
+      "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+      "needed": 1.437292956802497,
+      "best": 1.45,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "muon_catalysis",
+    "params": {
+     "phi": 10.0,
+     "sticking": "PSI 1987 (0.45%)"
+    },
+    "fusion_J": 5.893694147775312e-10,
+    "fuel_J": 7.530230179799999e-10,
+    "drivers_J": {
+     "accelerator": 7.530230179799999e-10
+    },
+    "electricity_in_J": 1.8825575449499997e-09,
+    "heat_J": 1.615780207356862e-07,
+    "target_gain": 0.7826711809667214,
+    "electric_gain": 34.33159770741089,
+    "stretch": 6.8965517241379315,
+    "limiting": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+    "notes": "209 fusions per muon; section 9",
+    "requirements": [
+     {
+      "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
+      "needed": 10.0,
+      "best": 1.45,
+      "stretch": 6.8965517241379315
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "muon_squeezed": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null
+  },
+  "pycnonuclear": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null
+  },
+  "projectiles": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null
+  },
+  "pauli_beam": {
+   "today's technology": {
+    "route": "pauli_beam",
+    "params": {
+     "rho_g_cc": 963.4221991670274,
+     "fuel_um": 10.0,
+     "drag": 1.3602530684836676,
+     "spin": false
+    },
+    "fusion_J": 102.93047099968469,
+    "fuel_J": 254.5632693416424,
+    "drivers_J": {
+     "laser": 13576.70769822093
+    },
+    "electricity_in_J": 135767.07698220928,
+    "heat_J": 28218.807017325125,
+    "target_gain": 0.007581401418340364,
+    "electric_gain": 0.08313888063163613,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "deuteron returns 0.81 of its energy in flight; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 963.4221991670274,
+      "best": 1000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 15.678056076513922,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 13576.70769822093,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "pauli_beam",
+    "params": {
+     "rho_g_cc": 9670.323231395216,
+     "fuel_um": 10.0,
+     "drag": 1.1858105114125943,
+     "spin": false
+    },
+    "fusion_J": 16713.876184782694,
+    "fuel_J": 11848.474465649984,
+    "drivers_J": {
+     "laser": 631918.6381679992
+    },
+    "electricity_in_J": 6319186.381679992,
+    "heat_J": 4582177.094781719,
+    "target_gain": 0.026449411641406934,
+    "electric_gain": 0.2900485485325104,
+    "stretch": 9.670323231395216,
+    "limiting": "cold squeezed density (g/cm\u00b3)",
+    "notes": "deuteron returns 2.8 of its energy in flight; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 9670.323231395216,
+      "best": 1000.0,
+      "stretch": 9.670323231395216
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 33.819485317645764,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 631918.6381679992,
+      "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "son_fisch_pB": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": {
+    "route": "son_fisch_pB",
+    "params": {
+     "rho_g_cc": 10000.0,
+     "t_i_kev": 204.97072206411156,
+     "fuel_um": 14.8425446724001
+    },
+    "fusion_J": 2255662.766727044,
+    "fuel_J": 1665308.6801067442,
+    "drivers_J": {
+     "laser": 15300179.501796048
+    },
+    "electricity_in_J": 153001795.01796046,
+    "heat_J": 2255662.766727044,
+    "target_gain": 0.1474272093645867,
+    "electric_gain": 0.005897088374583468,
+    "stretch": 10.0,
+    "limiting": "cold squeezed density (g/cm\u00b3)",
+    "notes": "ions self-heating ratio 0.93; section 17",
+    "requirements": [
+     {
+      "name": "cold squeezed density (g/cm\u00b3)",
+      "needed": 10000.0,
+      "best": 1000.0,
+      "stretch": 10.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 21.544346900318832,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 15300179.501796048,
+      "best": 2080000.0,
+      "stretch": 7.355855529709639
+     }
+    ]
+   }
+  },
+  "opaque_pB": {
+   "today's technology": null,
+   "\u2264 10\u00d7 today": null
+  },
+  "fibre_pinch": {
+   "today's technology": {
+    "route": "fibre_pinch",
+    "params": {
+     "current_ma": 4.0163928191933325,
+     "t_kev": 6.431446848798816,
+     "alfven_times": 1.0,
+     "squeeze": 18.940911054446932,
+     "spin": false
+    },
+    "fusion_J": 4000.321905041433,
+    "fuel_J": 12098.558458550824,
+    "drivers_J": {
+     "pulsed power": 148225.88858805262
+    },
+    "electricity_in_J": 988172.5905870175,
+    "heat_J": 1096704.5108137939,
+    "target_gain": 0.026988010955084057,
+    "electric_gain": 0.4439323742676585,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "1 cm of D-T fibre; fusion / plasma heat 0.33; X-rays to resupply 0 x the heat; section 19",
+    "requirements": [
+     {
+      "name": "pinch current (A)",
+      "needed": 4016392.8191933325,
+      "best": 26000000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "energy into the pinch (J)",
+      "needed": 148225.88858805262,
+      "best": 3000000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "stable Alfv\u00e9n times of a dense hot pinch",
+      "needed": 1.0,
+      "best": 1.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 18.940911054446932,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 332.70805645953607,
+      "best": 600.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "fibre_pinch",
+    "params": {
+     "current_ma": 47.72722991978464,
+     "t_kev": 13.329056837063284,
+     "alfven_times": 9.59835652996394,
+     "squeeze": 42.21979450731127,
+     "spin": false
+    },
+    "fusion_J": 142133931.97592643,
+    "fuel_J": 1708416.35686199,
+    "drivers_J": {
+     "pulsed power": 17948554.55226136
+    },
+    "electricity_in_J": 119657030.34840907,
+    "heat_J": 38966595198.564384,
+    "target_gain": 7.918962586211089,
+    "electric_gain": 130.26094692507127,
+    "stretch": 9.59835652996394,
+    "limiting": "stable Alfv\u00e9n times of a dense hot pinch",
+    "notes": "1 cm of D-T fibre; fusion / plasma heat 83; X-rays to resupply 0 x the heat; section 19",
+    "requirements": [
+     {
+      "name": "pinch current (A)",
+      "needed": 47727229.91978464,
+      "best": 26000000.0,
+      "stretch": 1.8356626892224863
+     },
+     {
+      "name": "energy into the pinch (J)",
+      "needed": 17948554.55226136,
+      "best": 3000000.0,
+      "stretch": 5.982851517420453
+     },
+     {
+      "name": "stable Alfv\u00e9n times of a dense hot pinch",
+      "needed": 9.59835652996394,
+      "best": 1.0,
+      "stretch": 9.59835652996394
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 42.21979450731127,
+      "best": 35.0,
+      "stretch": 1.2062798430660362
+     },
+     {
+      "name": "hot-spot pressure (Gbar)",
+      "needed": 3425.9778704332493,
+      "best": 600.0,
+      "stretch": 5.709963117388749
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   }
+  },
+  "channelling": {
+   "today's technology": {
+    "route": "channelling",
+    "params": {
+     "ion_kev": 176.30958280050876,
+     "source": "aligned beam",
+     "values": "generous"
+    },
+    "fusion_J": 0.026655281723640685,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "accelerator": 1.0
+    },
+    "electricity_in_J": 2.5,
+    "heat_J": 7.307653833179819,
+    "target_gain": 0.026655281723640685,
+    "electric_gain": 1.1692246133087711,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of deuterons into a titanium tritide crystal; section 20",
+    "requirements": [
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   },
+   "\u2264 10\u00d7 today": {
+    "route": "channelling",
+    "params": {
+     "ion_kev": 176.30958280050876,
+     "source": "aligned beam",
+     "values": "generous"
+    },
+    "fusion_J": 0.026655281723640685,
+    "fuel_J": 1.0,
+    "drivers_J": {
+     "accelerator": 1.0
+    },
+    "electricity_in_J": 2.5,
+    "heat_J": 7.307653833179819,
+    "target_gain": 0.026655281723640685,
+    "electric_gain": 1.1692246133087711,
+    "stretch": 1.0,
+    "limiting": "",
+    "notes": "per joule of deuterons into a titanium tritide crystal; section 20",
+    "requirements": [
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
+      "stretch": 1.0
+     }
+    ]
+   }
+  }
+ },
+ "settings": {
+  "samples": 300,
+  "refine": 100,
+  "seed": 1,
+  "uranium_k_eff": 0.95
+ }
+}
