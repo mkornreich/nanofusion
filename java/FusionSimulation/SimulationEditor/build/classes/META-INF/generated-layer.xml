@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN"
+                            "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="xml">
+        <folder name="entities">
+            <folder name="org_nanofusion_editor">
+                <file name="SimulationEditor" url="nbres:/org/netbeans/modules/settings/resources/properties-1_0.dtd">
+                    <!--org.nanofusion.editor.SimulationEditorTopComponent-->
+                    <attr name="hint.originalPublicID" stringvalue="-//org.nanofusion.editor//SimulationEditor//EN"/>
+                </file>
+                <file name="SimulationVisualizer" url="nbres:/org/netbeans/modules/settings/resources/properties-1_0.dtd">
+                    <!--org.nanofusion.editor.SimulationVisualizerTopComponent-->
+                    <attr name="hint.originalPublicID" stringvalue="-//org.nanofusion.editor//SimulationVisualizer//EN"/>
+                </file>
+            </folder>
+        </folder>
+        <folder name="memory">
+            <folder name="org">
+                <folder name="nanofusion">
+                    <folder name="editor">
+                        <file name="SimulationEditorTopComponent">
+                            <!--org.nanofusion.editor.SimulationEditorTopComponent-->
+                            <attr name="settings.providerPath" stringvalue="xml/lookups//org_nanofusion_editor/SimulationEditor.instance"/>
+                        </file>
+                        <file name="SimulationVisualizerTopComponent">
+                            <!--org.nanofusion.editor.SimulationVisualizerTopComponent-->
+                            <attr name="settings.providerPath" stringvalue="xml/lookups//org_nanofusion_editor/SimulationVisualizer.instance"/>
+                        </file>
+                    </folder>
+                </folder>
+            </folder>
+        </folder>
+        <folder name="lookups">
+            <folder name="org_nanofusion_editor">
+                <file name="SimulationEditor.instance">
+                    <!--org.nanofusion.editor.SimulationEditorTopComponent-->
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr name="settings.instanceClass" stringvalue="org.nanofusion.editor.SimulationEditorTopComponent"/>
+                    <attr name="settings.instanceOf" stringvalue="org.nanofusion.editor.SimulationEditorTopComponent"/>
+                    <attr boolvalue="true" name="xmlproperties.preventStoring"/>
+                </file>
+                <file name="SimulationVisualizer.instance">
+                    <!--org.nanofusion.editor.SimulationVisualizerTopComponent-->
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr name="settings.instanceClass" stringvalue="org.nanofusion.editor.SimulationVisualizerTopComponent"/>
+                    <attr name="settings.instanceOf" stringvalue="org.nanofusion.editor.SimulationVisualizerTopComponent"/>
+                    <attr boolvalue="true" name="xmlproperties.preventStoring"/>
+                </file>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="Window">
+            <file name="org-nanofusion-editor-SimulationEditorTopComponent.shadow">
+                <!--org.nanofusion.editor.SimulationEditorTopComponent-->
+                <attr name="originalFile" stringvalue="Actions/Window/org-nanofusion-editor-SimulationEditorTopComponent.instance"/>
+            </file>
+            <file name="org-nanofusion-editor-SimulationVisualizerTopComponent.shadow">
+                <!--org.nanofusion.editor.SimulationVisualizerTopComponent-->
+                <attr name="originalFile" stringvalue="Actions/Window/org-nanofusion-editor-SimulationVisualizerTopComponent.instance"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Windows2">
+        <folder name="Components">
+            <file name="SimulationEditorTopComponent.settings">
+                <!--org.nanofusion.editor.SimulationEditorTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
+<settings version="1.0">
+  <instance class="org.nanofusion.editor.SimulationEditorTopComponent"/>
+</settings>
+]]></file>
+            <file name="SimulationVisualizerTopComponent.settings">
+                <!--org.nanofusion.editor.SimulationVisualizerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
+<settings version="1.0">
+  <instance class="org.nanofusion.editor.SimulationVisualizerTopComponent"/>
+</settings>
+]]></file>
+        </folder>
+        <folder name="Modes">
+            <folder name="explorer">
+                <file name="SimulationEditorTopComponent.wstcref">
+                    <!--org.nanofusion.editor.SimulationEditorTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
+<tc-ref version="2.0">
+  <tc-id id="SimulationEditorTopComponent"/>
+  <state opened="true"/>
+</tc-ref>
+]]></file>
+            </folder>
+            <folder name="editor">
+                <file name="SimulationVisualizerTopComponent.wstcref">
+                    <!--org.nanofusion.editor.SimulationVisualizerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
+<tc-ref version="2.0">
+  <tc-id id="SimulationVisualizerTopComponent"/>
+  <state opened="false"/>
+</tc-ref>
+]]></file>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="Actions">
+        <folder name="Window">
+            <file name="org-nanofusion-editor-SimulationEditorTopComponent.instance">
+                <!--org.nanofusion.editor.SimulationEditorTopComponent-->
+                <attr
+                    methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
+                <attr name="component" newvalue="org.nanofusion.editor.SimulationEditorTopComponent"/>
+                <attr name="preferredID" stringvalue="SimulationEditorTopComponent"/>
+                <attr
+                    bundlevalue="org.nanofusion.editor.Bundle#CTL_SimulationEditorAction" name="displayName"/>
+            </file>
+            <file name="org-nanofusion-editor-SimulationVisualizerTopComponent.instance">
+                <!--org.nanofusion.editor.SimulationVisualizerTopComponent-->
+                <attr
+                    methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
+                <attr name="component" newvalue="org.nanofusion.editor.SimulationVisualizerTopComponent"/>
+                <attr name="preferredID" stringvalue="SimulationVisualizerTopComponent"/>
+                <attr
+                    bundlevalue="org.nanofusion.editor.Bundle#CTL_SimulationVisualizerAction" name="displayName"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>

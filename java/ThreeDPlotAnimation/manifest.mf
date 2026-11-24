@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.nanofusion.visualization.threed
+OpenIDE-Module-Localizing-Bundle: org/nanofusion/visualization/threed/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

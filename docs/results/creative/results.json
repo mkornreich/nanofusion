@@ -1,0 +1,220 @@
+{
+ "cold_squeeze": {
+  "rows": [
+   {
+    "rho_g_cc": 0.21,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 3.000993298608248e-177,
+    "electron_energy_keV": 0.002980630864013456,
+    "pressure_Gbar": 0.0001600489172883518,
+    "sound_speed_m_s": 12821.097235004732,
+    "convergence_from_solid": 1.0,
+    "ignition_radius_m": 1e+30,
+    "mass_kg": 8.796459430051421e+92,
+    "compression_J": 1.0058643245780025e+101,
+    "yield_if_burnt_J": 2.9680215827704035e+107,
+    "gain_ideal": 2950717.616926715
+   },
+   {
+    "rho_g_cc": 20,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 2.2531124435281685e-73,
+    "electron_energy_keV": 0.062156328143880835,
+    "pressure_Gbar": 0.31791849570994035,
+    "sound_speed_m_s": 51421.87971919542,
+    "convergence_from_solid": 4.566711403962942,
+    "ignition_radius_m": 1e+30,
+    "mass_kg": 8.377580409572783e+94,
+    "compression_J": 1.9976861684051846e+104,
+    "yield_if_burnt_J": 2.826687221686099e+109,
+    "gain_ideal": 141498.0624280305
+   },
+   {
+    "rho_g_cc": 1000.0,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 4.1601289245102736e-29,
+    "electron_energy_keV": 0.842824924754848,
+    "pressure_Gbar": 215.34949105348875,
+    "sound_speed_m_s": 189376.79209439873,
+    "convergence_from_solid": 16.82390865739974,
+    "ignition_radius_m": 1e+30,
+    "mass_kg": 4.1887902047863907e+96,
+    "compression_J": 1.3544073024008394e+107,
+    "yield_if_burnt_J": 1.4133436108430494e+111,
+    "gain_ideal": 10435.144644729386
+   },
+   {
+    "rho_g_cc": 10000.0,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 1.599507099281307e-13,
+    "electron_energy_keV": 3.8981999235946363,
+    "pressure_Gbar": 9925.229972898436,
+    "sound_speed_m_s": 405991.40347009734,
+    "convergence_from_solid": 36.24601243342973,
+    "ignition_radius_m": 1.0152912823019491e+17,
+    "mass_kg": 4.3838994126337254e+58,
+    "compression_J": 6.556136639676019e+69,
+    "yield_if_burnt_J": 1.47917559068596e+73,
+    "gain_ideal": 2256.169558356025
+   },
+   {
+    "rho_g_cc": 100000.0,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 0.010180142377777144,
+    "electron_energy_keV": 17.807848681766437,
+    "pressure_Gbar": 446442.8096892725,
+    "sound_speed_m_s": 855901.000481682,
+    "convergence_from_solid": 78.08966656190799,
+    "ignition_radius_m": 3363021.728851576,
+    "mass_kg": 1.593226896076897e+28,
+    "compression_J": 1.0884597974948928e+40,
+    "yield_if_burnt_J": 5.375721733737236e+42,
+    "gain_ideal": 493.8833520640398
+   },
+   {
+    "rho_g_cc": 1000000.0,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 358251.52524127526,
+    "electron_energy_keV": 77.46989432698759,
+    "pressure_Gbar": 18333051.446016196,
+    "sound_speed_m_s": 1699480.5702998585,
+    "convergence_from_solid": 168.23908657399738,
+    "ignition_radius_m": 0.18975277988338415,
+    "mass_kg": 28618907.46492699,
+    "compression_J": 8.5056855068055e+19,
+    "yield_if_burnt_J": 9.65633226716488e+21,
+    "gain_ideal": 113.52797207748552
+   },
+   {
+    "rho_g_cc": 3000000.0,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 210371570.16876078,
+    "electron_energy_keV": 149.91757325161382,
+    "pressure_Gbar": 100631889.94257791,
+    "sound_speed_m_s": 2260057.1615807787,
+    "convergence_from_solid": 242.64275032025859,
+    "ignition_radius_m": 0.00042972672776416573,
+    "mass_kg": 0.9972107766556526,
+    "compression_J": 5735388136298.727,
+    "yield_if_burnt_J": 336469818478764.0,
+    "gain_ideal": 58.66557074825999
+   },
+   {
+    "rho_g_cc": 10000000.0,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 76107380635.4786,
+    "electron_energy_keV": 294.39622327265494,
+    "pressure_Gbar": 606139224.2105061,
+    "sound_speed_m_s": 2975527.214789228,
+    "convergence_from_solid": 362.4601243342973,
+    "ignition_radius_m": 1.563857376219904e-06,
+    "mass_kg": 1.6020646508634423e-07,
+    "compression_J": 1809404.1375035227,
+    "yield_if_burnt_J": 54055412.84612543,
+    "gain_ideal": 29.874703901532442
+   },
+   {
+    "rho_g_cc": 30000000.0,
+    "fuel": "DT",
+    "rate_per_nucleus_s": 7186056038339.941,
+    "electron_energy_keV": 517.9864646056748,
+    "pressure_Gbar": 2934515511.062038,
+    "sound_speed_m_s": 3717326.2744996254,
+    "convergence_from_solid": 522.7579585747101,
+    "ignition_radius_m": 2.0691885811446407e-08,
+    "mass_kg": 1.1132945505887197e-12,
+    "compression_J": 22.123396431785316,
+    "yield_if_burnt_J": 375.6377529395007,
+    "gain_ideal": 16.97920814725406
+   }
+  ],
+  "nif_enhancement_needed": 6.06958087215825e+36
+ },
+ "muon_factory": {
+  "rows": [
+   {
+    "e_max": 0.5,
+    "e_max_GeV_u": 0.5,
+    "crystal_radius_m": 8.873675219518329e-07,
+    "strip_intensity_W_cm2": 2.110115855371747e+23,
+    "beam_GeV_per_muon": 40.557688638558126,
+    "laser_GeV_per_muon": 270.38459092372085,
+    "gains_150": [
+     0.009758322362180605,
+     0.03252774120726868,
+     0.06505548241453736
+    ]
+   },
+   {
+    "e_max": 1.0,
+    "e_max_GeV_u": 1.0,
+    "crystal_radius_m": 1.2549271843536873e-06,
+    "strip_intensity_W_cm2": 4.2202317107434933e+23,
+    "beam_GeV_per_muon": 7.857900705671105,
+    "laser_GeV_per_muon": 52.38600470447404,
+    "gains_150": [
+     0.05036650561318065,
+     0.16788835204393554,
+     0.3357767040878711
+    ]
+   },
+   {
+    "e_max": 2.0,
+    "e_max_GeV_u": 2.0,
+    "crystal_radius_m": 1.7747350439036659e-06,
+    "strip_intensity_W_cm2": 8.440463421486988e+23,
+    "beam_GeV_per_muon": 5.059433572504697,
+    "laser_GeV_per_muon": 33.72955715003132,
+    "gains_150": [
+     0.07822515985797787,
+     0.2607505328599262,
+     0.5215010657198524
+    ]
+   },
+   {
+    "e_max": 4.0,
+    "e_max_GeV_u": 4.0,
+    "crystal_radius_m": 2.5098543687073745e-06,
+    "strip_intensity_W_cm2": 1.6880926842973973e+24,
+    "beam_GeV_per_muon": 4.759776083737731,
+    "laser_GeV_per_muon": 31.73184055825154,
+    "gains_150": [
+     0.08314991987799727,
+     0.2771663995933243,
+     0.5543327991866486
+    ]
+   }
+  ],
+  "lwfa_GeV_per_muon": 445822076.7471973
+ },
+ "boosters": {
+  "hot": {
+   "spin 1, 10 keV": 2.1921629149657385,
+   "spin 1, 30 keV": 3.133558140546311,
+   "spin 1.5, 10 keV": 3.2834828222831987,
+   "spin 1.5, 30 keV": 4.692494064937587
+  },
+  "burn": {
+   "spin 1, generous": {
+    "radius_m": 0.001584893192461114,
+    "energy_J": 11194170.59494305
+   },
+   "spin 1, conservative": {
+    "radius_m": 0.004216965034285822,
+    "energy_J": 78083317.48422621
+   },
+   "spin 1.5, generous": {
+    "radius_m": 0.0005308844442309885,
+    "energy_J": 420718.80195654236
+   },
+   "spin 1.5, conservative": {
+    "radius_m": 0.002818382931264455,
+    "energy_J": 23310857.884486206
+   }
+  },
+  "xray": {
+   "fluence_J_cm2": 176239429.73999998,
+   "muons_per_cm2_needed": 1.3896784789337371e+17
+  }
+ }
+}

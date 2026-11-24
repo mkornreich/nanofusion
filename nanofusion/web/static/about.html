@@ -1,0 +1,126 @@
+<p>
+  NanoFusion tests <strong>“guided nuclear laser fusion”</strong>. Philipp
+  Kornreich and Carlos Hartmann of Syracuse University proposed it in a talk at
+  Photonics North 2011. The code's author tag, <code>pkornrei</code>, matches.
+  The full write-up, with sources, is in <code>docs/what-it-simulates.md</code>.
+</p>
+
+<h3>The idea</h3>
+<p>
+  A very short, intense laser pulse (about 6 fs) hits a
+  <strong>lithium-deuteride (LiD) nanocrystal</strong> and strips its electrons
+  in under a femtosecond. The heavy nuclei stay on their lattice sites for a
+  moment. The laser field, aligned with a crystal axis, pushes the light
+  deuterium nuclei faster than the lithium ones, “guiding” each deuteron into
+  the lithium nucleus ahead of it. The model puts bare deuterium (+1) and
+  lithium-7 (+3) nuclei on LiD's lattice sites, 2.04 Å apart. It applies the
+  laser field for about 20 fs and reports “fusion” if a pair comes within
+  2 fm, roughly the range of the nuclear force.
+</p>
+
+<table>
+  <tr><th>Setting</th><th>Meaning</th></tr>
+  <tr><td>Lattice, 2.04 Å spacing</td><td>Rock-salt LiD: Li–D distance a/2, with a ≈ 4.07 Å</td></tr>
+  <tr><td>Field E₀·sin(ωt), λ = 3.6 µm</td><td>Laser field. 3.6 µm is the edge of the DF chemical-laser band; one period is 12 fs.</td></tr>
+  <tr><td>E₀ = 1e12 / 3e12 V/m</td><td>Peak intensity 1.3×10¹⁷ / 1.2×10¹⁸ W/cm²</td></tr>
+  <tr><td>Lorentz force</td><td>Meant to be the laser's magnetic force q·v×B (see below)</td></tr>
+  <tr><td>Time step 2e-17 s × 1000</td><td>20 fs, about 1.7 laser cycles</td></tr>
+  <tr><td>Threshold 2e-15 m</td><td>Nuclear-force range. The target reactions are D + ⁷Li → 2α + n (15.1 MeV) and D + ⁶Li → 2α (22.4 MeV).</td></tr>
+</table>
+
+<h3>What it shows</h3>
+<p>
+  The guiding effect is real: deuterons close in on their lithium neighbours,
+  to 1.3 Å at 1e12 V/m and 0.56 Å at 3e12 V/m. But fusion needs 2 fm, about
+  28,000 times closer, and a 2.2 MeV Coulomb barrier, while the pair gains only
+  about 5–80 eV. For the field's push to supply 2.2 MeV it would need about
+  10¹⁷ V/m (about 10²⁷ W/cm²). That is about 10,000 times the most intense
+  laser ever built. At realistic strengths the model cannot produce fusion, and
+  a “YES” at the default threshold would be a numerical artifact.
+</p>
+
+<h3>With improved physics</h3>
+<p>
+  The “Improved physics” model has every ion interacting, a real laser pulse
+  and measured fusion cross sections. It shows that the guiding fails:
+  lithium-6 has the same charge-to-mass ratio as deuterium, and lithium-7
+  collisions reach only about 90 keV even at 10²² W/cm². Instead, the stripped
+  crystal Coulomb-explodes in about 2 fs. A 30 nm crystal would fire deuterons
+  at about 300 keV, giving about 0.5 fusion reactions per pulse if they hit
+  surrounding LiD. That is detectable, but the laser delivers about 10⁷ times
+  more energy than the fusion releases. Details are in
+  <code>docs/improved-model.md</code>.
+</p>
+<p>
+  Further experiments (<code>docs/experiments.md</code>) found the crystal
+  never fuses by itself. Pre-expanded crystals and longer wavelengths don't
+  help, and colliding crystals help only a little. But a tritium catcher raises
+  the yield about 60-fold (about 33 reactions per 30 nm crystal), and larger
+  crystals give far more. The best fusion-to-laser energy ratio is still only
+  about 10⁻³.
+</p>
+<p>
+  <strong>Net energy?</strong> No (<code>docs/energy.md</code>). Ions stopping
+  in cold matter return at most about 0.4% of their energy as fusion, even
+  with a perfect laser. Firing them into an already-hot D-T plasma returns 2–3
+  times their energy, but that needs a fusion plasma to begin with. Exploding a
+  whole ball of crystals only breaks even as ordinary, uncompressed
+  inertial-confinement fusion: a few mm of D-T heated to 10–30 keV with
+  11–78 MJ delivered at once. That is far beyond any laser, and light can't
+  reach crystals deeper than about 10 nm.
+</p>
+<p>
+  The published routes to beat this limit don't work for these crystals either:
+  proton–boron fuel and its “avalanche” (at most about 0.02 extra fusions per
+  fusion), electron screening, and using the crystals as a fast-ignition spark
+  (their explosion is isotropic and wastes over 97% of the ions). Shaped
+  crystals don't fix this. A disk still sprays its ions in every direction. A
+  lithium disk with a deuterium layer on one face does make a beam, but the
+  ignitor would then need megajoules of laser in femtoseconds, tens of
+  thousands of times the power of any laser today. The same
+  model reproduces the Texas Petawatt cluster-fusion record, whose measured
+  fusion-to-laser energy ratio is about 2×10⁻⁷. For comparison, the National
+  Ignition Facility reached a target gain of 4.1 by compressing D-T fuel.
+</p>
+<p>
+  The strongest form of the original “guided head-on collisions” idea is a
+  hollow shell whose ions are pulled onto its centre all at once
+  (<code>docs/implosion.md</code>). The focus works, shrinking to under 1% of
+  the cavity radius. But the ions' own repulsion limits how many fit into it,
+  and deuterium and tritium arrive at different times. The best case returns
+  about 3×10⁻⁴ of the energy the laser must supply, almost all of it from ions
+  springing back into the cold wall.
+</p>
+<p>
+  Two routes need no hot plasma at all. Muon-catalysed fusion in solid D-T
+  comes closest: each muon catalyses up to about 150 fusions, returning about
+  half the energy it cost to make. Sticking to the alpha particle stops it
+  short of breakeven, and laser-made muons are about 10⁸ times too expensive.
+  NASA's “lattice confinement fusion” (gamma rays on erbium deuteride) returned
+  about 4×10⁻¹⁴ of its beam energy.
+</p>
+<p>
+  More speculative ideas fare no better. A cold crystal squeezed until its
+  nuclei tunnel together would ignite, but only at white-dwarf density
+  (~10⁷ g/cm³, ten thousand times what laser fusion reaches). Micrometre
+  crystals could make muons ten million times more cheaply than today's laser
+  muon sources, yet no more cheaply than an accelerator. Spin-polarised fuel
+  cuts breakeven energies severalfold without changing the verdict. Across
+  every fusion regime in dense matter (screened, pycnonuclear, four published
+  rate models), hot fuel always ignites more cheaply than cold or warm fuel at
+  the same density.
+</p>
+
+<h3>Known limitations of the original model</h3>
+<ul>
+  <li>No electrons, and Coulomb forces only between near neighbours (≤ 2 lattice
+    steps). The long-range field of the whole stripped crystal is left out.
+    That field is what gives real exploding clusters keV energies: about
+    14 eV × R² (R in Å) at the surface.</li>
+  <li>Positions and velocities are rounded to the “Precision” digits each step.
+    At 6 digits a position between 1 and 10 nm moves in 10 fm steps, which is
+    coarser than the 2 fm threshold.</li>
+  <li>The “Lorentz” term omits the field amplitude E₀·sin(ωt), so it is
+    negligibly small. It is kept as written to match the original results.</li>
+  <li>Explicit Euler integration, with distances checked once per step.</li>
+</ul>

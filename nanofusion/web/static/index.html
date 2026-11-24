@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>NanoFusion Simulation</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script type="module" src="/static/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>NanoFusion Simulation</h1>
+    <nav class="actions" aria-label="File">
+      <button type="button" id="open-btn">Open…</button>
+      <input type="file" id="open-input" accept=".json,application/json" hidden>
+      <a id="save-link" class="button" href="/api/download" download aria-disabled="true">Save</a>
+      <button type="button" id="about-btn">About the model</button>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <form id="params" class="panel" novalidate aria-label="Simulation parameters">
+      <fieldset>
+        <legend>Model</legend>
+        <span class="segmented wide" role="radiogroup" aria-label="Model">
+          <label><input type="radio" name="model" value="original" checked> Original (2013)</label>
+          <label><input type="radio" name="model" value="improved"> Improved physics</label>
+        </span>
+        <p class="hint" data-model="original">Exact port of the Java code: neighbour-only forces, a field switched on abruptly, and “fusion” meaning a pair came closer than the threshold.</p>
+        <p class="hint" data-model="improved" hidden>Every ion feels every other ion, a real laser pulse, and fusion yields from measured cross sections (with tunnelling). Electrons are assumed stripped at t = 0.</p>
+        <label class="row"><span>Name</span><input name="name" autocomplete="off"></label>
+      </fieldset>
+
+      <div data-model="improved" hidden>
+      <fieldset>
+        <legend>Crystal (fully stripped LiD)</legend>
+        <label class="row"><span>Shape</span><select name="impShape"><option value="sphere">Sphere</option><option value="cube">Cube</option></select></label>
+        <label class="row"><span id="imp-size-label">Radius (nm)</span><input name="impSize" inputmode="decimal" spellcheck="false"></label>
+        <label class="row"><span>Lithium</span><select name="impLithium"><option value="Li6">Li-6 (enriched)</option><option value="Li7">Li-7 (as original)</option></select></label>
+        <label class="row" title="Pre-expanded: the crystal was stretched by a weak prepulse, so its density falls off outwards. Such profiles make the explosion form shock shells, where inner ions overtake outer ones."><span>Density profile</span><select name="impProfile"><option value="uniform">Uniform (solid)</option><option value="expanded">Pre-expanded (by a prepulse)</option></select></label>
+        <label class="row" title="Pre-expanded profile: density at the centre, as a fraction of solid LiD"><span>Core density (× solid)</span><input name="impCore" inputmode="decimal" spellcheck="false"></label>
+        <label class="row" title="Pre-expanded profile: edge radius over the original edge radius (3 makes the edge 63 times thinner than the centre)"><span>Edge expansion (×)</span><input name="impExpansion" inputmode="decimal" spellcheck="false"></label>
+        <label class="row"><span>Geometry</span><select name="impGeometry"><option value="single">One crystal</option><option value="pair">Two crystals (along x)</option></select></label>
+        <label class="row"><span>Gap between crystals (nm)</span><input name="impGap" inputmode="decimal" spellcheck="false"></label>
+        <p class="row"><span>Ions</span><output id="imp-ions" class="value">–</output></p>
+      </fieldset>
+      <fieldset>
+        <legend>Laser pulse</legend>
+        <label class="row"><span>Peak intensity (W/cm²)</span><input name="impIntensity" inputmode="decimal" spellcheck="false"></label>
+        <label class="row"><span>Wavelength (µm)</span><input name="impWavelength" inputmode="decimal" spellcheck="false"></label>
+        <label class="row"><span>Duration, FWHM (fs)</span><input name="impFwhm" inputmode="decimal" spellcheck="false"></label>
+        <label class="row" title="Carrier phase when the electrons are stripped: 0° = field crest (little net push), 90° = field zero (largest push, like the original)"><span>Phase at stripping (°)</span><input name="impPhase" inputmode="decimal" spellcheck="false"></label>
+        <label class="row" title="Time of the pulse peak after the electrons are stripped"><span>Pulse peak at (fs)</span><input name="impCentre" inputmode="decimal" spellcheck="false"></label>
+      </fieldset>
+      <fieldset>
+        <legend>Run</legend>
+        <label class="row"><span>Simulated time (fs)</span><input name="impDuration" inputmode="decimal" spellcheck="false"></label>
+        <label class="row"><span>Frames to keep</span><input name="impFrames" type="number" min="2" max="2000" step="1"></label>
+        <label class="row" title="Yields are also extrapolated to a crystal of this radius (15 nm = the proposal's 30 nm crystal)"><span>Extrapolate to radius (nm)</span><input name="impTarget" inputmode="decimal" spellcheck="false"></label>
+      </fieldset>
+      </div>
+
+      <div data-model="original">
+      <fieldset>
+        <legend>Simulation</legend>
+        <label class="row"><span>Iterations</span><input name="iterations" type="number" min="0" step="1" inputmode="numeric"></label>
+        <label class="row"><span>Time step (s)</span><input name="timeStep" inputmode="decimal" autocomplete="off" spellcheck="false"></label>
+        <label class="row" title="Significant digits kept by the engine's rounded operations"><span>Precision (digits)</span><input name="precision" type="number" min="1" max="200" step="1"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Lattice size</legend>
+        <label class="row"><span>X</span><input name="sizeX" type="number" min="1" max="1000" step="1"></label>
+        <label class="row"><span>Y</span><input name="sizeY" type="number" min="1" max="1000" step="1"></label>
+        <label class="row"><span>Z</span><input name="sizeZ" type="number" min="1" max="1000" step="1"></label>
+        <p class="row"><span>Particles</span><output id="particle-count" class="value">–</output></p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Laser electric field (V/m)</legend>
+        <p class="hint">Peak field, e.g. <code>1e12</code>. Leave all empty for no field.</p>
+        <label class="row"><span>X</span><input name="fieldX" inputmode="decimal" placeholder="0" spellcheck="false"></label>
+        <label class="row"><span>Y</span><input name="fieldY" inputmode="decimal" placeholder="0" spellcheck="false"></label>
+        <label class="row"><span>Z</span><input name="fieldZ" inputmode="decimal" placeholder="0" spellcheck="false"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Options</legend>
+        <label class="row" title="Particles closer than this count as fusing. Empty = 2.0E-15 m"><span>Fusion threshold (m)</span><input name="threshold" inputmode="decimal" placeholder="2.0E-15" spellcheck="false"></label>
+        <label class="check"><input name="lorentz" type="checkbox"> Include “Lorentz” force</label>
+        <label class="check"><input name="logTime" type="checkbox"> Use log time (shrinking step)</label>
+        <label class="row"><span>Transition step</span><input name="transition" type="number" step="1"></label>
+        <label class="row"><span>Damping factor</span><input name="damping" inputmode="decimal" spellcheck="false"></label>
+      </fieldset>
+      </div>
+
+      <div class="form-footer">
+      <div id="form-errors" class="errors" role="alert" hidden></div>
+      <button type="submit" id="run-btn" class="primary">Run</button>
+
+      <div id="job" class="job" hidden>
+        <label for="job-progress" id="job-label">Working…</label>
+        <div class="job-row">
+          <progress id="job-progress" max="1000"></progress>
+          <button type="button" id="cancel-btn">Cancel</button>
+        </div>
+      </div>
+
+      <div class="fusion">
+        <span>Fusion?</span> <strong id="fusion" class="unknown">–</strong>
+      </div>
+      <p id="fusion-detail" class="hint"></p>
+      <button type="button" id="goto-fusion" class="link" hidden>Show first close approach</button>
+      </div>
+    </form>
+
+    <section class="viewer panel" aria-label="Visualizer">
+      <div class="canvas-wrap">
+        <canvas id="plot" role="img" aria-label="Particle positions"></canvas>
+        <p id="empty-hint" class="empty-hint">Run a simulation, or open a saved one.</p>
+      </div>
+      <input type="range" id="frame-slider" min="1" max="1" value="1" aria-label="Frame" disabled>
+      <div class="controls">
+        <button type="button" id="restart" disabled>« Restart</button>
+        <button type="button" id="prev" disabled>‹ Previous</button>
+        <button type="button" id="next" disabled>Next ›</button>
+        <button type="button" id="last" disabled>Last »</button>
+        <span id="frame-label" class="value">Frame – of –</span>
+        <span class="spacer"></span>
+        <button type="button" id="animate" class="primary" disabled>Animate</button>
+      </div>
+      <div class="controls">
+        <label class="inline">Frames per second
+          <input type="range" id="fps" min="1" max="51" value="25">
+          <output id="fps-out" class="value">25</output>
+        </label>
+        <span class="segmented" role="radiogroup" aria-label="View">
+          <label><input type="radio" name="view" value="3d" checked> 3D</label>
+          <label><input type="radio" name="view" value="2d"> 2D slice</label>
+        </span>
+        <label class="inline"><input type="checkbox" id="autofit"> Fit each frame</label>
+        <label class="inline">Z slice
+          <input type="range" id="zslice" min="0" max="0" value="0" disabled>
+          <output id="z-out" class="value">0</output>
+        </label>
+      </div>
+      <div class="info">
+        <span id="sim-time">Simulation time: –</span>
+        <span id="comp-time">Computing time: –</span>
+        <span class="hint push" id="controls-hint">3D: drag to rotate · 2D: drag to pan · wheel to zoom · double-click to reset · ←/→ step · Space animate</span>
+      </div>
+      <details id="report" class="report" open hidden>
+        <summary>Improved-model report</summary>
+        <div id="report-body"></div>
+      </details>
+    </section>
+  </main>
+
+  <footer id="status" class="status" role="status" aria-live="polite"></footer>
+
+  <dialog id="about" aria-labelledby="about-title">
+    <article>
+      <h2 id="about-title">What this simulator models</h2>
+      <div id="about-body"></div>
+      <form method="dialog"><button class="primary">Close</button></form>
+    </article>
+  </dialog>
+</body>
+</html>

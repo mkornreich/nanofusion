@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nanofusion"
+version = "2.0.0"
+description = "Lattice deuterium/lithium fusion simulation with a browser UI (Python port of the NetBeans application)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.22",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+nanofusion = "nanofusion.__main__:main"
+
+[tool.setuptools]
+packages = ["nanofusion", "nanofusion.web"]
+
+[tool.setuptools.package-data]
+"nanofusion.web" = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

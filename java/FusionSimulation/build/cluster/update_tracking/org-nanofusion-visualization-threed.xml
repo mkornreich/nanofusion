@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module codename="org.nanofusion.visualization.threed">
+    <module_version install_time="1404931562262" last="true" origin="installer" specification_version="1.0">
+        <file crc="2190868244" name="config/Modules/org-nanofusion-visualization-threed.xml"/>
+        <file crc="2373595183" name="modules/ext/jcommon-1.0.21.jar"/>
+        <file crc="1242721174" name="modules/ext/jfreechart-1.0.17-swt.jar"/>
+        <file crc="1915941052" name="modules/ext/jfreechart-1.0.17.jar"/>
+        <file crc="710969689" name="modules/ext/jfreesvg-1.4.jar"/>
+        <file crc="1855248977" name="modules/ext/jmathplot.jar"/>
+        <file crc="2727948609" name="modules/ext/swtgraphics2d.jar"/>
+        <file crc="4036869710" name="modules/org-nanofusion-visualization-threed.jar"/>
+    </module_version>
+</module>

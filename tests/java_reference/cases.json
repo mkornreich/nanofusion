@@ -1,0 +1,9 @@
+{
+  "basic_4x4x4": "x=4 y=4 z=4 iterations=4 precision=6 ex=1.0E+12",
+  "coulomb_only": "x=2 y=2 z=2 iterations=40 precision=6",
+  "lorentz_logtime": "x=4 y=3 z=2 iterations=30 precision=8 timeStep=3.0E-17 ex=5e11 ey=2e11 ez=-1e11 lorentz=true logTime=true transition=10 damping=4.5",
+  "fusion_threshold": "x=3 y=3 z=1 iterations=5 precision=6 threshold=2.1e-10 ex=1e12",
+  "low_precision": "x=5 y=1 z=1 iterations=50 precision=4 ex=3e12 lorentz=true",
+  "high_precision": "x=3 y=3 z=3 iterations=50 precision=15 ex=1e12 ey=1e12",
+  "long_run": "x=3 y=3 z=3 iterations=200 precision=6 ex=3.0E+12 lorentz=true name=Long run"
+}

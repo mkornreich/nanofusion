@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.apisupport.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/nb-module-project/3">
+            <code-name-base>org.nanofusion.visualization.threed</code-name-base>
+            <suite-component/>
+            <module-dependencies/>
+            <friend-packages>
+                <friend>org.nanofusion.editor</friend>
+                <package>org.nanofusion.visualization.threed</package>
+            </friend-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/swtgraphics2d.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/swtgraphics2d.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/jfreechart-1.0.17-swt.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jfreechart-1.0.17-swt.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/jfreechart-1.0.17.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jfreechart-1.0.17.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/jcommon-1.0.21.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jcommon-1.0.21.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/jmathplot.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jmathplot.jar</binary-origin>
+            </class-path-extension>
+        </data>
+    </configuration>
+</project>
