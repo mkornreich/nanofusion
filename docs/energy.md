@@ -1392,9 +1392,9 @@ record 4.1, so it is if anything conservative.
 
 | Best electricity out / in | Today's technology | ≤ 10× today | ≤ 100× today | Unlimited |
 |---|---|---|---|---|
-| Ordinary inertial fusion (yardstick) | – | **1.5** | **3.1** | **7.1** |
+| Ordinary inertial fusion (yardstick) | – | **1.5** | **3.0** | **7.1** |
 | Dense D-T Z-pinch | 0.01 | 0.89 | **2.8** | **5.7** |
-| Dense D-T Z-pinch followed in time (section 24) | 2×10⁻⁷ | 0.002 | **3.7** | **5.5** |
+| Dense D-T Z-pinch followed in time, best with a liner (sections 24–25) | 0.003 | **22** | **22** | **22** |
 | Muon catalysis | 0.12 | 0.16 | 0.16 | 0.16 |
 | Best route using exploding crystals | 0.005 | 0.005 | 0.012 | 1.3 (tamped ball) |
 
@@ -1402,12 +1402,17 @@ Untested theory is left out of this table; section 22 adds it.
 
 * **Nothing reaches breakeven with today's technology.** The best is muon
   catalysis, which returns about a tenth of the electricity it costs.
-* **Ordinary inertial fusion leads beyond that.** Within ten times today's
-  best on every demand it reaches 1.5. That needs a 19 MJ laser, a cold shell
-  of 6 g/cm² (about ten times NIF's) and a low adiabat, as power-plant studies
-  of inertial fusion also find.
-* **The dense Z-pinch is second**, if it stays stable for many Alfvén times,
-  which no dense, hot pinch has done.
+* **Ordinary inertial fusion is the most proven route beyond that.** Within
+  ten times today's best on every demand it reaches 1.5. That needs a 19 MJ
+  laser, a cold shell of 6 g/cm² (about ten times NIF's) and a low adiabat, as
+  power-plant studies of inertial fusion also find.
+* **On paper the time-dependent pinch leads** (section 25): 22 within ten
+  times today.
+  * The design is a thin beryllium liner lined with D-T ice, at 34 MA.
+  * But it converges ~170×, five times NIF's best, in a 0-D model with no
+    liner instability. Its convergence is the number to doubt.
+* **The static Z-pinch** gives 0.89, if it stays stable for many Alfvén
+  times, which no dense, hot pinch has done.
 * **Exploding crystals never help.**
   * As the spark for inertial fusion they do worse than an ordinary hot spot
     at every budget (0.64 against 7.1 even with no limits).
@@ -1451,17 +1456,16 @@ held (`python -m nanofusion sim search --theory`). Numbers:
 |---|---|---|---|---|
 | Ordinary inertial fusion (with spin-polarised fuel) | – | **1.8** | **3.5** | **8.2** |
 | Dense D-T Z-pinch (with spin-polarised fuel) | 0.018 | **1.2** | **3.4** | **7.1** |
-| Dense D-T Z-pinch followed in time (sheared-flow stabilised) | 0.001 | **4.2** | **5.9** | **6.0** |
+| Dense D-T Z-pinch followed in time (liner ice burnt as an ICF shell) | 0.22 | **37** | **37** | **37** |
 | Antimatter spark (theoretical factory) | – | 0.16 | 0.39 | 0.39 |
 | Light-assisted tunnelling | – | 0.032 | 0.091 | 0.85 |
 | Muon catalysis (stuck muons freed) | 0.14 | 0.2 | 0.2 | 0.2 |
 | Proton–boron (channelling, direct conversion) | – | 0.009 | 0.015 | 0.023 |
 
-* **Theory moves the numbers, and changes one leader.**
+* **Theory moves the numbers, not the verdict.**
   * Spin-polarised fuel lifts inertial fusion and the pinch by 15–35%.
-  * Sheared-flow stabilisation, proven only below 0.6 MA, would make the
-    time-dependent pinch (section 24) the best route within ten times today:
-    4.2, at 68 MA on a 1.5 mm fibre.
+  * If a liner's ice burns like an ICF shell, the time-dependent pinch goes
+    from 22 to 37 within ten times today.
   * Every other untested idea stays far below breakeven.
 * **Proton–boron gets about 50% better and stays at 2% of breakeven.**
   Channelling feeds the ions, but the X-rays still win. Direct conversion
@@ -1579,13 +1583,72 @@ possible. Proposal: [zpinch_experiment.md](zpinch_experiment.md). Code:
 * On a 60 MA machine (studied, not built), a ~1 mm fibre ignites and
   returns 1.9× its electricity, but only if it stays stable through its whole
   burn.
-* As the simulator route `dynamic_pinch` (section 21's table) it reaches:
-  * 0.002 within ten times today, against the static route's 0.89, because
-    ten Alfvén times aren't enough;
-  * 3.7 within a hundred, needing 46 Alfvén times and 71 MA;
-  * with sheared-flow stabilisation, 4.2 within ten times today, the best of
-    any route at that budget, if that stabilisation works at fibre
-    density.
+* As the simulator route `dynamic_pinch`, a bare fibre reaches about 2
+  within ten times today, against the static route's 0.89. With a liner
+  (section 25) the route reaches 22.
+
+## 25. Making the dense pinch testable, and what energy takes
+
+**Idea.** The fibre pinch of section 24 stalls on Z. Find a version Z can
+test now, and what it would take to make energy. Code:
+`tools/zpinch_energy.py`; numbers:
+[results/zpinch_experiment/energy.md](results/zpinch_experiment/energy.md);
+plan: [zpinch_experiment.md](zpinch_experiment.md).
+
+**Why the fibre stalls.** A dense, cold column is too resistive to take the
+current. Keeping the current rising, a longer fibre, or a stiffer driver
+doesn't help: the column cools, its resistance climbs, and the current
+falls.
+
+**A gas column instead.** A centimetre-wide column of gas, as in Z's gas
+puffs, conducts easily and heats by its own implosion.
+* The model puts Z's deuterium gas-puff record (3.9×10¹³ neutrons) between
+  one and two Alfvén times of stability.
+* It converges too far: 0.1–0.2 mm against 2.5 mm measured.
+
+| D-T gas column | Fusion per cm | Electricity out ÷ in |
+|---|---|---|
+| Z, 26 MA, held 3–30 Alfvén times | 3–9 MJ | 0.04–0.12 |
+| 60 MA, held 3 Alfvén times | 341 MJ | 0.85 |
+| 80 MA, held 10 Alfvén times | 2.4 GJ | 3.3 |
+
+* **The energy designs need deep convergence**, 160–260×, where the best
+  implosion of any kind converges about 35×. They also need a few Alfvén
+  times of stability and fifty-fifty D-T: 20% tritium costs a factor of ~8.
+* **A more efficient driver** scales gain directly: at the 24% of the Z 300
+  design, 60 MA gives 1.4.
+* **Possible now:** deuterium gas columns on Z with a 1% tritium trace. They
+  measure how many Alfvén times the pinch holds and how far it converges,
+  the two numbers energy turns on.
+* **The literature points the same way:**
+  * the only driver above 60 MA being built is Pacific Fusion's (target
+    2030);
+  * sheared-flow stabilisation is doubtful at these densities;
+  * a fuel column inside a MagLIF liner is the likelier winner. Pacific
+    Fusion's own designs give 109–816 MJ at 56–65 MA, the same class as the
+    gas column here.
+
+**With a liner.** The model now has one: a MagLIF-like beryllium tube
+imploding onto preheated, magnetised gas, optionally lined with frozen D-T
+ice.
+* The field's leak is calibrated to MagLIF's measured field × radius.
+* As a 0-D model it overshoots Z's MagLIF yields 9–12× (too hot, burn too
+  brief) and undershoots published high-current designs. So read its
+  numbers as a comparison between designs.
+
+| Liner, 50/50 D-T | Electricity out ÷ in | Convergence | Compressed field |
+|---|---|---|---|
+| 60 MA, 600 µm of ice | 3.5 | 131 | 63 kT |
+| 80 MA, 600 µm of ice, 10 T | 4.2 | 43 | 3.7 kT |
+
+* **Thick ice burns at 60–80 MA**, by the model's own ablation; below ~50 MA
+  the field keeps the heat from it.
+* **At 80 MA the liner needs no more convergence than MagLIF already shows**,
+  and no stabilisation of the fuel. It is the most credible energy design
+  here, on a driver that doesn't exist yet.
+* **The simulator's search goes further on paper**: 22 at 34 MA, with a thinner
+  liner and ~170× convergence. That is where a 0-D model with no liner
+  instability is least trustworthy.
 
 ## Why everything hits the same wall
 
@@ -1693,13 +1756,12 @@ net energy:
 * **Untested theory** (section 22) mostly moves the numbers, not the
   verdict: proton–boron stays at 2% of breakeven, antimatter sparks need more
   antiprotons than have ever existed at once, and light-assisted tunnelling
-  costs more light than it returns. The exception is a dense pinch kept
-  stable by sheared flow, which would lead within ten times today's
-  technology (section 24).
+  costs more light than it returns.
 * **Every route in one simulator** (section 21): with today's technology
-  the best is a tenth of breakeven. Within ten times today's technology only
-  ordinary inertial fusion crosses net electricity (1.5), with the dense
-  Z-pinch next. Combining exploding crystals with any other idea stays below
+  the best is a tenth of breakeven. Within ten times today's technology
+  ordinary inertial fusion crosses net electricity (1.5). The time-dependent
+  pinch with a liner goes further on paper (22), but only by converging ~170×
+  in a model with no liner instability. Combining exploding crystals with any other idea stays below
   ~1% of breakeven.
 * **A practical experiment** (section 23): a one-change-at-a-time shot
   campaign on NIF. It is mostly not novel, and its static model's claim that
@@ -1712,6 +1774,13 @@ net energy:
   reaches 1% of breakeven even if fully stabilised. D-T pinches are untried
   and, for want of tritium on Z, not possible yet. Preheated deuterium fibres
   with a tritium trace are.
+* **Making the pinch testable and energy-producing** (section 25): a gas
+  column instead of a fibre takes the current and heats itself. Z can test it
+  now with deuterium. In the model it makes net electricity at 60–80 MA, but
+  only with 160–260× convergence and a few Alfvén times of stability. A
+  MagLIF-like liner with thick D-T ice does better: 4.2× the electricity in
+  at 80 MA, converging no further than MagLIF already does, on a driver
+  beyond the ~60 MA being built for ~2030.
 * **Three more walls attacked, none breached.**
   * An opaque proton–boron ball traps its X-rays, but the trapped radiation
     and pairs soak up its energy. The balls that do repay their heat need

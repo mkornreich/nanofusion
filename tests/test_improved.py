@@ -687,3 +687,49 @@ def test_zpinch_dynamics_and_route():
     flow = S.evaluate("dynamic_pinch", {"stability": "sheared flow"})
     assert not plain.untested and flow.untested and flow.fusion_J > plain.fusion_J
     assert "stability" in S.THEORY_OFF
+
+
+def test_zpinch_gas_column_and_tritium_share():
+    from nanofusion.improved import simulator as S
+    from nanofusion.improved import zpinch as Z
+
+    # a pre-formed D-T column (7 mg/cm, 1 cm wide) at 60 MA, held 10 Alfvén times, ignites; deuterium alone doesn't
+    ion = 2.5 * Z.P.AMU
+    gas = {"ions_per_m": 7e-4 / ion, "radius_um": 1e4, "wall_mm": 20, "start_kev": 0.005, "current_ma": 60,
+           "growth_limit": 10}
+    dt = Z.run(Z.Pinch(**gas))
+    dd = Z.run(Z.Pinch(**gas, tritium=0.0))
+    assert dt["burn_up"] > 0.05 and dt["peak_T_keV"] > 20 and dd["yield_J"] < 0.01 * dt["yield_J"]
+    # an explicit 1% tritium trace matches the post-hoc estimate from a deuterium run
+    fibre = {"fuel": "DD", "radius_um": 120, "current_ma": 26, "start_kev": 0.1, "rise_stabilised": True}
+    trace = Z.run(Z.Pinch(**fibre))["trace_dt_neutrons"]
+    explicit = Z.run(Z.Pinch(**fibre, tritium=0.01))["neutrons_dt"]
+    assert explicit == pytest.approx(trace, rel=0.1)
+    # the simulator route takes the same load
+    o = S.evaluate("dynamic_pinch", {"load": "gas column", "current_ma": 60, "column_mm": 10, "line_mg_cm": 7,
+                                     "alfven_times": 10, "preheat_kev": 0.005})
+    assert o.electric_gain > 0.3 and not o.untested
+
+
+def test_zpinch_liner():
+    from nanofusion.improved import simulator as S
+    from nanofusion.improved import zpinch as Z
+
+    # a Z MagLIF shot (z3289-like): the leaking field ends near the measured B R (0.25-0.34 T m), convergence in the
+    # tens, and the clean 0-D yield above the clean 2-D 5.2e13 (the model's known overshoot at this scale)
+    shot = Z.Pinch(fuel="DD", current_ma=20, liner_um=2790, liner_aspect=6, length_mm=10, fill_mg_cc=1.03,
+                   bz_tesla=15.9, start_kev=0.046, hold_ns=100)
+    r = Z.run(shot)
+    peak = max(r["history"], key=lambda h: h["fusion"])
+    assert 0.15 < peak["b"] * peak["a"] < 0.6
+    assert 20 < shot.fuel_radius_um / r["min_radius_um"] < 100 and r["neutrons_dd"] > 5.2e13
+    # without the field the fuel loses its heat to the liner: a much lower yield
+    cold = Z.run(Z.Pinch(fuel="DD", current_ma=20, liner_um=2790, liner_aspect=6, length_mm=10, fill_mg_cc=1.03,
+                         bz_tesla=0.0, start_kev=0.046, hold_ns=100))
+    assert cold["neutrons_dd"] < r["neutrons_dd"]
+    # the route: frozen fuel burnt as an ICF shell is an untested idea, and adds yield over ablation alone
+    kw = {"load": "liner", "current_ma": 60, "liner_mm": 4.5, "fill_mg_cc": 1, "bz_tesla": 15, "ice_um": 400,
+          "preheat_kev": 0.2}
+    low = S.evaluate("dynamic_pinch", kw)
+    high = S.evaluate("dynamic_pinch", {**kw, "ice_burn": "as an ICF shell"})
+    assert not low.untested and high.untested and high.fusion_J > 3 * low.fusion_J

@@ -122,14 +122,14 @@ electricity out per electricity in (section 21). It also runs ordinary
 inertial fusion as a yardstick and combines the ideas (crystal sparks, muon
 factories, pulsed-power drivers, magnetised liners, spin-polarised fuel,
 blankets). With today's technology the best is a tenth of breakeven. Within
-ten times today's technology only ordinary inertial fusion (1.5) crosses net
-electricity, with the dense Z-pinch next; no combination with exploding
-crystals gets above ~1% of breakeven. Untested theory (alpha channelling,
+ten times today's technology ordinary inertial fusion crosses net electricity
+(1.5). A pinch followed in time, with its fuel inside a thin liner, goes
+further on paper (22), but only by converging ~170×. No combination with
+exploding crystals gets above ~1% of breakeven. Untested theory (alpha channelling,
 direct conversion, freeing stuck muons with fields, antimatter sparks,
 light-assisted tunnelling, spin-polarised fuel) is kept apart and searched
-separately (`python3 -m nanofusion sim search --theory`, section 22). It mostly
-moves the numbers, not the verdict. The exception is a dense pinch kept stable
-by sheared flow, which would lead within ten times today's technology.
+separately (`python3 -m nanofusion sim search --theory`, section 22): it moves
+the numbers, not the verdict.
 `python3 tools/icf_experiment.py` and `python3 tools/icf_dynamics.py` design a
 practical experiment with ordinary inertial fusion: a one-change-at-a-time shot
 campaign on NIF (section 23; [docs/icf_experiment.md](docs/icf_experiment.md)).
@@ -144,7 +144,12 @@ with a time-dependent pinch model (`nanofusion/improved/zpinch.py`; section 24;
 fibre on Z can't take the current cold and collapses radiatively when
 preheated. On Z it reaches 1% of breakeven even if fully stabilised; at
 ~70 MA, with tens of Alfvén times of stability, a millimetre-thick fibre
-ignites (`dynamic_pinch` route: 3.7 within a hundred times today). D-T pinches
+ignites.
+`python3 tools/zpinch_energy.py` (section 25) finds a version Z can test now:
+a deuterium gas column, not a fibre, with a tritium trace. It also finds what
+energy would take: a 60–80 MA driver, 160–260× convergence and a few Alfvén
+times of stability. With a MagLIF-like liner and thick D-T ice (`liner_um` in
+`zpinch.py`), 80 MA gives 4.2× the electricity in at MagLIF's own convergence. D-T pinches
 have never been tried and need tritium Z doesn't yet handle; preheated
 deuterium fibres with a tritium trace are possible today.
 

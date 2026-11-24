@@ -1512,55 +1512,77 @@
    "today's technology": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 0.5,
-     "radius_um": 1160.999059537864,
-     "preheat_kev": 0.5,
-     "alfven_times": 1.0,
+     "current_ma": 24.862111480258857,
+     "load": "liner",
+     "radius_um": 418.4022233067671,
+     "column_mm": 19.05288395566116,
+     "line_mg_cm": 0.152580312171264,
+     "liner_mm": 2.3373780450614343,
+     "liner_aspect": 4.2821452082418805,
+     "fill_mg_cc": 1.2867687177441536,
+     "bz_tesla": 44.32317360605324,
+     "ice_um": 559.5483146426294,
+     "ice_burn": "ablation",
+     "tritium": 0.45735569815190574,
+     "preheat_kev": 0.24127466395952257,
+     "alfven_times": 8644.676632612653,
      "stability": "breaks"
     },
-    "fusion_J": 5.1923901150022695,
-    "fuel_J": 15.411336003099708,
+    "fusion_J": 228796.40329333072,
+    "fuel_J": 1316196.8402473351,
     "drivers_J": {
-     "pulsed power": 2475.826050080882,
-     "laser": 1225733.7929251073
+     "pulsed power": 5688943.812089473,
+     "laser": 3466.4973903029563
     },
-    "electricity_in_J": 12273843.436251612,
-    "heat_J": 6.603397775588446,
-    "target_gain": 4.227609061826737e-06,
-    "electric_gain": 2.152022814983894e-07,
+    "electricity_in_J": 37960957.05449952,
+    "heat_J": 290885.48437339364,
+    "target_gain": 0.04019323816350832,
+    "electric_gain": 0.0030651016933611786,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
-    "notes": "blown apart at 37 ns; 0.3 MA reached; 0.0% burnt; hottest 0.5 keV; narrowest 1.2e+03 \u00b5m; zpinch.py",
+    "notes": "end of pulse at 250 ns; 24.6 MA reached; 0.0% burnt; hottest 9.4 keV; narrowest 52 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 500000.0,
+      "needed": 24862111.480258856,
       "best": 26000000.0,
       "stretch": 1.0
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 15.411336003099708,
+      "needed": 1316196.8402473351,
       "best": 3000000.0,
       "stretch": 1.0
      },
      {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 1.0,
-      "best": 1.0,
-      "stretch": 1.0
-     },
-     {
       "name": "radial squeeze of the fuel",
-      "needed": 1.0,
+      "needed": 23.900874550338642,
       "best": 35.0,
       "stretch": 1.0
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 1225733.7929251073,
+      "needed": 3466.4973903029563,
       "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 44.32317360605324,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 6467.560545602316,
+      "best": 7100.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 4.2821452082418805,
+      "best": 9.0,
       "stretch": 1.0
      }
     ]
@@ -1568,168 +1590,234 @@
    "\u2264 10\u00d7 today": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 3.5791873610536817,
-     "radius_um": 62.569745554380525,
-     "preheat_kev": 0.4455674007501241,
-     "alfven_times": 9.31899053796694,
+     "current_ma": 34.059784769233225,
+     "load": "liner",
+     "radius_um": 43.21744160288109,
+     "column_mm": 3.424528397372859,
+     "line_mg_cm": 0.05,
+     "liner_mm": 4.49477134864024,
+     "liner_aspect": 12.0,
+     "fill_mg_cc": 0.3,
+     "bz_tesla": 4.283130346354182,
+     "ice_um": 583.2840456535048,
+     "ice_burn": "ablation",
+     "tritium": 0.5,
+     "preheat_kev": 0.017459454747059722,
+     "alfven_times": 1.1718324275009082,
      "stability": "breaks"
     },
-    "fusion_J": 4093.3875214954082,
-    "fuel_J": 80152.1970787859,
+    "fusion_J": 2912925695.567115,
+    "fuel_J": 2585181.689731219,
     "drivers_J": {
-     "pulsed power": 164283.6552192919,
-     "laser": 3172.521733695103
+     "pulsed power": 9918206.943057163,
+     "laser": 473.8354808553523
     },
-    "electricity_in_J": 1126949.5854655637,
-    "heat_J": 5205.746381799448,
-    "target_gain": 0.02444452988225462,
-    "electric_gain": 0.0018477299957118697,
-    "stretch": 9.31899053796694,
-    "limiting": "stable Alfv\u00e9n times of a dense hot pinch",
+    "electricity_in_J": 66126117.97518964,
+    "heat_J": 3702304099.823499,
+    "target_gain": 293.6807586216592,
+    "electric_gain": 22.395411756743954,
+    "stretch": 4.961872529249569,
+    "limiting": "radial squeeze of the fuel",
     "untested": [],
-    "notes": "broke up at 61 ns; 3.8 MA reached; 0.0% burnt; hottest 12 keV; narrowest 63 \u00b5m; zpinch.py",
+    "notes": "blown apart at 126 ns; 35.0 MA reached; 24.6% burnt; hottest 81 keV; narrowest 20 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 3579187.361053682,
+      "needed": 34059784.76923323,
       "best": 26000000.0,
-      "stretch": 1.0
+      "stretch": 1.3099917218935857
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 80152.1970787859,
+      "needed": 2585181.689731219,
       "best": 3000000.0,
       "stretch": 1.0
      },
      {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 9.31899053796694,
-      "best": 1.0,
-      "stretch": 9.31899053796694
-     },
-     {
       "name": "radial squeeze of the fuel",
-      "needed": 1.0,
+      "needed": 173.6655385237349,
       "best": 35.0,
-      "stretch": 1.0
+      "stretch": 4.961872529249569
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 3172.521733695103,
+      "needed": 473.8354808553523,
       "best": 2080000.0,
       "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 4.283130346354182,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 14064.092614855477,
+      "best": 7100.0,
+      "stretch": 1.980858114768377
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 12.0,
+      "best": 9.0,
+      "stretch": 1.3333333333333333
      }
     ]
    },
    "\u2264 100\u00d7 today": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 70.64849849397969,
-     "radius_um": 1525.1604920722946,
-     "preheat_kev": 0.44809485777140606,
-     "alfven_times": 46.185759733152004,
+     "current_ma": 34.059784769233225,
+     "load": "liner",
+     "radius_um": 43.21744160288109,
+     "column_mm": 3.424528397372859,
+     "line_mg_cm": 0.05,
+     "liner_mm": 4.49477134864024,
+     "liner_aspect": 12.0,
+     "fill_mg_cc": 0.3,
+     "bz_tesla": 4.283130346354182,
+     "ice_um": 583.2840456535048,
+     "ice_burn": "ablation",
+     "tritium": 0.5,
+     "preheat_kev": 0.017459454747059722,
+     "alfven_times": 1.1718324275009082,
      "stability": "breaks"
     },
-    "fusion_J": 2480741801.873821,
-    "fuel_J": 25217507.459024835,
+    "fusion_J": 2912925695.567115,
+    "fuel_J": 2585181.689731219,
     "drivers_J": {
-     "pulsed power": 48067778.540864184,
-     "laser": 1895673.2113176645
+     "pulsed power": 9918206.943057163,
+     "laser": 473.8354808553523
     },
-    "electricity_in_J": 339408589.05227125,
-    "heat_J": 3154871751.44499,
-    "target_gain": 49.65112927301884,
-    "electric_gain": 3.718081219163394,
-    "stretch": 46.185759733152004,
-    "limiting": "stable Alfv\u00e9n times of a dense hot pinch",
+    "electricity_in_J": 66126117.97518964,
+    "heat_J": 3702304099.823499,
+    "target_gain": 293.6807586216592,
+    "electric_gain": 22.395411756743954,
+    "stretch": 4.961872529249569,
+    "limiting": "radial squeeze of the fuel",
     "untested": [],
-    "notes": "blown apart at 76 ns; 79.3 MA reached; 40.0% burnt; hottest 1.2e+02 keV; narrowest 32 \u00b5m; zpinch.py",
+    "notes": "blown apart at 126 ns; 35.0 MA reached; 24.6% burnt; hottest 81 keV; narrowest 20 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 70648498.49397969,
+      "needed": 34059784.76923323,
       "best": 26000000.0,
-      "stretch": 2.7172499420761422
+      "stretch": 1.3099917218935857
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 25217507.459024835,
+      "needed": 2585181.689731219,
       "best": 3000000.0,
-      "stretch": 8.405835819674945
-     },
-     {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 46.185759733152004,
-      "best": 1.0,
-      "stretch": 46.185759733152004
+      "stretch": 1.0
      },
      {
       "name": "radial squeeze of the fuel",
-      "needed": 48.36748062800072,
+      "needed": 173.6655385237349,
       "best": 35.0,
-      "stretch": 1.3819280179428777
+      "stretch": 4.961872529249569
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 1895673.2113176645,
+      "needed": 473.8354808553523,
       "best": 2080000.0,
       "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 4.283130346354182,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 14064.092614855477,
+      "best": 7100.0,
+      "stretch": 1.980858114768377
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 12.0,
+      "best": 9.0,
+      "stretch": 1.3333333333333333
      }
     ]
    },
    "unlimited": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 77.01038956915757,
-     "radius_um": 2000.0,
-     "preheat_kev": 0.5,
-     "alfven_times": 4970.4895534957195,
+     "current_ma": 34.059784769233225,
+     "load": "liner",
+     "radius_um": 43.21744160288109,
+     "column_mm": 3.424528397372859,
+     "line_mg_cm": 0.05,
+     "liner_mm": 4.49477134864024,
+     "liner_aspect": 12.0,
+     "fill_mg_cc": 0.3,
+     "bz_tesla": 4.283130346354182,
+     "ice_um": 583.2840456535048,
+     "ice_burn": "ablation",
+     "tritium": 0.5,
+     "preheat_kev": 0.017459454747059722,
+     "alfven_times": 1.1718324275009082,
      "stability": "breaks"
     },
-    "fusion_J": 4385089867.222053,
-    "fuel_J": 34506189.242260166,
+    "fusion_J": 2912925695.567115,
+    "fuel_J": 2585181.689731219,
     "drivers_J": {
-     "pulsed power": 55507083.43433892,
-     "laser": 3637411.3281901553
+     "pulsed power": 9918206.943057163,
+     "laser": 473.8354808553523
     },
-    "electricity_in_J": 406421336.17749435,
-    "heat_J": 5576717471.845215,
-    "target_gain": 74.14197863771797,
-    "electric_gain": 5.488606995189567,
-    "stretch": 4970.4895534957195,
-    "limiting": "stable Alfv\u00e9n times of a dense hot pinch",
+    "electricity_in_J": 66126117.97518964,
+    "heat_J": 3702304099.823499,
+    "target_gain": 293.6807586216592,
+    "electric_gain": 22.395411756743954,
+    "stretch": 4.961872529249569,
+    "limiting": "radial squeeze of the fuel",
     "untested": [],
-    "notes": "blown apart at 106 ns; 89.0 MA reached; 41.1% burnt; hottest 1.2e+02 keV; narrowest 47 \u00b5m; zpinch.py",
+    "notes": "blown apart at 126 ns; 35.0 MA reached; 24.6% burnt; hottest 81 keV; narrowest 20 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 77010389.56915757,
+      "needed": 34059784.76923323,
       "best": 26000000.0,
-      "stretch": 2.9619380603522143
+      "stretch": 1.3099917218935857
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 34506189.242260166,
+      "needed": 2585181.689731219,
       "best": 3000000.0,
-      "stretch": 11.502063080753388
-     },
-     {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 4970.4895534957195,
-      "best": 1.0,
-      "stretch": 4970.4895534957195
+      "stretch": 1.0
      },
      {
       "name": "radial squeeze of the fuel",
-      "needed": 42.40096026409639,
+      "needed": 173.6655385237349,
       "best": 35.0,
-      "stretch": 1.2114560075456111
+      "stretch": 4.961872529249569
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 3637411.3281901553,
+      "needed": 473.8354808553523,
       "best": 2080000.0,
-      "stretch": 1.748755446245267
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 4.283130346354182,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 14064.092614855477,
+      "best": 7100.0,
+      "stretch": 1.980858114768377
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 12.0,
+      "best": 9.0,
+      "stretch": 1.3333333333333333
      }
     ]
    }
@@ -1738,19 +1826,19 @@
    "today's technology": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 175.23455426489525,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.02665507464904763,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.033898466168231695,
+    "target_gain": 0.02665507464904763,
+    "electric_gain": 0.005423754586917072,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -1760,19 +1848,19 @@
    "\u2264 10\u00d7 today": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 176.2772956022993,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.026655298903986293,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.03389875136339815,
+    "target_gain": 0.026655298903986293,
+    "electric_gain": 0.005423800218143704,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -1782,19 +1870,19 @@
    "\u2264 100\u00d7 today": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 175.6430965922433,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.026655343772145734,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.033898808424269476,
+    "target_gain": 0.026655343772145734,
+    "electric_gain": 0.005423809347883116,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -1804,19 +1892,19 @@
    "unlimited": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 175.6430965922433,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.026655343772145734,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.033898808424269476,
+    "target_gain": 0.026655343772145734,
+    "electric_gain": 0.005423809347883116,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -1829,38 +1917,38 @@
    "\u2264 10\u00d7 today": {
     "route": "compressed_icf",
     "params": {
-     "rho_g_cc": 1680.3188009447708,
-     "rho_r": 5.940471691332224,
+     "rho_g_cc": 1577.7829973834735,
+     "rho_r": 5.759235698926943,
      "adiabat": 1.0,
      "ignitor": "hot spot",
      "driver": "laser",
      "spin": false
     },
-    "fusion_J": 483414084.99349284,
-    "fuel_J": 167041.17637976984,
+    "fusion_J": 545608420.4450719,
+    "fuel_J": 187480.94270408707,
     "drivers_J": {
-     "laser": 16704117.637976984
+     "laser": 18748094.270408705
     },
-    "electricity_in_J": 167041176.37976983,
-    "heat_J": 614779595.2987173,
-    "target_gain": 28.939815647277648,
-    "electric_gain": 1.4721629926767508,
-    "stretch": 9.900786152220373,
+    "electricity_in_J": 187480942.70408705,
+    "heat_J": 693874949.7075759,
+    "target_gain": 29.102073660160755,
+    "electric_gain": 1.4804170273514408,
+    "stretch": 9.59872616487824,
     "limiting": "fuel areal density (g/cm\u00b2)",
     "untested": [],
-    "notes": "3 mg of D-T, 47% burnt, hot spot 45 \u00b5m at 511 Gbar; sections 7 and 11",
+    "notes": "3.5 mg of D-T, 46% burnt, hot spot 50 \u00b5m at 460 Gbar; sections 7 and 11",
     "requirements": [
      {
       "name": "fuel areal density (g/cm\u00b2)",
-      "needed": 5.940471691332224,
+      "needed": 5.759235698926943,
       "best": 0.6,
-      "stretch": 9.900786152220373
+      "stretch": 9.59872616487824
      },
      {
       "name": "cold squeezed density (g/cm\u00b3)",
-      "needed": 1680.3188009447708,
+      "needed": 1577.7829973834735,
       "best": 1000.0,
-      "stretch": 1.680318800944771
+      "stretch": 1.5777829973834734
      },
      {
       "name": "fuel adiabat (lower is harder)",
@@ -1870,41 +1958,41 @@
      },
      {
       "name": "hot-spot pressure (Gbar)",
-      "needed": 511.00357145356566,
+      "needed": 460.1497642258188,
       "best": 600.0,
       "stretch": 1.0
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 16704117.637976984,
+      "needed": 18748094.270408705,
       "best": 2080000.0,
-      "stretch": 8.030825787488935
+      "stretch": 9.013506860773417
      }
     ]
    },
    "\u2264 100\u00d7 today": {
     "route": "compressed_icf",
     "params": {
-     "rho_g_cc": 795.5442008385168,
+     "rho_g_cc": 820.1655935802297,
      "rho_r": 10.0,
      "adiabat": 1.0,
      "ignitor": "hot spot",
      "driver": "laser",
      "spin": false
     },
-    "fusion_J": 12534456353.941021,
-    "fuel_J": 2077838.2871693016,
+    "fusion_J": 11465945068.343918,
+    "fuel_J": 1929151.4912435699,
     "drivers_J": {
-     "laser": 207783828.71693015
+     "laser": 192915149.12435699
     },
-    "electricity_in_J": 2077838287.1693015,
-    "heat_J": 15940636079.457684,
-    "target_gain": 60.324503746713944,
-    "electric_gain": 3.068696188320616,
-    "stretch": 99.89607149852411,
+    "electricity_in_J": 1929151491.2435699,
+    "heat_J": 14581761863.493658,
+    "target_gain": 59.43517199342774,
+    "electric_gain": 3.023456048875449,
+    "stretch": 92.74766784824855,
     "limiting": "laser energy per shot (J)",
     "untested": [],
-    "notes": "62 mg of D-T, 60% burnt, hot spot 156 \u00b5m at 147 Gbar; sections 7 and 11",
+    "notes": "57 mg of D-T, 60% burnt, hot spot 149 \u00b5m at 155 Gbar; sections 7 and 11",
     "requirements": [
      {
       "name": "fuel areal density (g/cm\u00b2)",
@@ -1914,7 +2002,7 @@
      },
      {
       "name": "cold squeezed density (g/cm\u00b3)",
-      "needed": 795.5442008385168,
+      "needed": 820.1655935802297,
       "best": 1000.0,
       "stretch": 1.0
      },
@@ -1926,15 +2014,15 @@
      },
      {
       "name": "hot-spot pressure (Gbar)",
-      "needed": 147.12378913313051,
+      "needed": 154.78538488145267,
       "best": 600.0,
       "stretch": 1.0
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 207783828.71693015,
+      "needed": 192915149.12435699,
       "best": 2080000.0,
-      "stretch": 99.89607149852411
+      "stretch": 92.74766784824855
      }
     ]
    },
@@ -1999,22 +2087,22 @@
    "today's technology": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.06258299539065432,
-     "aspect": 11.829416116900706,
-     "t_i_kev": 36.034656386946764,
+     "radius_mm": 0.08265945360508249,
+     "aspect": 7.067746367699355,
+     "t_i_kev": 26.50144101962053,
      "fill": 1.0,
-     "b_tesla": 4335.971562257333,
+     "b_tesla": 5467.389567264314,
      "spin": false
     },
-    "fusion_J": 3784.1745250767517,
-    "fuel_J": 14335.905409396102,
+    "fusion_J": 4484.728350644746,
+    "fuel_J": 14674.767187181807,
     "drivers_J": {
-     "pulsed power": 2867181.0818792204
+     "pulsed power": 2934953.4374363613
     },
-    "electricity_in_J": 19114540.54586147,
-    "heat_J": 4812.5062038639535,
-    "target_gain": 0.0013198240421551997,
-    "electric_gain": 0.0001007088021251114,
+    "electricity_in_J": 19566356.24957574,
+    "heat_J": 5703.43224581711,
+    "target_gain": 0.001528040715549508,
+    "electric_gain": 0.00011659671679423252,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -2022,13 +2110,13 @@
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 2867181.0818792204,
+      "needed": 2934953.4374363613,
       "best": 3000000.0,
       "stretch": 1.0
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 4335.971562257333,
+      "needed": 5467.389567264314,
       "best": 7100.0,
       "stretch": 1.0
      }
@@ -2037,36 +2125,36 @@
    "\u2264 10\u00d7 today": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.22003742252998215,
-     "aspect": 3.9641853893967056,
-     "t_i_kev": 26.255471484393095,
-     "fill": 0.9675227950431486,
-     "b_tesla": 6105.771039318792,
+     "radius_mm": 0.23131055917710674,
+     "aspect": 2.6861855106918244,
+     "t_i_kev": 32.541275140423714,
+     "fill": 1.0,
+     "b_tesla": 5981.153259100993,
      "spin": false
     },
-    "fusion_J": 88711.30002127012,
-    "fuel_J": 149733.11141766314,
+    "fusion_J": 83388.05308475158,
+    "fuel_J": 149994.79819195592,
     "drivers_J": {
-     "pulsed power": 29946622.283532627
+     "pulsed power": 29998959.638391186
     },
-    "electricity_in_J": 199644148.5568842,
-    "heat_J": 112818.17973142766,
-    "target_gain": 0.002962314052695407,
-    "electric_gain": 0.00022603854016644542,
-    "stretch": 9.982207427844209,
+    "electricity_in_J": 199993064.25594124,
+    "heat_J": 106048.36540681597,
+    "target_gain": 0.0027796981658669145,
+    "electric_gain": 0.00021210408631191434,
+    "stretch": 9.999653212797062,
     "limiting": "energy into the pinch (J)",
     "untested": [],
     "notes": "0.5% of the pulsed power reaches the fuel; burn died out; sections 12, 19",
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 29946622.283532627,
+      "needed": 29998959.638391186,
       "best": 3000000.0,
-      "stretch": 9.982207427844209
+      "stretch": 9.999653212797062
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 6105.771039318792,
+      "needed": 5981.153259100993,
       "best": 7100.0,
       "stretch": 1.0
      }
@@ -2075,38 +2163,38 @@
    "\u2264 100\u00d7 today": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.24475153758538812,
-     "aspect": 27.69544762645371,
-     "t_i_kev": 25.703900144323136,
+     "radius_mm": 0.3436451985381245,
+     "aspect": 9.484211937190747,
+     "t_i_kev": 27.309408416700595,
      "fill": 1.0,
-     "b_tesla": 7857.60426944691,
+     "b_tesla": 7367.651416088831,
      "spin": false
     },
-    "fusion_J": 1770654.9526684766,
-    "fuel_J": 1481105.9589295709,
+    "fusion_J": 1893313.1139829527,
+    "fuel_J": 1480692.315167012,
     "drivers_J": {
-     "pulsed power": 296221191.7859142
+     "pulsed power": 296138463.0334024
     },
-    "electricity_in_J": 1974807945.239428,
-    "heat_J": 2251822.1313924855,
-    "target_gain": 0.005977475622163351,
-    "electric_gain": 0.00045610959522840525,
-    "stretch": 98.7403972619714,
+    "electricity_in_J": 1974256420.2226827,
+    "heat_J": 2407812.072757172,
+    "target_gain": 0.006393337409093664,
+    "electric_gain": 0.00048784181185250236,
+    "stretch": 98.71282101113412,
     "limiting": "energy into the pinch (J)",
     "untested": [],
     "notes": "0.5% of the pulsed power reaches the fuel; burn died out; sections 12, 19",
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 296221191.7859142,
+      "needed": 296138463.0334024,
       "best": 3000000.0,
-      "stretch": 98.7403972619714
+      "stretch": 98.71282101113412
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 7857.60426944691,
+      "needed": 7367.651416088831,
       "best": 7100.0,
-      "stretch": 1.1067048266826633
+      "stretch": 1.0376973825477227
      }
     ]
    },
@@ -2115,34 +2203,34 @@
     "params": {
      "radius_mm": 3.0,
      "aspect": 100.0,
-     "t_i_kev": 6.687424044407883,
+     "t_i_kev": 6.774868647075437,
      "fill": 1.0,
-     "b_tesla": 2718.464633879542,
+     "b_tesla": 2473.359951551904,
      "spin": false
     },
-    "fusion_J": 303210880660.7059,
-    "fuel_J": 2503725184.8578734,
+    "fusion_J": 306351975532.1337,
+    "fuel_J": 2527221922.355764,
     "drivers_J": {
-     "pulsed power": 500745036971.5747
+     "pulsed power": 505444384471.1528
     },
-    "electricity_in_J": 3338300246477.165,
-    "heat_J": 385607015371.23315,
-    "target_gain": 0.6055194925035631,
-    "electric_gain": 0.04620399447630941,
-    "stretch": 166915.01232385825,
+    "electricity_in_J": 3369629229807.685,
+    "heat_J": 389601688041.7187,
+    "target_gain": 0.606104222233412,
+    "electric_gain": 0.04624861211379679,
+    "stretch": 168481.46149038424,
     "limiting": "energy into the pinch (J)",
     "untested": [],
     "notes": "0.5% of the pulsed power reaches the fuel; grew to the limit; sections 12, 19",
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 500745036971.5747,
+      "needed": 505444384471.1528,
       "best": 3000000.0,
-      "stretch": 166915.01232385825
+      "stretch": 168481.46149038424
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 2718.464633879542,
+      "needed": 2473.359951551904,
       "best": 7100.0,
       "stretch": 1.0
      }
@@ -2154,30 +2242,30 @@
    "\u2264 10\u00d7 today": {
     "route": "muon_factory",
     "params": {
-     "e_max_gev_u": 2.5964638658375723,
+     "e_max_gev_u": 2.5977525341011347,
      "phi": 10.0,
      "sticking": "PSI 1987 (0.45%)",
      "rf_stripping": "none"
     },
     "fusion_J": 5.893694147775312e-10,
-    "fuel_J": 7.81950851248811e-10,
+    "fuel_J": 7.819135905427923e-10,
     "drivers_J": {
-     "laser": 5.213005674992074e-09
+     "laser": 5.212757270285282e-09
     },
-    "electricity_in_J": 5.2130056749920735e-08,
+    "electricity_in_J": 5.212757270285282e-08,
     "heat_J": 7.495277890036028e-10,
-    "target_gain": 0.11305750492558735,
-    "electric_gain": 0.00575121406523113,
-    "stretch": 9.961526493097603,
+    "target_gain": 0.1130628924805617,
+    "electric_gain": 0.005751488129141934,
+    "stretch": 9.966470564616252,
     "limiting": "laser intensity (W/cm\u00b2)",
     "untested": [],
     "notes": "33 GeV of light per muon, 209 fusions each; sections 9-10",
     "requirements": [
      {
       "name": "laser intensity (W/cm\u00b2)",
-      "needed": 1.0957679142407363e+24,
+      "needed": 1.0963117621077877e+24,
       "best": 1.1e+23,
-      "stretch": 9.961526493097603
+      "stretch": 9.966470564616252
      },
      {
       "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
@@ -2352,21 +2440,21 @@
    "today's technology": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5357.473752921857,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022246467716789,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022246467716789,
-    "target_gain": 0.0019022246467716789,
-    "electric_gain": 0.0003043559434834686,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -2376,21 +2464,21 @@
    "\u2264 10\u00d7 today": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5357.473752921857,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022246467716789,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022246467716789,
-    "target_gain": 0.0019022246467716789,
-    "electric_gain": 0.0003043559434834686,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -2400,21 +2488,21 @@
    "\u2264 100\u00d7 today": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5353.104455856213,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022298390694104,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022298390694104,
-    "target_gain": 0.0019022298390694104,
-    "electric_gain": 0.00030435677425110565,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -2424,21 +2512,21 @@
    "unlimited": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5353.104455856213,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022298390694104,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022298390694104,
-    "target_gain": 0.0019022298390694104,
-    "electric_gain": 0.00030435677425110565,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -3138,43 +3226,47 @@
    "today's technology": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 26.0,
-     "radius_um": 240.0,
-     "preheat_kev": 0.1,
-     "alfven_times": 1.0,
+     "current_ma": 5.3116601774929215,
+     "load": "liner",
+     "radius_um": 75.31586130519626,
+     "column_mm": 1.0,
+     "line_mg_cm": 0.05428281556192021,
+     "liner_mm": 5.924061429995755,
+     "liner_aspect": 3.088729323085262,
+     "fill_mg_cc": 20.0,
+     "bz_tesla": 34.83066668375512,
+     "ice_um": 83.09507520422697,
+     "ice_burn": "ablation",
+     "tritium": 0.4283397086295433,
+     "preheat_kev": 0.5,
+     "alfven_times": 578.6403037471372,
      "stability": "breaks"
     },
-    "fusion_J": 0.0,
-    "fuel_J": 148027.36492975298,
+    "fusion_J": 5.117527918456826,
+    "fuel_J": 17843.056065396377,
     "drivers_J": {
-     "pulsed power": 7760278.179276712,
-     "laser": 10475.744625187646
+     "pulsed power": 233428.0995180082,
+     "laser": 1145623.4948803096
     },
-    "electricity_in_J": 51839945.308096625,
-    "heat_J": 0.0,
-    "target_gain": 0.0,
-    "electric_gain": 0.0,
+    "electricity_in_J": 13012422.27892315,
+    "heat_J": 1394.4215525830828,
+    "target_gain": 3.710903884411671e-06,
+    "electric_gain": 4.286431911579429e-05,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
-    "notes": "broke up at 13 ns; 5.5 MA reached; 0.0% burnt; hottest 0.16 keV; narrowest 2.4e+02 \u00b5m; zpinch.py",
+    "notes": "end of pulse at 250 ns; 5.4 MA reached; 0.0% burnt; hottest 0.5 keV; narrowest 3.9e+03 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 26000000.0,
+      "needed": 5311660.177492921,
       "best": 26000000.0,
       "stretch": 1.0
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 148027.36492975298,
+      "needed": 17843.056065396377,
       "best": 3000000.0,
-      "stretch": 1.0
-     },
-     {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 1.0,
-      "best": 1.0,
       "stretch": 1.0
      },
      {
@@ -3185,8 +3277,32 @@
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 10475.744625187646,
+      "needed": 1145623.4948803096,
       "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 34.83066668375512,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 34.83066668375513,
+      "best": 7100.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 3.088729323085262,
+      "best": 9.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "blanket k_eff",
+      "needed": 0.95,
+      "best": 0.98,
       "stretch": 1.0
      }
     ]
@@ -3194,55 +3310,77 @@
    "\u2264 10\u00d7 today": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 4.3157848462415656,
-     "radius_um": 97.50459852736837,
-     "preheat_kev": 0.2655163203101146,
-     "alfven_times": 9.612433563752846,
+     "current_ma": 82.88327812055438,
+     "load": "liner",
+     "radius_um": 87.02619938625881,
+     "column_mm": 6.377196424527596,
+     "line_mg_cm": 7.144005271360883,
+     "liner_mm": 6.858180399538192,
+     "liner_aspect": 3.4192248539124264,
+     "fill_mg_cc": 0.5982486045209907,
+     "bz_tesla": 1.3585028606245992,
+     "ice_um": 600.0,
+     "ice_burn": "ablation",
+     "tritium": 0.2554054929696769,
+     "preheat_kev": 0.03613613980640349,
+     "alfven_times": 58.06810339648488,
      "stability": "breaks"
     },
-    "fusion_J": 4124.322275344407,
-    "fuel_J": 109522.11179465815,
+    "fusion_J": 3227385434.1937976,
+    "fuel_J": 6222573.123279161,
     "drivers_J": {
-     "pulsed power": 230598.0765395494,
-     "laser": 4590.963468256468
+     "pulsed power": 55830528.24267473,
+     "laser": 3132.1767745659945
     },
-    "electricity_in_J": 1583230.1449462275,
-    "heat_J": 1130699.7163702438,
-    "target_gain": 0.017536200986268416,
-    "electric_gain": 0.28566907217614823,
-    "stretch": 9.612433563752846,
-    "limiting": "stable Alfv\u00e9n times of a dense hot pinch",
+    "electricity_in_J": 372234843.3855772,
+    "heat_J": 876366554658.3579,
+    "target_gain": 57.80357959603806,
+    "electric_gain": 941.7351118316229,
+    "stretch": 4.873720038401449,
+    "limiting": "radial squeeze of the fuel",
     "untested": [],
-    "notes": "broke up at 66 ns; 4.6 MA reached; 0.0% burnt; hottest 6.4 keV; narrowest 88 \u00b5m; zpinch.py",
+    "notes": "blown apart at 159 ns; 81.9 MA reached; 22.5% burnt; hottest 75 keV; narrowest 25 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 4315784.846241565,
+      "needed": 82883278.12055437,
       "best": 26000000.0,
-      "stretch": 1.0
+      "stretch": 3.187818389252091
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 109522.11179465815,
+      "needed": 6222573.123279161,
       "best": 3000000.0,
-      "stretch": 1.0
-     },
-     {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 9.612433563752846,
-      "best": 1.0,
-      "stretch": 9.612433563752846
+      "stretch": 2.0741910410930537
      },
      {
       "name": "radial squeeze of the fuel",
-      "needed": 1.1125618700680258,
+      "needed": 170.5802013440507,
       "best": 35.0,
-      "stretch": 1.0
+      "stretch": 4.873720038401449
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 4590.963468256468,
+      "needed": 3132.1767745659945,
       "best": 2080000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "magnetic field on the target (T)",
+      "needed": 1.3585028606245992,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 4336.990740065351,
+      "best": 7100.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 3.4192248539124264,
+      "best": 9.0,
       "stretch": 1.0
      },
      {
@@ -3258,19 +3396,19 @@
    "today's technology": {
     "route": "channelling",
     "params": {
-     "ion_kev": 170.13401350577521,
+     "ion_kev": 179.6799193850619,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026630829218788926,
+    "fusion_J": 0.026645857895296984,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 7.300950079579934,
-    "target_gain": 0.026630829218788926,
-    "electric_gain": 1.1681520127327896,
+    "heat_J": 7.305070252333325,
+    "target_gain": 0.026645857895296984,
+    "electric_gain": 1.1688112403733322,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -3287,19 +3425,19 @@
    "\u2264 10\u00d7 today": {
     "route": "channelling",
     "params": {
-     "ion_kev": 174.82126625531106,
+     "ion_kev": 177.52569079554436,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026654561368146465,
+    "fusion_J": 0.026653602963445405,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 7.30745634479297,
-    "target_gain": 0.026654561368146465,
-    "electric_gain": 1.1691930151668752,
+    "heat_J": 7.307193594248442,
+    "target_gain": 0.026653602963445405,
+    "electric_gain": 1.1691509750797509,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -3319,56 +3457,56 @@
    "\u2264 10\u00d7 today": {
     "route": "compressed_icf",
     "params": {
-     "rho_g_cc": 1611.1171889241514,
-     "rho_r": 5.179056840053702,
-     "adiabat": 1.0,
+     "rho_g_cc": 1487.8816335283602,
+     "rho_r": 5.717844537192248,
+     "adiabat": 1.084305525475319,
      "ignitor": "hot spot",
      "driver": "laser",
      "spin": false
     },
-    "fusion_J": 412300845.10050744,
-    "fuel_J": 156077.43892847706,
+    "fusion_J": 569281700.6549383,
+    "fuel_J": 202654.37282096854,
     "drivers_J": {
-     "laser": 15607743.892847706
+     "laser": 20265437.28209685
     },
-    "electricity_in_J": 156077438.92847705,
-    "heat_J": 113033952608.717,
-    "target_gain": 26.416428148173644,
-    "electric_gain": 289.6868461828494,
-    "stretch": 8.631761400089504,
-    "limiting": "fuel areal density (g/cm\u00b2)",
+    "electricity_in_J": 202654372.8209685,
+    "heat_J": 156070892256.24515,
+    "target_gain": 28.091261625914203,
+    "electric_gain": 308.053342414917,
+    "stretch": 9.742998693315794,
+    "limiting": "laser energy per shot (J)",
     "untested": [],
-    "notes": "2.8 mg of D-T, 44% burnt, hot spot 48 \u00b5m at 476 Gbar; sections 7 and 11",
+    "notes": "3.6 mg of D-T, 46% burnt, hot spot 51 \u00b5m at 453 Gbar; sections 7 and 11",
     "requirements": [
      {
       "name": "fuel areal density (g/cm\u00b2)",
-      "needed": 5.179056840053702,
+      "needed": 5.717844537192248,
       "best": 0.6,
-      "stretch": 8.631761400089504
+      "stretch": 9.529740895320414
      },
      {
       "name": "cold squeezed density (g/cm\u00b3)",
-      "needed": 1611.1171889241514,
+      "needed": 1487.8816335283602,
       "best": 1000.0,
-      "stretch": 1.6111171889241513
+      "stretch": 1.4878816335283602
      },
      {
       "name": "fuel adiabat (lower is harder)",
-      "needed": 1.0,
+      "needed": 1.084305525475319,
       "best": 1.5,
-      "stretch": 1.5
+      "stretch": 1.3833739335990711
      },
      {
       "name": "hot-spot pressure (Gbar)",
-      "needed": 476.44870269643275,
+      "needed": 452.51208684421835,
       "best": 600.0,
       "stretch": 1.0
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 15607743.892847706,
+      "needed": 20265437.28209685,
       "best": 2080000.0,
-      "stretch": 7.503723025407551
+      "stretch": 9.742998693315794
      },
      {
       "name": "blanket k_eff",
@@ -3383,22 +3521,22 @@
    "today's technology": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.12021686416904354,
-     "aspect": 3.294744572230952,
-     "t_i_kev": 17.26894343933314,
-     "fill": 1.0,
-     "b_tesla": 5294.421996519474,
+     "radius_mm": 0.040439182873454514,
+     "aspect": 99.10307195152154,
+     "t_i_kev": 40.0,
+     "fill": 0.4038368326870387,
+     "b_tesla": 3613.5754617405823,
      "spin": false
     },
-    "fusion_J": 3436.0587186825815,
-    "fuel_J": 13835.213108592654,
+    "fusion_J": 1677.145652631926,
+    "fuel_J": 14601.409822638134,
     "drivers_J": {
-     "pulsed power": 2767042.6217185305
+     "pulsed power": 2920281.9645276265
     },
-    "electricity_in_J": 18446950.81145687,
-    "heat_J": 942009.4646511261,
-    "target_gain": 0.00124178019222145,
-    "electric_gain": 0.020426345237849742,
+    "electricity_in_J": 19468546.430184178,
+    "heat_J": 459796.29794670903,
+    "target_gain": 0.000574309492372328,
+    "electric_gain": 0.009446956907555,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -3406,13 +3544,13 @@
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 2767042.6217185305,
+      "needed": 2920281.9645276265,
       "best": 3000000.0,
       "stretch": 1.0
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 5294.421996519474,
+      "needed": 3613.5754617405823,
       "best": 7100.0,
       "stretch": 1.0
      },
@@ -3427,38 +3565,38 @@
    "\u2264 10\u00d7 today": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.19997724167300363,
-     "aspect": 2.7199020735351027,
-     "t_i_kev": 36.580470823292565,
-     "fill": 1.0,
-     "b_tesla": 17155.356551958008,
+     "radius_mm": 0.21500952274312526,
+     "aspect": 20.106279104636567,
+     "t_i_kev": 32.07389317390272,
+     "fill": 0.11486627804264751,
+     "b_tesla": 2670.95346699733,
      "spin": false
     },
-    "fusion_J": 53600.44343087133,
-    "fuel_J": 124139.72391810484,
+    "fusion_J": 30419.8126625857,
+    "fuel_J": 103627.21818745018,
     "drivers_J": {
-     "pulsed power": 24827944.783620965
+     "pulsed power": 20725443.637490038
     },
-    "electricity_in_J": 165519631.89080644,
-    "heat_J": 14694779.44216775,
-    "target_gain": 0.002158875569363745,
-    "electric_gain": 0.03551187076554622,
-    "stretch": 8.27598159454032,
+    "electricity_in_J": 138169624.2499336,
+    "heat_J": 8339715.292192907,
+    "target_gain": 0.0014677520633411011,
+    "electric_gain": 0.024143411657854066,
+    "stretch": 6.908481212496679,
     "limiting": "energy into the pinch (J)",
     "untested": [],
     "notes": "0.5% of the pulsed power reaches the fuel; burn died out; sections 12, 19",
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 24827944.783620965,
+      "needed": 20725443.637490038,
       "best": 3000000.0,
-      "stretch": 8.27598159454032
+      "stretch": 6.908481212496679
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 17155.356551958008,
+      "needed": 2670.95346699733,
       "best": 7100.0,
-      "stretch": 2.4162474016842266
+      "stretch": 1.0
      },
      {
       "name": "blanket k_eff",
@@ -3474,30 +3612,30 @@
    "\u2264 10\u00d7 today": {
     "route": "muon_factory",
     "params": {
-     "e_max_gev_u": 2.5885395241133153,
+     "e_max_gev_u": 2.573764199474975,
      "phi": 10.0,
      "sticking": "PSI 1987 (0.45%)",
      "rf_stripping": "none"
     },
     "fusion_J": 5.893694147775312e-10,
-    "fuel_J": 7.821813489608172e-10,
+    "fuel_J": 7.826181113560184e-10,
     "drivers_J": {
-     "laser": 5.2145423264054485e-09
+     "laser": 5.2174540757067895e-09
     },
-    "electricity_in_J": 5.214542326405448e-08,
+    "electricity_in_J": 5.217454075706789e-08,
     "heat_J": 1.615780207356862e-07,
-    "target_gain": 0.11302418848785191,
-    "electric_gain": 1.2394416278298168,
-    "stretch": 9.931124167432618,
+    "target_gain": 0.11296111211054435,
+    "electric_gain": 1.2387499220205236,
+    "stretch": 9.874437536909664,
     "limiting": "laser intensity (W/cm\u00b2)",
     "untested": [],
     "notes": "33 GeV of light per muon, 209 fusions each; sections 9-10",
     "requirements": [
      {
       "name": "laser intensity (W/cm\u00b2)",
-      "needed": 1.092423658417588e+24,
+      "needed": 1.0861881290600631e+24,
       "best": 1.1e+23,
-      "stretch": 9.931124167432618
+      "stretch": 9.874437536909664
      },
      {
       "name": "liquid or solid D-T density (\u00d7 liquid hydrogen)",
@@ -3564,21 +3702,21 @@
    "today's technology": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5371.1719356401945,
+     "proton_kev": 5559.923865337416,
      "target": "boron",
-     "avalanche": true,
+     "avalanche": false,
      "source": "accelerator",
-     "screening_ev": 1014.7188529225991
+     "screening_ev": 441.963820227792
     },
-    "fusion_J": 0.0019018008714097618,
+    "fusion_J": 0.0018445248704969171,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019018008714097618,
-    "target_gain": 0.0019018008714097618,
-    "electric_gain": 0.0003042881394255619,
+    "heat_J": 0.0018445248704969171,
+    "target_gain": 0.0018445248704969171,
+    "electric_gain": 0.00029512397927950677,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -3586,7 +3724,7 @@
     "requirements": [
      {
       "name": "electron screening potential (eV)",
-      "needed": 1014.7188529225991,
+      "needed": 441.963820227792,
       "best": 1500.0,
       "stretch": 1.0
      }
@@ -3595,21 +3733,21 @@
    "\u2264 10\u00d7 today": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5369.094347489732,
+     "proton_kev": 5337.42974987665,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
-     "screening_ev": 1138.8447912271527
+     "screening_ev": 765.0215407616654
     },
-    "fusion_J": 0.0019018209487868705,
+    "fusion_J": 0.0019018852922898118,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019018209487868705,
-    "target_gain": 0.0019018209487868705,
-    "electric_gain": 0.0003042913518058993,
+    "heat_J": 0.0019018852922898118,
+    "target_gain": 0.0019018852922898118,
+    "electric_gain": 0.0003043016467663699,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -3617,7 +3755,7 @@
     "requirements": [
      {
       "name": "electron screening potential (eV)",
-      "needed": 1138.8447912271527,
+      "needed": 765.0215407616654,
       "best": 1500.0,
       "stretch": 1.0
      }
@@ -3639,8 +3777,8 @@
    "idea": "ignitor",
    "value": "hot spot",
    "today's technology": null,
-   "\u2264 10\u00d7 today": 1.4721629926767508,
-   "\u2264 100\u00d7 today": 3.068696188320616,
+   "\u2264 10\u00d7 today": 1.462903951103162,
+   "\u2264 100\u00d7 today": 2.9970936771315415,
    "unlimited": 7.083478940250298
   },
   {
@@ -3657,8 +3795,8 @@
    "idea": "driver",
    "value": "laser",
    "today's technology": null,
-   "\u2264 10\u00d7 today": 1.4721629926767508,
-   "\u2264 100\u00d7 today": 3.068696188320616,
+   "\u2264 10\u00d7 today": 1.4804170273514408,
+   "\u2264 100\u00d7 today": 2.9970936771315415,
    "unlimited": 7.083478940250298
   },
   {
@@ -3675,8 +3813,8 @@
    "idea": "spin",
    "value": false,
    "today's technology": null,
-   "\u2264 10\u00d7 today": 1.4721629926767508,
-   "\u2264 100\u00d7 today": 3.068696188320616,
+   "\u2264 10\u00d7 today": 1.4804170273514408,
+   "\u2264 100\u00d7 today": 3.023456048875449,
    "unlimited": 7.083478940250298
   },
   {
@@ -3684,8 +3822,8 @@
    "idea": "spin",
    "value": true,
    "today's technology": null,
-   "\u2264 10\u00d7 today": 1.7870986678433982,
-   "\u2264 100\u00d7 today": 3.547112075141202,
+   "\u2264 10\u00d7 today": 1.8024697814613455,
+   "\u2264 100\u00d7 today": 3.525415832798331,
    "unlimited": 8.187807505545443
   },
   {
@@ -3764,19 +3902,19 @@
    "route": "magnetised_liner",
    "idea": "spin",
    "value": false,
-   "today's technology": 0.0001007088021251114,
-   "\u2264 10\u00d7 today": 0.00022603854016644542,
-   "\u2264 100\u00d7 today": 0.00045610959522840525,
-   "unlimited": 0.04620399447630941
+   "today's technology": 0.00011659671679423252,
+   "\u2264 10\u00d7 today": 0.00021210408631191434,
+   "\u2264 100\u00d7 today": 0.00048784181185250236,
+   "unlimited": 0.04624861211379679
   },
   {
    "route": "magnetised_liner",
    "idea": "spin",
    "value": true,
-   "today's technology": 0.00016419890860664695,
-   "\u2264 10\u00d7 today": 0.0003392745605588155,
-   "\u2264 100\u00d7 today": 0.0006924527862514748,
-   "unlimited": 0.07550414991127095
+   "today's technology": 0.000175050692956955,
+   "\u2264 10\u00d7 today": 0.000317963519064014,
+   "\u2264 100\u00d7 today": 0.0007387428424086984,
+   "unlimited": 0.07660324471806657
   },
   {
    "route": "fast_ignition",
@@ -3836,37 +3974,37 @@
    "route": "pB_catcher",
    "idea": "avalanche",
    "value": false,
-   "today's technology": 0.00029826882461379925,
-   "\u2264 10\u00d7 today": 0.00029826882461379925,
-   "\u2264 100\u00d7 today": 0.00029826882461379925,
-   "unlimited": 0.00029826882461379925
+   "today's technology": 0.0002982537250418714,
+   "\u2264 10\u00d7 today": 0.0002982537250418714,
+   "\u2264 100\u00d7 today": 0.0002982652951751108,
+   "unlimited": 0.0002982652951751108
   },
   {
    "route": "pB_catcher",
    "idea": "avalanche",
    "value": true,
-   "today's technology": 0.0003043559434834686,
-   "\u2264 10\u00d7 today": 0.0003043559434834686,
-   "\u2264 100\u00d7 today": 0.0003043559434834686,
-   "unlimited": 0.0003043559434834686
+   "today's technology": 0.0003043405357570116,
+   "\u2264 10\u00d7 today": 0.0003043405357570116,
+   "\u2264 100\u00d7 today": 0.0003043523420154192,
+   "unlimited": 0.0003043523420154192
   },
   {
    "route": "pB_catcher",
    "idea": "screening_ev",
    "value": 0.0,
-   "today's technology": 0.0003043559434834686,
-   "\u2264 10\u00d7 today": 0.0003043559434834686,
-   "\u2264 100\u00d7 today": 0.00030435677425110565,
-   "unlimited": 0.00030435677425110565
+   "today's technology": 0.00030435697666965475,
+   "\u2264 10\u00d7 today": 0.00030435697666965475,
+   "\u2264 100\u00d7 today": 0.00030435697666965475,
+   "unlimited": 0.00030435697666965475
   },
   {
    "route": "pB_catcher",
    "idea": "screening_ev",
    "value": 1500.0,
-   "today's technology": 0.0003043085702484742,
-   "\u2264 10\u00d7 today": 0.0003043085702484742,
-   "\u2264 100\u00d7 today": 0.0003043085702484742,
-   "unlimited": 0.0003043085702484742
+   "today's technology": 0.00030430803341709444,
+   "\u2264 10\u00d7 today": 0.00030430803341709444,
+   "\u2264 100\u00d7 today": 0.0003043080346357408,
+   "unlimited": 0.0003043080346357408
   },
   {
    "route": "muon_catalysis",
@@ -3996,30 +4134,75 @@
   },
   {
    "route": "dynamic_pinch",
+   "idea": "load",
+   "value": "fibre",
+   "today's technology": 2.313454940225239e-07,
+   "\u2264 10\u00d7 today": 2.2564578684910073,
+   "\u2264 100\u00d7 today": 5.224872313414316,
+   "unlimited": 5.224872313414316
+  },
+  {
+   "route": "dynamic_pinch",
+   "idea": "load",
+   "value": "gas column",
+   "today's technology": 2.572951365538222e-07,
+   "\u2264 10\u00d7 today": 1.945550868934906,
+   "\u2264 100\u00d7 today": 4.1870853180110075,
+   "unlimited": 4.1870853180110075
+  },
+  {
+   "route": "dynamic_pinch",
+   "idea": "load",
+   "value": "liner",
+   "today's technology": 0.002464048668927451,
+   "\u2264 10\u00d7 today": 12.146679931187466,
+   "\u2264 100\u00d7 today": 14.57390255805557,
+   "unlimited": 17.89089696421426
+  },
+  {
+   "route": "dynamic_pinch",
    "idea": "stability",
    "value": "breaks",
-   "today's technology": 2.152022814983894e-07,
-   "\u2264 10\u00d7 today": 0.0018477299957118697,
-   "\u2264 100\u00d7 today": 3.718081219163394,
-   "unlimited": 5.488606995189567
+   "today's technology": 0.0030651016933611786,
+   "\u2264 10\u00d7 today": 22.395411756743954,
+   "\u2264 100\u00d7 today": 22.395411756743954,
+   "unlimited": 22.395411756743954
   },
   {
    "route": "dynamic_pinch",
    "idea": "stability",
    "value": "rising current",
-   "today's technology": 2.30227013493321e-07,
-   "\u2264 10\u00d7 today": 0.14929205954976973,
-   "\u2264 100\u00d7 today": 3.717553650202269,
-   "unlimited": 5.488626849863961
+   "today's technology": 0.0030651016933611786,
+   "\u2264 10\u00d7 today": 22.395411756743954,
+   "\u2264 100\u00d7 today": 22.395411756743954,
+   "unlimited": 22.395411756743954
   },
   {
    "route": "dynamic_pinch",
    "idea": "stability",
    "value": "sheared flow",
-   "today's technology": 0.0010507209955150018,
-   "\u2264 10\u00d7 today": 4.16826629416696,
-   "\u2264 100\u00d7 today": 5.692135940913451,
-   "unlimited": 5.8382906486481465
+   "today's technology": 0.2227721898915755,
+   "\u2264 10\u00d7 today": 22.395411756743954,
+   "\u2264 100\u00d7 today": 22.395411756743954,
+   "unlimited": 22.395411756743954
+  },
+  {
+   "route": "dynamic_pinch",
+   "idea": "ice_burn",
+   "value": "ablation",
+   "today's technology": 0.0030651016933611786,
+   "\u2264 10\u00d7 today": 22.395411756743954,
+   "\u2264 100\u00d7 today": 22.395411756743954,
+   "unlimited": 22.395411756743954
+  },
+  {
+   "route": "dynamic_pinch",
+   "idea": "ice_burn",
+   "value": "as an ICF shell",
+   "today's technology": 0.0030651016933611786,
+   "\u2264 10\u00d7 today": 33.85848534633126,
+   "\u2264 100\u00d7 today": 34.60488704024543,
+   "unlimited": 35.9757625609873
   }
  ],
  "theory": {
@@ -5721,57 +5904,67 @@
    "today's technology": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 16.26232659108558,
-     "radius_um": 195.88992270808916,
-     "preheat_kev": 0.03571853836271705,
-     "alfven_times": 1.0,
+     "current_ma": 19.566975676171168,
+     "load": "gas column",
+     "radius_um": 1213.9037964255522,
+     "column_mm": 1.353241509032685,
+     "line_mg_cm": 0.7365107553203212,
+     "liner_mm": 2.96310309707372,
+     "liner_aspect": 7.149179400831697,
+     "fill_mg_cc": 0.6281987925075557,
+     "bz_tesla": 72.45392794180682,
+     "ice_um": 397.818533933515,
+     "ice_burn": "ablation",
+     "tritium": 0.49941076120823696,
+     "preheat_kev": 0.18255046471321343,
+     "alfven_times": 10000.0,
      "stability": "sheared flow"
     },
-    "fusion_J": 42596.421719376565,
-    "fuel_J": 2679890.9709670595,
+    "fusion_J": 11036818.707612693,
+    "fuel_J": 2020853.0693005484,
     "drivers_J": {
-     "pulsed power": 3089668.137229486,
-     "laser": 2492.758971295024
+     "pulsed power": 3732980.231755654,
+     "laser": 30955.552487632507
     },
-    "electricity_in_J": 20622715.17124286,
-    "heat_J": 54171.799537376566,
-    "target_gain": 0.013775616195041192,
-    "electric_gain": 0.0010507209955150018,
+    "electricity_in_J": 25196090.403247353,
+    "heat_J": 14032470.589593804,
+    "target_gain": 2.9322547833614463,
+    "electric_gain": 0.2227721898915755,
     "stretch": 1.0,
     "limiting": "",
     "untested": [
      "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m\u207b\u00b3)"
     ],
-    "notes": "end of pulse at 150 ns; 5.8 MA reached; 0.0% burnt; hottest 0.64 keV; narrowest 7.2 \u00b5m; zpinch.py",
+    "notes": "blown apart at 109 ns; 24.1 MA reached; 4.5% burnt; hottest 25 keV; narrowest 42 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 16262326.59108558,
+      "needed": 19566975.67617117,
       "best": 26000000.0,
       "stretch": 1.0
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 2679890.9709670595,
+      "needed": 2020853.0693005484,
       "best": 3000000.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "radial squeeze of the fuel",
+      "needed": 32.28409476295493,
+      "best": 35.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "laser energy per shot (J)",
+      "needed": 30955.552487632507,
+      "best": 2080000.0,
       "stretch": 1.0
      },
      {
       "name": "stable Alfv\u00e9n times of a dense hot pinch",
       "needed": 1.0,
       "best": 1.0,
-      "stretch": 1.0
-     },
-     {
-      "name": "radial squeeze of the fuel",
-      "needed": 27.288090584924785,
-      "best": 35.0,
-      "stretch": 1.0
-     },
-     {
-      "name": "laser energy per shot (J)",
-      "needed": 2492.758971295024,
-      "best": 2080000.0,
       "stretch": 1.0
      },
      {
@@ -5785,61 +5978,83 @@
    "\u2264 10\u00d7 today": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 68.19210663978865,
-     "radius_um": 1472.281149827316,
-     "preheat_kev": 0.04979438618660526,
-     "alfven_times": 1.8934513808263016,
-     "stability": "sheared flow"
+     "current_ma": 34.97332069289593,
+     "load": "liner",
+     "radius_um": 27.66487534606625,
+     "column_mm": 3.7329729287178606,
+     "line_mg_cm": 0.07724033570840706,
+     "liner_mm": 4.479529213574024,
+     "liner_aspect": 12.0,
+     "fill_mg_cc": 0.3,
+     "bz_tesla": 2.0748834531795617,
+     "ice_um": 600.0,
+     "ice_burn": "as an ICF shell",
+     "tritium": 0.4890849767346279,
+     "preheat_kev": 0.01,
+     "alfven_times": 1.208951159058753,
+     "stability": "breaks"
     },
-    "fusion_J": 2471409046.9992485,
-    "fuel_J": 26232350.443251126,
+    "fusion_J": 5138862430.47547,
+    "fuel_J": 2769241.511031347,
     "drivers_J": {
-     "pulsed power": 44947419.69388428,
-     "laser": 196301.81085890206
+     "pulsed power": 10461540.03908046,
+     "laser": 267.86777274476214
     },
-    "electricity_in_J": 301612482.73448426,
-    "heat_J": 3143002864.205412,
-    "target_gain": 54.74535471648213,
-    "electric_gain": 4.16826629416696,
-    "stretch": 8.744116814417042,
-    "limiting": "energy into the pinch (J)",
+    "electricity_in_J": 69746278.93826385,
+    "heat_J": 6532673873.4714365,
+    "target_gain": 491.2021398432637,
+    "electric_gain": 37.46536143815703,
+    "stretch": 9.162442437821467,
+    "limiting": "radial squeeze of the fuel",
     "untested": [
-     "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m\u207b\u00b3)"
+     "burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)"
     ],
-    "notes": "blown apart at 123 ns; 88.7 MA reached; 42.8% burnt; hottest 1.4e+02 keV; narrowest 24 \u00b5m; zpinch.py",
+    "notes": "blown apart at 125 ns; 36.5 MA reached; 24.6% burnt; hottest 1.2e+02 keV; narrowest 11 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 68192106.63978864,
+      "needed": 34973320.692895934,
       "best": 26000000.0,
-      "stretch": 2.622773332299563
+      "stretch": 1.345127718957536
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 26232350.443251126,
+      "needed": 2769241.511031347,
       "best": 3000000.0,
-      "stretch": 8.744116814417042
-     },
-     {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 1.8934513808263016,
-      "best": 1.0,
-      "stretch": 1.8934513808263016
+      "stretch": 1.0
      },
      {
       "name": "radial squeeze of the fuel",
-      "needed": 62.02189303631168,
+      "needed": 320.6854853237513,
       "best": 35.0,
-      "stretch": 1.7720540867517622
+      "stretch": 9.162442437821467
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 196301.81085890206,
+      "needed": 267.86777274476214,
       "best": 2080000.0,
       "stretch": 1.0
      },
      {
-      "name": "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m\u207b\u00b3)",
+      "name": "magnetic field on the target (T)",
+      "needed": 2.0748834531795617,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 17845.89009074286,
+      "best": 7100.0,
+      "stretch": 2.5135056465835017
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 12.0,
+      "best": 9.0,
+      "stretch": 1.3333333333333333
+     },
+     {
+      "name": "burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)",
       "needed": 1.0,
       "best": NaN,
       "stretch": 1.0
@@ -5849,61 +6064,83 @@
    "\u2264 100\u00d7 today": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 83.44830273257764,
-     "radius_um": 2000.0,
-     "preheat_kev": 0.013474600408489404,
-     "alfven_times": 1.4226150852113917,
-     "stability": "sheared flow"
+     "current_ma": 34.97332069289593,
+     "load": "liner",
+     "radius_um": 27.66487534606625,
+     "column_mm": 3.7329729287178606,
+     "line_mg_cm": 0.07724033570840706,
+     "liner_mm": 4.479529213574024,
+     "liner_aspect": 12.0,
+     "fill_mg_cc": 0.3,
+     "bz_tesla": 2.0748834531795617,
+     "ice_um": 600.0,
+     "ice_burn": "as an ICF shell",
+     "tritium": 0.4890849767346279,
+     "preheat_kev": 0.01,
+     "alfven_times": 1.208951159058753,
+     "stability": "breaks"
     },
-    "fusion_J": 5031774385.677247,
-    "fuel_J": 33819827.62869041,
+    "fusion_J": 5138862430.47547,
+    "fuel_J": 2769241.511031347,
     "drivers_J": {
-     "pulsed power": 65175561.81917035,
-     "laser": 98025.3283373501
+     "pulsed power": 10461540.03908046,
+     "laser": 267.86777274476214
     },
-    "electricity_in_J": 435483998.74450916,
-    "heat_J": 6399135475.1336,
-    "target_gain": 77.08745000188598,
-    "electric_gain": 5.877722711816891,
-    "stretch": 11.273275876230135,
-    "limiting": "energy into the pinch (J)",
+    "electricity_in_J": 69746278.93826385,
+    "heat_J": 6532673873.4714365,
+    "target_gain": 491.2021398432637,
+    "electric_gain": 37.46536143815703,
+    "stretch": 9.162442437821467,
+    "limiting": "radial squeeze of the fuel",
     "untested": [
-     "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m\u207b\u00b3)"
+     "burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)"
     ],
-    "notes": "blown apart at 102 ns; 108.1 MA reached; 47.2% burnt; hottest 1.5e+02 keV; narrowest 35 \u00b5m; zpinch.py",
+    "notes": "blown apart at 125 ns; 36.5 MA reached; 24.6% burnt; hottest 1.2e+02 keV; narrowest 11 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 83448302.73257765,
+      "needed": 34973320.692895934,
       "best": 26000000.0,
-      "stretch": 3.2095501050991406
+      "stretch": 1.345127718957536
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 33819827.62869041,
+      "needed": 2769241.511031347,
       "best": 3000000.0,
-      "stretch": 11.273275876230135
-     },
-     {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 1.4226150852113917,
-      "best": 1.0,
-      "stretch": 1.4226150852113917
+      "stretch": 1.0
      },
      {
       "name": "radial squeeze of the fuel",
-      "needed": 57.58562128956493,
+      "needed": 320.6854853237513,
       "best": 35.0,
-      "stretch": 1.645303465416141
+      "stretch": 9.162442437821467
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 98025.3283373501,
+      "needed": 267.86777274476214,
       "best": 2080000.0,
       "stretch": 1.0
      },
      {
-      "name": "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m\u207b\u00b3)",
+      "name": "magnetic field on the target (T)",
+      "needed": 2.0748834531795617,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 17845.89009074286,
+      "best": 7100.0,
+      "stretch": 2.5135056465835017
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 12.0,
+      "best": 9.0,
+      "stretch": 1.3333333333333333
+     },
+     {
+      "name": "burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)",
       "needed": 1.0,
       "best": NaN,
       "stretch": 1.0
@@ -5913,61 +6150,83 @@
    "unlimited": {
     "route": "dynamic_pinch",
     "params": {
-     "current_ma": 82.30705383944223,
-     "radius_um": 2000.0,
+     "current_ma": 34.97332069289593,
+     "load": "liner",
+     "radius_um": 27.66487534606625,
+     "column_mm": 3.7329729287178606,
+     "line_mg_cm": 0.07724033570840706,
+     "liner_mm": 4.479529213574024,
+     "liner_aspect": 12.0,
+     "fill_mg_cc": 0.3,
+     "bz_tesla": 2.0748834531795617,
+     "ice_um": 600.0,
+     "ice_burn": "as an ICF shell",
+     "tritium": 0.4890849767346279,
      "preheat_kev": 0.01,
-     "alfven_times": 1.0,
-     "stability": "sheared flow"
+     "alfven_times": 1.208951159058753,
+     "stability": "breaks"
     },
-    "fusion_J": 5000907802.193559,
-    "fuel_J": 33372499.415684156,
+    "fusion_J": 5138862430.47547,
+    "fuel_J": 2769241.511031347,
     "drivers_J": {
-     "pulsed power": 63405054.5710463,
-     "laser": 72748.2265638031
+     "pulsed power": 10461540.03908046,
+     "laser": 267.86777274476214
     },
-    "electricity_in_J": 423427846.0726134,
-    "heat_J": 6359881042.357585,
-    "target_gain": 78.7819927879079,
-    "electric_gain": 6.007995082370594,
-    "stretch": 11.12416647189472,
-    "limiting": "energy into the pinch (J)",
+    "electricity_in_J": 69746278.93826385,
+    "heat_J": 6532673873.4714365,
+    "target_gain": 491.2021398432637,
+    "electric_gain": 37.46536143815703,
+    "stretch": 9.162442437821467,
+    "limiting": "radial squeeze of the fuel",
     "untested": [
-     "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m\u207b\u00b3)"
+     "burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)"
     ],
-    "notes": "blown apart at 106 ns; 107.3 MA reached; 46.9% burnt; hottest 1.5e+02 keV; narrowest 35 \u00b5m; zpinch.py",
+    "notes": "blown apart at 125 ns; 36.5 MA reached; 24.6% burnt; hottest 1.2e+02 keV; narrowest 11 \u00b5m; zpinch.py",
     "requirements": [
      {
       "name": "pinch current (A)",
-      "needed": 82307053.83944224,
+      "needed": 34973320.692895934,
       "best": 26000000.0,
-      "stretch": 3.1656559169016245
+      "stretch": 1.345127718957536
      },
      {
       "name": "energy into the pinch (J)",
-      "needed": 33372499.415684156,
+      "needed": 2769241.511031347,
       "best": 3000000.0,
-      "stretch": 11.12416647189472
-     },
-     {
-      "name": "stable Alfv\u00e9n times of a dense hot pinch",
-      "needed": 1.0,
-      "best": 1.0,
       "stretch": 1.0
      },
      {
       "name": "radial squeeze of the fuel",
-      "needed": 57.102390218868216,
+      "needed": 320.6854853237513,
       "best": 35.0,
-      "stretch": 1.6314968633962348
+      "stretch": 9.162442437821467
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 72748.2265638031,
+      "needed": 267.86777274476214,
       "best": 2080000.0,
       "stretch": 1.0
      },
      {
-      "name": "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m\u207b\u00b3)",
+      "name": "magnetic field on the target (T)",
+      "needed": 2.0748834531795617,
+      "best": 800.0,
+      "stretch": 1.0
+     },
+     {
+      "name": "compressed magnetic field (T)",
+      "needed": 17845.89009074286,
+      "best": 7100.0,
+      "stretch": 2.5135056465835017
+     },
+     {
+      "name": "liner aspect ratio (radius / wall)",
+      "needed": 12.0,
+      "best": 9.0,
+      "stretch": 1.3333333333333333
+     },
+     {
+      "name": "burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)",
       "needed": 1.0,
       "best": NaN,
       "stretch": 1.0
@@ -5979,19 +6238,19 @@
    "today's technology": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 175.80692519106987,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.02665538578911888,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.03389886185915801,
+    "target_gain": 0.02665538578911888,
+    "electric_gain": 0.005423817897465282,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -6001,19 +6260,19 @@
    "\u2264 10\u00d7 today": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 175.80692519106987,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.02665538578911888,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.03389886185915801,
+    "target_gain": 0.02665538578911888,
+    "electric_gain": 0.005423817897465282,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -6023,19 +6282,19 @@
    "\u2264 100\u00d7 today": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 175.80692519106987,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.02665538578911888,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.03389886185915801,
+    "target_gain": 0.02665538578911888,
+    "electric_gain": 0.005423817897465282,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -6045,19 +6304,19 @@
    "unlimited": {
     "route": "channelling",
     "params": {
-     "ion_kev": 175.912807032332,
+     "ion_kev": 175.80692519106987,
      "source": "aligned beam",
      "values": "generous"
     },
-    "fusion_J": 0.026655393007195008,
+    "fusion_J": 0.02665538578911888,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.03389887103871247,
-    "target_gain": 0.026655393007195008,
-    "electric_gain": 0.005423819366193995,
+    "heat_J": 0.03389886185915801,
+    "target_gain": 0.02665538578911888,
+    "electric_gain": 0.005423817897465282,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -6070,40 +6329,40 @@
    "\u2264 10\u00d7 today": {
     "route": "compressed_icf",
     "params": {
-     "rho_g_cc": 1562.8026279075477,
-     "rho_r": 5.867136870376927,
+     "rho_g_cc": 1571.2886919978723,
+     "rho_r": 5.831860670586733,
      "adiabat": 1.006472067463981,
      "ignitor": "hot spot",
      "driver": "laser",
      "spin": true
     },
-    "fusion_J": 702212725.7479596,
-    "fuel_J": 195644.04008372905,
+    "fusion_J": 682910294.8958564,
+    "fuel_J": 191552.38510687693,
     "drivers_J": {
-     "laser": 19564404.008372903
+     "laser": 19155238.510687694
     },
-    "electricity_in_J": 195644040.08372903,
-    "heat_J": 893035740.4765127,
-    "target_gain": 35.892364799226,
-    "electric_gain": 1.8258378636922927,
-    "stretch": 9.778561450628212,
+    "electricity_in_J": 191552385.10687694,
+    "heat_J": 868487964.5719334,
+    "target_gain": 35.65135952313126,
+    "electric_gain": 1.8135779705115325,
+    "stretch": 9.719767784311221,
     "limiting": "fuel areal density (g/cm\u00b2)",
     "untested": [
      "spin-polarised D-T that survives in the fuel"
     ],
-    "notes": "3.7 mg of D-T, 57% burnt, hot spot 50 \u00b5m at 456 Gbar; sections 7 and 11",
+    "notes": "3.6 mg of D-T, 57% burnt, hot spot 50 \u00b5m at 460 Gbar; sections 7 and 11",
     "requirements": [
      {
       "name": "fuel areal density (g/cm\u00b2)",
-      "needed": 5.867136870376927,
+      "needed": 5.831860670586733,
       "best": 0.6,
-      "stretch": 9.778561450628212
+      "stretch": 9.719767784311221
      },
      {
       "name": "cold squeezed density (g/cm\u00b3)",
-      "needed": 1562.8026279075477,
+      "needed": 1571.2886919978723,
       "best": 1000.0,
-      "stretch": 1.5628026279075478
+      "stretch": 1.5712886919978724
      },
      {
       "name": "fuel adiabat (lower is harder)",
@@ -6113,15 +6372,15 @@
      },
      {
       "name": "hot-spot pressure (Gbar)",
-      "needed": 455.8300847184997,
+      "needed": 459.9584830954756,
       "best": 600.0,
       "stretch": 1.0
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 19564404.008372903,
+      "needed": 19155238.510687694,
       "best": 2080000.0,
-      "stretch": 9.405963465563895
+      "stretch": 9.209249283984468
      },
      {
       "name": "spin-polarised D-T that survives in the fuel",
@@ -6134,28 +6393,28 @@
    "\u2264 100\u00d7 today": {
     "route": "compressed_icf",
     "params": {
-     "rho_g_cc": 795.5442008385168,
+     "rho_g_cc": 797.480946748649,
      "rho_r": 10.0,
      "adiabat": 1.0,
      "ignitor": "hot spot",
      "driver": "laser",
      "spin": true
     },
-    "fusion_J": 14488603224.265902,
-    "fuel_J": 2077838.2871693016,
+    "fusion_J": 14385887816.901798,
+    "fuel_J": 2065544.5640611832,
     "drivers_J": {
-     "laser": 207783828.71693015
+     "laser": 206554456.40611833
     },
-    "electricity_in_J": 2077838287.1693015,
-    "heat_J": 18425813196.522354,
-    "target_gain": 69.72921479854017,
-    "electric_gain": 3.547112075141202,
-    "stretch": 99.89607149852411,
+    "electricity_in_J": 2065544564.0611832,
+    "heat_J": 18295185358.95925,
+    "target_gain": 69.64694960934125,
+    "electric_gain": 3.5429272604001456,
+    "stretch": 99.30502711832612,
     "limiting": "laser energy per shot (J)",
     "untested": [
      "spin-polarised D-T that survives in the fuel"
     ],
-    "notes": "62 mg of D-T, 69% burnt, hot spot 156 \u00b5m at 147 Gbar; sections 7 and 11",
+    "notes": "62 mg of D-T, 69% burnt, hot spot 156 \u00b5m at 148 Gbar; sections 7 and 11",
     "requirements": [
      {
       "name": "fuel areal density (g/cm\u00b2)",
@@ -6165,7 +6424,7 @@
      },
      {
       "name": "cold squeezed density (g/cm\u00b3)",
-      "needed": 795.5442008385168,
+      "needed": 797.480946748649,
       "best": 1000.0,
       "stretch": 1.0
      },
@@ -6177,15 +6436,15 @@
      },
      {
       "name": "hot-spot pressure (Gbar)",
-      "needed": 147.12378913313051,
+      "needed": 147.72080366446446,
       "best": 600.0,
       "stretch": 1.0
      },
      {
       "name": "laser energy per shot (J)",
-      "needed": 207783828.71693015,
+      "needed": 206554456.40611833,
       "best": 2080000.0,
-      "stretch": 99.89607149852411
+      "stretch": 99.30502711832612
      },
      {
       "name": "spin-polarised D-T that survives in the fuel",
@@ -6264,22 +6523,22 @@
    "today's technology": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.06445820016797606,
-     "aspect": 12.348610281298106,
-     "t_i_kev": 32.40580444790314,
+     "radius_mm": 0.08278555232703287,
+     "aspect": 6.876242292824041,
+     "t_i_kev": 26.58968254470377,
      "fill": 1.0,
-     "b_tesla": 5903.676281266209,
+     "b_tesla": 6880.788992420541,
      "spin": true
     },
-    "fusion_J": 6392.29744593723,
-    "fuel_J": 14852.792320471044,
+    "fusion_J": 6680.235933132472,
+    "fuel_J": 14559.59740526547,
     "drivers_J": {
-     "pulsed power": 2970558.4640942086
+     "pulsed power": 2911919.481053094
     },
-    "electricity_in_J": 19803723.09396139,
-    "heat_J": 8129.374295941776,
-    "target_gain": 0.002151884072709671,
-    "electric_gain": 0.00016419890860664695,
+    "electricity_in_J": 19412796.54035396,
+    "heat_J": 8495.558716553349,
+    "target_gain": 0.0022941004985194747,
+    "electric_gain": 0.000175050692956955,
     "stretch": 1.0,
     "limiting": "",
     "untested": [
@@ -6289,13 +6548,13 @@
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 2970558.4640942086,
+      "needed": 2911919.481053094,
       "best": 3000000.0,
       "stretch": 1.0
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 5903.676281266209,
+      "needed": 6880.788992420541,
       "best": 7100.0,
       "stretch": 1.0
      },
@@ -6310,23 +6569,23 @@
    "\u2264 10\u00d7 today": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.20934897550276702,
-     "aspect": 4.594820097581931,
-     "t_i_kev": 25.408823626056783,
+     "radius_mm": 0.22007451291655242,
+     "aspect": 3.1135120984436457,
+     "t_i_kev": 31.49193192365652,
      "fill": 1.0,
-     "b_tesla": 5877.182338842042,
+     "b_tesla": 5757.230016312198,
      "spin": true
     },
-    "fusion_J": 136743.70616160842,
-    "fuel_J": 149216.4320248478,
+    "fusion_J": 123727.34264296069,
+    "fuel_J": 144780.96227053873,
     "drivers_J": {
-     "pulsed power": 29843286.40496956
+     "pulsed power": 28956192.454107746
     },
-    "electricity_in_J": 198955242.6997971,
-    "heat_J": 173903.1669604992,
-    "target_gain": 0.004582059237914146,
-    "electric_gain": 0.0003496327407122437,
-    "stretch": 9.947762134989853,
+    "electricity_in_J": 193041283.027385,
+    "heat_J": 157349.6677045498,
+    "target_gain": 0.004272914777695803,
+    "electric_gain": 0.0003260435596715922,
+    "stretch": 9.652064151369249,
     "limiting": "energy into the pinch (J)",
     "untested": [
      "spin-polarised D-T that survives in the fuel"
@@ -6335,13 +6594,13 @@
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 29843286.40496956,
+      "needed": 28956192.454107746,
       "best": 3000000.0,
-      "stretch": 9.947762134989853
+      "stretch": 9.652064151369249
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 5877.182338842042,
+      "needed": 5757.230016312198,
       "best": 7100.0,
       "stretch": 1.0
      },
@@ -6356,23 +6615,23 @@
    "\u2264 100\u00d7 today": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 0.32066792339444083,
-     "aspect": 12.357661413441967,
-     "t_i_kev": 23.665079255060796,
+     "radius_mm": 0.3436451985381245,
+     "aspect": 9.484211937190747,
+     "t_i_kev": 27.309408416700595,
      "fill": 1.0,
-     "b_tesla": 7483.434030227332,
+     "b_tesla": 7367.651416088831,
      "spin": true
     },
-    "fusion_J": 2576386.747941769,
-    "fuel_J": 1367541.9826710126,
+    "fusion_J": 2867059.52095864,
+    "fuel_J": 1480692.315167012,
     "drivers_J": {
-     "pulsed power": 273508396.5342025
+     "pulsed power": 296138463.0334024
     },
-    "electricity_in_J": 1823389310.2280169,
-    "heat_J": 3276507.7630163375,
-    "target_gain": 0.009419772045717029,
-    "electric_gain": 0.000718773055131404,
-    "stretch": 91.16946551140084,
+    "electricity_in_J": 1974256420.2226827,
+    "heat_J": 3646169.4987973156,
+    "target_gain": 0.009681483085955152,
+    "electric_gain": 0.0007387428424086984,
+    "stretch": 98.71282101113412,
     "limiting": "energy into the pinch (J)",
     "untested": [
      "spin-polarised D-T that survives in the fuel"
@@ -6381,15 +6640,15 @@
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 273508396.5342025,
+      "needed": 296138463.0334024,
       "best": 3000000.0,
-      "stretch": 91.16946551140084
+      "stretch": 98.71282101113412
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 7483.434030227332,
+      "needed": 7367.651416088831,
       "best": 7100.0,
-      "stretch": 1.0540047929897651
+      "stretch": 1.0376973825477227
      },
      {
       "name": "spin-polarised D-T that survives in the fuel",
@@ -6402,23 +6661,23 @@
    "unlimited": {
     "route": "magnetised_liner",
     "params": {
-     "radius_mm": 2.9999817551020036,
-     "aspect": 95.18320603235225,
-     "t_i_kev": 5.3889825022340085,
+     "radius_mm": 3.0,
+     "aspect": 93.33629926027741,
+     "t_i_kev": 5.3719368270106544,
      "fill": 1.0,
-     "b_tesla": 2379.423871279301,
+     "b_tesla": 1954.4271837939039,
      "spin": true
     },
-    "fusion_J": 385619750213.7043,
-    "fuel_J": 1918493275.3591979,
+    "fusion_J": 374230334361.8842,
+    "fuel_J": 1863859713.5449345,
     "drivers_J": {
-     "pulsed power": 383698655071.83954
+     "pulsed power": 372771942708.9869
     },
-    "electricity_in_J": 2557991033812.2637,
-    "heat_J": 490410108714.0742,
-    "target_gain": 1.005006781015443,
-    "electric_gain": 0.0766867596065337,
-    "stretch": 127899.55169061318,
+    "electricity_in_J": 2485146284726.579,
+    "heat_J": 475925672522.76013,
+    "target_gain": 1.0039122892197814,
+    "electric_gain": 0.07660324471806657,
+    "stretch": 124257.31423632897,
     "limiting": "energy into the pinch (J)",
     "untested": [
      "spin-polarised D-T that survives in the fuel"
@@ -6427,13 +6686,13 @@
     "requirements": [
      {
       "name": "energy into the pinch (J)",
-      "needed": 383698655071.83954,
+      "needed": 372771942708.9869,
       "best": 3000000.0,
-      "stretch": 127899.55169061318
+      "stretch": 124257.31423632897
      },
      {
       "name": "compressed magnetic field (T)",
-      "needed": 2379.423871279301,
+      "needed": 1954.4271837939039,
       "best": 7100.0,
       "stretch": 1.0
      },
@@ -6792,21 +7051,21 @@
    "today's technology": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5353.104455856213,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022298390694104,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022298390694104,
-    "target_gain": 0.0019022298390694104,
-    "electric_gain": 0.00030435677425110565,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -6816,21 +7075,21 @@
    "\u2264 10\u00d7 today": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5353.104455856213,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022298390694104,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022298390694104,
-    "target_gain": 0.0019022298390694104,
-    "electric_gain": 0.00030435677425110565,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -6840,21 +7099,21 @@
    "\u2264 100\u00d7 today": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5353.104455856213,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022298390694104,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022298390694104,
-    "target_gain": 0.0019022298390694104,
-    "electric_gain": 0.00030435677425110565,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],
@@ -6864,21 +7123,21 @@
    "unlimited": {
     "route": "pB_catcher",
     "params": {
-     "proton_kev": 5353.104455856213,
+     "proton_kev": 5354.848370374835,
      "target": "boron",
      "avalanche": true,
      "source": "accelerator",
      "screening_ev": 0.0
     },
-    "fusion_J": 0.0019022298390694104,
+    "fusion_J": 0.001902231104185342,
     "fuel_J": 1.0,
     "drivers_J": {
      "accelerator": 1.0
     },
     "electricity_in_J": 2.5,
-    "heat_J": 0.0019022298390694104,
-    "target_gain": 0.0019022298390694104,
-    "electric_gain": 0.00030435677425110565,
+    "heat_J": 0.001902231104185342,
+    "target_gain": 0.001902231104185342,
+    "electric_gain": 0.00030435697666965475,
     "stretch": 1.0,
     "limiting": "",
     "untested": [],

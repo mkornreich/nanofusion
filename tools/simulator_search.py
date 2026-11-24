@@ -104,12 +104,52 @@ IDEAS = [
     ("opaque_pB", "direct_conversion", (False, True)),
     ("son_fisch_pB", "alpha_channelling", (0.0, 0.5, 0.9)),
     ("son_fisch_pB", "direct_conversion", (False, True)),
+    ("dynamic_pinch", "load", ("fibre", "gas column", "liner")),
     ("dynamic_pinch", "stability", ("breaks", "rising current", "sheared flow")),
+    ("dynamic_pinch", "ice_burn", ("ablation", "as an ICF shell")),
 ]
 
 
 def gain(o) -> float:
     return o.electric_gain if o is not None else 0.0
+
+
+def pinch_design(o) -> str:
+    """One line on a dynamic_pinch design: its load, current and the convergence it needs."""
+    p = o.params
+    squeeze = next(r.needed for r in o.all_requirements if r.name == "radial squeeze of the fuel")
+    if p["load"] == "liner":
+        what = (f"a {fmt(p['liner_mm'])} mm liner with a wall 1/{fmt(p['liner_aspect'])} of its radius, "
+                f"{fmt(p['ice_um'])} µm of D-T ice and {fmt(p['bz_tesla'])} T")
+    elif p["load"] == "gas column":
+        what = f"a {fmt(p['column_mm'])} mm gas column of {fmt(p['line_mg_cm'])} mg/cm"
+    else:
+        what = f"a {fmt(p['radius_um'])} µm fibre"
+    return f"{what} at {fmt(p['current_ma'])} MA, converging {fmt(squeeze)}× (NIF's best: 35)"
+
+
+def lead_findings(icf: dict, pinch: dict, dyn: dict, dyn_theory: dict, lead10) -> list[str]:
+    """Bullets on who leads beyond today's technology: inertial fusion, and the pinch, static and in time."""
+    leads_pinch = lead10 is not None and lead10.route == "dynamic_pinch"
+    icf_line = (f"Within ten times today's best on every demand it reaches {fmt(icf[10.0].electric_gain)} (target gain "
+                f"{fmt(icf[10.0].target_gain)}); within a hundred, {fmt(icf[100.0].electric_gain)}. The ten-times design "
+                f"needs a drive of {fmt(icf[10.0].driver_J / 1e6)} MJ, a cold shell of {fmt(icf[10.0].params['rho_r'])} "
+                f"g/cm² ({fmt(icf[10.0].params['rho_r'] / S.TODAY['fuel areal density (g/cm²)'][0])} times NIF's) at an "
+                f"adiabat of {fmt(icf[10.0].params['adiabat'])}. That matches the standard view that inertial fusion "
+                "power needs target gains of tens to a hundred and an efficient driver.")
+    out = [("* **Ordinary inertial fusion is the most proven route beyond that.** " if leads_pinch else
+            "* **Ordinary inertial fusion leads everywhere beyond that.** ") + icf_line,
+           (f"* **The dense Z-pinch, static**: {fmt(pinch[10.0].electric_gain)} within ten times today, "
+            f"{fmt(pinch[100.0].electric_gain)} within a hundred, if it stays stable for many Alfvén times.")]
+    if dyn[10.0] is not None:
+        out.append(
+            f"* **Followed in time, the pinch {'leads within ten times today' if leads_pinch else 'does differently'}"
+             f"** (dynamic_pinch: {fmt(gain(dyn[10.0]))}, against the static {fmt(pinch[10.0].electric_gain)}; "
+             f"{fmt(gain(dyn[100.0]))} within a hundred). Its best design is {pinch_design(dyn[10.0])}. That is in "
+             "effect cylindrical inertial fusion, in a 0-D model with no liner instability, so its convergence is "
+             "the number to doubt. A cold fibre can't take the current; a gas column or a liner can. With untested "
+             f"ideas it reaches {fmt(gain(dyn_theory[10.0]))} within ten times today.")
+    return out
 
 
 def idea_effects(known: dict, found_designs: dict | None = None) -> tuple[list[str], list]:
@@ -267,23 +307,7 @@ def main() -> int:
     lines += ["", "## What the search found", "",
               (f"* **With today's technology nothing reaches breakeven.** The best is {today.route.replace('_', ' ')} "
               f"at {fmt(today.electric_gain)}."),
-              (f"* **Ordinary inertial fusion leads everywhere beyond that.** Within ten times today's best on every "
-              f"demand it reaches {fmt(icf[10.0].electric_gain)} (target gain {fmt(icf[10.0].target_gain)}); within "
-              f"a hundred, {fmt(icf[100.0].electric_gain)}. The ten-times design needs a drive of "
-              f"{fmt(icf[10.0].driver_J / 1e6)} MJ, a cold shell of {fmt(icf[10.0].params['rho_r'])} g/cm² "
-              f"({fmt(icf[10.0].params['rho_r'] / S.TODAY['fuel areal density (g/cm²)'][0])} times NIF's) at an "
-              f"adiabat of {fmt(icf[10.0].params['adiabat'])}. That matches the standard view that inertial fusion "
-              "power needs target gains of tens to a hundred and an efficient driver."),
-              (f"* **The dense Z-pinch is second**: {fmt(pinch[10.0].electric_gain)} within ten times today, "
-              f"{fmt(pinch[100.0].electric_gain)} within a hundred, if it stays stable for many Alfvén times."),
-              (f"* **Followed in time, the pinch needs more stability, but burns better once it has it** "
-              f"(dynamic_pinch: {fmt(gain(dyn[10.0]))} within ten times today against the static "
-              f"{fmt(pinch[10.0].electric_gain)}; {fmt(gain(dyn[100.0]))} within a hundred; "
-              f"{fmt(gain(dyn[S.INF]))} unlimited). A generator circuit, radiative collapse above the "
-              "Pease-Braginskii current and instability growth replace the static pinch's hot Bennett equilibrium. "
-              "A cold fibre can't take the current. Given tens of Alfvén times and ~70 MA, a millimetre-thick fibre "
-              "collapses to ICF-like density, ignites and burns ~40% of its fuel. With untested sheared-flow "
-              f"stabilisation it reaches {fmt(gain(dyn_theory[10.0]))} within ten times today."),
+              *lead_findings(icf, pinch, dyn, dyn_theory, best_of(fusion_only, 10.0)),
               (f"* **Exploding crystals never help.** The best crystal route within a hundred times today is "
               f"{crystal100.route.replace('_', ' ')} at {fmt(crystal100.electric_gain)}. As the spark for inertial "
               f"fusion, crystals do worse than an ordinary hot spot at every budget (unlimited: "

@@ -18,16 +18,16 @@ electricity → driver (laser light, accelerator beam or pulsed current) → ene
 
 | Route (section) | today's technology | ≤ 10× today | ≤ 100× today | unlimited |
 |---|---|---|---|---|
-| compressed_icf (7, 11) | – | **1.5** | **3.1** | **7.1** |
+| dynamic_pinch (24, 25) | 3.1×10⁻³ | **22** | **22** | **22** |
+| compressed_icf (7, 11) | – | **1.5** | **3** | **7.1** |
 | fibre_pinch (19) | 0.01 | 0.89 | **2.8** | **5.7** |
-| dynamic_pinch (24) | 2.2×10⁻⁷ | 1.8×10⁻³ | **3.7** | **5.5** |
 | pycnonuclear (10) | – | – | – | **5.3** |
 | tamped_ball (12) | 8.6×10⁻⁴ | 4.5×10⁻³ | 0.012 | **1.3** |
 | muon_squeezed (17) | – | – | – | **1.1** |
 | fast_ignition (7) | – | – | – | 0.41 |
 | crystal_ball (3) | 7×10⁻⁴ | 1.4×10⁻³ | 3.1×10⁻³ | 0.19 |
 | muon_catalysis (9) | 0.12 | 0.16 | 0.16 | 0.16 |
-| magnetised_liner (12, 19) | 10⁻⁴ | 2.3×10⁻⁴ | 4.6×10⁻⁴ | 0.046 |
+| magnetised_liner (12, 19) | 1.2×10⁻⁴ | 2.1×10⁻⁴ | 4.9×10⁻⁴ | 0.046 |
 | son_fisch_pB (17) | – | 6.3×10⁻³ | 0.01 | 0.015 |
 | muon_factory (9, 10) | – | 5.8×10⁻³ | 5.9×10⁻³ | 5.9×10⁻³ |
 | channelling (20) | 5.4×10⁻³ | 5.4×10⁻³ | 5.4×10⁻³ | 5.4×10⁻³ |
@@ -54,36 +54,42 @@ Bold: more than 1, net electricity on paper.
 
 ### ≤ 10× today
 
-**compressed_icf** (Ordinary inertial fusion: compressed D-T lit by a hot spot (the reference)): rho_g_cc 1,700, rho_r 5.9, adiabat 1, ignitor hot spot, driver laser.
+**dynamic_pinch** (D-T pinch followed in time, driven by a generator circuit): current_ma 34, load liner, radius_um 43, column_mm 3.4, line_mg_cm 0.05, liner_mm 4.5, liner_aspect 12, fill_mg_cc 0.3, bz_tesla 4.3, ice_um 580, ice_burn ablation, tritium 0.5, preheat_kev 0.017, alfven_times 1.2, stability breaks.
 
-* Fusion 4.8×10⁸ J from 1.7×10⁷ J of laser; electricity out / in **1.5**. 3 mg of D-T, 47% burnt, hot spot 45 µm at 511 Gbar; sections 7 and 11.
-* fuel areal density (g/cm²): 5.9 against 0.6 (NIF's best shots), ×9.9 ← the hardest
-* cold squeezed density (g/cm³): 1,700 against 1,000 (NIF design density), ×1.7
-* fuel adiabat (lower is harder): 1 against 1.5 (NIF's 2012 low-foot designs), ×1.5
-* hot-spot pressure (Gbar): 510 against 600 (NIF's best shots), ×1
-* laser energy per shot (J): 1.7×10⁷ against 2.1×10⁶ (NIF), ×8
+* Fusion 2.9×10⁹ J from 9.9×10⁶ J of pulsed power, 470 J of laser; electricity out / in **22**. Blown apart at 126 ns; 35.0 MA reached; 24.6% burnt; hottest 81 keV; narrowest 20 µm; zpinch.py.
+* pinch current (A): 3.4×10⁷ against 2.6×10⁷ (Sandia's Z), ×1.3
+* energy into the pinch (J): 2.6×10⁶ against 3×10⁶ (Z (2.7 MJ of X-rays from ~20 MJ stored)), ×1
+* radial squeeze of the fuel: 170 against 35 (NIF-class implosions, 30–40), ×5 ← the hardest
+* laser energy per shot (J): 470 against 2.1×10⁶ (NIF), ×1
+* magnetic field on the target (T): 4.3 against 800 (laser-driven coil, claimed), ×1
+* compressed magnetic field (T): 1.4×10⁴ against 7,100 (NIF magnetised implosion (Sio et al. 2023)), ×2
+* liner aspect ratio (radius / wall): 12 against 9 (Z's record MagLIF shots (coated liners, mass-matched AR 9)), ×1.3
 
 ### ≤ 100× today
 
-**dynamic_pinch** (D-T fibre pinch followed in time, driven by a generator circuit): current_ma 71, radius_um 1,500, preheat_kev 0.45, alfven_times 46, stability breaks.
+**dynamic_pinch** (D-T pinch followed in time, driven by a generator circuit): current_ma 34, load liner, radius_um 43, column_mm 3.4, line_mg_cm 0.05, liner_mm 4.5, liner_aspect 12, fill_mg_cc 0.3, bz_tesla 4.3, ice_um 580, ice_burn ablation, tritium 0.5, preheat_kev 0.017, alfven_times 1.2, stability breaks.
 
-* Fusion 2.5×10⁹ J from 4.8×10⁷ J of pulsed power, 1.9×10⁶ J of laser; electricity out / in **3.7**. Blown apart at 76 ns; 79.3 MA reached; 40.0% burnt; hottest 1.2e+02 keV; narrowest 32 µm; zpinch.py.
-* pinch current (A): 7.1×10⁷ against 2.6×10⁷ (Sandia's Z), ×2.7
-* energy into the pinch (J): 2.5×10⁷ against 3×10⁶ (Z (2.7 MJ of X-rays from ~20 MJ stored)), ×8.4
-* stable Alfvén times of a dense hot pinch: 46 against 1 (fibre pinches broke up at peak current), ×46 ← the hardest
-* radial squeeze of the fuel: 48 against 35 (NIF-class implosions, 30–40), ×1.4
-* laser energy per shot (J): 1.9×10⁶ against 2.1×10⁶ (NIF), ×1
+* Fusion 2.9×10⁹ J from 9.9×10⁶ J of pulsed power, 470 J of laser; electricity out / in **22**. Blown apart at 126 ns; 35.0 MA reached; 24.6% burnt; hottest 81 keV; narrowest 20 µm; zpinch.py.
+* pinch current (A): 3.4×10⁷ against 2.6×10⁷ (Sandia's Z), ×1.3
+* energy into the pinch (J): 2.6×10⁶ against 3×10⁶ (Z (2.7 MJ of X-rays from ~20 MJ stored)), ×1
+* radial squeeze of the fuel: 170 against 35 (NIF-class implosions, 30–40), ×5 ← the hardest
+* laser energy per shot (J): 470 against 2.1×10⁶ (NIF), ×1
+* magnetic field on the target (T): 4.3 against 800 (laser-driven coil, claimed), ×1
+* compressed magnetic field (T): 1.4×10⁴ against 7,100 (NIF magnetised implosion (Sio et al. 2023)), ×2
+* liner aspect ratio (radius / wall): 12 against 9 (Z's record MagLIF shots (coated liners, mass-matched AR 9)), ×1.3
 
 ### Unlimited
 
-**compressed_icf** (Ordinary inertial fusion: compressed D-T lit by a hot spot (the reference)): rho_g_cc 50, rho_r 10, adiabat 1, ignitor hot spot, driver laser.
+**dynamic_pinch** (D-T pinch followed in time, driven by a generator circuit): current_ma 34, load liner, radius_um 43, column_mm 3.4, line_mg_cm 0.05, liner_mm 4.5, liner_aspect 12, fill_mg_cc 0.3, bz_tesla 4.3, ice_um 580, ice_burn ablation, tritium 0.5, preheat_kev 0.017, alfven_times 1.2, stability breaks.
 
-* Fusion 7.1×10¹³ J from 5.1×10¹¹ J of laser; electricity out / in **7.1**. 3.6e+05 mg of D-T, 60% burnt, hot spot 15725 µm at 1 Gbar; sections 7 and 11.
-* fuel areal density (g/cm²): 10 against 0.6 (NIF's best shots), ×17
-* cold squeezed density (g/cm³): 50 against 1,000 (NIF design density), ×1
-* fuel adiabat (lower is harder): 1 against 1.5 (NIF's 2012 low-foot designs), ×1.5
-* hot-spot pressure (Gbar): 1.5 against 600 (NIF's best shots), ×1
-* laser energy per shot (J): 5.1×10¹¹ against 2.1×10⁶ (NIF), ×2.5×10⁵ ← the hardest
+* Fusion 2.9×10⁹ J from 9.9×10⁶ J of pulsed power, 470 J of laser; electricity out / in **22**. Blown apart at 126 ns; 35.0 MA reached; 24.6% burnt; hottest 81 keV; narrowest 20 µm; zpinch.py.
+* pinch current (A): 3.4×10⁷ against 2.6×10⁷ (Sandia's Z), ×1.3
+* energy into the pinch (J): 2.6×10⁶ against 3×10⁶ (Z (2.7 MJ of X-rays from ~20 MJ stored)), ×1
+* radial squeeze of the fuel: 170 against 35 (NIF-class implosions, 30–40), ×5 ← the hardest
+* laser energy per shot (J): 470 against 2.1×10⁶ (NIF), ×1
+* magnetic field on the target (T): 4.3 against 800 (laser-driven coil, claimed), ×1
+* compressed magnetic field (T): 1.4×10⁴ against 7,100 (NIF magnetised implosion (Sio et al. 2023)), ×2
+* liner aspect ratio (radius / wall): 12 against 9 (Z's record MagLIF shots (coated liners, mass-matched AR 9)), ×1.3
 
 ### The best route that uses exploding crystals, within 100× today
 
@@ -102,9 +108,9 @@ The same search with the untested ideas let in: spin-polarised fuel, alpha chann
 
 | Route (section) | today's technology | ≤ 10× today | ≤ 100× today | unlimited |
 |---|---|---|---|---|
+| dynamic_pinch (24, 25) | 0.22 | **37** | **37** | **37** |
 | compressed_icf (7, 11) | – | **1.8** | **3.5** | **8.2** |
 | fibre_pinch (19) | 0.018 | **1.2** | **3.4** | **7.1** |
-| dynamic_pinch (24) | 1.1×10⁻³ | **4.2** | **5.9** | **6** |
 | pycnonuclear (10) | – | – | – | **5.3** |
 | tamped_ball (12) | 1.3×10⁻³ | 6.8×10⁻³ | 0.019 | **1.9** |
 | muon_squeezed (17) | – | – | – | **1.1** |
@@ -113,7 +119,7 @@ The same search with the untested ideas let in: spin-polarised fuel, alpha chann
 | antimatter_spark (22) | – | 0.16 | 0.39 | 0.39 |
 | muon_catalysis (9) | 0.14 | 0.2 | 0.2 | 0.2 |
 | crystal_ball (3) | 7.9×10⁻⁴ | 1.6×10⁻³ | 3.1×10⁻³ | 0.19 |
-| magnetised_liner (12, 19) | 1.6×10⁻⁴ | 3.5×10⁻⁴ | 7.2×10⁻⁴ | 0.077 |
+| magnetised_liner (12, 19) | 1.8×10⁻⁴ | 3.3×10⁻⁴ | 7.4×10⁻⁴ | 0.077 |
 | son_fisch_pB (17) | – | 9.4×10⁻³ | 0.015 | 0.023 |
 | muon_factory (9, 10) | – | 0.02 | 0.021 | 0.021 |
 | opaque_pB (18) | – | – | 2×10⁻³ | 6.9×10⁻³ |
@@ -127,9 +133,9 @@ The same search with the untested ideas let in: spin-polarised fuel, alpha chann
 
 Ideas the best designs use:
 
+* dynamic_pinch: burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only); sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m⁻³)
 * compressed_icf: spin-polarised D-T that survives in the fuel
 * fibre_pinch: spin-polarised D-T that survives in the fuel
-* dynamic_pinch: sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m⁻³)
 * tamped_ball: spin-polarised D-T that survives in the fuel
 * laser_assisted: light-assisted tunnelling (Queisser & Schützhold)
 * antimatter_spark: an antiproton factory 10,000 times more efficient than CERN's; antiprotons light a hot spot by fission (ICAN, AIMStar)
@@ -147,11 +153,11 @@ Each row holds one idea at one setting and lets the search re-optimise everythin
 
 | Route | Idea | Setting | today's technology | ≤ 10× today | ≤ 100× today | unlimited |
 |---|---|---|---|---|---|---|
-| compressed_icf | ignitor | hot spot | – | 1.5 | 3.1 | 7.1 |
+| compressed_icf | ignitor | hot spot | – | 1.5 | 3 | 7.1 |
 | compressed_icf | ignitor | crystal spark | – | – | – | 0.64 |
-| compressed_icf | driver | laser | – | 1.5 | 3.1 | 7.1 |
+| compressed_icf | driver | laser | – | 1.5 | 3 | 7.1 |
 | compressed_icf | driver | pulsed-power X-rays | – | 0.61 | 1.4 | 3.7 |
-| compressed_icf | spin (untested) | False | – | 1.5 | 3.1 | 7.1 |
+| compressed_icf | spin (untested) | False | – | 1.5 | 3 | 7.1 |
 | compressed_icf | spin (untested) | True | – | 1.8 | 3.5 | 8.2 |
 | tamped_ball | ions_first | False | 3.4×10⁻⁴ | 7.1×10⁻⁴ | 6.9×10⁻³ | 1.2 |
 | tamped_ball | ions_first | True | 8.6×10⁻⁴ | 3.3×10⁻³ | 0.011 | 1.3 |
@@ -161,8 +167,8 @@ Each row holds one idea at one setting and lets the search re-optimise everythin
 | tamped_ball | spin (untested) | True | 1.3×10⁻³ | 6.8×10⁻³ | 0.019 | 1.8 |
 | fibre_pinch | spin (untested) | False | 0.01 | 0.89 | 2.8 | 5.7 |
 | fibre_pinch | spin (untested) | True | 0.017 | 1.2 | 3.3 | 6.9 |
-| magnetised_liner | spin (untested) | False | 10⁻⁴ | 2.3×10⁻⁴ | 4.6×10⁻⁴ | 0.046 |
-| magnetised_liner | spin (untested) | True | 1.6×10⁻⁴ | 3.4×10⁻⁴ | 6.9×10⁻⁴ | 0.076 |
+| magnetised_liner | spin (untested) | False | 1.2×10⁻⁴ | 2.1×10⁻⁴ | 4.9×10⁻⁴ | 0.046 |
+| magnetised_liner | spin (untested) | True | 1.8×10⁻⁴ | 3.2×10⁻⁴ | 7.4×10⁻⁴ | 0.077 |
 | fast_ignition | shaped | False | – | – | – | 0.073 |
 | fast_ignition | shaped | True | – | – | – | 0.41 |
 | cold_catcher | source | crystals | 3.3×10⁻⁵ | 3.3×10⁻⁵ | 3.3×10⁻⁵ | 3.3×10⁻⁵ |
@@ -187,20 +193,25 @@ Each row holds one idea at one setting and lets the search re-optimise everythin
 | son_fisch_pB | alpha_channelling (untested) | 0.9 | – | 6.6×10⁻³ | 0.011 | 0.015 |
 | son_fisch_pB | direct_conversion (untested) | False | – | 6.3×10⁻³ | 0.01 | 0.015 |
 | son_fisch_pB | direct_conversion (untested) | True | – | 9.4×10⁻³ | 0.015 | 0.022 |
-| dynamic_pinch | stability (untested) | breaks | 2.2×10⁻⁷ | 1.8×10⁻³ | 3.7 | 5.5 |
-| dynamic_pinch | stability (untested) | rising current | 2.3×10⁻⁷ | 0.15 | 3.7 | 5.5 |
-| dynamic_pinch | stability (untested) | sheared flow | 1.1×10⁻³ | 4.2 | 5.7 | 5.8 |
+| dynamic_pinch | load | fibre | 2.3×10⁻⁷ | 2.3 | 5.2 | 5.2 |
+| dynamic_pinch | load | gas column | 2.6×10⁻⁷ | 1.9 | 4.2 | 4.2 |
+| dynamic_pinch | load | liner | 2.5×10⁻³ | 12 | 15 | 18 |
+| dynamic_pinch | stability (untested) | breaks | 3.1×10⁻³ | 22 | 22 | 22 |
+| dynamic_pinch | stability (untested) | rising current | 3.1×10⁻³ | 22 | 22 | 22 |
+| dynamic_pinch | stability (untested) | sheared flow | 0.22 | 22 | 22 | 22 |
+| dynamic_pinch | ice_burn (untested) | ablation | 3.1×10⁻³ | 22 | 22 | 22 |
+| dynamic_pinch | ice_burn (untested) | as an ICF shell | 3.1×10⁻³ | 34 | 35 | 36 |
 
 ## What the search found
 
 * **With today's technology nothing reaches breakeven.** The best is muon catalysis at 0.12.
-* **Ordinary inertial fusion leads everywhere beyond that.** Within ten times today's best on every demand it reaches 1.5 (target gain 29); within a hundred, 3.1. The ten-times design needs a drive of 17 MJ, a cold shell of 5.9 g/cm² (9.9 times NIF's) at an adiabat of 1. That matches the standard view that inertial fusion power needs target gains of tens to a hundred and an efficient driver.
-* **The dense Z-pinch is second**: 0.89 within ten times today, 2.8 within a hundred, if it stays stable for many Alfvén times.
-* **Followed in time, the pinch needs more stability, but burns better once it has it** (dynamic_pinch: 1.8×10⁻³ within ten times today against the static 0.89; 3.7 within a hundred; 5.5 unlimited). A generator circuit, radiative collapse above the Pease-Braginskii current and instability growth replace the static pinch's hot Bennett equilibrium. A cold fibre can't take the current. Given tens of Alfvén times and ~70 MA, a millimetre-thick fibre collapses to ICF-like density, ignites and burns ~40% of its fuel. With untested sheared-flow stabilisation it reaches 4.2 within ten times today.
+* **Ordinary inertial fusion is the most proven route beyond that.** Within ten times today's best on every demand it reaches 1.5 (target gain 29); within a hundred, 3. The ten-times design needs a drive of 19 MJ, a cold shell of 5.8 g/cm² (9.6 times NIF's) at an adiabat of 1. That matches the standard view that inertial fusion power needs target gains of tens to a hundred and an efficient driver.
+* **The dense Z-pinch, static**: 0.89 within ten times today, 2.8 within a hundred, if it stays stable for many Alfvén times.
+* **Followed in time, the pinch leads within ten times today** (dynamic_pinch: 22, against the static 0.89; 22 within a hundred). Its best design is a 4.5 mm liner with a wall 1/12 of its radius, 580 µm of D-T ice and 4.3 T at 34 MA, converging 170× (NIF's best: 35). That is in effect cylindrical inertial fusion, in a 0-D model with no liner instability, so its convergence is the number to doubt. A cold fibre can't take the current; a gas column or a liner can. With untested ideas it reaches 37 within ten times today.
 * **Exploding crystals never help.** The best crystal route within a hundred times today is tamped ball at 0.012. As the spark for inertial fusion, crystals do worse than an ordinary hot spot at every budget (unlimited: 0.64 against 7.1): the isotropic explosion wastes the light. As a muon factory they make muons, but not cheaply.
 * **Lasers beat pulsed-power X-rays** as the driver of a compressed capsule (best within ten times today: 1.5 against 0.61). Pulsed power makes its drive more efficiently, but on Z only ~0.2% of the stored energy reached a capsule.
 * **Small ideas stay small.** Electron screening and the proton–boron avalanche change nothing you can see; ions heated first help the tamped ball two to five times; deuterium-only fuel costs a factor of tens; spin-polarised fuel helps but has never been shown to survive in a plasma.
-* **Untested theory changes the leader within ten times today.** With it, the best is dynamic pinch at 4.2 (with sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m⁻³)), against compressed icf at 1.5 without; within a hundred, dynamic pinch at 5.9 (with sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m⁻³)).
+* **Untested theory moves the numbers, not the verdict.** With it, the best within ten times today is dynamic pinch at 37 (with burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)); within a hundred, dynamic pinch at 37 (with burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)).
 * **Proton–boron with alpha channelling and direct conversion** reaches 0.023 with no limits on technology, against 0.015 without them. Channelling feeds the ions, but the X-rays still win.
 * **Antimatter sparks** reach at most 0.39, with 1.3×10¹⁴ antiprotons per shot, 22 times the most ever stored, from a factory 10,000 times more efficient than CERN's. Making antiprotons costs more than the fusion they spark.
 * **Light-assisted tunnelling** reaches at most 0.85, with no limits on technology: holding 5×10²¹ W/cm² over the fuel costs more light than the extra fusion returns, even with the most optimistic tunnelling boost.
@@ -213,17 +224,17 @@ A subcritical uranium blanket turns each D-T neutron into fission heat: about 27
 
 | Route | today's technology | ≤ 10× today |
 |---|---|---|
-| compressed_icf | – | **290** |
+| dynamic_pinch | 4.3×10⁻⁵ | **940** |
+| compressed_icf | – | **310** |
 | fibre_pinch | **2.1** | **75** |
 | muon_catalysis | **25** | **34** |
 | muon_factory | – | **1.2** |
 | channelling | **1.2** | **1.2** |
-| dynamic_pinch | 0 | 0.29 |
 | pauli_beam | 0.075 | 0.28 |
 | tamped_ball | 0.16 | 0.26 |
 | cold_catcher | 0.18 | 0.18 |
 | crystal_ball | 0.043 | 0.14 |
-| magnetised_liner | 0.02 | 0.036 |
+| magnetised_liner | 9.4×10⁻³ | 0.024 |
 | son_fisch_pB | – | 5.7×10⁻³ |
 | pB_catcher | 3×10⁻⁴ | 3×10⁻⁴ |
 | lattice_confinement | 4.8×10⁻⁸ | 4.8×10⁻⁸ |

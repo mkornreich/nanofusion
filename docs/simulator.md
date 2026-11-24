@@ -90,6 +90,7 @@ They are kept apart from stretch:
 | A microbubble implosion | `hollow_shell` | simulated only |
 | A dense pinch stable while its current rises | `stability` on `dynamic_pinch` | NRL 1987; 2-D MHD blamed a cold core under an unstable corona |
 | Sheared-flow stabilisation at fibre density | `stability` on `dynamic_pinch` | shown for ~10³ Alfvén times only below 0.6 MA and 5×10²⁴ per m³ (FuZE) |
+| Burn spreading into a liner's frozen fuel like an ICF shell | `ice_burn` on `dynamic_pinch` | high-gain MagLIF designs (Slutz & Vesey 2012); simulated only |
 
 A design's **stretch** is its largest ratio of demand to best. 1 means today's
 best would do; 10 means some demand is ten times beyond it.
@@ -118,7 +119,7 @@ best would do; 10 means some demand is ten times beyond it.
 | `muon_squeezed` | 17 | density, core size, muons in the core |
 | `opaque_pB` | 18 | density, ion temperature, ball radius |
 | `fibre_pinch` | 19 | current, temperature, Alfvén times stable, squeeze, spin |
-| `dynamic_pinch` | 24 | the same fibre followed in time on a generator circuit: current, fibre radius, laser preheat, Alfvén times stable, stability idea |
+| `dynamic_pinch` | 24, 25 | a pinch followed in time on a generator circuit: current; a fibre (radius), a gas column (radius, fuel per cm) or a MagLIF-like liner (radius, wall, gas, axial field, ice); tritium share; laser preheat; Alfvén times stable; stability idea |
 | `channelling` | 20 | ion energy, aligned beam or exploding crystal, measured or generous values |
 
 Each run also notes which demand limits it.
@@ -152,6 +153,10 @@ quarter of the usual rate (`Route.effort`).
   * A preheated one collapses radiatively.
   * On Z even a fully stable pinch reaches ~1% of breakeven; the static
     `fibre_pinch` assumed a hot Bennett pinch from the start.
+  * It also takes a pre-formed gas column, and a MagLIF-like liner with
+    frozen D-T ice. Its field leak is calibrated to MagLIF's measured
+    field × radius, but as a 0-D model it is a comparison between designs,
+    not a forecast.
 
 **Combinations.** Options can be switched on and off: the ignitor and driver
 of `compressed_icf`, spin polarisation on every D-T route, screening and an
@@ -167,24 +172,26 @@ tables, including what each idea adds.
 
 | Best electricity out / in | Today | ≤ 10× today | ≤ 100× today | Unlimited |
 |---|---|---|---|---|
-| Ordinary inertial fusion | – | **1.5** | **3.1** | **7.1** |
+| Ordinary inertial fusion | – | **1.5** | **3.0** | **7.1** |
 | Dense D-T Z-pinch (static) | 0.01 | 0.89 | **2.8** | **5.7** |
-| Dense D-T Z-pinch, followed in time | 2×10⁻⁷ | 0.002 | **3.7** | **5.5** |
+| Dense D-T Z-pinch, followed in time (best: a liner) | 0.003 | **22** | **22** | **22** |
 | Muon catalysis | 0.12 | 0.16 | 0.16 | 0.16 |
 | Best route using exploding crystals | 0.005 | 0.005 | 0.012 | 1.3 |
 
 * **With today's technology nothing reaches breakeven.** The best is muon
   catalysis, at about a tenth of the electricity it costs.
-* **Ordinary inertial fusion leads beyond that.** Within ten times today on
-  every demand it reaches 1.5, with a 19 MJ laser and a shell about ten times
-  NIF's areal density.
-* **The dense Z-pinch is next**, if it stays stable for many Alfvén times.
-  Followed in time (`dynamic_pinch`), it needs more stability than the static
-  route asked for:
-  * within ten times today it reaches only 0.002, against the static 0.89;
-  * given ~46 Alfvén times and 71 MA, a 1.5 mm fibre collapses radiatively to
-    ICF-like density, ignites and burns 40% of its fuel: 3.7 within a
-    hundred times today.
+* **Ordinary inertial fusion is the most proven route beyond that.** Within
+  ten times today on every demand it reaches 1.5, with a 19 MJ laser and a
+  shell about ten times NIF's areal density.
+* **The time-dependent pinch leads on paper**, 22 within ten times today.
+  * Its best design is a 4.5 mm beryllium liner, its wall 1/12 of its radius,
+    lined with 580 µm of D-T ice, with a 4.3 T field, at 34 MA. It burns 25%
+    of its fuel.
+  * But it converges ~170×, against NIF's best 35, in a 0-D model with no
+    liner instability. That is in effect cylindrical inertial fusion, and its
+    convergence is the number to doubt.
+  * Bare fibres and gas columns reach about 2 within ten times today.
+  * The static pinch gives 0.89.
 * **Combining the crystals with other ideas doesn't rescue them.**
   * As a fusion spark they are worse than a hot spot.
   * As a muon factory they reach 0.006 of breakeven.
@@ -194,11 +201,9 @@ tables, including what each idea adds.
   first helps two to three times.
 * **A uranium blanket makes several routes "net energy"**, but nearly all of
   the heat is then fission.
-* **Untested theory moves the numbers, and changes one leader.**
-  * **Sheared-flow stabilisation at fibre density** (shown only at ≤ 0.6 MA)
-    makes the time-dependent pinch the best route within ten times today:
-    4.2, against inertial fusion's 1.5. That design is 68 MA on a 1.5 mm
-    fibre, limited by the 26 MJ it puts into the pinch.
+* **Untested theory moves the numbers, not the verdict.**
+  * If the liner's ice burns like an ICF shell, the time-dependent pinch
+    reaches 37 within ten times today, against 22 without.
   * Spin-polarised fuel lifts inertial fusion and the pinch by 15–35%.
   * Proton–boron with alpha channelling and direct conversion reaches 2% of
     breakeven.

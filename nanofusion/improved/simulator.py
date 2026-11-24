@@ -111,6 +111,7 @@ TODAY = {
     "fuel areal density (g/cm²)": (0.6, "NIF's best shots"),
     "fuel adiabat (lower is harder)": (1.5, "NIF's 2012 low-foot designs"),
     "compressed magnetic field (T)": (7.1e3, "NIF magnetised implosion (Sio et al. 2023)"),
+    "liner aspect ratio (radius / wall)": (9.0, "Z's record MagLIF shots (coated liners, mass-matched AR 9)"),
     "electron screening potential (eV)": (1500.0, "6Li(d,a) in palladium, the largest measured"),
     "antiprotons per shot": (6e12, "the most ever stored, Fermilab's Recycler"),
 }
@@ -119,7 +120,7 @@ LOWER_IS_HARDER = {"crystals' distance from the core (m)", "fuel adiabat (lower 
 # design is flagged, and the search leaves it out unless asked for theory (search(..., theory=True)).
 # Route parameters that switch on untested theory, with their "off" values:
 THEORY_OFF = {"spin": False, "alpha_channelling": 0.0, "direct_conversion": False, "rf_stripping": "none",
-              "stability": "breaks"}
+              "stability": "breaks", "ice_burn": "ablation"}
 DIRECT_EFFICIENCY = 0.6  # charged fusion products turned straight into electricity (design claims)
 
 
@@ -281,6 +282,7 @@ class Route:
     run: Callable
     dt: bool = True  # D-T fuel: spin polarisation and a blanket can apply
     effort: float = 1.0  # share of the search's samples spent on this route (slow routes get fewer)
+    seeds: list = field(default_factory=list)  # known good designs the search also starts from
 
     def defaults(self) -> dict:
         return {p.name: p.default for p in self.params}
@@ -608,33 +610,65 @@ PINCH_STABILITY = {  # untested ideas that would keep a dense pinch stable longe
     "rising current": "a dense pinch stays stable while its current rises (NRL 1987; disputed by 2-D MHD)",
     "sheared flow": "sheared-flow stabilisation of a pinch at fibre density (shown only below 0.6 MA, 5e24 m⁻³)",
 }
+ICE_BURN = {  # how a liner's frozen fuel burns: the model's ablation (a lower bound), or as an ICF shell (untested)
+    "ablation": None,
+    "as an ICF shell": "burn spreading into a liner's frozen fuel (high-gain MagLIF; simulated only)",
+}
 PREHEAT_COUPLING = 0.5  # share of the preheat laser's energy that heats the fibre (MagLIF-like)
 
 
 def _dynamic_pinch(p: dict, s: Settings) -> Outcome:
-    """A D-T fibre on a pulsed-power generator, followed in time (zpinch.run).
+    """A D-T pinch on a pulsed-power generator, followed in time (zpinch.run).
 
-    The generator is a capacitor bank behind 15 nH, sized to drive current_ma into the fibre at its starting
-    radius in 100 ns. A laser preheats the fibre so it can carry the current. The pinch heats ohmically and by
+    The load is a frozen fibre (radius_um), a pre-formed gas column (column_mm wide, line_mg_cm of fuel per cm,
+    as from a gas puff), or a liner (MagLIF-like: a beryllium tube liner_mm in radius carrying the current,
+    imploding onto preheated gas at fill_mg_cc with an axial field bz_tesla, and frozen fuel ice_um thick on
+    its inner wall). The tritium share applies to all fuel (D-D reactions breed more in place). The
+    generator is a capacitor bank behind 15 nH, sized to drive current_ma into the load at its starting radius
+    in 100 ns. A laser can preheat the load so it carries the current. The pinch heats ohmically and by
     compression, radiates, collapses above the Pease-Braginskii current, and burns, until the m = 0 mode has
     grown for alfven_times e-folds (or never, with an untested stability idea). Each shot pays for the whole bank.
     """
     from . import zpinch as Z  # local: zpinch imports burn1d, which is only needed here
 
-    pinch = Z.Pinch(fuel="DT", radius_um=p["radius_um"], current_ma=p["current_ma"], start_kev=p["preheat_kev"],
-                    growth_limit=p["alfven_times"], rise_stabilised=p["stability"] == "rising current",
-                    shear=0.1 if p["stability"] == "sheared flow" else 0.0)
+    shared = {"current_ma": p["current_ma"], "start_kev": p["preheat_kev"], "tritium": p["tritium"],
+              "growth_limit": p["alfven_times"], "rise_stabilised": p["stability"] == "rising current",
+              "shear": 0.1 if p["stability"] == "sheared flow" else 0.0}
+    if p["load"] == "fibre":
+        pinch = Z.Pinch(radius_um=p["radius_um"], **shared)
+    elif p["load"] == "liner":
+        inner = p["liner_mm"] * 1e3 * (1 - 1 / p["liner_aspect"])
+        pinch = Z.Pinch(liner_um=p["liner_mm"] * 1e3, liner_aspect=p["liner_aspect"], fill_mg_cc=p["fill_mg_cc"],
+                        bz_tesla=p["bz_tesla"], ice_um=min(p["ice_um"], 0.8 * inner), hold_ns=150.0, **shared)
+    else:
+        ion_mass = (2.014 + 1.002 * p["tritium"]) * P.AMU
+        pinch = Z.Pinch(radius_um=p["column_mm"] * 1e3, ions_per_m=p["line_mg_cm"] * 1e-4 / ion_mass,
+                        wall_mm=max(10.0, 2 * p["column_mm"]), **shared)
     r = Z.run(pinch)
     preheat = 3 * r["line_density"] * p["preheat_kev"] * KEV * pinch.length_mm * 1e-3 / PREHEAT_COUPLING
+    squeeze = pinch.fuel_radius_um / max(r["min_radius_um"], 1e-3)
+    fusion, dt = r["yield_J"], r["neutrons_dt"]
     reqs = [Requirement("pinch current (A)", p["current_ma"] * 1e6),
             Requirement("energy into the pinch (J)", r["delivered_J"]),
-            Requirement("stable Alfvén times of a dense hot pinch", p["alfven_times"]),
-            Requirement("radial squeeze of the fuel", p["radius_um"] / max(r["min_radius_um"], 1e-3)),
+            Requirement("radial squeeze of the fuel", squeeze),
             Requirement("laser energy per shot (J)", preheat)]
-    if PINCH_STABILITY[p["stability"]]:
-        reqs.append(Requirement(PINCH_STABILITY[p["stability"]], 1.0))
-    return Outcome("dynamic_pinch", p, r["yield_J"], r["delivered_J"], {"pulsed power": r["bank_J"], "laser": preheat},
-                   r["yield_J"] / (Q_DT_MEV * MEV), reqs,
+    if p["load"] == "liner":
+        # the liner holds the fuel; no current flows in it, so no m = 0 mode, but the field is squeezed with it
+        reqs += [Requirement("magnetic field on the target (T)", p["bz_tesla"]),
+                 Requirement("compressed magnetic field (T)", p["bz_tesla"] * squeeze**pinch.flux_exponent),
+                 Requirement("liner aspect ratio (radius / wall)", p["liner_aspect"])]
+        if ICE_BURN[p["ice_burn"]] and r["ice_ions"] > 0:
+            fusion += r["ice_burn_bound_J"]
+            dt += r["ice_burn_bound_J"] / (Q_DT_MEV * MEV)
+            reqs.append(Requirement(ICE_BURN[p["ice_burn"]], 1.0))
+    else:
+        # the Alfvén times the pinch actually had to hold (it may burn out before its allowance)
+        reqs.append(Requirement("stable Alfvén times of a dense hot pinch",
+                                max(1.0, min(p["alfven_times"], r["alfven_times_to_burn"]))))
+        if PINCH_STABILITY[p["stability"]]:
+            reqs.append(Requirement(PINCH_STABILITY[p["stability"]], 1.0))
+    return Outcome("dynamic_pinch", p, fusion, r["delivered_J"], {"pulsed power": r["bank_J"], "laser": preheat},
+                   dt, reqs,
                    notes=f"{r['stopped']} at {r['t_stop_ns']:.0f} ns; {r['peak_current_MA']:.1f} MA reached; "
                    f"{r['burn_up']:.1%} burnt; hottest {r['peak_T_keV']:.2g} keV; narrowest {r['min_radius_um']:.2g} µm; "
                    "zpinch.py")
@@ -979,13 +1013,36 @@ ROUTES = {r.name: r for r in [
         Param("t_kev", 3.0, 30.0, default=10.0, help="Bennett temperature (keV)"),
         Param("alfven_times", 1.0, 1e4, default=1.0, help="how long the pinch stays stable"),
         Param("squeeze", 1.0, 300.0, default=6.0, help="radial squeeze of the fibre"), SPIN], _pinch),
-    Route("dynamic_pinch", "24", "D-T fibre pinch followed in time, driven by a generator circuit", [
+    Route("dynamic_pinch", "24, 25", "D-T pinch followed in time, driven by a generator circuit", [
         Param("current_ma", 0.5, 100.0, default=26.0, help="peak current into a fixed load (MA)"),
+        Param("load", choices=("fibre", "gas column", "liner"), default="fibre",
+              help="a frozen fibre, a gas column, or fuel inside a liner"),
         Param("radius_um", 20.0, 2000.0, default=240.0, help="fibre radius (um)"),
+        Param("column_mm", 1.0, 30.0, default=10.0, help="gas column radius (mm)"),
+        Param("line_mg_cm", 0.05, 20.0, default=0.7, help="gas column's fuel per cm (mg)"),
+        Param("liner_mm", 1.5, 8.0, default=3.0, help="liner outer radius (mm)"),
+        Param("liner_aspect", 3.0, 12.0, default=6.0, help="liner outer radius / wall thickness"),
+        Param("fill_mg_cc", 0.3, 20.0, default=1.0, help="fuel gas density inside the liner (mg/cm3)"),
+        Param("bz_tesla", 1.0, 100.0, default=15.0, help="axial field in the liner's fuel (T)"),
+        Param("ice_um", 0.0, 600.0, log=False, default=0.0, help="frozen fuel on the liner's inner wall (um)"),
+        Param("ice_burn", choices=tuple(ICE_BURN), default="ablation", help="how the frozen fuel burns"),
+        Param("tritium", 0.0, 0.5, log=False, default=0.5, help="tritium share of the hydrogen"),
         Param("preheat_kev", 0.01, 0.5, default=0.1, help="laser preheat of the fibre (keV)"),
         Param("alfven_times", 1.0, 1e4, default=1.0, help="e-folds of the m = 0 mode before the pinch breaks"),
         Param("stability", choices=tuple(PINCH_STABILITY), default="breaks",
-              help="untested ways to stay stable longer")], _dynamic_pinch, effort=0.25),
+              help="untested ways to stay stable longer")], _dynamic_pinch, effort=0.6, seeds=[
+        {"current_ma": 60.0, "load": "fibre", "radius_um": 960.0, "preheat_kev": 0.1, "tritium": 0.5,
+         "alfven_times": 50.0, "stability": "sheared flow"},
+        {"current_ma": 70.0, "load": "fibre", "radius_um": 1500.0, "preheat_kev": 0.45, "tritium": 0.5,
+         "alfven_times": 46.0, "stability": "breaks"},
+        {"current_ma": 60.0, "load": "gas column", "column_mm": 10.0, "line_mg_cm": 7.0, "tritium": 0.5,
+         "preheat_kev": 0.01, "alfven_times": 10.0, "stability": "breaks"},
+        {"current_ma": 80.0, "load": "gas column", "column_mm": 10.0, "line_mg_cm": 20.0, "tritium": 0.5,
+         "preheat_kev": 0.01, "alfven_times": 10.0, "stability": "breaks"},
+        {"current_ma": 60.0, "load": "liner", "liner_mm": 3.0, "liner_aspect": 6.0, "fill_mg_cc": 3.0,
+         "bz_tesla": 15.0, "ice_um": 200.0, "preheat_kev": 0.2, "tritium": 0.5, "ice_burn": "ablation"},
+        {"current_ma": 60.0, "load": "liner", "liner_mm": 4.5, "liner_aspect": 6.0, "fill_mg_cc": 1.0,
+         "bz_tesla": 15.0, "ice_um": 400.0, "preheat_kev": 0.2, "tritium": 0.5, "ice_burn": "as an ICF shell"}]),
     Route("channelling", "20", "Ions channelled through a tritide crystal", [
         Param("ion_kev", 50.0, 3000.0, default=300.0),
         Param("source", choices=("aligned beam", "exploding crystal"), default="aligned beam"),
@@ -1088,7 +1145,7 @@ def search(routes=None, samples: int = 200, refine: int = 80, seed: int = 1, set
             n_samples, n_refine = max(1, int(samples * route.effort)), max(1, int(refine * route.effort))
             pool = [o for o in (_safe(name, {**{q.name: q.sample(rng) for q in free}, **held}, settings)
                                 for _ in range(n_samples)) if o is not None]
-            for seed_design in [dict(held)] + [dict(d) for d in (start or [])]:
+            for seed_design in [dict(held)] + [dict(d) for d in (start or [])] + [dict(d) for d in route.seeds]:
                 seed_design.update(held)
                 known = {q.name for q in route.params}
                 out = _safe(name, {k: v for k, v in seed_design.items() if k in known}, settings)
