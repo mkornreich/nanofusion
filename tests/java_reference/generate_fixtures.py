@@ -35,7 +35,7 @@ def split_args(spec: str) -> list[str]:
 
 def main() -> int:
     if not ENGINE.is_dir():
-        print(f"missing {ENGINE}; extract nanofusion.adding into ./java first", file=sys.stderr)
+        print(f"missing {ENGINE}; extract the original nanofusion.adding archive (not in this repository) into ./java first", file=sys.stderr)
         return 1
     cases = json.loads((HERE / "cases.json").read_text())
     FIXTURES.mkdir(parents=True, exist_ok=True)

@@ -7,6 +7,7 @@ name = "nanofusion"
 version = "2.0.0"
 description = "Lattice deuterium/lithium fusion simulation with a browser UI (Python port of the NetBeans application)"
 readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.22",

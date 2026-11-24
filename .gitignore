@@ -7,3 +7,9 @@ __pycache__/
 .ruff_cache/
 .venv/
 *.json.part
+
+# Large data files from the original Java application, kept out of the repository
+/nanofusion.adding
+/java/FusionSimulation/*.json
+/java/FusionSimulation/*.zip
+/java/FusionSimulation/build/testuserdir/var/cache/

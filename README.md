@@ -16,8 +16,9 @@ North 2011. [docs/what-it-simulates.md](docs/what-it-simulates.md) covers:
   realistic laser strengths.
 
 This is a Python port of the original NetBeans Platform (Java 6) application.
-That application is kept unchanged in [`java/`](java/), extracted from
-`nanofusion.adding`.
+That application's source is kept unchanged in [`java/`](java/). Its large
+data files (the original `nanofusion.adding` archive, sample simulation runs and
+a build cache) are not included in this repository.
 
 ## Running
 
@@ -33,7 +34,7 @@ browser; press Ctrl+C to stop it. You can also open a saved simulation at
 start-up, including files written by the old Java app:
 
 ```bash
-python3 -m nanofusion java/FusionSimulation/sim6x6x6lor.json
+python3 -m nanofusion path/to/saved-run.json
 ```
 
 Options: `--port N`, `--no-browser`, and `--host ADDRESS`. By default the
@@ -204,8 +205,8 @@ Saved files are standard JSON with one frame per line (`properties`, then
 `results`). Number formatting matches the Java output. The loader also accepts
 the original app's non-standard layout (`properties: {...}` with a trailing
 comma). If a file is truncated, the complete frames are loaded and a warning is
-shown. `java/FusionSimulation/sim10x10x10.json` is such a file: it stops after
-569 of 1001 frames.
+shown. The original app's sample run `sim10x10x10.json` (not included here)
+is such a file: it stops after 569 of 1001 frames.
 
 ## Layout
 
@@ -236,3 +237,7 @@ To regenerate the Java reference outputs (needs a JDK):
 ```bash
 python3 tests/java_reference/generate_fixtures.py
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE).
