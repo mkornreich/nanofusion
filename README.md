@@ -149,7 +149,12 @@ ignites.
 a deuterium gas column, not a fibre, with a tritium trace. It also finds what
 energy would take: a 60–80 MA driver, 160–260× convergence and a few Alfvén
 times of stability. With a MagLIF-like liner and thick D-T ice (`liner_um` in
-`zpinch.py`), 80 MA gives 4.2× the electricity in at MagLIF's own convergence. D-T pinches
+`zpinch.py`), 80 MA gives 4.2× the electricity in at MagLIF's own convergence.
+`python3 tools/liner_experiment.py` (section 26;
+[docs/liner_experiment.md](docs/liner_experiment.md)) designs an experiment for
+the search's best liner: 34 MA, a thin wall and thick ice, 22× on paper. It
+hasn't been tried. It needs ~170× convergence and sits on a knife-edge, and a
+deuterium test on Z would settle it. D-T pinches
 have never been tried and need tritium Z doesn't yet handle; preheated
 deuterium fibres with a tritium trace are possible today.
 

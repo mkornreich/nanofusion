@@ -113,6 +113,9 @@ class Pinch:
     # (convergence)^this, not ^2. 1.57 matches MagLIF's measured B R of 0.25-0.34 T m at convergence ~30-45 from
     # 10-16 T (Lewis et al. 2023).
     flux_exponent: float = 1.57
+    # The liner breaks up (magneto-Rayleigh-Taylor) once the fuel has converged this many times; 0 = never. MagLIF
+    # has reached ~30-40; the model alone would go much further.
+    max_convergence: float = 0.0
 
     @property
     def lined(self) -> bool:
@@ -328,7 +331,7 @@ def _integrate(rhs, t_end: float, y0: list, atol: list, max_step: float, events:
         return rhs(t, y)
 
     ts, ys = [0.0], [np.asarray(y0, dtype=float)]
-    status, hit, gave_up = 0, [[], [], []], False
+    status, hit, gave_up = 0, [[] for _ in events], False
     y_now = np.asarray(y0, dtype=float)
     edges = np.linspace(0.0, t_end, CHUNKS + 1)
     for t0, t1 in itertools.pairwise(edges):
@@ -385,13 +388,17 @@ def run(p: Pinch, t_end_ns: float | None = None, max_step_ns: float = 0.05) -> d
         return y[0] - wall
     blown_apart.terminal = True
 
+    def liner_broken(t, y):
+        return y[0] - a0 / p.max_convergence if p.max_convergence > 0 else 1.0
+    liner_broken.terminal = True
+
     f_t = p.tritium_share
     ice0 = p.ice_ions
     y0 = [a0, 0.0, heat0, float(n0) * (1 - f_t), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, drive["V0"], float(n0) * f_t,
           0.0, 0.0, p.liner_inner_um * 1e-6 if p.lined else 0.0, 0.0, ice0]
     atol = [1e-10, 1e-2, heat0 * 1e-6, n0 * 1e-12, n0 * 1e-12, 1e-6, 1e-6, 1e-3, 1e-3, 1e-6, 1.0, 1.0, n0 * 1e-14,
             1.0, 1.0, 1e-10, 1e-2, max(ice0, n0) * 1e-12]
-    sol = _integrate(rhs, t_end, y0, atol, max_step_ns * 1e-9, (broken, collapsed, blown_apart))
+    sol = _integrate(rhs, t_end, y0, atol, max_step_ns * 1e-9, (broken, collapsed, blown_apart, liner_broken))
     y = sol.y[:, -1]
     t_stop = float(sol.t[-1])
     end = _rates(p, t_stop, y, drive)
@@ -432,7 +439,8 @@ def run(p: Pinch, t_end_ns: float | None = None, max_step_ns: float = 0.05) -> d
             trace += rate * dt * length
     status = "solver gave up" if sol.gave_up else "end of pulse"
     if sol.status == 1:
-        status = ("broke up" if len(sol.t_events[0]) else "collapsed" if len(sol.t_events[1]) else "blown apart")
+        status = ("broke up" if len(sol.t_events[0]) else "collapsed" if len(sol.t_events[1]) else
+                  "liner broke up" if len(sol.t_events[3]) else "blown apart")
     hot = [h for h in history if h["T_keV"] > 0.05]
     peak = max(history, key=lambda h: h["fusion"]) if history else end
     burning = [h["t_ns"] for h in history if h["fusion"] >= 0.5 * peak["fusion"]] if peak["fusion"] > 0 else []

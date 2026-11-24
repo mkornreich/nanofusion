@@ -1650,6 +1650,36 @@ ice.
   liner and ~170× convergence. That is where a 0-D model with no liner
   instability is least trustworthy.
 
+## 26. An experiment for the thin, ice-lined liner
+
+**Idea.** Test the simulator's best design within ten times today: a 4.5 mm
+beryllium liner with a wall 1/12 of its radius, lined with 580 µm of D-T ice,
+4.3 T, at 34 MA. In the model it gives 2.9 GJ, 22× the electricity in.
+Proposal: [liner_experiment.md](liner_experiment.md); code:
+`tools/liner_experiment.py`; numbers:
+[results/liner_experiment/summary.md](results/liner_experiment/summary.md).
+
+**Has it been done? No, and what's new is what's least credible.**
+* The closest published design is Sefkow et al.'s 70 MA ice burner (2014):
+  the same geometry, twice the current, converging only 24–35×.
+* This design ignites at 34 MA, below every published threshold (42–56 MA).
+* It converges ~170×, where designs stay below 40× and the best radiographed
+  liner reached 20 ± 3.
+* No ice-lined liner has been imploded on Z.
+
+**The model's own verdict.**
+* **All or nothing:** if the liner breaks up at MagLIF's ~40×, the shot makes
+  25 J instead of 2.9 GJ.
+* **A knife-edge:** 30 MA, a 1/9 wall, or MagLIF's usual 1 mg/cm³ of gas each
+  cut the yield 8,000–110,000-fold.
+
+**The experiment.**
+* **Stage 1, on Z now, in deuterium (~$20–50M):** image the stagnated
+  column. The model predicts ~10 µm if the liner holds, ~90 µm if it breaks
+  like MagLIF's. Anything near 0.1 mm ends the design.
+* **Stage 2:** D-T on a ~34 MA driver, which doesn't exist yet. Pacific
+  Fusion's >60 MA machine, run below full current, could serve.
+
 ## Why everything hits the same wall
 
 **Rider's argument.** Rider's general analysis of fusion out of thermal
@@ -1781,6 +1811,11 @@ net energy:
   MagLIF-like liner with thick D-T ice does better: 4.2× the electricity in
   at 80 MA, converging no further than MagLIF already does, on a driver
   beyond the ~60 MA being built for ~2030.
+* **An experiment for the search's best liner** (section 26): 34 MA, a thin
+  wall and thick ice give 22× in the model. But it needs ~170× convergence
+  (no liner has shown more than ~40×) and sits on a knife-edge. It hasn't
+  been tried. A deuterium test on Z, imaging the stagnated column, would
+  settle it for ~$20–50M.
 * **Three more walls attacked, none breached.**
   * An opaque proton–boron ball traps its X-rays, but the trapped radiation
     and pairs soak up its energy. The balls that do repay their heat need

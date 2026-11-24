@@ -733,3 +733,16 @@ def test_zpinch_liner():
     low = S.evaluate("dynamic_pinch", kw)
     high = S.evaluate("dynamic_pinch", {**kw, "ice_burn": "as an ICF shell"})
     assert not low.untested and high.untested and high.fusion_J > 3 * low.fusion_J
+
+
+def test_liner_convergence_limit():
+    from nanofusion.improved import zpinch as Z
+
+    # the simulator's best liner design ignites only if the fuel converges ~170x; a liner that breaks up at
+    # MagLIF's ~40x stops the burn almost entirely
+    design = {"fuel": "DT", "current_ma": 34.06, "liner_um": 4495.0, "liner_aspect": 12.0, "fill_mg_cc": 0.3,
+              "bz_tesla": 4.283, "ice_um": 583.3, "start_kev": 0.017, "hold_ns": 150.0}
+    full = Z.run(Z.Pinch(**design))
+    capped = Z.run(Z.Pinch(**design, max_convergence=40))
+    assert capped["stopped"] == "liner broke up" and capped["yield_J"] < 1e-3 * full["yield_J"]
+    assert full["burn_up"] > 0.1
