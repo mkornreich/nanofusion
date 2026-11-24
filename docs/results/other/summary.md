@@ -8,7 +8,7 @@ Fusions per muon Y = 1 / (λ₀/λ_c + ω_s), with λ₀ = 4.55×10⁵ /s (muon 
 
 ### Fusions per muon
 
-| density φ (× liquid hydrogen) | ω_s = 0.45% (measured, record conditions (Los Alamos)) | ω_s = 0.56% (measured directly (PSI)) | ω_s = 0.65% (theory) | ω_s = 0.30% (hoped for) |
+| density φ (× liquid hydrogen) | ω_s = 0.45% (measured (PSI, Breunlich et al. 1987)) | ω_s = 0.56% (measured directly (PSI)) | ω_s = 0.65% (theory) | ω_s = 0.30% (hoped for) |
 |---|---|---|---|---|
 | 0.5 | 99 | 89 | 82 | 116 |
 | 1 | 137 | 119 | 107 | 172 |

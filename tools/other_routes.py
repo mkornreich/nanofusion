@@ -22,7 +22,9 @@ OUT = Path("docs/results/other")
 
 # --- inputs from the literature -------------------------------------------------
 RECORD_FUSIONS = 150  # Los Alamos (Jones et al. 1986), up to 150 +- 20 per muon
-STICKING = {"measured, record conditions (Los Alamos)": 0.0045, "measured directly (PSI)": 0.0056,
+# Sticking: 0.45% measured at PSI in liquid and gas (Breunlich et al., PRL 58, 329 (1987)); 0.56% measured
+# directly at PSI (Petitjean et al., Hyperfine Interact. 82, 273 (1993)); later runs 0.50-0.53%.
+STICKING = {"measured (PSI, Breunlich et al. 1987)": 0.0045, "measured directly (PSI)": 0.0056,
             "theory": 0.0065, "hoped for": 0.003}
 RECORD_DENSITY = 1.3  # relative to liquid-hydrogen density, the high end of the Los Alamos targets
 MUON_COST_GEV = {"optimised accelerator design (Kelly et al. 2021)": 4.7,
@@ -39,7 +41,7 @@ NASA = {"beam_MeV": 2.9, "beam_mA": 15.0, "fusion_neutrons_per_s": 1.55e3, "theo
 def muon_section() -> tuple[list[str], dict]:
     data: dict = {}
     # Cycle rate per unit density that reproduces the record with the measured sticking
-    lam_record = A.MUON_DECAY_RATE / (1 / RECORD_FUSIONS - STICKING["measured, record conditions (Los Alamos)"])
+    lam_record = A.MUON_DECAY_RATE / (1 / RECORD_FUSIONS - STICKING["measured (PSI, Breunlich et al. 1987)"])
     lam_per_density = lam_record / RECORD_DENSITY
     lines = ["## 1. Muon-catalysed fusion in solid or compressed D-T", "",
              "Fusions per muon Y = 1 / (λ₀/λ_c + ω_s), with λ₀ = 4.55×10⁵ /s (muon decay), λ_c the cycle rate and "
@@ -62,7 +64,7 @@ def muon_section() -> tuple[list[str], dict]:
               "| muon cost | fusions needed to repay the muon (17.6 MeV each) | gain at the record (150) "
               "| best possible gain (Y = 1/ω_s = 222) | with blanket heat (26 MeV per fusion), best |",
               "|---|---|---|---|---|"]
-    y_max = 1 / STICKING["measured, record conditions (Los Alamos)"]
+    y_max = 1 / STICKING["measured (PSI, Breunlich et al. 1987)"]
     data["gains"] = {}
     for label, cost in MUON_COST_GEV.items():
         row = {"needed": A.fusions_needed(cost), "record": A.muon_gain(RECORD_FUSIONS, cost),
@@ -80,7 +82,7 @@ def muon_section() -> tuple[list[str], dict]:
     lines += ["", f"**Electricity.** Kelly et al. (2021) find electricity out / in = {KELLY_Q_ELEC_AT_150:.0%} "
               f"at 150 fusions per muon for their optimised plant. Since that ratio is proportional to the fusions per "
               f"muon, electrical breakeven needs about {needed_elec:.0f} fusions per muon. That needs sticking below "
-              f"{1 / needed_elec:.2%}, about {STICKING['measured, record conditions (Los Alamos)'] * needed_elec:.0f} "
+              f"{1 / needed_elec:.2%}, about {STICKING['measured (PSI, Breunlich et al. 1987)'] * needed_elec:.0f} "
               "times lower than measured.", ""]
     return lines, data
 

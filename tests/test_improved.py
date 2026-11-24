@@ -417,3 +417,48 @@ def test_chain_reaction_blanket_trap_and_projectiles():
     spectrum = A.spectrum_yield(slope, 13000.0, e_min_kev=200.0)
     assert 0.5 * 3.8e12 * spectrum["reactions_per_ion"] == pytest.approx(1.2e7, rel=0.5)
     assert 400 < spectrum["mean_keV"] < 600
+
+
+def test_pauli_blocked_stopping_and_degenerate_routes():
+    from nanofusion.improved import degenerate as D
+
+    # The exact RPA low-speed coefficient matches Lindhard & Winther's Table 1, and the stopping number goes to
+    # their friction law for slow ions and to Bethe's formula for fast ones.
+    assert D.low_speed_coefficient(0.1) == pytest.approx(0.787, rel=0.005)
+    assert D.low_speed_coefficient(0.01) == pytest.approx(1.823, rel=0.005)
+    gas = D.fermi_gas(4.5e31)
+    slow = float(D.stopping_number(0.1, gas["chi2"]))
+    assert slow == pytest.approx(D.low_speed_coefficient(gas["chi2"]) * 1e-3, rel=0.02)
+    bethe = math.log(2 * P.M_E * (20 * gas["v_F"]) ** 2 / (D.HBAR * gas["omega_p"]))
+    assert float(D.stopping_number(20.0, gas["chi2"])) == pytest.approx(bethe, rel=0.01)
+    # Slow protons in aluminium: linear response gives two-thirds of the measured stopping (NIST PSTAR, 10 keV).
+    n_al = 3 * 2.699e3 / (26.9815 * P.AMU)
+    al = float(D.electron_stopping(10.0, P.MASS_U["p"], 1, n_al)) * 1e-5 / 2.699
+    assert 0.55 < al / 292.1 < 0.8
+    # Squeezed cold D-T: a deuteron returns ~0.4 of its energy at 250 g/cm3, more than all of it above
+    # ~1,000 g/cm3, and about 5 at most, once collisions with ions take over. Protons in squeezed boron stay below 1.
+    assert 0.3 < D.best_in_flight("D", "DT", 250.0)["gain"] < 0.5
+    assert D.best_in_flight("D", "DT", 2500.0)["gain"] > 1.5
+    top = D.best_in_flight("D", "DT", 2.5e5)
+    assert 4 < top["gain"] < 6 and top["electron_share"] < 0.1
+    assert D.best_in_flight("p", "boron", 2.34e5, e_lo=100.0, e_hi=8000.0)["gain"] < 1
+    D.ELECTRON_DRAG_FACTOR = 1.6
+    try:
+        assert D.best_in_flight("D", "DT", 1000.0)["gain"] < 0.8
+    finally:
+        D.ELECTRON_DRAG_FACTOR = 1.0
+    # Son & Fisch: 100 keV ions in proton-boron keep themselves hot above ~1e5 g/cm3, with electrons near 30 keV.
+    rho = D.self_heating_density("pB", 100.0)
+    assert 1e5 < rho < 1e6
+    balance = D.hot_ion_balance("pB", rho, 100.0)
+    assert 20 < balance["T_e_keV"] < 45 and balance["T_e_over_T_F"] < 1
+    assert balance["self_heating"] == pytest.approx(1.0, rel=0.05)
+    # Muons: tuned to 35% reactivation at liquid density; squeezing to 100 g/cm3 frees over 90% of stuck muons,
+    # mostly while the stuck ion is faster than the muon's orbit. A 50 um core at that density lasts ~0.1 ns.
+    assert D.MU_HE_BINDING_KEV == pytest.approx(10.94, rel=0.002)
+    assert float(D.hydrogen_ionisation_m2(100.0)) * 1e4 == pytest.approx(1.12e-16, rel=0.05)  # Rudd's fit
+    assert D.muon_reactivation(2.5)["reactivation"] == pytest.approx(0.35, abs=0.05)
+    squeezed = D.muon_reactivation(100.0)
+    assert squeezed["reactivation"] > 0.9 and squeezed["fusions_limit"] > 1000
+    assert D.muon_reactivation(100.0, fast_only=True)["reactivation"] > 0.85
+    assert 1e-10 < D.squeeze_lifetime(100.0, 50e-6) < 2e-10

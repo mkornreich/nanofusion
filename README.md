@@ -104,6 +104,12 @@ energy. `python3 -m nanofusion ball --help` burns a single ball.
 around the fusion source, a chain reaction in D-T, bare ions in a magnetic
 trap, and crystals fired as projectiles (sections 13–16). It also checks the
 model against nanowire-array experiments (section 6).
+`python3 tools/pauli_blocking.py` tries one new lever: squeezing the fuel
+until its electrons are degenerate, so that Pauli blocking weakens their drag
+on fast ions (section 17). A crystal ion then returns its own energy at the
+density NIF's fuel is designed for, 250 times better than in cold matter. It
+also tests Son & Fisch's degenerate proton–boron, and freeing stuck muons in
+muon catalysis. None gives net energy: the squeeze costs more than it returns.
 
 ### The page
 

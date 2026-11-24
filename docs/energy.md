@@ -13,7 +13,10 @@ energy by a factor of at least 1,000. This page tries to close that gap:
   fusion in dense matter across every burning regime;
 * five more attempts (sections 12–16): holding the ball of crystals together
   with a tamper and a magnetic field, a fission blanket, a chain reaction in
-  D-T, bare ions in a magnetic trap, and crystals fired as projectiles.
+  D-T, bare ions in a magnetic trap, and crystals fired as projectiles;
+* one new lever (section 17): squeezing the fuel until its electrons are
+  degenerate, so that Pauli blocking weakens their drag. It is tested on
+  crystal ions, on hot proton–boron ions and on muon catalysis.
 
 Full numbers are in [results/energy/summary.md](results/energy/summary.md).
 Code: `nanofusion/improved/energy.py`. To reproduce:
@@ -34,6 +37,12 @@ way of heating it:
   delivered in picoseconds (section 12). This is the biggest lever found,
   about a thousandfold. On paper it still returns only 0.15 of the laser
   energy at breakeven, and 1.5 at best, for 180 MJ of picosecond light.
+
+Squeezing the fuel until its electrons are degenerate (section 17) is the
+only lever that weakens the electrons' drag itself. A fast ion then returns
+its own energy at the density NIF's fuel is designed for. But the squeeze
+costs more than it returns, and fuel that dense ignites the ordinary way from
+a small hot spark.
 
 The published literature reaches the same conclusion for every related idea.
 
@@ -62,6 +71,9 @@ The published literature reaches the same conclusion for every related idea.
 | Chain reaction in D-T through its own neutrons and alphas | 0.002 new fusions per fusion in cold D-T; about 1 only in a 30–100 keV plasma metres across | No chain reaction in anything that can be built |
 | Bare ions in a magnetic trap (no electrons at all) | 7 W per m³ at 10 T; the record collider luminosity would give 0.7 W | Never: the ions' own charge caps the density |
 | Whole crystals as projectiles (cluster-impact fusion) | 0.4% of the kinetic energy; 0.0016 from the wall plug | Never: the cold-catcher limit again, though 30 times better than the laser route |
+| Crystal ions fired into cold fuel squeezed until its electrons are degenerate (Pauli blocking) | the ion's own energy at 1,000 g/cm³ (250 times the cold-catcher limit), up to ~5 when denser; 0.004–0.035 of the light once the squeeze is paid for | Never: the squeeze eats the gain, and fuel that dense ignites from a joule-to-kilojoule spark anyway |
+| Hot proton–boron ions in degenerate electrons (Son & Fisch 2004) | the ions keep themselves hot at 10⁵–4×10⁶ g/cm³; fusion per burn time 3–5.5 times the squeeze and heating | Only on paper, at white-dwarf density, like pycnonuclear D-T |
+| Muon catalysis in squeezed fuel (stuck muons knocked free) | sticking below 0.1% above ~60 g/cm³; but ≤ ~140 fusions per muon in a 140 ps squeeze | Never: a squeeze is far too short, and a long one needs 10¹¹ times today's muon beams |
 
 ### Where this sits among real results (fusion energy / laser energy)
 
@@ -430,14 +442,17 @@ project's ion simulation. Code: `nanofusion/improved/alternatives.py` and
 **How it works.** A negative muon replaces an electron and binds a deuteron
 and a triton 207 times closer than an ordinary molecule. They fuse within a
 picosecond, and the muon is usually freed to do it again. It stops when the
-muon decays (2.2 µs) or sticks to the alpha particle, about 0.45% of the time
-in the record experiment.
+muon decays (2.2 µs) or sticks to the alpha particle, about 0.5% of the time.
 
 **Measured inputs.**
 * The record is about 150 fusions per muon, at Los Alamos
   ([Jones et al. 1986](https://www.osti.gov/biblio/6978999)).
-* Sticking was measured at 0.45% (Los Alamos), 0.56% (PSI, direct), and 0.65%
-  in theory.
+* Sticking was measured at 0.45% (PSI,
+  [Breunlich et al. 1987](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.58.329)),
+  0.56% (PSI, direct), and 0.50–0.53% in later runs; theory gives 0.56–0.65%.
+  Los Alamos reported lower values at high density, which PSI did not
+  reproduce. *Correction:* an earlier version credited the 0.45% to Los
+  Alamos.
 * A muon costs 4.7 GeV in an optimised accelerator design
   ([Kelly et al. 2021](https://doi.org/10.1088/2515-7655/abfb4b)), 5 GeV in
   the traditional estimate, and 8 GeV in a pessimistic one.
@@ -989,6 +1004,193 @@ where D-T fusion peaks. That is generous, since hydrogen ice is weakly bound.
   micrometre within the 0.3 ps the crystal takes to stop (a rough estimate,
   not modelled).
 
+## 17. Switching off the electrons' drag: Pauli blocking in squeezed fuel
+
+**Idea.** Every route above fails the same way: electrons drag a fast ion to
+a stop long before it fuses (see "Why everything hits the same wall" below).
+Squeezing the fuel changes the electrons themselves:
+* squeezed hard enough, the electrons are degenerate, with every low-energy
+  state full;
+* an ion slower than their Fermi velocity can only kick the few electrons
+  near the top;
+* so the drag per metre stops growing with density
+  ([Fermi & Teller 1947](https://journals.aps.org/pr/abstract/10.1103/PhysRev.72.399)),
+  while fusion per metre keeps growing.
+
+I tested three uses:
+1. crystal ions fired into cold, squeezed fuel;
+2. hot ions in degenerate electrons, proposed for proton–boron by Son & Fisch;
+3. muon catalysis, where a stuck muon gets knocked free more often.
+
+Code: `nanofusion/improved/degenerate.py` and `tools/pauli_blocking.py`.
+Numbers: [results/pauli/summary.md](results/pauli/summary.md).
+
+**Model.**
+* **Electron drag:** Lindhard's random-phase dielectric function of a free
+  electron gas at zero temperature, integrated numerically.
+  * It reproduces Lindhard & Winther's slow-ion friction (their table, to
+    0.5%) and Bethe's formula for fast ions.
+  * Checked on a real degenerate electron gas, slow protons in aluminium, it
+    gives 0.67–1.06 of the measured stopping
+    ([NIST PSTAR](https://physics.nist.gov/PhysRefData/Star/Text/PSTAR.html)).
+  * Below the Fermi velocity this kind of model drags too little: measured
+    friction in metals is about 1.6 times higher
+    ([Montanari & Miraglia](https://arxiv.org/abs/1705.01575)). Squeezed fuel
+    is more weakly coupled, so the gap should shrink, but every result is
+    also run with the drag raised 1.6-fold.
+* **Ion drag:** Coulomb collisions with the fuel's nuclei, which Pauli
+  blocking does not touch.
+* **NIF may already have seen the effect.** Knock-on ions crossing its cold,
+  partly degenerate fuel showed a degeneracy-induced shift of their Bragg
+  peak, at 90% confidence
+  ([Hayes et al., Nat. Phys. 16, 432 (2020)](https://www.osti.gov/pages/servlets/purl/1881627)).
+
+### Crystal ions into squeezed cold fuel
+
+A deuteron slowing down in cold D-T (solid D-T is 0.25 g/cm³; NIF's fuel is
+designed for about 1,000 g/cm³ and has reached 500–800):
+
+| D-T density (g/cm³) | Fermi energy | Best return (deuteron energy) | Share of its energy lost to electrons |
+|---|---|---|---|
+| 0.25 (cold solid, section 1's model) | – | 0.006 (236 keV) | ~100% |
+| 25 | 120 eV | 0.064 (160 keV) | 91% |
+| 250 | 560 eV | 0.39 (167 keV) | 75% |
+| 1,000 | 1.4 keV | **1.0** (175 keV) | 56% |
+| 2,500 | 2.6 keV | 1.7 (191 keV) | 43% |
+| 25,000 | 12 keV | 3.8 (236 keV) | 15% |
+| 250,000 | 53 keV | 4.8 (269 keV) | 3% |
+
+* **The cold-catcher wall breaks.** At the density NIF's fuel is designed
+  for, a deuteron returns its own energy, 250 times the 0.4% limit of
+  section 1. That is the first time in this project for an ion in unheated
+  fuel. With the drag raised 1.6-fold it returns 0.73, and the crossing moves
+  from ~940 to ~1,600 g/cm³.
+* **It saturates near 5.** In the densest fuel the deuteron loses most of
+  its energy to nuclei instead of electrons.
+* **Protons in squeezed boron stay below 1** (0.74 at 234,000 g/cm³).
+  Boron's charge of 5 makes collisions with the nuclei the drag.
+* **Why it works.** Degenerate electrons drag on a slow ion about as much as
+  a plasma at their Fermi temperature does (section 2's hot catcher). The
+  squeeze gets that at a fifth of the energy, and without radiation.
+
+**What the squeeze costs.** The trick lasts only while the fuel stays cold,
+so the fair test gives the beam as much energy as the squeeze. Real drivers
+here means 15% of the light into ions (section 7), and 1% of the light into
+the squeezed fuel, as in NIF-class implosions:
+
+| D-T density (g/cm³) | Return, perfect drivers | Return on the light, real drivers | Hot spark that ignites the same fuel |
+|---|---|---|---|
+| 250 | 0.2 | 0.004 | 3.3 kJ |
+| 1,000 | 0.52 | 0.010 | 210 J |
+| 2,500 | 0.87 | 0.016 | 33 J |
+| 25,000 | 1.9 | 0.035 | 0.34 J |
+
+* **The squeeze eats the gain.** The light comes back at 0.4–3.5%, and the
+  wall plug at a few parts per thousand at best.
+* **Fuel that dense ignites from a small spark.** A hot spot of joules to
+  kilojoules ignites it (section 11's cheapest hot ball). The ions are far
+  better spent as that spark (fast ignition, section 7). The real obstacle is
+  the squeeze: up to 25 times NIF's design density, without heating.
+
+### Hot ions in degenerate electrons (Son & Fisch's proton–boron)
+
+**Idea**
+([Son & Fisch, Phys. Lett. A 329, 76 (2004)](https://bp-pub.pppl.gov/pub_report/2004/PPPL-4003.pdf)).
+Proton–boron fails because its electrons drain the hot ions' energy and
+radiate it (section 4). Degenerate electrons drain at a fixed rate whatever
+the density, and radiate less, while fusion grows with density. So above
+some density the ions' own fusion products should keep them hot. Son &
+Fisch found such a regime above ~10⁵ g/cm³, with ions near 100 keV and
+electrons near 30 keV.
+
+**Test.** A steady power balance:
+* the ions lose energy to the electrons at the degenerate (Lindhard–Winther)
+  rate;
+* they get back the alphas' share that goes to ions;
+* the electrons must radiate what they receive. Pauli blocking cuts their
+  bremsstrahlung by about 2.2 (T/T_F)^1.5 (Son & Fisch give the scaling; the
+  prefactor is derived here), which fixes the electron temperature.
+
+| Ion temperature | Lowest density where the ions keep themselves hot | × NIF's design density | Electron temperature (÷ Fermi energy) | Fusion in one burn time ÷ energy to squeeze and heat |
+|---|---|---|---|---|
+| 50 keV | 3.9×10⁶ g/cm³ | 3,900 | 27 keV (0.08) | 3 |
+| 75 keV | 8×10⁵ g/cm³ | 800 | 29 keV (0.20) | 5.1 |
+| 100 keV | 3.5×10⁵ g/cm³ | 350 | 31 keV (0.35) | 5.5 |
+| 150 keV | 1.1×10⁵ g/cm³ | 110 | 40 keV (0.94) | 4.9 |
+
+* **This reproduces Son & Fisch.** With 100 keV ions, 3.5×10⁵ g/cm³ and
+  electrons at 31 keV, against their > 10⁵ g/cm³ and ~30 keV.
+* **The window is real, but at white-dwarf density.** It needs 110–3,900
+  times NIF's design density, and a 50–160-fold radial squeeze of a solid
+  without heating it. That is the same verdict as pycnonuclear D-T
+  (section 10).
+* **Son & Fisch said so themselves.** They found a gain of ~18 on the
+  electrons' Fermi energy (40–200 in a 2006 follow-up). A power plant needs
+  far more, and they listed the squeeze as unsolved. A 2025 analysis finds
+  that proton–boron inertial fusion needs about 100 times today's
+  compressed areal density
+  ([Ochs et al., arXiv:2511.10885](https://arxiv.org/abs/2511.10885)).
+* **Hotter ions don't need degeneracy.** With 200–300 keV ions the balance
+  closes with electrons at 77–120 keV, 5–17 times their Fermi energy:
+  ordinary hot electrons. That is the narrow classical window of Liu et al.
+  (below), which needs confinement, not squeezing.
+
+### Muon catalysis: freeing stuck muons
+
+**Idea.** Muon catalysis came closest of the cold routes (section 9), and
+sticking caps it:
+* in about 0.9% of fusions the muon sticks to the alpha;
+* the stuck ion leaves with 3.46 MeV, and collisions with fuel nuclei knock
+  the muon free while it slows down, about 35% of the time at liquid
+  density;
+* electrons slow the stuck ion without freeing the muon, because an electron
+  moving with it carries only ~0.5 keV against the muon's 11 keV binding.
+
+With the electrons' drag switched off, the stuck ion meets many more nuclei
+before it stops.
+
+**Model.**
+* Stripping cross section: proton-on-hydrogen ionisation (Rudd et al. 1985),
+  scaled to the muonic ion.
+* Slowing: the stopping above.
+* One factor, tuned so that liquid D-T reproduces 35%.
+
+| D-T density (g/cm³) | Stuck muons freed | Effective sticking | Fusions per muon allowed by sticking |
+|---|---|---|---|
+| liquid, 0.18 | 35% | 0.58% | 171 |
+| 25 | 68% | 0.28% | 351 |
+| 50 | 85% | 0.14% | 718 |
+| 100 | 96% | 0.035% | 2,900 |
+| 250 | 99.9% | 0.0009% | 1.1×10⁵ |
+
+* **Squeezing frees the stuck muons.** Above ~60 g/cm³ sticking falls below
+  0.1%, enough on paper for the ~1,000 fusions per muon that electricity
+  needs (section 9). Most of the stripping happens while the ion is faster
+  than the muon's orbit, where the cross section is most reliable. This
+  matches an earlier finding: Cripps, Harms & Goel (Hyperfine Interact. 77,
+  181 (1993)) found useful fusion numbers only below ~5 eV and above 100
+  times liquid density.
+* **But a squeeze is far too short.**
+  * A 50 µm core at 100 g/cm³ holds together for 140 ps.
+  * Even at the d-t-μ molecule's own fusion rate (10¹² per second), a muon
+    could catalyse only ~140 fusions in that time, fewer than in liquid
+    fuel.
+  * The cycle's other steps have never been measured in pressure-ionised
+    fuel, where the molecular resonance that drives them is gone.
+* **A squeeze long enough for 1,000 fusions (1 ns) is out of reach.**
+  * It needs a 0.35 mm core: 18 mg of D-T and 130 kJ even if squeezed
+    perfectly cold.
+  * Repaying that takes 4.5×10¹³ muons in the core at once. They live
+    2.2 µs, so the source would have to make 2×10¹⁹ per second, about 10¹¹
+    times the most intense muon beams.
+
+**Verdict.** Pauli blocking is the first lever in this project that weakens
+the electrons' drag itself instead of going around it, and the lever is
+large: 250-fold for a fast ion, and sticking cut tenfold or more for muons. But
+every use needs cold fuel squeezed to NIF's design density or far beyond,
+and fuel that dense is better used the ordinary way: a small hot spark
+ignites it.
+
 ## Why everything hits the same wall
 
 **Rider's argument.** Rider's general analysis of fusion out of thermal
@@ -1015,6 +1217,12 @@ other four routes change the driver (an accelerator instead of a laser),
 the product (neutrons into a blanket), or the plasma (no electrons). Each
 meets a limit already found: electrons stop fast ions, and like charges keep
 bare ions apart.
+
+**Pauli blocking dents the wall itself (section 17).** In fuel squeezed until
+its electrons are degenerate, the drag on a slow ion stops growing with
+density. A fast ion then returns its own energy at NIF's design density, and stuck
+muons are knocked free. But it takes cold fuel at or far beyond NIF's
+density, and fuel that dense is better ignited the ordinary way.
 
 **Later challenges to Rider.**
 * [Rostoker et al. 2003](https://ui.adsabs.harvard.edu/abs/2003JFuE...22...83R)
@@ -1073,6 +1281,13 @@ net energy:
   * Bare ions in a magnetic trap are capped by their own charge at watts per
     cubic metre.
   * Crystals fired as projectiles hit the same 0.4% cold-catcher limit.
+* **Pauli blocking** in squeezed, degenerate fuel weakens the electrons' drag
+  itself, the first lever here that does.
+  * A fast ion returns its own energy at 1,000 g/cm³, but paying for the
+    squeeze leaves 0.4–3.5% of the light.
+  * Son & Fisch's proton–boron keeps itself hot only at white-dwarf density.
+  * Stuck muons are freed above ~60 g/cm³, but a squeeze lasts ~0.1 ns, far
+    too short for the 1,000 fusions per muon that electricity needs.
 
 ## Caveats (generous or conservative?)
 
@@ -1090,6 +1305,15 @@ net energy:
   * section 12 stops following a ball once its radius has grown fivefold,
     because the wall model is not trusted further. Balls that ignite are
     still burning then, and would return 20–50% more.
+* **Section 17:**
+  * generous: electrons at zero temperature; target ions at rest when sharing
+    the alphas' energy; ions and electrons merging their drag smoothly near
+    the Fermi temperature (up to 2 times generous there);
+  * uncertain either way: linear response, which drags 1.6 times too little
+    on slow protons in metals (every result is also given with that much
+    more drag); the bremsstrahlung prefactor for degenerate electrons,
+    derived here; and a single-state model of the stuck muon, tuned once at
+    liquid density.
 * **Model limits:**
   * 0-D burn with fixed temperature and a fixed burn time;
   * cross sections held constant above their measured ranges;
