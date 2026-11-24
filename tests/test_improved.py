@@ -462,3 +462,39 @@ def test_pauli_blocked_stopping_and_degenerate_routes():
     assert squeezed["reactivation"] > 0.9 and squeezed["fusions_limit"] > 1000
     assert D.muon_reactivation(100.0, fast_only=True)["reactivation"] > 0.85
     assert 1e-10 < D.squeeze_lifetime(100.0, 50e-6) < 2e-10
+
+
+def test_xray_trapping_fibre_pinch_and_channelling():
+    from nanofusion.improved import degenerate as D
+    from nanofusion.improved import walls as W
+
+    # Thermal pairs vanish in cool fuel and outnumber the fuel's own electrons in hot, thin fuel.
+    assert W.pair_density(1e30, 10.0) < 1e-10 * 1e30
+    assert W.pair_density(1e30, 300.0) > 1e30
+    # Free-free opacity falls as T^-3.5; alphas heat ions in hot electrons and electrons in cold ones (Stix).
+    ions, n_e = D.fuel_ions(D.pb_fuel(0.15), 1000.0)
+    assert W.free_free_opacity(ions, n_e, 200.0) == pytest.approx(W.free_free_opacity(ions, n_e, 100.0) * 2**-3.5)
+    assert W.alpha_share_classical(ions, n_e, 100.0) > 0.6 > W.alpha_share_classical(ions, n_e, 5.0)
+    # The smallest proton-boron ball that repays its heat at 1e4 g/cm3 is transparent, holds ~MJ, rhoR ~13 g/cm2.
+    ball = W.smallest_burning_ball(1e4)
+    assert not ball["opaque"] and 1e5 < ball["energy_J"] < 1e7 and 8 < ball["rhoR_g_cm2"] < 25
+    # At 1,000 g/cm3 an opaque ball is tens of kg; its X-rays and pairs hold most of its energy; it returns < 1.
+    opaque = W.smallest_opaque_ball(1000.0)
+    assert opaque["mass_kg"] > 1 and opaque["radiation_share"] > 0.9 and opaque["gain"] < 1
+    # Z-pinch: Bennett's relation; alphas held above ~1.35 MA; at 26 MA a ~6-fold squeeze repays the heat in one
+    # Alfven time, and ten Alfven times cut the squeeze tenfold.
+    z = W.fibre_pinch(26e6)
+    assert 2 * z["ions_per_m"] * 10.0 * P.J_PER_KEV == pytest.approx(4e-7 * math.pi * 26e6**2 / (8 * math.pi))
+    assert W.alpha_confining_current() == pytest.approx(1.35e6, rel=0.01)
+    assert 4 < z["squeeze"] < 8 and z["field_J_m"] > 5 * z["heat_J_m"]
+    assert W.fibre_pinch(26e6, alfven_times=10.0)["squeeze"] == pytest.approx(z["squeeze"] / 10)
+    assert W.fibre_pinch(1e6, fuel="6LiD")["squeeze"] > 1e4
+    # Channelling: Lindhard's angle ~1.5 degrees for 300 keV deuterons along Ti rows, under 1% of an isotropic
+    # source inside it, and at most ~6 times the random return.
+    psi = W.critical_angle(300.0, 1, 22, 3.15e-10)
+    assert 1.2 < math.degrees(psi) < 1.8 and W.axial_acceptance(psi, 26) < 0.01
+    assert 0.05 < W.planar_acceptance(psi / 2.5, 13) < 0.2
+    assert W.channelled_return(0.004, [(1.0, 3.0, 0.5, 1.0)]) == pytest.approx(0.024)
+    assert W.channelled_return(0.004, [(0.01, 2.0, 0.9, 0.5), (0.1, 2.0, 0.9, 0.5)]) < 0.0045
+    # Magnetised electrons need their cyclotron frequency above the plasma frequency: ~7e4 T in solid D-T.
+    assert W.magnetised_electron_field(4.5e28, 1.0) == pytest.approx(6.8e4, rel=0.02)

@@ -16,7 +16,11 @@ energy by a factor of at least 1,000. This page tries to close that gap:
   D-T, bare ions in a magnetic trap, and crystals fired as projectiles;
 * one new lever (section 17): squeezing the fuel until its electrons are
   degenerate, so that Pauli blocking weakens their drag. It is tested on
-  crystal ions, on hot proton–boron ions and on muon catalysis.
+  crystal ions, on hot proton–boron ions and on muon catalysis;
+* three walls no earlier section touched (sections 18–20): trapping
+  proton–boron's X-rays inside an opaque ball, holding the fuel with a
+  current instead of a laser (a fibre Z-pinch), and steering ions through a
+  tritide crystal's channels.
 
 Full numbers are in [results/energy/summary.md](results/energy/summary.md).
 Code: `nanofusion/improved/energy.py`. To reproduce:
@@ -74,6 +78,9 @@ The published literature reaches the same conclusion for every related idea.
 | Crystal ions fired into cold fuel squeezed until its electrons are degenerate (Pauli blocking) | the ion's own energy at 1,000 g/cm³ (250 times the cold-catcher limit), up to ~5 when denser; 0.004–0.035 of the light once the squeeze is paid for | Never: the squeeze eats the gain, and fuel that dense ignites from a joule-to-kilojoule spark anyway |
 | Hot proton–boron ions in degenerate electrons (Son & Fisch 2004) | the ions keep themselves hot at 10⁵–4×10⁶ g/cm³; fusion per burn time 3–5.5 times the squeeze and heating | Only on paper, at white-dwarf density, like pycnonuclear D-T |
 | Muon catalysis in squeezed fuel (stuck muons knocked free) | sticking below 0.1% above ~60 g/cm³; but ≤ ~140 fusions per muon in a 140 ps squeeze | Never: a squeeze is far too short, and a long one needs 10¹¹ times today's muon beams |
+| Proton–boron ball made opaque to its own X-rays | the balls that repay their heat need ρR 17–25 g/cm² (40–60 × NIF's hot spot) and trap 10–65%; trapping half at 1,000 g/cm³ takes 1.8 kg holding ~8 megatons, returning 0.3% | Only at white-dwarf-like densities; trapped X-rays and pairs soak up the energy |
+| Fibre of D-T fuel pinched by its own current (Z-pinch, no laser) | at Z's 26 MA, a sixfold squeeze held one Alfvén time (37 ps) repays the plasma's heat; the field costs 7.5 times that heat | Not with today's pinches; the field energy demands a large burn multiplication |
+| Ions channelled through a tritide crystal | 0.008–0.023 for a perfectly aligned beam (2–6 × random); +9% at most for an exploding crystal | Never: the cold-catcher limit, slightly dented |
 
 ### Where this sits among real results (fusion energy / laser energy)
 
@@ -1191,6 +1198,157 @@ every use needs cold fuel squeezed to NIF's design density or far beyond,
 and fuel that dense is better used the ordinary way: a small hot spark
 ignites it.
 
+## 18. Trap the X-rays: an opaque proton–boron ball
+
+Sections 18–20 each attack a wall no earlier section touched. Code:
+`nanofusion/improved/walls.py` and `tools/three_walls.py`. Numbers:
+[results/walls/summary.md](results/walls/summary.md).
+
+**Idea.** Proton–boron makes no neutrons, but its electrons radiate X-rays
+faster than fusion heats the fuel (section 4). A big or dense enough ball is
+opaque to its own X-rays: they are reabsorbed inside and only leak out slowly
+through the surface. Does that save proton–boron?
+
+**Model.**
+* A free ball of proton–boron (15% boron) at a fixed density and ion
+  temperature.
+* The electrons settle where what they receive (the hot ions' drain and
+  part of the alpha energy) equals the X-rays that escape.
+* Escape is followed frequency by frequency: free-free absorption, Thomson
+  scattering, and the escape probability from a sphere. Low-frequency X-rays
+  are trapped first.
+* The trapped frequencies fill with blackbody radiation, and photons near
+  m_e c² make electron–positron pairs. The ball must pay for both.
+* The ball "repays its heat" if its ions keep themselves hot and it
+  releases at least its own energy before flying apart.
+
+**The smallest balls that repay their heat** (all with 200 keV ions):
+
+| Density (g/cm³) | Radius | Mass | Energy it holds | Areal density ρR | X-rays trapped |
+|---|---|---|---|---|---|
+| 100 | 2.5 mm | 6.5 g | 180 GJ | 25 g/cm² | 10% |
+| 1,000 | 190 µm | 30 mg | 720 MJ | 19 g/cm² | 22% |
+| 10⁴ | 19 µm | 0.29 mg | 6.5 MJ | 19 g/cm² | 43% |
+| 10⁵ | 1.7 µm | 1.9 µg | 41 kJ | 17 g/cm² | 65% |
+
+**The smallest balls that trap at least half their X-rays** (300 keV ions):
+
+| Density (g/cm³) | Radius | Mass | Energy it holds | Share of it in X-rays and pairs | Fusion before it flies apart ÷ its energy |
+|---|---|---|---|---|---|
+| 100 | 26 cm | 7.4 t | 1.8×10²¹ J (440,000 megatons) | 100% | 3×10⁻⁴ |
+| 1,000 | 7.5 mm | 1.8 kg | 3.6×10¹⁶ J (8.5 megatons) | 99.8% | 0.003 |
+| 10⁴ | 46 µm | 4.2 mg | 190 MJ | 36% | 1.5 |
+| 10⁵ | 1 µm | 0.42 µg | 12 kJ | 3% | 0.6 |
+
+* **The balls that repay their heat are hot-ion balls at 17–25 g/cm².**
+  * Their ions are at 200 keV and their electrons near 90 keV.
+  * They trap 10–65% of their X-rays, more the denser they are.
+  * That is 40–60 times the areal density of the hot spot in NIF's best
+    shots (0.44 g/cm²), at 26 to 23,000 times its ~600 Gbar.
+* **This matches the published studies.**
+  * Lavell et al. find proton–boron burn propagating at 7,000–9,000 g/cm³
+    with 14–18 g/cm², and failing at 1,000 g/cm³ with 2 g/cm²
+    ([Fusion Sci. Technol. 82 (2026)](https://www.osti.gov/pages/servlets/purl/3366104)).
+  * Ochs et al. find breakeven needs areal densities about 100 times the
+    state of the art, at about 1,000 times the pressure
+    ([arXiv:2511.10885](https://arxiv.org/abs/2511.10885)).
+* **Trapping most X-rays costs more than it saves, except in
+  white-dwarf-like matter.**
+  * At NIF's design density, trapping half the X-rays takes 1.8 kg of fuel
+    holding about 8 megatons.
+  * The trapped X-rays and pairs hold 99.8% of that energy, and the ball
+    returns 0.3% of it.
+  * Only at 10⁴–10⁵ g/cm³ is a ball small enough to be opaque without
+    holding much radiation.
+
+## 19. Hold the fuel with a current: a fibre Z-pinch
+
+**Idea.** Section 12 held the fuel with a gold tamper and a field that
+something else had to make. A current does both at once. Run megaamperes
+along a fibre of solid fuel, and the current's own magnetic field squeezes
+the fibre and holds it (a Z-pinch). No laser is needed.
+
+**Model.**
+* Bennett's equilibrium, μ₀I²/8π = (N_i + N_e)kT: each current holds a given
+  amount of fuel per metre at 10 keV.
+* The pinch lives some number of Alfvén times (radius ÷ Alfvén speed)
+  before instabilities tear it.
+* A narrower pinch is denser and burns faster, so there is a radius at which
+  fusion repays the plasma's heat.
+* Above 1.35 MA the pinch's own field holds the fusion alphas inside it.
+
+**Checks.** Bennett's relation puts a 100 µm deuterium fibre at 640 kA at
+140 eV; fibre pinches of that kind reached a few hundred eV
+([Sethian et al. 1987](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.59.892)).
+At 300 kA and 1 keV it holds 1.4×10¹⁹ ions per metre; Zap Energy's FuZE
+pinch holds about 1.1×10¹⁹
+([Levitt et al. 2024](https://www.osti.gov/pages/servlets/purl/2337575)).
+
+| Current | Solid D-T fibre it holds at 10 keV | Squeeze to repay the heat in one Alfvén time (= Alfvén times needed unsqueezed) | That pinch lives | Squeeze for the alphas alone to repay it | Field energy ÷ plasma heat |
+|---|---|---|---|---|---|
+| 0.64 MA | 13 µm across | ×240 (1.1×10⁴ g/cm³) | 22 fs | ×1,200 | 17 |
+| 1.4 MA | 29 µm across | ×110 (2,300 g/cm³) | 110 fs | ×560 | 15 |
+| 5 MA | 110 µm across | ×31 (180 g/cm³) | 1.4 ps | ×160 | 12 |
+| 26 MA (Sandia's Z) | 550 µm across | ×6 (6.8 g/cm³) | 37 ps | ×30 | 7.5 |
+| 60 MA | 1.3 mm across | ×2.6 (1.3 g/cm³) | 200 ps | ×13 | 5.3 |
+
+* **At the Z machine's current the numbers are not crazy.** A D-T fibre
+  half a millimetre across repays its heat if squeezed sixfold and held for
+  one Alfvén time, or held unsqueezed for six.
+* **But fibre pinches haven't lasted.**
+  * Sethian's deuterium fibres stayed stable for ~100 growth times, but only
+    while the current rose and only at a few hundred eV. At peak current
+    they went unstable.
+  * Other fibre pinches (Los Alamos, Imperial College) expanded and broke up
+    early, and their neutrons came mostly from beams, not heat.
+  * Zap Energy's sheared-flow pinch lasts 1,000–10,000 growth times, but at
+    a millionth of solid density and 1–3 keV.
+* **The field costs more than the plasma.** At 26 MA the field around the
+  pinch holds 7.5 times the plasma's heat, 3.8 MJ per cm, out of the ~20 MJ
+  that Z stores. Even ignition-like conditions are far from net electricity
+  unless the burn multiplies the energy many times over.
+* **Lithium deuteride fibres are hopeless.** D + ⁶Li burns thousands of times
+  more slowly than D-T: a 1 MA LiD fibre would need a 160,000-fold squeeze.
+
+## 20. Steer through the lattice: channelling in a tritide crystal
+
+**Idea.** A fast ion entering a crystal almost along a row or plane of atoms
+is steered gently between them (channelling). In the open channel it meets
+fewer electrons, so it loses energy more slowly, and its flux piles up in the
+channel centre. In titanium tritide the tritons sit in the channel centres
+along ⟨100⟩. Can the crystal itself beat the cold-catcher limit?
+
+| Deuteron energy | Axial critical angle (Lindhard) | Share of an isotropic explosion along an axis | ... along a plane (generous) |
+|---|---|---|---|
+| 100 keV | 2.6° | 1.3% | 23% |
+| 300 keV | 1.5° | 0.44% | 13% |
+| 1 MeV | 0.81° | 0.13% | 7% |
+
+A 300 keV deuteron stopping in non-channelling titanium tritide returns 0.0038
+of its energy. With channelling:
+
+| Case | Flux at the tritons | Stopping ÷ random | Return |
+|---|---|---|---|
+| Perfectly aligned beam, generous | ×3 | 0.5 | 0.023 |
+| Perfectly aligned beam, measured values | ×2 | 0.9 | 0.0084 |
+| Exploding crystal, generous, half the path channelled | axes ×3, planes ×2 | 0.5, 0.9 | 0.0041 |
+
+The measured values: flux peaking of 1.4–2.2 at interstitial sites, and
+channelled stopping only 5–13% below random at the speeds of 100–300 keV
+deuterons. Stopping halves only above ~1 MeV per nucleon.
+
+* **A perfectly aligned beam does 2–6 times better** (0.008–0.023), still
+  40–120 times short of breakeven. Experiments agree on the size: 20 keV
+  deuterons on palladium gave about twice the neutrons along a crystal plane
+  as at 30° to it
+  ([Dalkarov et al. 2019](https://journals.aps.org/prab/abstract/10.1103/PhysRevAccelBeams.22.034201)).
+* **An exploding crystal can't aim.** Under 0.5% of its ions fall inside an
+  axial critical angle and ~13% along a plane, and they dechannel partway: a
+  9% gain even with generous numbers.
+* **Blinding the electrons with a magnetic field instead** needs their
+  cyclotron frequency to beat the plasma frequency: about 68,000 T in solid
+  D-T, 85 times the strongest laser-made field claimed.
+
 ## Why everything hits the same wall
 
 **Rider's argument.** Rider's general analysis of fusion out of thermal
@@ -1223,6 +1381,12 @@ its electrons are degenerate, the drag on a slow ion stops growing with
 density. A fast ion then returns its own energy at NIF's design density, and stuck
 muons are knocked free. But it takes cold fuel at or far beyond NIF's
 density, and fuel that dense is better ignited the ordinary way.
+
+**The other walls (sections 18–20).** Trapping proton–boron's X-rays makes
+the trapped radiation itself the heat sink, except in white-dwarf-like matter. A current can hold fuel as well
+as a tamper and field can, at the price of a field that holds several times
+the plasma's heat. A crystal's channels raise the return two- to sixfold at
+best, for ions that could hardly be aimed into them.
 
 **Later challenges to Rider.**
 * [Rostoker et al. 2003](https://ui.adsabs.harvard.edu/abs/2003JFuE...22...83R)
@@ -1288,6 +1452,16 @@ net energy:
   * Son & Fisch's proton–boron keeps itself hot only at white-dwarf density.
   * Stuck muons are freed above ~60 g/cm³, but a squeeze lasts ~0.1 ns, far
     too short for the 1,000 fusions per muon that electricity needs.
+* **Three more walls attacked, none breached.**
+  * An opaque proton–boron ball traps its X-rays, but the trapped radiation
+    and pairs soak up its energy. The balls that do repay their heat need
+    40–60 times the areal density of NIF's hot spot, as other studies find.
+  * A fibre Z-pinch holds fuel with its own current. At the Z machine's
+    current the squeeze is modest, but the pinch must survive its
+    instabilities, and its field holds several times the plasma's heat.
+  * Channelling in a tritide crystal returns at most 2.3% of an aligned
+    ion's energy (0.8% with measured values), and exploding crystals can't
+    aim.
 
 ## Caveats (generous or conservative?)
 
@@ -1314,6 +1488,14 @@ net energy:
     more drag); the bremsstrahlung prefactor for degenerate electrons,
     derived here; and a single-state model of the stuck muon, tuned once at
     liquid density.
+* **Sections 18–20:**
+  * generous: the opaque ball ignores Compton scattering's energy exchange
+    and the annihilation of its pairs; the pinch is uniform, at its Bennett
+    temperature from the start;
+    channelling uses the widest critical angle for every axis;
+  * rough: the opaque ball's frequency-resolved escape (scattering folded
+    into an effective depth) and the pinch's lifetime in Alfvén times are
+    order-of-magnitude models.
 * **Model limits:**
   * 0-D burn with fixed temperature and a fixed burn time;
   * cross sections held constant above their measured ranges;

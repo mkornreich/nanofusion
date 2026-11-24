@@ -110,6 +110,10 @@ on fast ions (section 17). A crystal ion then returns its own energy at the
 density NIF's fuel is designed for, 250 times better than in cold matter. It
 also tests Son & Fisch's degenerate proton–boron, and freeing stuck muons in
 muon catalysis. None gives net energy: the squeeze costs more than it returns.
+`python3 tools/three_walls.py` attacks three walls nothing else touched
+(sections 18–20): trapping proton–boron's X-rays in an opaque ball, holding a
+D-T fibre with its own current (a Z-pinch, no laser), and channelling ions
+through a tritide crystal. None breaks through.
 
 ### The page
 
