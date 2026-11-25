@@ -154,7 +154,10 @@ times of stability. With a MagLIF-like liner and thick D-T ice (`liner_um` in
 [docs/liner_experiment.md](docs/liner_experiment.md)) designs an experiment for
 the search's best liner: 34 MA, a thin wall and thick ice, 22× on paper. It
 hasn't been tried. It needs ~170× convergence and sits on a knife-edge, and a
-deuterium test on Z would settle it. D-T pinches
+deuterium test on Z would settle it. MHD simulations with Athena++
+(`tools/athena_liner.py`, section 27) predict the answer. In 2-D, a 0.1–1 µm
+ripple on the liner breaks it up, and the fuel converges only 9–25×. A 3-D
+quick look is no better (7×). D-T pinches
 have never been tried and need tritium Z doesn't yet handle; preheated
 deuterium fibres with a tritium trace are possible today.
 

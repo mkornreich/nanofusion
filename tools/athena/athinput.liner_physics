@@ -1,0 +1,101 @@
+<comment>
+problem   = Thin, ice-lined beryllium liner (nanofusion's best liner design), r-z, with burn physics
+configure = --prob=liner --coord=cylindrical -b --nscalars=5 --flux=hlld --eos=general/liner_eos -omp
+patch     = tools/athena/athena-physics.patch on Athena++ (see tools/athena_liner.py build)
+units     = mm, ns, g/cm3 (pressure 1e15 Pa, B 35.45 kT per code unit)
+
+<job>
+problem_id = liner
+
+<output1>
+file_type  = hst
+dt         = 0.01
+
+<output2>
+file_type  = vtk
+variable   = prim
+x2_slice   = 0.0
+dt         = 5.0
+
+<output3>
+file_type  = rst
+dt         = 5.0         # restart files every 5 ns: tools/athena_liner.py run resumes from the newest
+
+<output4>
+file_type  = vtk
+variable   = prim
+dt         = 1.0e9       # full 3-D snapshots; set output4/dt for 3-D runs (else only the first and last)
+
+<time>
+cfl_number = 0.3
+nlim       = -1
+tlim       = 140.0
+integrator = vl2
+xorder     = 2
+ncycle_out = 2000
+
+<mesh>
+num_threads = 1          # OpenMP threads (Athena++ ignores OMP_NUM_THREADS); <= the number of meshblocks
+nx1        = 256
+x1min      = 0.01        # 10 um: the axis is a reflecting wall here
+x1max      = 6.0
+x1rat      = 1.013       # ~3 um cells at the axis, ~80 um at the outer edge
+ix1_bc     = reflecting
+ox1_bc     = user        # the current's field enters here
+nx2        = 2           # two cells over the full circle: axisymmetric (r-z)
+x2min      = 0.0
+x2max      = 6.283185307179586
+ix2_bc     = periodic
+ox2_bc     = periodic
+nx3        = 64          # 0.5 mm of liner along z, 7.8 um cells
+x3min      = 0.0
+x3max      = 0.5
+ix3_bc     = periodic
+ox3_bc     = periodic
+
+<meshblock>
+nx1        = 64
+nx2        = 2
+nx3        = 32
+
+<hydro>
+eos_model  = liner       # liner: Be and D-T cold curves, ionisation, degenerate electrons; ideal: gamma law
+gamma      = 1.6666666666666667
+dfloor     = 1.0e-7
+pfloor     = 1.0e-12
+
+<problem>
+r_out      = 4.495       # liner outer radius (mm)
+aspect     = 12.0        # outer radius / wall
+ice        = 0.5833      # D-T ice thickness (mm)
+rho_liner  = 1.85        # beryllium (g/cm3)
+rho_ice    = 0.25        # D-T ice
+rho_gas    = 3.0e-4      # D-T vapour, 0.3 mg/cm3
+rho_vac    = 1.0e-4      # the "vacuum" outside (0.1 mg/cm3, lighter than the gas)
+p0         = 4.0e-7      # 4e8 Pa: the gas at ~17 eV; everything starts at this pressure
+bz         = 4.283       # axial field (T)
+i_peak     = 34.06       # MA
+t_rise     = 100.0       # ns, sin^2 rise, then held
+modes      = 16          # ripple modes along z: wavelengths 31 um to 0.5 mm
+mmax       = 0           # azimuthal ripple modes (3-D runs): m = 1..mmax, each with n = -modes..modes
+mseed      = -1          # if >= 0, keep only m <= mseed (0 with mmax > 0: the 2-D part of a 3-D seed)
+ripple     = 0.0         # rms ripple of the liner's outer surface (mm)
+seed       = 1
+
+# physics (all on; set false to see what each one does)
+burn        = true       # D-T burn and fuel depletion (Bosch-Hale, ion temperature)
+alpha       = 1          # alpha heating: -1 none, 0 where made, 1 radial diffusion across the field
+radiation   = true       # bremsstrahlung, recombination, Be K-shell lines; carried along r in 17 groups
+resistivity = true       # Spitzer-Braginskii, Lee-More in cold dense matter
+eta_vac     = 1.26e-3    # Ohm m in the vacuum (1000 m2/s: the field crosses the 1.5 mm gap in ~2 ns)
+eta_max     = 1.26e-3    # Ohm m: cap on the plasma's resistivity
+eta_ohm     = 1          # switches on Athena++'s field diffusion (needed by resistivity and nernst); the value is not used
+conduction  = true       # electron heat flux, Braginskii, flux-limited
+flux_limit  = 0.1        # of the free-streaming flux n_e T_e v_te
+cond_safety = 0.4        # of the explicit conduction time step
+two_temp    = true       # separate ion and electron temperatures
+nernst      = true       # the field carried down the electron temperature gradient
+circuit     = true       # the current from a capacitor bank (as nanofusion's 0-D model sizes it)
+driver_nh   = 15.0       # the machine's inductance (nH)
+wall_mm     = 10.0       # the return conductor (mm)
+length_mm   = 10.0       # the liner's real length (mm): the history outputs are for all of it

@@ -85,6 +85,67 @@ physics. The model has no liner instability. So it lets thin, fast liners
 squeeze far further than real ones, and it ignites wherever the squeeze is
 deepest.
 
+## What MHD simulations say
+
+To test that, the same target was imploded in 2-D (r–z) with Athena++,
+Princeton's open MHD code. A ripple on the liner's outer surface seeds the
+magneto-Rayleigh-Taylor instability. Code: `tools/athena_liner.py` and
+`tools/athena/`. Numbers and a figure:
+[results/liner_athena/summary.md](results/liner_athena/summary.md).
+
+| Ripple on the liner (rms) | Fuel convergence | Beryllium mixed into the hot gas | 0-D model's fusion at that convergence |
+|---|---|---|---|
+| none | 69× | 1% | 1.2 kJ |
+| 0.1 µm (about a diamond-turned finish) | 25× | 17% | 0.5 J |
+| 1 µm | 9× | 19% | nothing |
+| 10 µm | 5× | 4% | nothing |
+
+* **Even a perfectly smooth liner stops at 69×.** This run keeps all the
+  field and heat in the fuel: no radiation, no conduction, no field leaking
+  out. So the fuel pushes back harder than in the 0-D model, and the real
+  limit could be somewhat higher.
+* **A ripple of 0.1–1 µm destroys the liner before stagnation.**
+  * Beryllium spikes cross the ice into the gas 15–20 ns before stagnation.
+  * With a 1 µm ripple, no dense shell is left at 120 ns, and the drive field
+    has burst through the liner.
+  * The fuel ends up scattered over ~0.3–2 mm instead of a column tens of
+    µm wide.
+* **How much to trust it.** The runs are crude:
+  * The beryllium is a soft ideal gas, with no strength and no resistivity.
+  * The current is prescribed, not driven by a circuit.
+  * The grid has 8 µm cells along the axis.
+
+  These may well exaggerate the instability by a factor of a few. They
+  can't bridge the 7–20× in convergence the design is missing.
+* **It agrees with experiment.** MagLIF uses walls 1/6 of the radius because
+  thinner ones broke up. The best radiographed liner converged 20 ± 3.
+
+**3-D (a quick look) is no better.** It ran at half the r–z resolution,
+over the whole circle. The same 1 µm ripple was seeded with patterns running
+around the liner and helices, as well as patterns along it.
+* **The fuel converged only 7×, at 0.1 keV.** For comparison:
+  * a 2-D twin with only the axisymmetric quarter of the seed reached 25×;
+  * the full-resolution 2-D run with 1 µm reached 9×.
+* **Patterns running around the circle grew fastest.** The compressed axial
+  field stiffens the fuel's edge against ripples along the axis, but not
+  against these.
+  * By 120 ns the gas was pinched into two lobes (an m = 2 pattern) and pushed
+    up to ~0.2 mm off the axis.
+  * By 135 ns, beryllium filled the axis along the whole length.
+* **How much to trust it.** The circle has only 64 cells, which imprints the
+  grid on the late stages. The run shows that 3-D doesn't rescue the design,
+  not exactly how much worse it is.
+
+**Going further isn't worth it for this design.** Measured on a 12-core
+laptop:
+* A 3-D run at the 2-D resolution takes ~1–1.5 days, if stopped soon after
+  stagnation.
+* A resolution check or the full 1 cm length takes weeks.
+
+Only a design that survives in 2-D deserves those runs. The quick look took
+11.7 h, 85% of it after stagnation: once beryllium reaches the axis, the thin
+cells there force tiny time steps.
+
 ## The experiment
 
 Each stage costs more than the last, and each can stop the programme.
@@ -132,12 +193,14 @@ equivalent) from a ~10 MJ bank. That is 22× the electricity in: the best of
 any design here, at a current only 1.3× Z's. The literature and the model's
 own fragility say the convergence it needs is the most likely thing to fail.
 The 80 MA liner (section 25), at MagLIF's own ~43× convergence, is the design
-to believe. Stage 1 is the cheap way to find out which.
+to believe. Stage 1 is the cheap way to find out which. The MHD simulations
+above already predict the answer: the thin wall breaks up long before 170×.
 
 ## Limits
 
 * **0-D, incompressible liner, no instability.** Convergence is the model's
-  free variable, which is why the knife-edge appears.
+  free variable, which is why the knife-edge appears. The MHD simulations
+  test this and find the liner breaks up.
 * **The convergence limit** is a sharp cut-off. Real break-up degrades
   compression gradually and mixes liner into the fuel.
 * **Calibration:** at Z's scale the liner model overshoots clean 2-D MagLIF

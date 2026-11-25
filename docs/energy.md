@@ -1680,6 +1680,38 @@ Proposal: [liner_experiment.md](liner_experiment.md); code:
 * **Stage 2:** D-T on a ~34 MA driver, which doesn't exist yet. Pacific
   Fusion's >60 MA machine, run below full current, could serve.
 
+## 27. The thin liner in 2-D and 3-D MHD
+
+**Idea.** Section 26's design needs its liner intact to ~170× convergence, and
+the 0-D model has no liner instability. So implode it in Athena++, Princeton's
+open MHD code, with a ripple on the liner to seed the magneto-Rayleigh-Taylor
+instability. Code: `tools/athena_liner.py` and `tools/athena/`. Numbers:
+[results/liner_athena/summary.md](results/liner_athena/summary.md).
+
+**Result: the liner breaks up (2-D).**
+* With no ripple, the fuel converges 69×; the 0-D model says 177×.
+* A 0.1 µm ripple, about a diamond-turned finish, cuts that to 25×. A 1 µm
+  ripple cuts it to 9×.
+* Beryllium spikes reach the gas 15–20 ns before stagnation. They mix about a
+  fifth of the gas's mass of beryllium into it.
+* At 25×, the 0-D model's 2.9 GJ falls to 0.5 J.
+
+**3-D (a quick look, half resolution) is no better.**
+* The same 1 µm ripple, seeded also with patterns running around the liner,
+  left 7× convergence at 0.1 keV.
+* Those patterns grew fastest, because the axial field can't stiffen them.
+  They pinched the gas off the axis, and by 135 ns beryllium filled it.
+
+**Caveats.**
+* Ideal MHD.
+* The beryllium is a soft ideal gas, with no strength or resistivity.
+* A prescribed current.
+* 0.5 mm of liner.
+
+These could exaggerate the instability by a factor of a few, not by the 7–20×
+in convergence the design is missing. Stage 1 of section 26 on Z would most
+likely see the column stop near 0.1 mm, ending the design.
+
 ## Why everything hits the same wall
 
 **Rider's argument.** Rider's general analysis of fusion out of thermal

@@ -1,0 +1,135 @@
+diff --git a/configure.py b/configure.py
+index 8e7a158..6376932 100755
+--- a/configure.py
++++ b/configure.py
+@@ -101,7 +101,7 @@ parser.add_argument(
+ parser.add_argument('--eos',
+                     default='adiabatic',
+                     choices=['adiabatic', 'isothermal', 'general/eos_table',
+-                             'general/hydrogen', 'general/ideal'],
++                             'general/hydrogen', 'general/ideal', 'general/liner_eos'],
+                     help='select equation of state')
+ 
+ # --flux=[name] argument
+diff --git a/src/eos/eos.hpp b/src/eos/eos.hpp
+index 9825271..41617ca 100644
+--- a/src/eos/eos.hpp
++++ b/src/eos/eos.hpp
+@@ -142,6 +142,15 @@ class EquationOfState {
+ #endif  // !MAGNETIC_FIELDS_ENABLED (GR)
+ #endif  // #else (#if !RELATIVISTIC_DYNAMICS, #elif !GENERAL_RELATIVITY)
+ 
++  // nanofusion liner: a general EOS may depend on the cell's composition. SetCell names the
++  // cell whose composition the next PresFromRhoEg/EgasFromRhoP/AsqFromRhoP calls use
++  // (cons: read the conserved scalars, otherwise the primitive ones).
++  void SetCell(int k, int j, int i, bool cons = false) {
++    if (set_cell_ != nullptr) set_cell_(this, k, j, i, cons);
++  }
++  MeshBlock *GetBlock() const {return pmy_block_;}
++  void (*set_cell_)(EquationOfState *peos, int k, int j, int i, bool cons) = nullptr;
++  Real eos_comp_[4] = {0.0, 0.0, 0.0, 0.0};
+   Real PresFromRhoEg(Real rho, Real egas);
+   Real EgasFromRhoP(Real rho, Real pres);
+   Real AsqFromRhoP(Real rho, Real pres);
+diff --git a/src/eos/general/general_mhd.cpp b/src/eos/general/general_mhd.cpp
+index cd5d198..daca691 100644
+--- a/src/eos/general/general_mhd.cpp
++++ b/src/eos/general/general_mhd.cpp
+@@ -113,6 +113,7 @@ void EquationOfState::ConservedToPrimitive(
+         u_e = (u_e - ke - pb > energy_floor_) ?  u_e : energy_floor_ + ke + pb;
+         // MSBC: if ke >> energy_floor_ then u_e - ke may still be zero at this point due
+         //       to floating point errors/catastrophic cancellation
++        SetCell(k, j, i, true);
+         w_p = PresFromRhoEg(u_d, u_e - ke - pb);
+       }
+     }
+@@ -160,6 +161,7 @@ void EquationOfState::PrimitiveToConserved(
+         u_m2 = w_vy*w_d;
+         u_m3 = w_vz*w_d;
+         // cellwise conversion
++        SetCell(k, j, i);
+         u_e = EgasFromRhoP(u_d, w_p) + 0.5*(w_d*(SQR(w_vx) + SQR(w_vy) + SQR(w_vz))
+                                      + (SQR(bcc1) + SQR(bcc2) + SQR(bcc3)));
+       }
+diff --git a/src/field/field_diffusion/field_diffusion.cpp b/src/field/field_diffusion/field_diffusion.cpp
+index c20b00c..fcc67cf 100644
+--- a/src/field/field_diffusion/field_diffusion.cpp
++++ b/src/field/field_diffusion/field_diffusion.cpp
+@@ -30,6 +30,9 @@
+ 
+ //! FieldDiffusion constructor
+ 
++UserDiffusionEMFFunc user_diffusion_emf = nullptr;
++
++
+ FieldDiffusion::FieldDiffusion(MeshBlock *pmb, ParameterInput *pin) :
+     pmy_block(pmb), field_diffusion_defined(false) {
+   int nc1 = pmb->ncells1, nc2 = pmb->ncells2, nc3 = pmb->ncells3;
+@@ -106,6 +109,7 @@ void FieldDiffusion::CalcDiffusionEMF(FaceField &bi, const AthenaArray<Real> &bc
+   ClearEMF(e_oa);
+   if (eta_ohm != 0.0) OhmicEMF(bi, bc, e_oa);
+   if (eta_ad != 0.0) AmbipolarEMF(bi, bc, e_oa);
++  if (user_diffusion_emf != nullptr) user_diffusion_emf(this, pmy_block, ph->w, bc, e_oa);
+ 
+   // calculate the Poynting flux pflux and add to energy flux in Hydro class
+   if (NON_BAROTROPIC_EOS) PoyntingFlux(e_oa, bc);
+diff --git a/src/field/field_diffusion/field_diffusion.hpp b/src/field/field_diffusion/field_diffusion.hpp
+index f17966a..f6b46cb 100644
+--- a/src/field/field_diffusion/field_diffusion.hpp
++++ b/src/field/field_diffusion/field_diffusion.hpp
+@@ -90,4 +90,11 @@ class FieldDiffusion {
+   AthenaArray<Real> dx1_, dx2_, dx3_, len_;
+   AthenaArray<Real> eta_tot_;
+ };
++// nanofusion liner: an extra edge EMF from the problem generator (e.g. Nernst advection),
++// added to the Ohmic one; its Poynting flux goes into the energy equation with it.
++using UserDiffusionEMFFunc = void (*)(FieldDiffusion *pfdif, MeshBlock *pmb,
++                                      const AthenaArray<Real> &w,
++                                      const AthenaArray<Real> &bcc, EdgeField &e);
++extern UserDiffusionEMFFunc user_diffusion_emf;
++
+ #endif // FIELD_FIELD_DIFFUSION_FIELD_DIFFUSION_HPP_
+diff --git a/src/hydro/new_blockdt.cpp b/src/hydro/new_blockdt.cpp
+index c049131..64431ba 100644
+--- a/src/hydro/new_blockdt.cpp
++++ b/src/hydro/new_blockdt.cpp
+@@ -86,6 +86,7 @@ void Hydro::NewBlockTimeStep() {
+           wi[IVY] = w(IVY,k,j,i);
+           wi[IVZ] = w(IVZ,k,j,i);
+           if (NON_BAROTROPIC_EOS) wi[IPR] = w(IPR,k,j,i);
++          if (GENERAL_EOS) pmb->peos->SetCell(k, j, i);
+           if (fluid_status == FluidFormulation::evolve) {
+             if (MAGNETIC_FIELDS_ENABLED) {
+               AthenaArray<Real> &bcc = pmb->pfield->bcc, &b_x1f = pmb->pfield->b.x1f,
+diff --git a/src/hydro/rsolvers/mhd/hlld.cpp b/src/hydro/rsolvers/mhd/hlld.cpp
+index 251872e..3386502 100644
+--- a/src/hydro/rsolvers/mhd/hlld.cpp
++++ b/src/hydro/rsolvers/mhd/hlld.cpp
+@@ -89,7 +89,9 @@ void Hydro::RiemannSolver(const int k, const int j, const int il, const int iu,
+     ul.mx = wli[IVX]*ul.d;
+     ul.my = wli[IVY]*ul.d;
+     ul.mz = wli[IVZ]*ul.d;
++    const int kl = k - (ivx == IVZ), jl = j - (ivx == IVY), il_ = i - (ivx == IVX);
+     if (GENERAL_EOS) {
++      peos->SetCell(kl, jl, il_);
+       ul.e  = peos->EgasFromRhoP(ul.d, wli[IPR]) + kel + pbl;
+     } else {
+       ul.e  = wli[IPR]*igm1 + kel + pbl;
+@@ -102,6 +104,7 @@ void Hydro::RiemannSolver(const int k, const int j, const int il, const int iu,
+     ur.my = wri[IVY]*ur.d;
+     ur.mz = wri[IVZ]*ur.d;
+     if (GENERAL_EOS) {
++      peos->SetCell(k, j, i);
+       ur.e  = peos->EgasFromRhoP(ur.d, wri[IPR]) + ker + pbr;
+     } else {
+       ur.e  = wri[IPR]*igm1 + ker + pbr;
+@@ -111,7 +114,9 @@ void Hydro::RiemannSolver(const int k, const int j, const int il, const int iu,
+ 
+     //--- Step 2.  Compute L & R wave speeds according to Miyoshi & Kusano, eqn. (67)
+ 
++    if (GENERAL_EOS) peos->SetCell(kl, jl, il_);
+     Real cfl = pmy_block->peos->FastMagnetosonicSpeed(wli,bxi);
++    if (GENERAL_EOS) peos->SetCell(k, j, i);
+     Real cfr = pmy_block->peos->FastMagnetosonicSpeed(wri,bxi);
+ 
+     spd[0] = std::min( wli[IVX]-cfl, wri[IVX]-cfr );
